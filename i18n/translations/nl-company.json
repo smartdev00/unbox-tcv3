@@ -1,0 +1,44 @@
+{
+  "materials": {
+    "title": "Communications",
+    "info": "Communication Materials",
+    "all": "Download All",
+    "button": "Download",
+    "a4": "A4 Poster",
+    "instagram": "Instagram Post",
+    "facebook": "Facebook Post",
+    "a3": "A3 Poster",
+    "copyright": "Copyright 2022. City Ucoin. All Rights Reserved.",
+    "question": "Why do we need this? ",
+    "answer": "In order to let consumers know that you are accepting Ucoins, we are providing you with communication materials to be placed in your shop window etc."
+  },
+  "financial": {
+    "title": "Financial Information",
+    "info": "Finance Information",
+    "companyName": "Company Trading Name",
+    "VATNumber": "VAT Number",
+    "bankIBAN": "Bank IBAN",
+    "bankBIC": "Bank BIC",
+    "email": "if you wish to change any financial details, please contact us at"
+  },
+  "details": {
+    "title": "Company Details",
+    "description": "Description",
+    "category": "Category",
+    "contact": "Phone number",
+    "address": "Address",
+    "city": "City",
+    "postal": "Post Code",
+    "website": "Website",
+    "location": "Merchant Location",
+    "merchant": "Merchant",
+    "button": "Edit Merchant",
+    "name": "Company Name",
+    "editTitle": "Edit Merchant",
+    "save": "Save",
+    "account": "Account Details",
+    "picture": "Profile Picture",
+    "upload": "Upload",
+    "required": "This is required."
+  }
+}

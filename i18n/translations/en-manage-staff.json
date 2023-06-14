@@ -1,0 +1,67 @@
+{
+  "reset": "Reset Password",
+  "remove": "Remove Account",
+  "staffManagement": {
+    "type": "Merchant Leader",
+    "addAccount": "Add Account",
+    "leader": "Leader Account",
+    "staff": "Staff Account"
+  },
+  "removeAccount": {
+    "title": "Remove Account",
+    "successfully": "Successfully Removed",
+    "warning": "Are you sure you want to remove",
+    "info": "it may not possible to register this person again for several days.",
+    "result": "Successfully removed.",
+    "cancel": "Cancel",
+    "remove": "Remove",
+    "done": "Done"
+  },
+  "addAccount": {
+    "title": "Add Account",
+    "select": "Merchant Type",
+    "staff": "Merchant Staff",
+    "staffRights": "Limited access to Ucoins Balance",
+    "leader": "Merchant Leader",
+    "leaderRights": "Same authority as you",
+    "question": "Have a question?"
+  },
+  "createAccount": {
+    "title": "Create Account",
+    "staff": "Merchant Staff",
+    "leader": "Merchant Leader",
+    "givenName": "Given Name",
+    "familyName": "Family Name",
+    "username": "Username",
+    "email": "Email Address",
+    "password": "Password",
+    "confirm": "Confirm Password",
+    "create": "Create Account",
+    "required": "Oops! This is a required field.",
+    "userExists": "User already exists.",
+    "badEmail": "This email is not valid.",
+    "passwordsDontMatch": "Passwords don't match."
+  },
+  "createSuccess": {
+    "title": "Success",
+    "thanks": "Thank You",
+    "login": " We have sent login information to the Merchant Leader email address you have created",
+    "button": "Back to Homepage",
+    "email": "Didn't receive the email? Please check your spam folder, or try another email address.",
+    "info": "Merchant Staff account has been created",
+    "info2": "Please share the merchant staffs username and password with them so they can log in",
+    "username": "Username",
+    "rights": "Limited access to Ucoins Balance"
+  },
+  "changePassword": {
+    "title": "Change Password",
+    "description": "Change Password",
+    "newPassword": "New Password",
+    "confirm": "Confirm New Password",
+    "required": "Oops! This is a required field.",
+    "info": "Password Updated!",
+    "details": "Your {{userType}} {{displayName}} password has been changed successfully.",
+    "save": "Save",
+    "continue": "Continue"
+  }
+}

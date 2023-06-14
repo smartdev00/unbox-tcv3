@@ -1,0 +1,50 @@
+{
+  "editPassword": {
+    "title": "Password",
+    "description": "Change Password",
+    "save": "Save",
+    "oldPassword": "Current Password",
+    "newPassword": "New Password",
+    "confirmNewPassword": "Confirm New Password",
+    "required": "Oops! This is a required field.",
+    "passwordNotMatched": "Passwords aren't the same."
+  },
+  "editProfile": {
+    "title": "Profile",
+    "description": "Account Details",
+    "givenName": "Given Name",
+    "familyName": "Family Name",
+    "contact": "If you would like to change the email address registered with this account, please contact:",
+    "save": "Save",
+    "email": "Email Address",
+    "phone": "Contact Number",
+    "required": "Oops! This is a required field."
+  },
+  "myDetails": {
+    "title": "Account Details",
+    "profile": "Profile",
+    "type": "Account Type",
+    "givenName": "Given Name",
+    "familyName": "Family Name",
+    "email": "Email Address",
+    "phone": "Contact Number",
+    "button": "Edit Profile",
+    "MerchantStaff": "Merchant Staff",
+    "MerchantLeader": "Merchant Leader"
+  },
+  "profile": {
+    "consumer": "Consumer",
+    "account": "Account",
+    "general": "General",
+    "logout": "Log Out",
+    "faq": "FAQ",
+    "legal": "Legal",
+    "about": "About City Ucoin",
+    "editProfile": "Edit Profile",
+    "changePassword": "Change Password",
+    "accountDetails": "Account Details",
+    "companyDetails": "Company Details",
+    "finance": "Finance Information",
+    "materials": "Campaign Materials"
+  }
+}

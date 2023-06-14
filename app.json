@@ -1,0 +1,18 @@
+{
+  "expo": {
+    "name": "the-click-3",
+    "slug": "the-click-3",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "bundleIdentifier": ""
+    },  
+    "splash": {
+      "image": "./assets/products.png",
+      "backgroundColor": "#FEF9B0"
+    }
+  },
+  "name": "the-click-3"
+}

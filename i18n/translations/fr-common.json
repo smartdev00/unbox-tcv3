@@ -1,0 +1,9 @@
+{
+  "ok": "D'accord !",
+  "loginWith": "Connectez-vous avec {{provider}}",
+  "termsAndConditions": "Conditions générales",
+  "confirmTerms": "En cliquant sur login vous acceptez notre $t(common:termsAndConditions) & $t(common:privacyPolicy)",
+  "privacyPolicy": "Privacy Policy",
+  "faqs.title": "FAQs",
+  "welcome": "Bienvenue, {{name}} !"
+}

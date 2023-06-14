@@ -1,0 +1,16 @@
+{
+  "create.title": "Create QR",
+  "amount.total": "Total Payment",
+  "amount.placeholder": "E.g. 250",
+  "haveAQuestion.button": "Have a question?",
+  "receipt.title": "Receipt",
+  "showQRCode.button": "Show QR",
+  "cancel.button": "Cancel",
+  "show.title": "QR Code",
+  "show.customer": "Ask consumer to scan this QR code to continue payment.",
+  "code": "CODE NUMBER: {{code}}",
+  "awaiting.button": "Awaiting confirmation...",
+  "cancelAndCreate.button": "Cancel and Create New QR Code",
+  "totalAmount.text": "Total amount:",
+  "totalAmount": "{{amount}} "
+}

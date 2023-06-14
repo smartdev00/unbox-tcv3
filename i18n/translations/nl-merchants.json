@@ -1,0 +1,27 @@
+{
+  "title": "Merchants",
+  "balance": "Balance",
+  "category": "Category",
+  "filter": "Filter",
+  "list": "List",
+  "map": "Maps",
+  "sort": "Sort By",
+  "clear": "Clear Filters",
+  "categories": {
+    "Foods & Beverages": "Foods & Beverages",
+    "Homeware": "Homeware",
+    "Sports": "Sports",
+    "Electronics": "Electronics",
+    "Clothes": "Clothes",
+    "Leisure": "Leisure",
+    "Hotel": "Hotel",
+    "Other": "Other"
+  },
+  "sorting": {
+    "nearest": "Nearest",
+    "newest": "Newest",
+    "oldest": "Oldest",
+    "alphabetically": "A-Z",
+    "reverse": "Z-A"
+  }
+}

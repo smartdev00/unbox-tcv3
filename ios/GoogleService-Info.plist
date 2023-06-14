@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>694911827044-elpuh7oh7bnk6s93uigktc8mlhpfg8p1.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.694911827044-elpuh7oh7bnk6s93uigktc8mlhpfg8p1</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBP8-mFf74URNM9BEc2xrt3xCEM5N3Co4E</string>
+	<key>GCM_SENDER_ID</key>
+	<string>694911827044</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>be.fostplus.theclick.development</string>
+	<key>PROJECT_ID</key>
+	<string>the-click-v3-internal</string>
+	<key>STORAGE_BUCKET</key>
+	<string>the-click-v3-internal.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:694911827044:ios:1ef5a0ae5cd753dcfb3371</string>
+</dict>
+</plist>

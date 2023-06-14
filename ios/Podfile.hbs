@@ -1,0 +1,81 @@
+require File.join(File.dirname(`node --print "require.resolve('expo/package.json')"`), "scripts/autolinking")
+require_relative '../node_modules/react-native/scripts/react_native_pods'
+require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
+
+require 'json'
+podfile_properties = JSON.parse(File.read(File.join(__dir__, 'Podfile.properties.json'))) rescue {}
+
+platform :ios, podfile_properties['ios.deploymentTarget'] || '13.0'
+install! 'cocoapods',
+  :deterministic_uuids => false
+
+target 'the-click-3' do
+
+  pod 'Firebase', :modular_headers => true
+  pod 'FirebaseCore', :modular_headers => true
+  pod 'GoogleUtilities', :modular_headers => true
+  $RNFirebaseAsStaticFramework = true
+
+  use_expo_modules!
+  post_integrate do |installer|
+    begin
+      expo_patch_react_imports!(installer)
+    rescue => e
+      Pod::UI.warn e
+    end
+  end
+  config = use_native_modules!
+  use_react_native!(:path => config[:reactNativePath])
+
+
+  use_frameworks! :linkage => podfile_properties['ios.useFrameworks'].to_sym if podfile_properties['ios.useFrameworks']
+
+  # Flags change depending on the env values.
+  flags = get_default_flags()
+
+  use_react_native!(
+    :path => config[:reactNativePath],
+    # :hermes_enabled => true,
+    :hermes_enabled => flags[:hermes_enabled] || podfile_properties['expo.jsEngine'] == 'hermes',
+    :fabric_enabled => flags[:fabric_enabled],
+    # An absolute path to your application root.
+    :app_path => "#{Dir.pwd}/.."
+  )
+
+  # Uncomment to opt-in to using Flipper
+  # Note that if you have use_frameworks! enabled, Flipper will not work
+  #
+  # if !ENV['CI']
+  #   use_flipper!()
+  # end
+  
+  pre_install do |installer|    
+    $RNMapboxMaps.pre_install(installer)
+  end
+
+  post_install do |installer|    
+    $RNMapboxMaps.post_install(installer)
+    react_native_post_install(installer)
+    __apply_Xcode_12_5_M1_post_install_workaround(installer)
+
+
+    installer.pods_project.targets.each do |target|
+      if target.respond_to?(:product_type) and target.product_type == "com.apple.product-type.bundle"
+        target.build_configurations.each do |config|
+            config.build_settings['CODE_SIGNING_ALLOWED'] = 'NO'
+        end
+      end
+    end
+
+
+    installer.generated_projects.each do |project|
+      project.targets.each do |target|
+          target.build_configurations.each do |config|
+              config.build_settings["DEVELOPMENT_TEAM"] = "GNRWSCZC8T"
+           end
+      end
+    end
+
+  end
+
+end

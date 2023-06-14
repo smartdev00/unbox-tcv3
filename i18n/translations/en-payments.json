@@ -1,0 +1,43 @@
+{
+  "scan": {
+    "instructions1": "Align the QR code within the frame to scan.",
+    "instructions2": "Your phone will automatically detect the QR Code.",
+    "submit.button": "Submit",
+    "enterQr.button": "Enter QR Number",
+    "scannerNotWorking": "Scanner not working?",
+    "flipCamera.button": "Flip Camera",
+    "flash.button": "Flash"
+  },
+  "summary": {
+    "title": "Payment Summary",
+    "pay": "Payable with Ucoins",
+    "remaining": "Remaining amount",
+    "total": "Total Payment"
+  },
+  "amount": {
+    "title": "Ucoins Amount",
+    "button": "Confirm",
+    "total": "Total Payment",
+    "pay": "Pay with Ucoins"
+  },
+  "confirmation": {
+    "title": "Confirmation",
+    "transfer": "Transfer Amount",
+    "target": "To following merchant:",
+    "button": "Pay  Ucoins"
+  },
+  "success": {
+    "title": "Success",
+    "result": "You've successfully sent  Ucoins to:",
+    "owed": "Amount owed:",
+    "info": "Please pay the rest to the merchant.",
+    "button": "Done"
+  },
+  "failure": {
+    "title": "Oops!",
+    "result": "Payment Declined. Please try again.",
+    "button": "Try Again"
+  },
+  "transactions.noItems": "There are currently no transactions.",
+  "transactions.findAMerchant": "Let's find a merchant!"
+}
