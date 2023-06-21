@@ -1,0 +1,135 @@
+name: Sign, Build and Publish App
+
+on:
+  pull_request:
+    branches: 
+      - develop
+      - main
+    types:
+      - closed
+
+jobs:
+  bump_version:
+    name: Bump build version
+    permissions:
+      contents: read
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ssh-key: ${{ secrets.GIT_PRIVATE_KEY }}
+      - name: Clean Gemfile.lock
+        id: clean_gemfile
+        run: |
+          rm -rf Gemfile.lock
+      - name: Setup Ruby (bundle)
+        id: ruby_setup
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7.5
+          bundler-cache: true
+      - name: Bundle Install
+        id: bundle_install
+        run: |
+          bundle lock --add-platform x86_64-darwin-19
+          bundle install
+      - name: Bump version iOS
+        id: bump_version_ios
+        env:
+          XCODEPROJ_PATH: "ios/the-click-3.xcodeproj"
+        run: |
+          bundle exec fastlane build_version
+      - name: Commit bump version changes
+        id: bump_commit
+        if: steps.bump_version_ios.conclusion == 'success'
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git add .
+          git commit -m "[skip ci] bump build number"
+          git push origin ${{ github.ref }}
+  build_ios_ipa:
+    name: Build iOS .ipa
+    runs-on: macos-latest
+    needs: bump_version
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ssh-key: ${{ secrets.GIT_PRIVATE_KEY }}
+      - name: add SSH key
+        id: add_ssh_key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.GIT_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          echo "${{ secrets.GIT_PUBLIC_KEY }}" > ~/.ssh/id_rsa.pub
+          sudo chmod 400 ~/.ssh/id_rsa
+          sudo chmod 400 ~/.ssh/id_rsa.pub
+      - name: Generate existing .mobileprovision
+        run: |
+          echo "${{ secrets.MOBILEPROVISION_FILE_BASE64 }}" | base64 --decode > ios/theclick.mobileprovision
+          ls -lah ios/theclick.mobileprovision
+      - name: Install dependencies
+        run: |
+          git pull origin ${{ github.ref }}
+          yarn install --frozen-lockfile --network-timeout 300000
+      - name: Restore Pods cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            Pods
+            ~/Library/Caches/CocoaPods
+            ~/.cocoapods
+          key: ${{ runner.os }}-pods-${{ hashFiles('Podfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pods-
+      - name: Setup Ruby (bundle)
+        id: ruby_setup
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7.5
+          bundler-cache: true
+      - name: Install Pods
+        id: pod_install
+        run: |
+          gem install ffi -v '1.14.0'
+          cd ios
+          arch -x86_64 pod install --repo-update
+      - name: Build ipa using fastlane
+        id: build_ipa_fastlane
+        env:
+          APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
+          APP_STORE_CONNECT_API_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_API_ISSUER_ID }}
+          APP_STORE_CONNECT_API_KEY_CONTENT: ${{ secrets.APP_STORE_CONNECT_API_KEY_CONTENT }}
+          GIT_PRIVATE_KEY: ${{ secrets.GIT_PRIVATE_KEY }}
+          IOS_TEAM_ID: ${{ secrets.IOS_TEAM_ID }}
+          MATCH_PASSWORD: ${{ secrets.FASTLANE_MATCH_PASSWORD }}
+          PROVISIONING_PROFILE_PATH: "ios/theclick.mobileprovision"
+          GIT_URL: "git@github.com:Unbox-infinity/fastlane_match-theclick.git"
+          APP_IDENTIFIER: "be.fostplus.theclick.development"
+          XCODEPROJ_PATH: "ios/the-click-3.xcodeproj"
+          XARCHIVE_PATH: "ios/the-click-3.xcarchive"
+          XWORKSPACE_PATH: "ios/the-click-3.xcworkspace"
+          XCODE_SCHEMA: "the-click-3"
+          SIGNIDENTITY: "Apple Distribution: NBX (J68ZQUZ4L8)"
+          GIT_USERNAME: "yunan.fatah@unboxuniverse.com"
+        run: |
+          bundle lock --add-platform x86_64-darwin-19
+          bundle install
+          bundle exec fastlane beta
+      - name: Save .ipa to artifact
+        uses: actions/upload-artifact@v3
+        id: save_ipa_artifact
+        with:
+          name: app-release
+          path: /Users/runner/work/app-native-the-click-v3/app-native-the-click-v3/the-click-3.ipa
+      
+      - name: Deploy to Testflight
+        id: deploy_testflight
+        if: github.base_ref == 'develop'
+        env:
+          APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
+          APP_STORE_CONNECT_API_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_API_ISSUER_ID }}
+          APP_STORE_CONNECT_API_KEY_CONTENT: ${{ secrets.APP_STORE_CONNECT_API_KEY_CONTENT }}
+          APP_IPA_PATH: /Users/runner/work/app-native-the-click-v3/app-native-the-click-v3/the-click-3.ipa
+        run: bundle exec fastlane push_testflight_release
