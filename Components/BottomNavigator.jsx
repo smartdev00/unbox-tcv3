@@ -4,7 +4,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useNavigation } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 
-import messaging from '@react-native-firebase/messaging';
+// import messaging from '@react-native-firebase/messaging';
 
 import {
   Box,
@@ -88,29 +88,29 @@ const BottomNavigator = () => {
   const HEIGHT = 150;
   const BUTTON_HEIGHT = 10;
 
-  useEffect(() => {
-    messaging().onNotificationOpenedApp(remoteMessage => {
-      console.log(
-        'Notification caused app to open from background state:',
-        remoteMessage.notification,
-      );         
-      navigation.navigate("Dashboard");      
-    });
+  // useEffect(() => {
+  //   messaging().onNotificationOpenedApp(remoteMessage => {
+  //     console.log(
+  //       'Notification caused app to open from background state:',
+  //       remoteMessage.notification,
+  //     );         
+  //     navigation.navigate("Dashboard");      
+  //   });
 
-    // Check whether an initial notification is available
-    messaging()
-      .getInitialNotification()
-      .then(remoteMessage => {
-        if (remoteMessage) {
-          console.log(
-            'Notification caused app to open from quit state:',
-            remoteMessage.notification,
-          );
-          // console.log(remoteMessage);           
-        }
-        // setLoading(false);
-      });
-  }, []);
+  //   // Check whether an initial notification is available
+  //   messaging()
+  //     .getInitialNotification()
+  //     .then(remoteMessage => {
+  //       if (remoteMessage) {
+  //         console.log(
+  //           'Notification caused app to open from quit state:',
+  //           remoteMessage.notification,
+  //         );
+  //         // console.log(remoteMessage);           
+  //       }
+  //       // setLoading(false);
+  //     });
+  // }, []);
 
   return (
     <Tab.Navigator
