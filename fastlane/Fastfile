@@ -101,6 +101,7 @@ platform :ios do
       scheme: ENV['XCODE_SCHEMA'],
       archive_path: ENV['XARCHIVE_PATH'],
       workspace: ENV['XWORKSPACE_PATH'],
+      export_method: ENV['BUILD_MATCH_TYPE'] == 'appstore' ? 'app-store' : 'development',
       export_team_id: ENV['IOS_TEAM_ID'],
     )
   end
