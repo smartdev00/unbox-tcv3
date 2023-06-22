@@ -70,7 +70,7 @@ platform :ios do
     )
 
     match(
-      type: 'appstore',
+      type: ENV['BUILD_MATCH_TYPE'],
       app_identifier: ENV['APP_IDENTIFIER'],
       api_key: api_key,
       readonly: false,
