@@ -68,6 +68,14 @@ Increments patch build version
 
 Push a new build to Testflight
 
+### ios match_mobileprovision
+
+```sh
+[bundle exec] fastlane ios match_mobileprovision
+```
+
+Match mobile provision
+
 ### ios beta
 
 ```sh
