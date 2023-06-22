@@ -70,7 +70,7 @@ platform :ios do
     )
 
     match(
-      type: ENV['BUILD_MATCH_TYPE'],
+      type: 'appstore',
       app_identifier: ENV['APP_IDENTIFIER'],
       api_key: api_key,
       readonly: false,
@@ -80,28 +80,12 @@ platform :ios do
       git_private_key: ENV['GIT_PRIVATE_KEY']
     )
 
-    update_code_signing_settings(
-      use_automatic_signing: false,
-      path: ENV['XCODEPROJ_PATH'],
-      code_sign_identity: ENV['SIGNIDENTITY']
-    )
-
-    update_project_provisioning(
-      xcodeproj: ENV['XCODEPROJ_PATH'],
-      profile: ENV['PROVISIONING_PROFILE_PATH'],
-    )
-    
-    update_project_team(
-      path: ENV['XCODEPROJ_PATH'],
-      teamid: ENV['IOS_TEAM_ID']
-    )
-
     build_app(
       configuration: "Release",
       scheme: ENV['XCODE_SCHEMA'],
       archive_path: ENV['XARCHIVE_PATH'],
       workspace: ENV['XWORKSPACE_PATH'],
-      export_method: ENV['BUILD_MATCH_TYPE'] == 'appstore' ? 'app-store' : 'development',
+      export_method: 'app-store',
       export_team_id: ENV['IOS_TEAM_ID'],
     )
   end
