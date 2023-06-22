@@ -2,7 +2,7 @@ git_url(ENV['GIT_URL'])
 
 storage_mode("git")
 
-type("development") # The default type, can be: appstore, adhoc, enterprise or development 
+type(ENV['BUILD_MATCH_TYPE']) # The default type, can be: appstore, adhoc, enterprise or development 
 
 app_identifier(ENV['APP_IDENTIFIER'])
 username(ENV['GIT_USERNAME']) # Your Apple Developer Portal username

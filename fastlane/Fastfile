@@ -70,14 +70,13 @@ platform :ios do
     )
 
     match(
-      type: 'appstore',
+      type: ENV['BUILD_MATCH_TYPE'],
       app_identifier: ENV['APP_IDENTIFIER'],
       api_key: api_key,
       readonly: false,
       storage_mode: "git",
       git_url: ENV['GIT_URL'],
       username: ENV['GIT_USERNAME'],
-      git_private_key: ENV['GIT_PRIVATE_KEY']
     )
 
     update_code_signing_settings(

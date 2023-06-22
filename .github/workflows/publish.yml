@@ -106,13 +106,14 @@ jobs:
           MATCH_PASSWORD: ${{ secrets.FASTLANE_MATCH_PASSWORD }}
           PROVISIONING_PROFILE_PATH: "ios/theclick.mobileprovision"
           GIT_URL: "git@github.com:Unbox-infinity/fastlane_match-theclick.git"
-          APP_IDENTIFIER: "be.fostplus.theclick.development"
+          APP_IDENTIFIER: "be.fostplus.theclick.unbox-internal"
           XCODEPROJ_PATH: "ios/the-click-3.xcodeproj"
           XARCHIVE_PATH: "ios/the-click-3.xcarchive"
           XWORKSPACE_PATH: "ios/the-click-3.xcworkspace"
           XCODE_SCHEMA: "the-click-3"
           SIGNIDENTITY: "Apple Distribution: NBX (J68ZQUZ4L8)"
           GIT_USERNAME: "yunan.fatah@unboxuniverse.com"
+          BUILD_MATCH_TYPE: ${{ github.base_ref == 'main' && 'appstore' || 'development' }}
         run: |
           bundle lock --add-platform x86_64-darwin-19
           bundle install
