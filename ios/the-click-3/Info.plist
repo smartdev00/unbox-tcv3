@@ -53,7 +53,6 @@
 	<array>
 		<string>fetch</string>
 		<string>location</string>
-		<string>remote-notifications</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>SplashScreen</string>
