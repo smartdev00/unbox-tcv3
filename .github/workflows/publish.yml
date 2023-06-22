@@ -92,6 +92,7 @@ jobs:
       - name: Install Pods
         id: pod_install
         run: |
+          ls -lah /Applications
           gem install ffi -v '1.14.0'
           cd ios
           arch -x86_64 pod install --repo-update
