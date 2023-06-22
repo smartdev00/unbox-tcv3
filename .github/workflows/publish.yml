@@ -109,10 +109,12 @@ jobs:
           XCODE_SCHEMA: "the-click-3"
           GIT_USERNAME: "yunan.fatah@unboxuniverse.com"
           CODE_SIGN_IDENTITY: "Apple Distribution: NBX (${{ secrets.IOS_TEAM_ID }})"
-          PROVISIONING_PROFILE_PATH: "/Users/runner/Library/MobileDevice/Provisioning Profiles/57dd42e5-5289-4529-b8b9-4c1c39b6d335.mobileprovision"
+          PROVISIONING_PROFILE_PATH: "/Users/runner/Library/MobileDevice/Provisioning Profiles/a3c94ecd-f01d-41ed-ae50-33085dcf9dbe.mobileprovision"
         run: |
           bundle lock --add-platform x86_64-darwin-19
           bundle install
+          bundle exec fastlane ios match_mobileprovision
+          ls -lah /Users/runner/Library/MobileDevice/Provisioning\ Profiles
           bundle exec fastlane beta
           mkdir ios/build-ipa
           cp /Users/runner/work/app-native-the-click-v3/app-native-the-click-v3/the-click-3.ipa ios/build-ipa/the-click-3.ipa
