@@ -118,19 +118,37 @@ jobs:
           bundle lock --add-platform x86_64-darwin-19
           bundle install
           bundle exec fastlane beta
+          mkdir ios/build-ipa
+          cp /Users/runner/work/app-native-the-click-v3/app-native-the-click-v3/the-click-3.ipa ios/build-ipa/the-click-3.ipa
       - name: Save .ipa to artifact
         uses: actions/upload-artifact@v3
         id: save_ipa_artifact
         with:
-          name: app-release
-          path: /Users/runner/work/app-native-the-click-v3/app-native-the-click-v3/the-click-3.ipa
-      
+          name: the-click-3.ipa
+          path: ios/build-ipa/
+  deploy_testflight:
+    name: Testflight Deployment
+    needs: build_ios_ipa
+    if: github.base_ref == 'develop'
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/download-artifact@master
+        with:
+          name: the-click-3.ipa
+          path: ios/build-ipa/
+      - name: Setup Ruby (bundle)
+        id: ruby_setup
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7.5
+          bundler-cache: true
       - name: Deploy to Testflight
-        id: deploy_testflight
-        if: github.base_ref == 'develop'
         env:
           APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
           APP_STORE_CONNECT_API_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_API_ISSUER_ID }}
           APP_STORE_CONNECT_API_KEY_CONTENT: ${{ secrets.APP_STORE_CONNECT_API_KEY_CONTENT }}
-          APP_IPA_PATH: /Users/runner/work/app-native-the-click-v3/app-native-the-click-v3/the-click-3.ipa
-        run: bundle exec fastlane push_testflight_release
+          APP_IPA_PATH: ios/build-ipa/the-click-3.ipa
+        run: |
+          bundle install
+          bundle exec fastlane push_testflight_release
