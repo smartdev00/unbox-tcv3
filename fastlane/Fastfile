@@ -80,7 +80,6 @@ platform :ios do
       git_private_key: ENV['GIT_PRIVATE_KEY']
     )
 
-    xcversion(version: "14.2")
     update_code_signing_settings(
       use_automatic_signing: false,
       path: ENV['XCODEPROJ_PATH'],
