@@ -68,14 +68,6 @@ Increments patch build version
 
 Push a new build to Testflight
 
-### ios nuke_profile
-
-```sh
-[bundle exec] fastlane ios nuke_profile
-```
-
-Build new .ipa file
-
 ### ios beta
 
 ```sh
