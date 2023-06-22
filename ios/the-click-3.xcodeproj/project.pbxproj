@@ -357,6 +357,8 @@
 					"FB_SONARKIT_ENABLED=1",
 				);
 				INFOPLIST_FILE = "the-click-3/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "The Click Internal";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.shopping";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -389,6 +391,8 @@
 				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = J68ZQUZ4L8;
 				INFOPLIST_FILE = "the-click-3/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "The Click Internal";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.shopping";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
