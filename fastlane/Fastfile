@@ -77,6 +77,7 @@ platform :ios do
       storage_mode: "git",
       git_url: ENV['GIT_URL'],
       username: ENV['GIT_USERNAME'],
+      git_private_key: ENV['GIT_PRIVATE_KEY']
     )
 
     update_code_signing_settings(
