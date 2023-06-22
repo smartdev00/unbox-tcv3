@@ -102,7 +102,7 @@ jobs:
           IOS_TEAM_ID: ${{ secrets.IOS_TEAM_ID }}
           MATCH_PASSWORD: ${{ secrets.FASTLANE_MATCH_PASSWORD }}
           GIT_URL: "git@github.com:Unbox-infinity/fastlane_match-unlitter-usa.git"
-          APP_IDENTIFIER: "be.fostplus.theclick.unbox-internal"
+          APP_IDENTIFIER: "com.unbox.theclick.v3"
           XCODEPROJ_PATH: "ios/the-click-3.xcodeproj"
           XARCHIVE_PATH: "ios/the-click-3.xcarchive"
           XWORKSPACE_PATH: "ios/the-click-3.xcworkspace"
