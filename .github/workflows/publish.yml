@@ -112,6 +112,8 @@ jobs:
           XWORKSPACE_PATH: "ios/the-click-3.xcworkspace"
           XCODE_SCHEMA: "the-click-3"
           GIT_USERNAME: "yunan.fatah@unboxuniverse.com"
+          CODE_SIGN_IDENTITY: "Apple Distribution: NBX (${{ secrets.IOS_TEAM_ID }})"
+          PROVISIONING_PROFILE_PATH: "/Users/runner/Library/MobileDevice/Provisioning Profiles/57dd42e5-5289-4529-b8b9-4c1c39b6d335.mobileprovision"
         run: |
           bundle lock --add-platform x86_64-darwin-19
           bundle install

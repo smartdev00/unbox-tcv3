@@ -80,7 +80,22 @@ platform :ios do
       git_private_key: ENV['GIT_PRIVATE_KEY']
     )
 
-    xcode_select("/Applications/Xcode_14.2.app")
+    xcversion(version: "14.2")
+    update_code_signing_settings(
+      use_automatic_signing: false,
+      path: ENV['XCODEPROJ_PATH'],
+      code_sign_identity: ENV['CODE_SIGN_IDENTITY']
+    )
+
+    update_project_provisioning(
+      xcodeproj: ENV['XCODEPROJ_PATH'],
+      profile: ENV['PROVISIONING_PROFILE_PATH'],
+    )
+    
+    update_project_team(
+      path: ENV['XCODEPROJ_PATH'],
+      teamid: ENV['IOS_TEAM_ID']
+    )
     build_app(
       configuration: "Release",
       scheme: ENV['XCODE_SCHEMA'],
