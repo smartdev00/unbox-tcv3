@@ -62,12 +62,12 @@ const ForgotPassword = ({ navigation }) => {
       <Box
         alignItems={'center'}
         justifyContent={'center'}
-        h={'56px'}
+        h={'100px'}
       >
         <UnboxLitterSVG />
       </Box>
 
-      <Box px={6} pt={53} flex={1}>
+      <Box px={6} pt={33} flex={1}>
         <Text
           variant={'heading1'}
           colorScheme={'primary'}

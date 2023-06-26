@@ -29,12 +29,12 @@ const SuccessView = ({ navigation }) => {
       <Box
         alignItems={'center'}
         justifyContent={'center'}
-        h={'56px'}
+        h={'100px'}
       >
         <UnboxLitterSVG />
       </Box>
       <Box
-        px={6} pt={53}
+        px={6} pt={33}
         flex={1} pb={12}
         justifyContent={'space-between'}
         alignItems={'center'}
