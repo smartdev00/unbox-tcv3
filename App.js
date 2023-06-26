@@ -250,8 +250,8 @@ const App = () => {
 
   useEffect(() => {
     const loadPrevious = async () => {     
-      const messagingToken = await messaging().getToken();
-      console.log('messagingToken', messagingToken);
+      // const messagingToken = await messaging().getToken();
+      // console.log('messagingToken', messagingToken);
 
       const _auth = await AsyncStorage.getItem("unbox-litter-the-click-3-auth");
       const authenticated = JSON.parse(_auth);
