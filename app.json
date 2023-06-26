@@ -10,7 +10,7 @@
       "bundleIdentifier": ""
     },  
     "splash": {
-      "image": "./assets/products.png",
+      "image": "./assets/images/products.png",
       "backgroundColor": "#FEF9B0"
     }
   },

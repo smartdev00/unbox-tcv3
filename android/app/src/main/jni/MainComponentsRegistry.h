@@ -13,7 +13,7 @@ class MainComponentsRegistry
  public:
   // Adapt it to the package you used for your Java class.
   constexpr static auto kJavaDescriptor =
-      "Lcom/be.fostplus.theclick.development/newarchitecture/components/MainComponentsRegistry;";
+      "Lcom/be.fostplus.theclick/newarchitecture/components/MainComponentsRegistry;";
 
   static void registerNatives();
 
