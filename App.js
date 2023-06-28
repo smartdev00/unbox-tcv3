@@ -57,13 +57,15 @@ import BottomNavigator from "./Components/BottomNavigator";
 import * as Unbox from './CommonComponents';
 
 import extendedTheme from "./extendedTheme";
+import UnboxLitterSVG from "./Components/UnboxLitterSVG";
+import Splash from "./Screens/Splash";
 
 const theme = extendTheme(extendedTheme);
 
 const linking = {
   prefixes: ["unlitter://"],
   config: {
-    screens: {      
+    screens: {
       Login: "login/:username/:releaseToken",
     },
   },
@@ -93,43 +95,43 @@ const authLink = setContext(async (req, { headers }) => {
 });
 
 const getNewToken = async () => {
-  console.log('getting new token')  
+  console.log('getting new token')
   // set context for user to be null
 
   let refreshToken = await AsyncStorage.getItem("unbox-litter-the-click-3-refreshToken")
   let token = await AsyncStorage.getItem("unbox-litter-the-click-3-token")
 
-    const url = `${AppConfig.authUri}/refresh`;
-    const body = {
-      token: refreshToken,
-    };
-    
-    try {
-      const res = await fetch(url, { 
-        method: "POST", 
-        body: JSON.stringify(body), 
-        headers: {
-          Authorization: `Bearer ${token}`,       
-          Accept: 'application/json',
-          'Content-Type': 'application/json',           
-        }
-      });
-      
-      const data = await res.json();
-      
-      if (data.success) {                   
-        await AsyncStorage.setItem("unbox-litter-the-click-3-token", data.result.session.value);
-        await AsyncStorage.setItem("unbox-litter-the-click-3-tokenExpires", JSON.stringify((Date.now() / 1000) + data.result.session.duration));
-        await AsyncStorage.setItem("unbox-litter-the-click-3-refreshToken", data.result.refresh.value);
-        await AsyncStorage.setItem("unbox-litter-the-click-3-refreshTokenExpires", data.result.refresh.expires);
-        return data.result.session.value;
-      }
+  const url = `${AppConfig.authUri}/refresh`;
+  const body = {
+    token: refreshToken,
+  };
 
-  
-    } catch (err) {
-      console.log(err)
-      return null;      
+  try {
+    const res = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify(body),
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      }
+    });
+
+    const data = await res.json();
+
+    if (data.success) {
+      await AsyncStorage.setItem("unbox-litter-the-click-3-token", data.result.session.value);
+      await AsyncStorage.setItem("unbox-litter-the-click-3-tokenExpires", JSON.stringify((Date.now() / 1000) + data.result.session.duration));
+      await AsyncStorage.setItem("unbox-litter-the-click-3-refreshToken", data.result.refresh.value);
+      await AsyncStorage.setItem("unbox-litter-the-click-3-refreshTokenExpires", data.result.refresh.expires);
+      return data.result.session.value;
     }
+
+
+  } catch (err) {
+    console.log(err)
+    return null;
+  }
 }
 
 let isRefreshing = false;
@@ -145,7 +147,7 @@ const resolvePendingRequests = () => {
 const errorLink = onError(
   ({ graphQLErrors, networkError, operation, forward }) => {
     if (graphQLErrors) {
-      for (let err of graphQLErrors) {        
+      for (let err of graphQLErrors) {
         switch (err.code) {
           case 401:
             let forward$;
@@ -176,8 +178,8 @@ const errorLink = onError(
 
             return forward$.flatMap(() => forward(operation));
 
-          default: 
-            console.log(err)            
+          default:
+            console.log(err)
         }
       }
     }
@@ -188,8 +190,8 @@ const errorLink = onError(
 
 const client = new ApolloClient({
   // uri: AppConfig.graphqlEndpoint,
-  link:  new ApolloLink.from([errorLink, authLink, httpLink]),
-  cache: new InMemoryCache(),  
+  link: new ApolloLink.from([errorLink, authLink, httpLink]),
+  cache: new InMemoryCache(),
 });
 
 
@@ -207,6 +209,7 @@ const App = () => {
   });
 
   const [ready, setReady] = useState(false);
+  const [isSplash, setSplashComplete] = useState(false);
 
   const [auth, setAuth] = useState();
   const [user, setUser] = useState();
@@ -283,11 +286,15 @@ const App = () => {
       }
 
       setReady(true)
+      console.log(isSplash)
     }
   
     loadPrevious()
   }, [])
 
+  const handleClickGo = () => {
+    setSplashComplete(true)
+  }
 
   if (!fontsLoaded) {
     return null;
@@ -309,57 +316,60 @@ const App = () => {
                     value={[achievements, setAchievements]}
                   >
                     <NativeBaseProvider theme={theme}>
-                      {!auth.authenticated ? ( 
-                        <NavigationContainer linking={linking}>
-                          <Stack.Navigator
-                            initialRouteName={initialRouteName}
-                            screenOptions={Object({
-                              headerShown: false,
-                              animation: "none",
-                            })}
-                          >
-                            <Stack.Screen
-                              name="ChangePassword"
-                              component={Screens.ChangePassword}
-                            />
-                            <Stack.Screen
-                              name="ContactUs"
-                              component={Screens.ContactUs}
-                            />
-                            <Stack.Screen
-                              name="ForgotPassword"
-                              component={Screens.ForgotPassword}
-                            />
-                            <Stack.Screen
-                              name="ForgotPasswordConfirm"
-                              component={Screens.ForgotPasswordConfirm}
-                            />
-                            <Stack.Screen
-                              name="Login"
-                              component={Screens.Login}
-                            />
-                            <Stack.Screen
-                              name="Register"
-                              component={Screens.Register}
-                            />
-                            <Stack.Screen
-                              name="TermsAndConditions"
-                              component={Screens.TermsAndConditions}
-                            />
-                            <Stack.Screen
-                              name="ValidateAccount"
-                              component={Screens.ValidateAccount}
-                            />
-                          </Stack.Navigator>
-                        </NavigationContainer>
-                      ) : (
-                        <NavigationContainer safeAreaTop>
-                          <BottomNavigator />
-                          </NavigationContainer>
-                      )}
-
- 
-                      
+                      {!isSplash ? (
+                        <Splash onClickGo={handleClickGo} />
+                      ) :
+                        <>
+                          {!auth.authenticated ? (
+                            <NavigationContainer linking={linking}>
+                              <Stack.Navigator
+                                initialRouteName={initialRouteName}
+                                screenOptions={Object({
+                                  headerShown: false,
+                                  animation: "none",
+                                })}
+                              >
+                                <Stack.Screen
+                                  name="ChangePassword"
+                                  component={Screens.ChangePassword}
+                                />
+                                <Stack.Screen
+                                  name="ContactUs"
+                                  component={Screens.ContactUs}
+                                />
+                                <Stack.Screen
+                                  name="ForgotPassword"
+                                  component={Screens.ForgotPassword}
+                                />
+                                <Stack.Screen
+                                  name="ForgotPasswordConfirm"
+                                  component={Screens.ForgotPasswordConfirm}
+                                />
+                                <Stack.Screen
+                                  name="Login"
+                                  component={Screens.Login}
+                                />
+                                <Stack.Screen
+                                  name="Register"
+                                  component={Screens.Register}
+                                />
+                                <Stack.Screen
+                                  name="TermsAndConditions"
+                                  component={Screens.TermsAndConditions}
+                                />
+                                <Stack.Screen
+                                  name="ValidateAccount"
+                                  component={Screens.ValidateAccount}
+                                />
+                              </Stack.Navigator>
+                            </NavigationContainer>
+                          ) : (
+                            <NavigationContainer safeAreaTop>
+                              <BottomNavigator />
+                            </NavigationContainer>
+                          )}
+                        </>
+                      }
                     </NativeBaseProvider>
                   </AchievementsContext.Provider>
                 </BalanceContext.Provider>
