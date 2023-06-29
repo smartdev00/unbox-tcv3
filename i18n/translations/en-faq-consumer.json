@@ -1,192 +1,234 @@
 {
-  "What is The Click?": [
+  "The Click app": [
     {
-      "question": "What is The Click?",
-      "answer": "Our The Click solution is an app that aims to educate and reward users to pick up and dispose of litter correctly, whilst stimulating the local economy."
+      "question": "How can I participate in the Click?",
+      "answer": "Everyone over the age of 12 can participate in the Click, free of charge, throughout Belgium. The Click is a free app that everyone can use. Download the Click app for iOS or Android, register and get started right away. You are already doing it at home, but now you can do it any time, anywhere. Thank you for making the Click."
     },
     {
-      "question": "How does The Click work?",
-      "answer": "1. Find a merchant or voucher\na. To find merchants that accept Circular Ucoins, please navigate to the “Merchants’ tab in the “Shop” page in the app. Alternatively, to view a \nlist of all available vouchers, navigate to the ”Vouchers” tab in the \n“Shop” page of the app. You can also keep an eye out for shops with a \nposter in their window indicating that they accept Circular Ucoins.\n2. Select voucher\na.  Once you’ve found a voucher you’d like to purchase with your Circular \nUcoins, simply click ‘Buy now’ on the voucher. Your purchased voucher \nwill appear in the ‘My Vouchers’ tab of the ‘Shop’ page in the The Click app.\n3. Redeem voucher in-store \na. When you wish to redeem your voucher, head over to the store and present your voucher. They will scan the QR code on the voucher and apply your deal/discount."
+      "question": "Does my phone support the Click app?",
+      "answer": "You need a modern smartphone to start using the Click app. You will also need access to the App Store or Google Play store. Check your smartphone settings to ensure that your location and camera are shared when prompted. In the menu for individual app permissions (settings → scroll down → click on The Click), change your location permission setting to ‘Always’."
     },
     {
-      "question": "What are the benefits of The Click?",
-      "answer": "The Click has many benefits for both consumers and participating merchants.\nFor consumers: \n- Earn Circular Ucoins to purchase rewards in the form of vouchers from participating merchants, \n- Join your local community in keeping your environment clean and beautiful, \n- Reduce litter entering local ecosystems and harming wildlife, \n- Stimulate your local economy by purchasing vouchers from participating local merchants,  \n- Free to sign up! \n \nFor Merchants: \n- Access to the The Click marketing channel, with no sign-up costs, \n- Potential for increased footfall and sales, \n- Positive CSR for encouraging consumers to clean up their environment,  \n- Freedom to create and manage your own offers,  \n- Quick and easy registration, with no complex POS integration!"
+      "question": "Is the Click app secure?",
+      "answer": "We have taken all reasonable steps to protect your personal information: Register via the app. To activate your account, click on the activation link in the e-mail you receive from us. Log in via the app and get immediate access. We respect all the existing privacy and GDPR rules."
     },
     {
-      "question": "Who developed The Click?",
-      "answer": "Unbox the Universe. You can find out more about Unbox the Universe at <0>www.unboxuniverse.com</0>"
+      "question": "What features does the Click app offer?",
+      "answer": "Collect litter and scan or take a photo of it to receive a reward \n Scan or take photos of your own empty packaging on the go \n Order vouchers you have earned via the web shop \n View your Click history \n Claim awards to earn Circular UCoins faster \n Map: you can record your walks and indicate whether the area was clean or not \n Inbox \n View transactions \n Your profile"
+    },
+    {
+      "question": "Do I have to purchase the Click app?",
+      "answer": "No, you don’t have to purchase the Click app. The app is free for everyone who registers."
+    },
+    {
+      "question": "Is the Click app available for international users?",
+      "answer": "You can use the Click app throughout the territory of Belgium. Would you like to use the Click app outside Belgium? Send an e-mail to theclick@fostplus.be"
+    },
+    {
+      "question": "How can I submit a complaint?",
+      "answer": "You can submit a complaint via the contact form, or send an e-mail to theclick@fostplus.be."
+    },
+    {
+      "question": "What are the system requirements for the Click app?",
+      "answer": "You only need a modern smartphone and an internet/4G connection."
+    },
+    {
+      "question": "Can I register without an email address?",
+      "answer": "No, it’s not possible to register without an e-mail address. You only need your e-mail address to register; this guarantees the security of the app."
+    },
+    {
+      "question": "What is a Click hotspot?",
+      "answer": "You can make the Click anywhere in Belgium. The Click conducts marketing campaigns. In some cases, you can earn double points if you are in a specific geofenced zone. You can keep track of when these campaigns are active via our social media channels."
     }
   ],
-  "How Can I Participate?": [
+  "Scanning or photographing litter": [
     {
-      "question": "Can I participate in The Click?",
-      "answer": "Yes! Anyone can download the The Click app. To earn Circular Ucoins, you must simply be within an activated geofence."
+      "question": "How do I scan a piece of litter?",
+      "answer": "Once you have logged into the Click app, you can either scroll through the menu or press the scan button in the middle. Via the scan button in the middle, you can get started by clicking the start button. Your camera is then activated and you can scan the barcode on the piece of litter. If the item does not have a barcode, you can photograph it (using the pink button on the right with a camera icon)."
     },
     {
-      "question": "Where can I use the The Click app?",
-      "answer": "Our The Click solution is currently available in Durham, England. If you are are a resident of Durham, or are simply visiting, you can download the app to start collecting and scanning litter within the activated geofence."
+      "question": "Why do I need to share my location?",
+      "answer": "We need your location to verify which Click zone you are in. We regularly conduct marketing campaigns, and you can earn extra Circular UCoins in some areas. We respect your privacy at all times."
     },
     {
-      "question": "Where can I download the app?",
-      "answer": "You can download the app on the App store for iPhone or Google Play Store for Android phones."
+      "question": "How do I share my location?",
+      "answer": "Your smartphone will ask you to share your location when scanning an item. Make sure you allow this."
     },
     {
-      "question": "Do I have to pay for the The Click application?",
-      "answer": "No. The Click is free to use and download."
+      "question": "Is there a limit to the number or items I can scan?",
+      "answer": "There is a limit of 250 items per person per week."
     },
     {
-      "question": "Which phones support the The Click application?",
-      "answer": "You will need a smartphone to use the The Click application."
+      "question": "How can I actively promote the Click?",
+      "answer": "You can share all your Click activities on social media and encourage others to make the Click. Follow our social media channels and share our posts whenever possible. We are stronger together, working to eliminate litter."
     },
     {
-      "question": "Is the The Click application available to international users?",
-      "answer": "Anyone can use the The Click application when in an active geofenced area."
+      "question": "How do I invite a friend?",
+      "answer": "You can share on social media that you are now part of the Click. Everyone who registers will receive an initial balance of Circular UCoins as a welcome gift. Include links to the App Store and Google Play store so your friends and family can find the app quickly. Thank you. \n https://apps.apple.com/us/app/the-click/id1570254730 \n https://play.google.com/store/apps/details?id=be.fostplus.theclick \n https://apps.apple.com/us/app/the-click/id1570254730 \n https://play.google.com/store/apps/details?id=be.fostplus.theclick."
     },
     {
-      "question": "How do I register with The Click?",
-      "answer": "To register, simply click 'Sign Up' when entering the The Click application. You will be prompted to provide some details. Provide these details and submit. You will then receive a welcome email with a temporary, one-time password. Next, log in to your account using this one-time password. You will be prompted to complete your registration by changing your one-time password to a password of your choice."
+      "question": "Are special events/bonuses available?",
+      "answer": "Hotspots enable you to earn more Circular UCoins. Other initiatives will be launched on an ad-hoc basis. \n You can move up a tier from Starter to Advanced to Champion by being an active Clicker. In each tier the number of Circular UCoins you earn per item goes up by one Circular UCoin."
     },
     {
-      "question": "Can I register for The Click without an email address?",
-      "answer": "No. You must have a valid email address to register for The Click"
-    },
-    {
-      "question": "What system requirements will I need to use the The Click application?",
-      "answer": "You will need a smartphone and an internet/4G connection to use the The Click application. You will also need to enable location services and allow access to your phone's camera application whilst using the The Click app."
-    },
-    {
-      "question": "The Click isn’t available in my country/region/community yet. What can I do?",
-      "answer": "Unfortunately, we do not have The Click solutions in every region just yet. However, if you would like to see The Click in your region or want to partner with us to bring The Click to your region, please send us an email using our <1>enquiry form.</1>"
-    },
-    {
-      "question": "I want to spread the word about The Click. What should I do?",
-      "answer": "If you want to spread the word about The Click, there are a number\nof ways you can do this:\n1. Word of mouth\na.Tell your friends about the The Click app. This is the best way to spread \nthe word!\n2. Social Media\na.Share that you are now part of The Click on your social media platforms \nand/or you can also share our website link or the link to download the \nThe Click app itself."
+      "question": "What happens if my submimssion is not automatically approved?",
+      "answer": "If we don’t recognise your item’s barcode, we will check your submission. It will then be approved or rejected. Circular UCoins will only be added to your account for approved Clicks. We guarantee that these Clicks will be approved within five working days."
     }
   ],
-  "Security": [
+  "Manage your account": [
     {
-      "question": "Is the The Click application secure?",
-      "answer": "We have taken all reasonable steps to protect your personal information."
-    },
-    {
-      "question": "Why do my location services need to be turned on when using the The Click application?",
-      "answer": "We use your location services in order to determine whether you are within a geofenced area. Litter can only be scanned inside pre-determined geofenced areas."
+      "question": "How do I register?",
+      "answer": "Register by downloading the Click app and entering your details. You only have to enter your details and click on register. We will send you a welcome e-mail with a temporary password. You can then log in to complete your registration and change your password."
     },
     {
-      "question": "How do I share my location with the The Click application?",
-      "answer": "When you go to scan a barcode on a piece of litter or take a photo of a piece of litter without a barcode, the The Click application will ask you to share your location. Click to allow sharing of location services. To avoid receiving this message multiple times, enable sharing always, or when using the The Click application. Depending on your settings, you may need to allow your browser to see your location."
+      "question": "How do I log in?",
+      "answer": "Once you have registered, you can log in to your account. Go to the login page and enter your e-mail address and password. Press the button to log in, and you can start Clicking."
     },
     {
-      "question": "Why do I need to allow the The Click application access to my camera?",
-      "answer": "In order to earn Circular Ucoins for picking up and disposing of litter, The Click requires you to scan the barcode on the litter or take a photo of the piece of litter, if no barcode is present. As such, the The Click app requires access to your camera."
-    }
-  ],
-  "Manage my account": [
-    {
-      "question": "How can I change/update my personal details registered with theThe Click application?",
-      "answer": "Login to the The Click app and navigate to the homepage. Within the homepage, you will find the ‘My Profile’ tab along the menu bar at the top of the screen. You can change your details under ‘Account’."
+      "question": "How can I change/update my personal details?",
+      "answer": "In your app, go to ‘My Profile’. You can change your details under ‘Profile’. Press the button to save your details."
     },
     {
-      "question": "I forgot my password. What should I do?",
-      "answer": "Navigate to the login page in the The Click app. Click on the ‘forgot your password?’ link. You will be prompted to enter your email address. Once submitted, you will receive an email containing a link to reset your password."
+      "question": "I have forgotten my password. What should I do?",
+      "answer": "Go to the login page and press the ‘Forgotten password’ link. Enter your e-mail address and press the button. You will receive a temporary password via e-mail to regain access to your account."
     },
-     {
-      "question": "I requested a password reset but haven’t received a link in my emails. What should I do?",
-      "answer": "Please ensure the email address entered is correct and is the email address registered with your The Click account. Please also check your junk/spam emails. If you have still not received an email to reset your password, please <1>contact us</1> directly."
+    {
+      "question": "How do I change my password?",
+      "answer": "In your app, go to ‘My Profile’. Press the ‘Password’ header. Enter your current and new password. Press the button to save your new password."
     },
-     {
-      "question": "I received an email with a link to reset my password, but I didn't request this. What now?",
-      "answer": "No need to worry. You can simply ignore that email."
+    {
+      "question": "How do I change my e-mail address?",
+      "answer": "In your app, go to ‘My Profile’. You can change your e-mail address under ‘Profile’. Press the button to save your details."
     },
-     {
-      "question": "I lost my phone. How can I get my account back?",
-      "answer": "This is not a problem! Your account is securely stored in our database. You can log back into your account from your new phone."
+    {
+      "question": "I've lost my phone. How can I access my account again?",
+      "answer": "This is not a problem. Your account is stored in our database. You can log in to your account again from your new phone."
     },
-     {
+    {
       "question": "My account has been deleted. What should I do?",
-      "answer": "Simply make a new account!"
+      "answer": "Register again and create a new account."
     },
     {
-      "question": "I want to delete my account and unsubscribe from all The Click communications. How can I do this?",
-      "answer": "To delete your The Click account, navigate to ‘My Profile’ page within the homepage. Under ‘Account’ you will see a link to ‘Delete Account’.\n\nPlease note that deleting your account will permanently delete all associated data, including your Ucoin balance and purchased vouchers. These will be unrecoverable."
-    },
-    {
-      "question": "I want to leave a review of the The Click app. How do I do this?",
-      "answer": "You can leave us a review in one of two ways:\n1. In the App Store for Iphone or Google Play Store for Android\n2. <1>Contact us</1> directly and let us know what you think of our app!"
-    },
-    {
-      "question": "I want to make a complaint about The Click. What should I do?",
-      "answer": "If you would like to make a complaint, please <1>contact us</1> directly and we will get back to you as soon as possible."
+      "question": "How do I unsubscribe?",
+      "answer": "You can remove the app from your phone at any time. You can delete your account and unsubscribe from the Click. You can send us a message via this contact form. We will complete the process within five working days."
     }
   ],
-  "Earning Circular Ucoins": [
+  "Circular Ucoins": [
     {
       "question": "What are Circular Ucoins?",
-      "answer": "Circular Ucoins are how we reward you for picking up and disposing of litter. These Circular Ucoins can then be spent on offers from participating merchants on the The Click app. The more you help us clean the environment, the more rewards you receive!"
+      "answer": "You can earn Circular UCoins by picking up litter, scanning or taking a photograph of the item, and then throwing it in a bin. You can use the Circular UCoins you earned in the web shop to purchase vouchers offering all kinds of rewards."
     },
     {
-      "question": "Is the Ucoin earn-rate fixed?",
-      "answer": "Yes. For each approved piece of litter collected and disposed of, you will earn 5 Circular Ucoins."
-    },
-    {
-      "question": "What kind of litter can I scan within the The Click app?",
-      "answer": "You can scan all types of litter within the The Click app."
-    },
-    {
-      "question": "How do I scan litter using the The Click app?",
-      "answer": "Once you have picked up a piece of litter, you will need to:\n1. Login to your The Click app\n2. Navigate to the ‘Scan’ page within the app (the large, central button on the \nnavigation menu at the bottom of the screen). \na. You may be asked to give the app permission to access your camera app and \nlocation services. You will need to allow these to continue. \nb. You will also need to ensure you are within an active geofence. You will \nreceive an error message if you are not. If you would like to see the \nlocations of active geofences, navigate to the ‘Maps’ page.\n3. Place the litter in front of your phone’s camera, within the The Click frame.\na. If your litter has a barcode, please face this towards the camera.  The \nThe Click app will automatically scan the barcode. If the barcode is \nrecognised, your scan will be submitted for approval. If the barcode is not \nrecognised, you will be asked for some more information about the litter \nbefore submitting for approval. \nb. If your litter does not have a barcode, use the pink camera button to take a\nphoto of the litter. You will then be asked for some more information about \nthe litter before submitting for approval. \n4. Your scan will then be verified for approval. This may take up to 48 hours. You\ncan see this pending scan in your wallet. \n5. Once approved, you will receive Circular Ucoins for your scan, and the \ntransaction will be updated in your walled to ‘Scan Approved’.\""
-    },
-    {
-      "question": "Where can I see my Ucoin balance?",
-      "answer": "Within the The Click app, there are many places from which you can view your Litter Ucoin balance: \n1. On the homepage\n2. In the top, right-hand corner of most pages with the app\n3. Within your wallet, you can also view a record of when you earned your Circular Ucoins and your transaction history, including how many Circular Ucoins you spent, with which\nmerchant and on which voucher and/or discount.\n4. If you believe there is an error with your Ucoin balance, please email support@The Clickusa.com"
-    },
-    {
-      "question": "What is an active geofenced area?",
-      "answer": "An active geofenced area is an area in which you can scan litter to earn Circular Ucoins on the The Click app. Outside of these zones, you are unable to scan litter to earn Circular Ucoins."
-    },
-    {
-      "question": "I scanned a piece of litter but didn’t receive any Circular Ucoins for it. Why is this?",
-      "answer": "Litter scans must be approved before Circular Ucoins can be earned by the user. If you did not receive any Circular Ucoins for a scan, this scan was not approved."
+      "question": "Can I earn Circular Ucoins everywhere?",
+      "answer": "Yes. You can make the Click anywhere in Belgium and earn UCoins."
     },
      {
-      "question": "Can I transfer Circular Ucoins to other The Click users",
-      "answer": "Unfortunately, this is not a feature we currently support."
+      "question": "How do I earn Circular Ucoins?",
+      "answer": "Open the Click app and log in to your account. \n Pick up a piece of litter and press the ‘Scan’ button. Share your location and activate your camera when prompted. \n If there is a barcode on your item, bring it close to the camera. If your barcode is recognised, it will be scanned. If the barcode cannot be scanned or your item doesn’t have a barcode, take a photo of it instead. We will ask you to identify the type of litter from a suggested list. Your Click will either be automatically approved or checked manually. \n Once your Click is approved, you will earn Circular UCoins."
     },
      {
+      "question": "Is the earn rate fixed?",
+      "answer": "Depending on which tier you have reached, the earn rate for each item is fixed. As you move up a tier, your reward for each approved Click will increase."
+    },
+     {
+      "question": "How many Circular Ucoins do I get?",
+      "answer": "You receive five Circular UCoins as a registration bonus. After that, you will receive a number of Circular UCoins per Click, depending on your tier. \n Five Circular UCoins when you Click in tier 1: Starter \n Six Circular UCoins when you Click in tier 2: Advanced \n Seven Circular UCoins when you click in tier 3: Champion \n In hotspot zones, you can receive extra Circular UCoins depending on the campaign."
+    },
+     {
+      "question": "Where can I see my Circular Ucoins balance?",
+      "answer": "Once you have logged in, you will see your Circular UCoins balance in the upper right-hand corner of the home screen. You can also find your Circular UCoins balance in ‘Overview’ under ‘Transactions’."
+    },
+    {
+      "question": "How do I manage my Circular Ucoins account?",
+      "answer": "Everything linked to your Circular UCoins account can be found in ‘My Clicks’ on the start page. You’ll find your vouchers, e-mails and transactions under ‘Overview’."
+    },
+    {
+      "question": "Can I use my Circular Ucoins for something else?",
+      "answer": "You can only use your Circular UCoins in the shop, which has a wide range of vouchers you can redeem."
+    },
+    {
       "question": "Can I buy Circular Ucoins?",
-      "answer": "No. Circular Ucoins can only be earned through cleaning up the environment!"
+      "answer": "No. Circular UCoins can only be earned by Clicking litter or your own empty packaging on the go."
     },
-     {
-      "question": "Is there a limit to how many pieces of litter I can pick up and scan with the The Click application?",
-      "answer": "Yes. You can scan a maximum of 25 pieces of litter every day. Please be aware that no more than 10 pieces of litter can be scanned per minute."
+    {
+      "question": "Can I sell Circular Ucoins?",
+      "answer": "No. You can only redeem your Circular UCoins for vouchers in the shop."
+    },
+    {
+      "question": "How can I use Circular Ucoins?",
+      "answer": "Log in to your account and click on ‘shop’. Browse the categories or search for relevant offers. Once you find a voucher you like, add it to the basket and press ‘buy’ to complete the order. An order confirmation e-mail will be sent to your e-mail address. Your new voucher(s) will be displayed in ‘Overview’ under ‘Vouchers’."
     }
   ],
-  "Spending Circular Ucoins": [
+  "Vouchers": [
     {
-      "question": "How can I spend my Circular Ucoins?",
-      "answer": "You can spend your circular Ucoins in the The Click app by purchasing available vouchers in the “shop” page of the app."
+      "question": "How many Circular Ucoins do I need to purchase a voucher?",
+      "answer": "Every voucher is assigned a different number of Circular UCoins (CUC). You will see the amount shown next to the voucher. You can also filter vouchers by amounts based on your current CUC balance."
     },
     {
-      "question": "Can I sell my Circular Ucoins?",
-      "answer": "No. Circular Ucoins can only be used within the The Click app to purchase vouchers and discounts from participating merchants."
+      "question": "How can I redeem vouchers?",
+      "answer": "Log in to your account and click on ‘shop’. You can click on an available voucher to view it. Purchase the voucher you want. Your voucher is now in ‘Overview’ under ‘Vouchers’. You can show the voucher on your smartphone to the relevant outlet (shop/leisure/food etc.). You can redeem it by pressing the ‘Redeem’ button in front of the participant."
     },
     {
-      "question": "Can I spend my Circular Ucoins in stores that are not registered with The Click?",
-      "answer": "No. Circular Ucoins are only redeemable for rewards at participating The Click merchants."
+      "question": "Where can I use the vouchers?",
+      "answer": "The vouchers can be used with specific local participants/partners. You will find detailed information in the voucher description. You can also choose from several national vouchers in the shop. Click on the filter button and choose National."
     },
     {
-      "question": "Can I trade my Circular Ucoins for fiat currency?",
-      "answer": "No. Circular Ucoins are not a currency. They cannot be redeemed for fiat currency."
+      "question": "How long do the vouchers remain valid?",
+      "answer": "The vouchers in the shop have a specified validity date. You can see when the offer will expire. \n Vouchers are valid for five days from the date of purchase.\n Vouchers are non-transferable and cannot be shared. \n Vouchers can only be used once."
     },
     {
-      "question": "Can I send my Circular Ucoins to friends and family who also use the The Click app?",
-      "answer": "Unfortunately, this is not a feature we currently support."
+      "question": "Can I exchange my voucher for another voucher?",
+      "answer": "No, this is not possible. Once a voucher has been purchased, it must be used or it will expire. Circular UCoins are deducted from your balance automatically."
+    },
+    {
+      "question": "How do I move up to a new tier?",
+      "answer": "By picking up more and more litter. You will reach a new tier when you exceed the number of items that have to be Clicked to open a new tier. \n Starter: 1 - 50 items \n Advanced: 51 - 150 items \n Champion: +150 items"
+    },
+    {
+      "question": "Why did I lose my *title* tier?",
+      "answer": "Once you have earned a tier, you remain in this tier even when you redeem your points. If you are inactive for 3 consecutive months, you lose your *title* tier and move down one tier."
     }
   ],
-  "I can't find the information I need": [
+  "Fix a problem": [
     {
-      "question": "I can't find the information I need. What should I do?",
-      "answer": "We're sorry we weren't able to help you with your query in our FAQs. Please <1>contact us</1> directly, providing us with some information about the issue you're facing, and we'll get back to you as soon as possible."
+      "question": "I am unable to log into my account",
+      "answer": "Try resetting your password. Go to the login page and press the ‘Forgotten password’ link. Enter your e-mail address and press the button. You will receive a temporary password via e-mail."
+    },
+    {
+      "question": "What should I do if I cannot open the Click app?",
+      "answer": "Make sure you have an active internet/4G connection. If the app does not open, you can delete it from your smartphone and reinstall it via the App Store or Google Play store."
+    },
+    {
+      "question": "What should I do if an item can't be scanned?",
+      "answer": "If an item can’t be scanned, you can take a photo of it and indicate the item type."
+    },
+    {
+      "question": "Where is the voucher I just bought?",
+      "answer": "Your voucher is in ‘Overview’ under ‘Vouchers’ in the top left-hand corner. They will stay on the ‘Vouchers’ page for a maximum of five days. You can view and download them there."
+    },
+    {
+      "question": "I accidentally purchased the wrong voucher. What should I do?",
+      "answer": "Be careful when purchasing vouchers, as they cannot be refunded or replaced."
+    },
+    {
+      "question": "Someone else has signed up using my e-mail",
+      "answer": "A welcome e-mail would have been sent to your e-mail address with a temporary password. Unless the other person has access to your e-mails, they will not be able to log in. If you want to be extra safe, you can reset your password."
+    }
+  ],
+  "Become a partner": [
+    {
+      "question": "How can I become a partner?",
+      "answer": "You can find information on our ‘The Click Partners’ web page. \n You can contact us via this contact form."
+    },
+    {
+      "question":"A different problem",
+      "answer": "How can I report a problem? \n You can report a problem via the contact form."
+    }
+  ],
+  "Partners": [
+    {
+      "question": "How can I take part in the Click?",
+      "answer": "To take part in the Click, go to www.the-click.app/company and register." 
     }
   ]
 }
