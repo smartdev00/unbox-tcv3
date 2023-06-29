@@ -1,192 +1,234 @@
 {
-  "What is UnLitter UK?": [
+  "De Click app": [
     {
-      "question": "What is UnLitter UK?",
-      "answer": "Our UnLitter UK solution is an app that aims to educate and reward users to pick up and dispose of litter correctly, whilst stimulating the local economy."
+      "question": "Hoe kan ik deelnemen aan de Click",
+      "answer": "Iedereen ouder dan 12 jaar kan gratis deelnemen aan de Click in heel België. De Click is een gratis app die iedereen kan gebruiken. Download de Click app voor iOS of Android, registreer en ga meteen aan de slag. Wat je thuis doet, kun je nu op een leuke manier, ook onderweg doen. Bedankt om de Click te maken."
     },
     {
-      "question": "How does UnLitter UK work?",
-      "answer": "1. Find a merchant or voucher\na. To find merchants that accept Circular Ucoins, please navigate to the \n“Merchants’ tab in the “Shop” page in the app. Alternatively, to view a \nlist of all available vouchers, navigate to the ”Vouchers” tab in the \n“Shop” page of the app. You can also keep an eye out for shops with a \nposter in their window indicating that they accept Circular Ucoins.\n2. Select voucher\na.  Once you’ve found a voucher you’d like to purchase with your Circular \nUcoins, simply click ‘Buy now’ on the voucher. Your purchased voucher \nwill appear in the ‘My Vouchers’ tab of the ‘Shop’ page in the UnLitter \nUK app.\n3. Redeem voucher in-store \na. When you wish to redeem your voucher, head over to the store and present \nyour voucher. They will scan the QR code on the voucher and apply your \ndeal/discount."
+      "question": "Ondersteunt mijn smartphone de Click app?",
+      "answer": "Je hebt een moderne smartphone nodig om te beginnen met de Click te maken. En je moet toegang hebben tot de app store of Google Play Store. Controleer ook jouw smartphone instellingen om ervoor te zorgen dat jouw locatie en camera worden gedeeld wanneer daarom wordt gevraagd. In het toegangsmenu voor individuele app-toestemmingen (instellingen → scrol naar beneden → klik op The Click), zet je instelling voor locatietoestemming op 'Altijd'."
     },
     {
-      "question": "What are the benefits of UnLitter UK?",
-      "answer": "UnLitter UK has many benefits for both consumers and participating merchants.\nFor consumers: \n- Earn Circular Ucoins to purchase rewards in the form of vouchers from participating merchants, \n- Join your local community in keeping your environment clean and beautiful, \n- Reduce litter entering local ecosystems and harming wildlife, \n- Stimulate your local economy by purchasing vouchers from participating local merchants,  \n- Free to sign up! \n \nFor Merchants: \n- Access to the UnLitter UK marketing channel, with no sign-up costs, \n- Potential for increased footfall and sales, \n- Positive CSR for encouraging consumers to clean up their environment,  \n- Freedom to create and manage your own offers,  \n- Quick and easy registration, with no complex POS integration!"
+      "question": "Is de Click app veilig?",
+      "answer": "We hebben alle redelijke stappen ondernomen om jouw persoonlijke informatie te beschermen: Registreer je via de app. Klik op de activatielink in de e-mail die je van ons ontvangt om je account te activeren. Log in via de app en krijg meteen toegang. Wij respecteren alle geldende privacy en GDPR regelgevingen. "
     },
     {
-      "question": "Who developed UnLitter UK?",
-      "answer": "Unbox the Universe. You can find out more about Unbox the Universe at <0>www.unboxuniverse.com</0>"
+      "question": "Welke functies heeft de Click app?",
+      "answer": "Zwerfvuil verzamelen en scannen of fotograferen voor een beloning \n Je eigen afval on-the-go scannen of fotograferen \n Bestellen van vouchers die je hebt verdiend in de webshop \n Bekijken van jouw Click-geschiedenis \n Awards claimen zodat je sneller Circular Ucoins verdient \n Kaart: je kan je wandelingen registreren en aanduiden of de omgeving schoon was of niet \n Inbox \n Transacties bekijken  \n Jouw profiel"
+    },
+    {
+      "question": "Moet ik de Click app kopen?",
+      "answer": "Nee, je hoeft de Click app niet te kopen. Het is een gratis app voor iedereen die zich registreert."
+    },
+    {
+      "question": "Is de Click app beschikbaar voor internationale gebruikers?",
+      "answer": "Je kan de Click app gebruiken in heel het grondgebied van België. Wil je de Click app gebruiken buiten de landsgrenzen van België? Stuur een mail naar theclick@fostplus.be"
+    },
+    {
+      "question": "Hoe kan ik een klacht sturen?",
+      "answer": "Je kunt een klacht sturen via het contactformulier, of een mail sturen naar theclick@fostplus.be."
+    },
+    {
+      "question": "Wat zijn de systeemvereisten voor het gebruik van de Click app?",
+      "answer": "Je hebt alleen een moderne smartphone en een internet /4G-verbinding nodig."
+    },
+    {
+      "question": "Kan ik me zonder e-mailadres registreren?",
+      "answer": "Nee, het is niet mogelijk om je te registreren zonder e-mailadres. Het registreren met je e-mailadres is éénmalig en garandeert ook de veiligheid van de app."
+    },
+    {
+      "question": "Wat is een Click hotspot?",
+      "answer": "Je kan de Click maken in heel België. De Click voert actieve marketing acties uit. In sommige gevallen kan je dubbele punten verdienen als je in een bepaalde geofence zone bent. Wanneer deze acties lopen kan je volgen via onze social media kanalen."
     }
   ],
-  "How Can I Participate?": [
+  "Zwerfvuil scannen of fotograferen": [
     {
-      "question": "Can I participate in UnLitter UK?",
-      "answer": "Yes! Anyone can download the UnLitter UK app. To earn Circular Ucoins, you must simply be within an activated geofence."
+      "question": "Hoe kan ik een stuk zwerfvuil scannen?",
+      "answer": "Zodra je bent ingelogd op de Click app, heb je de mogelijkheid om door het menu te bladeren of op de middelste scan knop te drukken. Via de middelste scanknop kun je aan de slag door op de startknop te klikken. Jouw camera wordt dan geactiveerd en je kunt de barcode op het zwerfvuil item scannen. Als het item geen barcode heeft, kun je zelf een foto maken (via de rechtse roze knop met icoon fototoestel)."
     },
     {
-      "question": "Where can I use the UnLitter UK app?",
-      "answer": "Our UnLitter UK solution is currently available in Durham, England. If you are are a resident of Durham, or are simply visiting, you can download the app to start collecting and scanning litter within the activated geofence."
+      "question": "Waarom moet ik mijn locatie delen?",
+      "answer": "Wij hebben jouw locatie nodig om na te gaan in welke Click zone je je bevindt. We voeren geregeld marketing acties uit en in sommige gebieden kan je dan extra Circular Ucoins verdienen. Wij respecteren ten alle tijden de privacy."
     },
     {
-      "question": "Where can I download the app?",
-      "answer": "You can download the app on the App store for iPhone or Google Play Store for Android phones."
+      "question": "Hoe deel ik mijn locatie?",
+      "answer": "Jouw smartphone zal je vragen om jouw locatie te delen wanneer je een item probeert te scannen. Zorg ervoor dat je dit toestaat."
     },
     {
-      "question": "Do I have to pay for the UnLitter UK application?",
-      "answer": "No. UnLitter UK is free to use and download."
+      "question": "Is er een limiet aan het aantal items dat ik kan scannen?",
+      "answer": "Er is een limiet van 250 items per persoon per week."
     },
     {
-      "question": "Which phones support the UnLitter UK application?",
-      "answer": "You will need a smartphone to use the UnLitter UK application."
+      "question": "Hoe kan ik actief de Click promoten?",
+      "answer": "Je kan al jouw Click activiteiten op jouw eigen Social Media delen en anderen betrekken bij het activeren. Volg zeker onze social media kanalen en deel zoveel mogelijk onze berichten. Samen sterk tegen zwerfvuil."
     },
     {
-      "question": "Is the UnLitter UK application available to international users?",
-      "answer": "Anyone can use the UnLitter UK application when in an active geofenced area."
+      "question": "Hoe kan ik een vriend uitnodigen?",
+      "answer": "Je kunt sharen dat je nu deel uitmaakt van de Click op jouw Sociale Media. Iedereen die zich registreert krijgt een eerste bedrag aan Circular Ucoins als welkomstgeschenk. Vermeld de linken naar de app store en google Play Store zodat je vrienden en familie de app snel terugvinden. Dank.\n https://apps.apple.com/us/app/the-click/id1570254730 \n https://play.google.com/store/apps/details?id=be.fostplus.theclick"
     },
     {
-      "question": "How do I register with UnLitter UK?",
-      "answer": "To register, simply click 'Sign Up' when entering the UnLitter UK application. You will be prompted to provide some details. Provide these details and submit. You will then receive a welcome email with a temporary, one-time password. Next, log in to your account using this one-time password. You will be prompted to complete your registration by changing your one-time password to a password of your choice."
+      "question": "Zijn er speciale evenementen/bonussen beschikbaar?",
+      "answer": "Hotspots zorgen voor een hoger aantal Circular Ucoins om te verdienen. Andere initiatieven zullen op een ad-hoc basis worden gelanceerd. Door een actieve Click-er te zijn kun je een level omhoog gaan van Starter naar Gevorderd naar Kampioen. In elk van de levels gaat het aantal Circular Ucoins dat je per item verdient omhoog met 1 Circular Ucoin."
     },
     {
-      "question": "Can I register for UnLitter UK without an email address?",
-      "answer": "No. You must have a valid email address to register for UnLitter UK"
-    },
-    {
-      "question": "What system requirements will I need to use the UnLitter UK application?",
-      "answer": "You will need a smartphone and an internet/4G connection to use the UnLitter UK application. You will also need to enable location services and allow access to your phone's camera application whilst using the UnLitter UK app."
-    },
-    {
-      "question": "UnLitter UK isn’t available in my country/region/community yet. What can I do?",
-      "answer": "Unfortunately, we do not have UnLitter UK solutions in every region just yet. However, if you would like to see UnLitter UK in your region or want to partner with us to bring UnLitter UK to your region, please send us an email using our <1>enquiry form.</1>"
-    },
-    {
-      "question": "I want to spread the word about UnLitter UK. What should I do?",
-      "answer": "If you want to spread the word about UnLitter UK, there are a number\nof ways you can do this:\n1. Word of mouth\na.Tell your friends about the UnLitter UK app. This is the best way to spread \nthe word!\n2. Social Media\na.Share that you are now part of UnLitter UK on your social media platforms \nand/or you can also share our website link or the link to download the \nUnLitter UK app itself."
+      "question": "Wat gebeurt er als mijn inzending niet automatisch wordt goedgekeurd?",
+      "answer": "Als we de barcode van jouw item niet herkennen, zullen we jouw invoer controleren. Jouw inzending wordt dan goedgekeurd of geweigerd. Circular Ucoins zullen alleen aan jouw account worden toegevoegd voor goedgekeurde Clicks. We garanderen dat deze Clicks binnen de 5 werkdagen worden goedgekeurd."
     }
   ],
-  "Security": [
+  "Accountbeheer": [
     {
-      "question": "Is the UnLitter UK application secure?",
-      "answer": "We have taken all reasonable steps to protect your personal information."
+      "question": "Hoe registreer ik?",
+      "answer": "Je registreert je door de Click app te downloaden en je gegevens in te vullen. Je hoeft alleen maar jouw gegevens in te voeren en op registreren te klikken. We sturen je een welkomstmail met een tijdelijk wachtwoord. Je kunt dan inloggen om jouw registratie af te ronden en jouw wachtwoord te wijzigen."
     },
     {
-      "question": "Why do my location services need to be turned on when using the UnLitter UK application?",
-      "answer": "We use your location services in order to determine whether you are within a geofenced area. Litter can only be scanned inside pre-determined geofenced areas."
+      "question": "Hoe kan ik inloggen?",
+      "answer": "inlogpagina en voer jouw e-mailadres en wachtwoord in. Druk op de knop om in te loggen en je kunt beginnen met Clicken."
     },
     {
-      "question": "How do I share my location with the UnLitter UK application?",
-      "answer": "When you go to scan a barcode on a piece of litter or take a photo of a piece of litter without a barcode, the UnLitter UK application will ask you to share your location. Click to allow sharing of location services. To avoid receiving this message multiple times, enable sharing always, or when using the UnLitter UK application. Depending on your settings, you may need to allow your browser to see your location."
+      "question": "Hoe kan ik mijn persoonlijke gegevens wijzigen/bijwerken?",
+      "answer": "In je app ga je naar 'Mijn profiel'. Je kunt jouw gegevens wijzigen onder 'Profiel'. Druk op de knop om jouw gegevens op te slaan."
     },
     {
-      "question": "Why do I need to allow the UnLitter UK application access to my camera?",
-      "answer": "In order to earn Circular Ucoins for picking up and disposing of litter, UnLitter UK requires you to scan the barcode on the litter or take a photo of the piece of litter, if no barcode is present. As such, the UnLitter UK app requires access to your camera."
+      "question": "Ik ben mijn wachtwoord vergeten. Wat moet ik doen?",
+      "answer": "Ga naar de loginpagina en druk op de link 'Wachtwoord vergeten'. Voer jouw e-mailadres in en druk op de knop om te verzenden. Je krijgt dan een tijdelijk wachtwoord per e-mail toegestuurd om weer toegang te krijgen tot jouw account."
+    },
+    {
+      "question": "Hoe kan ik mijn wachtwoord wijzigen?",
+      "answer": "In je app ga je naar 'Mijn profiel'. Druk op de kop 'Wachtwoord'. Daar voer je jouw huidige en nieuwe wachtwoord in. Druk op de knop om jouw nieuwe wachtwoord op te slaan."
+    },
+    {
+      "question": "Hoe verander ik mijn e-mailadres?",
+      "answer": "In je app ga je naar 'Mijn profiel'. Daar kun je jouw e-mailadres wijzigen onder 'Profielgegevens'. Druk op de knop om jouw gegevens op te slaan."
+    },
+    {
+      "question": "Ik ben mijn telefoon kwijt. Hoe krijg ik opnieuw toegang tot mijn account?",
+      "answer": "Dit is geen probleem. Jouw account wordt opgeslagen in onze database. Je kunt weer inloggen op jouw account vanaf jouw nieuwe telefoon.."
+    },
+    {
+      "question": "Mijn account is verwijderd, wat moet ik nu doen?",
+      "answer": "Registreer opnieuw en maak een nieuw account aan."
+    },
+    {
+      "question": "Hoe kan ik mij uitschrijven?",
+      "answer": "Je kan jouw account verwijderen en je uitschrijven uit de Click. Je kunt ons via dit contactformulier een bericht sturen en binnen de 5 werkdagen doen wij het nodige."
     }
   ],
-  "Manage my account": [
+  "Circular Ucoins": [
     {
-      "question": "How can I change/update my personal details registered with theUnLitter UK application?",
-      "answer": "Login to the UnLitter UK app and navigate to the homepage. Within the homepage, you will find the ‘My Profile’ tab along the menu bar at the top of the screen. You can change your details under ‘Account’."
+      "question": "Wat zijn Circular Ucoins?",
+      "answer": "Je kunt Circular Ucoins verdienen door zwerfvuil op te rapen en het artikel te scannen of te fotograferen, en het vervolgens in een vuilbak weg te gooien. Je kunt de verdiende Circular Ucoins in de webshop gebruiken om vouchers met allerlei voordelen te kopen."
     },
     {
-      "question": "I forgot my password. What should I do?",
-      "answer": "Navigate to the login page in the UnLitter UK app. Click on the ‘forgot your password?’ link. You will be prompted to enter your email address. Once submitted, you will receive an email containing a link to reset your password."
+      "question": "Kan ik overal Circular Ucoins verdienen?",
+      "answer": "Ja. Je kan overal in België de Click maken en Ucoins verdienen.."
     },
      {
-      "question": "I requested a password reset but haven’t received a link in my emails. What should I do?",
-      "answer": "Please ensure the email address entered is correct and is the email address registered with your UnLitter UK account. Please also check your junk/spam emails. If you have still not received an email to reset your password, please <1>contact us</1> directly."
+      "question": "Hoe verdien ik Circular Ucoins?",
+      "answer": "Open de Click app en log in op jouw account. \n Raap een zwerfvuilitem op en druk op de knop 'Scannen’. Deel je locatie wanneer daar om gevraagd wordt en activeer ook je camera wanneer daar om gevraagd wordt. \n Als er een barcode op je item staat, breng het dan dicht bij de camera. Als jouw barcode wordt herkend, wordt deze gescand. Als jouw barcode niet kan worden gescand of als jouw item geen barcode heeft, maak er dan een foto van. We zullen je vragen om het type afval te identificeren uit een voorgestelde lijst. Jouw Click wordt automatisch goedgekeurd of handmatig gecontroleerd. \n Zodra jouw Click is goedgekeurd, verdien je Circular Ucoins."
     },
      {
-      "question": "I received an email with a link to reset my password, but I didn't request this. What now?",
-      "answer": "No need to worry. You can simply ignore that email."
+      "question": "Is het verdien tarief vast?",
+      "answer": "Afhankelijk van het level waarop jij je bevindt, staat het verdien tarief voor elk item vast. Als je een level omhoog gaat, zal jouw beloning voor elke goedgekeurde Click toenemen."
     },
      {
-      "question": "I lost my phone. How can I get my account back?",
-      "answer": "This is not a problem! Your account is securely stored in our database. You can log back into your account from your new phone."
+      "question": "Hoeveel Circular Ucoins krijg ik?",
+      "answer": "Je krijgt 5 Circular Ucoins als registratiebonus. Daarna ontvang je een bedrag aan Circular Ucoins per Click, afhankelijk van het level waarin jij je bevindt. \n 5 Circular Ucoins terwijl je op level 1 Clickt: Starter \n 6 Circular Ucoins terwijl je op level 2 Clickt: Gevorderde \n 7 Circular Ucoins, terwijl je op level 3 Clickt: Kampioen \n In hotspotzones is het mogelijk om extra Circular Ucoins te krijgen, afhankelijk van de actie."
     },
      {
-      "question": "My account has been deleted. What should I do?",
-      "answer": "Simply make a new account!"
+      "question": "Waar kan ik mijn Circular Ucoins-balans zien?",
+      "answer": "Zodra je bent ingelogd, zie je jouw Circular Ucoins-balans in de rechterbovenhoek van jouw scherm op de startpagina. Je kunt jouw Circular Ucoins-balans ook vinden in het overzicht onder transacties. "
     },
     {
-      "question": "I want to delete my account and unsubscribe from all UnLitter UK communications. How can I do this?",
-      "answer": "To delete your UnLitter UK account, navigate to ‘My Profile’ page within the homepage. Under ‘Account’ you will see a link to ‘Delete Account’.\n\nPlease note that deleting your account will permanently delete all associated data, including your Ucoin balance and purchased vouchers. These will be unrecoverable."
+      "question": "Hoe beheer ik mijn Circular Ucoins-account?",
+      "answer": "Alles wat gekoppeld is aan jouw CUC-account vind je in de rubriek 'Mijn Clicks' via de 'thuis' button. Bij 'overzicht' vind je je vouchers, mails en jouw transacties."
     },
     {
-      "question": "I want to leave a review of the UnLitter UK app. How do I do this?",
-      "answer": "You can leave us a review in one of two ways:\n1. In the App Store for Iphone or Google Play Store for Android\n2. <1>Contact us</1> directly and let us know what you think of our app!"
+      "question": "Kan ik mijn Circular Ucoins voor iets anders gebruiken?",
+      "answer": "Je kunt jouw Circular Ucoins alleen in de shop gebruiken. Daar vind je een breed scala aan vouchers die je kunt inwisselen."
     },
     {
-      "question": "I want to make a complaint about UnLitter UK. What should I do?",
-      "answer": "If you would like to make a complaint, please <1>contact us</1> directly and we will get back to you as soon as possible."
+      "question": "Kan ik Circular Ucoins kopen?",
+      "answer": "Nee, Circular Ucoins kunnen alleen verdiend worden door zwerfvuil of je eigen afval on-the-go te Clicken."
+    },
+    {
+      "question": "Kan ik Circular Ucoins verkopen?",
+      "answer": "Nee, je kunt jouw Circular Ucoins alleen inwisselen voor vouchers in de shop."
+    },
+    {
+      "question": "Hoe kan ik Circular Ucoins gebruiken?",
+      "answer": "Log in op jouw account en ga naar de Winkel. Blader door de categorieën of zoek naar relevante aanbiedingen. Zodra je een voucher ziet die je leuk vindt, voeg je deze toe aan het shopmandje en druk je op ‘koop’ om de bestelling af te ronden. Een orderbevestigingsmail wordt naar jouw e-mailadres gestuurd. Jouw nieuwe voucher(s) worden getoond op de 'Vouchers' pagina via de button 'Overzicht'."
     }
   ],
-  "Earning Circular Ucoins": [
+  "Vouchers": [
     {
-      "question": "What are Circular Ucoins?",
-      "answer": "Circular Ucoins are how we reward you for picking up and disposing of litter. These Circular Ucoins can then be spent on offers from participating merchants on the UnLitter UK app. The more you help us clean the environment, the more rewards you receive!"
-    },
-    {
-      "question": "Is the Ucoin earn-rate fixed?",
-      "answer": "Yes. For each approved piece of litter collected and disposed of, you will earn 5 Circular Ucoins."
+      "question": "Hoeveel Circular Ucoins heb ik nodig om een voucher te krijgen?",
+      "answer": "Elke voucher heeft een ander aantal Circular Ucoins toegewezen gekregen. Je kunt het bedrag naast de voucher zien. Je kunt de vouchers ook filteren op bedragen op basis van uw huidige CUC-saldo."
     },
     {
-      "question": "What kind of litter can I scan within the UnLitter UK app?",
-      "answer": "You can scan all types of litter within the UnLitter UK app."
+      "question": "Hoe kan ik de vouchers inwisselen?",
+      "answer": "Log in op jouw account en ga naar de pagina “Winkel”. Daar klik je op een beschikbare voucher om deze te bekijken. Koop deze aan. Je voucher staat nu onder Overzicht > Vouchers. Je kunt jouw voucher op jouw mobiele scherm laten zien aan de betreffende handelaar (shop/vrije tijd/voedsel/...). En deze kan je inwisselen door de knop “Inwisselen” te drukken voor de handelaar."
     },
     {
-      "question": "How do I scan litter using the UnLitter UK app?",
-      "answer": "Once you have picked up a piece of litter, you will need to:\n1. Login to your UnLitter UK app\n2. Navigate to the ‘Scan’ page within the app (the large, central button on the \nnavigation menu at the bottom of the screen). \na. You may be asked to give the app permission to access your camera app and \nlocation services. You will need to allow these to continue. \nb. You will also need to ensure you are within an active geofence. You will \nreceive an error message if you are not. If you would like to see the \nlocations of active geofences, navigate to the ‘Maps’ page.\n3. Place the litter in front of your phone’s camera, within the UnLitter UK frame.\na. If your litter has a barcode, please face this towards the camera.  The \nUnLitter UK app will automatically scan the barcode. If the barcode is \nrecognised, your scan will be submitted for approval. If the barcode is not \nrecognised, you will be asked for some more information about the litter \nbefore submitting for approval. \nb. If your litter does not have a barcode, use the pink camera button to take a\nphoto of the litter. You will then be asked for some more information about \nthe litter before submitting for approval. \n4. Your scan will then be verified for approval. This may take up to 48 hours. You\ncan see this pending scan in your wallet. \n5. Once approved, you will receive Circular Ucoins for your scan, and the \ntransaction will be updated in your walled to ‘Scan Approved’.\""
+      "question": "Waar kan ik de vouchers gebruiken?",
+      "answer": "De vouchers kunnen gebruikt worden bij specifieke lokale deelnemers / partners. Je vindt de gedetailleerde informatie in de beschrijving van de vouchers. Via de knop Filter in de winkel kan je ook selecteren op Nationaal en kan je kiezen uit een aantal nationale bonnen."
     },
     {
-      "question": "Where can I see my Ucoin balance?",
-      "answer": "Within the UnLitter UK app, there are many places from which you can view your Litter Ucoin balance: \n1. On the homepage\n2. In the top, right-hand corner of most pages with the app\n3. Within your wallet, you can also view a record of when you earned your Circular Ucoins and your transaction history, including how many Circular Ucoins you spent, with which\nmerchant and on which voucher and/or discount.\n4. If you believe there is an error with your Ucoin balance, please email support@unlitter.uk"
+      "question": "Wat is de geldigheidsduur van de vouchers?",
+      "answer": "De vouchers in de shop hebben een vermelde geldigheidsdatum. Je kunt zien tot wanneer de aanbieding beschikbaar is.\n Vouchers are non-transferable and cannot be shared. \n Wanneer je de voucher hebt gekocht, is deze tot 5 dagen na aankoop geldig. De vouchers zijn niet overdraagbaar en kunnen niet gedeeld worden. Vouchers kunnen slechts één keer gebruikt worden."
     },
     {
-      "question": "What is an active geofenced area?",
-      "answer": "An active geofenced area is an area in which you can scan litter to earn Circular Ucoins on the UnLitter UK app. Outside of these zones, you are unable to scan litter to earn Circular Ucoins."
+      "question": "Kan ik mijn voucher inwisselen voor een andere voucher?",
+      "answer": "Nee, dit is niet mogelijk. Zodra een voucher is gekocht, moet deze worden gebruikt of anders vervalt deze. De Circular Ucoins worden automatisch van jouw saldo afgetrokken."
     },
     {
-      "question": "I scanned a piece of litter but didn’t receive any Circular Ucoins for it. Why is this?",
-      "answer": "Litter scans must be approved before Circular Ucoins can be earned by the user. If you did not receive any Circular Ucoins for a scan, this scan was not approved."
+      "question": "Hoe kom ik op een nieuw level?",
+      "answer": "Door steeds meer zwerfvuil op te ruimen. Een nieuw level kan worden bereikt als je het aantal zwerfvuil items passeert dat moet worden ge-Clickt om een nieuw level te openen. \n Starter: 1 - 50 items \n Gevorderde: 51 - 150 items \n Kampioen: + 150 items"
     },
-     {
-      "question": "Can I transfer Circular Ucoins to other UnLitter UK users",
-      "answer": "Unfortunately, this is not a feature we currently support."
-    },
-     {
-      "question": "Can I buy Circular Ucoins?",
-      "answer": "No. Circular Ucoins can only be earned through cleaning up the environment!"
-    },
-     {
-      "question": "Is there a limit to how many pieces of litter I can pick up and scan with the UnLitter UK application?",
-      "answer": "Yes. You can scan a maximum of 25 pieces of litter every day. Please be aware that no more than 10 pieces of litter can be scanned per minute."
+    {
+      "question": "Waarom ben ik mijn *titel* level kwijt?",
+      "answer": "Als je eenmaal een level hebt verdiend, blijf je binnen dit level, zelfs als je je punten inwisselt. Alleen wanneer je 3 maanden aan een stuk inactief bent, verlies je jouw *titel* level en ga je één level naar beneden."
     }
   ],
-  "Spending Circular Ucoins": [
+  "Probleem oplossen": [
     {
-      "question": "How can I spend my Circular Ucoins?",
-      "answer": "You can spend your circular Ucoins in the UnLitter UK app by purchasing available vouchers in the “shop” page of the app."
+      "question": "Ik kan niet inloggen op mijn account",
+      "answer": "Probeer jouw wachtwoord te resetten. Ga naar de loginpagina en druk op de link 'Wachtwoord vergeten'. Voer jouw e-mailadres in en druk op de knop om te verzenden. Je krijgt dan een tijdelijk wachtwoord per e-mail toegestuurd."
     },
     {
-      "question": "Can I sell my Circular Ucoins?",
-      "answer": "No. Circular Ucoins can only be used within the UnLitter UK app to purchase vouchers and discounts from participating merchants."
+      "question": "Wat moet ik doen als ik de Click app niet kan openen?",
+      "answer": "Zorg ervoor dat je een actieve internet /4G-verbinding heeft. Als het niet lukt op de app te openen kan je deze altijd van je smartphone verwijderen en opnieuw installeren via de app store of Google Play Store."
     },
     {
-      "question": "Can I spend my Circular Ucoins in stores that are not registered with UnLitter UK?",
-      "answer": "No. Circular Ucoins are only redeemable for rewards at participating UnLitter UK merchants."
+      "question": "Wat moet ik doen als een item niet kan worden gescand?",
+      "answer": "Wanneer een item niet gescand kan worden krijg je de mogelijkheid om een foto van het item te maken en het type item aan te geven."
     },
     {
-      "question": "Can I trade my Circular Ucoins for fiat currency?",
-      "answer": "No. Circular Ucoins are not a currency. They cannot be redeemed for fiat currency."
+      "question": "Waar is de voucher die ik heb gekocht?",
+      "answer": "Rechts onderaan via de button Overzicht en dan via Vouchers links bovenaan. Op de pagina 'Vouchers' staan jouw vouchers voor maximaal 5 dagen. Daar kun je ze bekijken en downloaden."
     },
     {
-      "question": "Can I send my Circular Ucoins to friends and family who also use the UnLitter UK app?",
-      "answer": "Unfortunately, this is not a feature we currently support."
+      "question": "Ik heb per ongeluk de verkeerde bon gekocht, wat moat ik nu doen?",
+      "answer": "Wees voorzichtig bij het kopen van vouchers, want ze kunnen niet worden terugbetaald of vervangen."
+    },
+    {
+      "question": "Lemand anders meldde zich aan met mijn e-mail",
+      "answer": "Een welkomstmail zou naar jouw e-mailadres zijn gestuurd met een tijdelijk wachtwoord. Tenzij de andere persoon toegang heeft tot jouw e-mails, kunnen zij niet inloggen. Als je toch extra veilig wilt zijn, kun je jouw wachtwoord opnieuw instellen."
     }
   ],
-  "I can't find the information I need": [
+  "Partner Worden": [
     {
-      "question": "I can't find the information I need. What should I do?",
-      "answer": "We're sorry we weren't able to help you with your query in our FAQs. Please <1>contact us</1> directly, providing us with some information about the issue you're facing, and we'll get back to you as soon as possible."
+      "question": "Hoe kan ik partner worden?",
+      "answer": "Je kunt informatie vinden op onze websitepagina ‘Partner van de Click.’ Je kunt contact met ons opnemen via dit contactformulier."
+    },
+    {
+      "question":"Een ander probleem",
+      "answer": "Hoe kan ik een probleem melden? Je kunt een probleem melden via het contactformulier."
+    }
+  ],
+  "Handelaars": [
+    {
+      "question": "Hoe neem ik deel aan de Click?",
+      "answer": "Om deel te nemen aan de Click ga je naar www.the-click.app/company en registreer je jezelf." 
     }
   ]
 }
