@@ -1,30 +1,21 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
-import { LocaleContext } from "../Context";
 import { TouchableOpacity, View } from "react-native";
 import { Button, Image, Text, VStack, Pressable } from "native-base";
 import { useNavigation } from "@react-navigation/native";
 import UnboxLitterSVG from "../Components/UnboxLitterSVG";
 import { useTranslation } from "react-i18next";
 import * as SplashScreen from "expo-splash-screen";
+import { languages } from '../i18n/config';
 
 SplashScreen.preventAutoHideAsync();
 
 const Splash = ({onClickGo }) => {
-  const [locale, setLocale] = useContext(LocaleContext);
-  const { t } = useTranslation();
-  const [isSplashAnimationComplete, setAnimationComplete] = useState(false);
-  const [selectedTab, setSelectedTab] = useState("en");
-  const tabs = [
-    { id: "en", label: "EN" },
-    { id: "fr", label: "FR" },
-    { id: "nl", label: "NL" },
-  ];
+  const { t, i18n } = useTranslation();
+  const [selectedLang, setSelectedLang] = useState(i18n.language);
 
-  const handleLangSelect = (lang) => {
-    setLocale({
-      language: lang
-    });
-    setSelectedTab(lang);
+  const handleLanguageSelect = async (lang) => {
+    i18n.changeLanguage(lang);
+    setSelectedLang(lang);
   };
 
   const handleStartClick = async () => {
@@ -40,17 +31,18 @@ const Splash = ({onClickGo }) => {
       <VStack alignItems={"center"}>
         <UnboxLitterSVG white={true} />
         <View style={{ flexDirection: "row", marginTop: 50 }}>
-          {tabs.map((tab) => (
+          {languages.map((l, key) => (
             <TouchableOpacity
-              key={tab.id}
-              onPress={() => handleLangSelect(tab.id)}
+              key={l.language}
+              onPress={() => handleLanguageSelect(l.language)}
               style={{
                 marginHorizontal: 8,
               }}
             >
               <Text fontSize={"20px"} fontWeight={700} mb={50}
-                color={(tab.id === selectedTab) ? "#FFFFFF" : "#9B0048"}
-              >{tab.label}
+                color={(l.language === selectedLang) ? "#FFFFFF" : "#9B0048"}
+                textTransform={"uppercase"}
+              >{l.language}
               </Text>
             </TouchableOpacity>
           ))}
