@@ -1,13 +1,13 @@
 {
   "editPassword": {
     "title": "Password",
-    "description": "Change Password",
+    "description": "Change password",
     "save": "Save",
     "oldPassword": "Current Password",
-    "newPassword": "New Password",
+    "newPassword": "New password",
     "confirmNewPassword": "Confirm New Password",
     "required": "Oops! This is a required field.",
-    "passwordNotMatched": "Passwords aren't the same.",
+    "passwordNotMatched": "Oops! Those passwords don't match.",
     "incorrect": "Oops, this is not your current password. Please try again."
   },
   "editProfile": {
@@ -15,7 +15,7 @@
     "description": "Account Details",
     "givenName": "Given Name",
     "familyName": "Family Name",
-    "contact": "If you would like to change the email address registered with this account, please contact:",
+    "contact": "If you would like to change the email address registered with this account, please contact theclick@fostplus.be:",
     "save": "Save",
     "email": "Email Address",
     "phone": "Contact Number",
@@ -25,7 +25,7 @@
   "myDetails": {
     "title": "Account Details",
     "profile": "Profile",
-    "type": "Account Type",
+    "type": "Account type",
     "givenName": "Given Name",
     "familyName": "Family Name",
     "email": "Email Address",
@@ -47,7 +47,7 @@
     "changePassword": "Change Password",
     "accountDetails": "Account Details",
     "companyDetails": "Company Details",
-    "finance": "Finance Information",
+    "finance": "Financial Information",
     "materials": "Campaign Materials"
   }
 }
