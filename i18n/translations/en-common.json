@@ -1,10 +1,10 @@
 {
-  "loginWith": "Log in with {{provider}}",
+  "loginWith": "Log in with \{{provider}}",
   "ok": "OK [en]!",
   "termsAndConditions": "Terms and Conditions",
   "privacyPolicy": "Privacy Policy",
   "confirmTerms": "By clicking login you agree to our $t(common:termsAndConditions) & $t(common:privacyPolicy)",
-  "welcome": "Welcome, {{name}} !",
+  "welcome": "Welcome, \{{name}} !",
   "faqs.title": "FAQs",
   "createQR": "Create QR",
   "scanQR": "Scan QR",
