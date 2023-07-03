@@ -4,28 +4,32 @@ import { Box, Button, Image, Text } from "native-base";
 
 import { AppConfig } from "../../config";
 import { Pressable, } from "react-native";
+import HTML from 'react-native-render-html';
 
 
 const PartnerAPI = ({ partner, }) => {
   return (
     <Box alignItems={"center"}>
-      <Text>{partner.contentTitle}</Text>
+      <Text mt={4}>{partner.contentTitle}</Text>
       <Image resizeMode={'contain'} width={"100px"} height={"100px"} source={Object({uri: AppConfig.rootUri + partner.contentImage})} alt={partner.identifier}/>               
       <Text>{partner.contentListLabel}</Text>
-      <Button>{partner.contentListButton}</Button>      
-      <Text>{partner.contentBody}</Text>      
+      <Button mt={4}>{partner.contentListButton}</Button>      
+      <HTML source={{ html: partner.contentBody }} />
     </Box>
   )
 }
 
+
 const PartnerPage = ({ partner, }) => {
+  var htmlContent = partner.contentBody;
+  htmlContent = htmlContent.replaceAll('src="/assets/', 'src="' + AppConfig.rootUri + '/assets/');
   return (
     <Box alignItems={"center"}>
-      <Text>{partner.contentTitle}</Text>
+      <Text mt={4}>{partner.contentTitle}</Text>
       <Image resizeMode={'contain'} width={"100px"} height={"100px"} source={Object({uri: AppConfig.rootUri + partner.contentImage})} alt={partner.identifier}/>               
       <Text>{partner.contentListLabel}</Text>
-      <Button>{partner.contentListButton}</Button>      
-      <Text>{partner.contentBody}</Text>
+      <Button mt={4}>{partner.contentListButton}</Button>   
+      <HTML source={{ html: htmlContent }} />
     </Box>
   );
 };
