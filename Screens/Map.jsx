@@ -423,8 +423,6 @@ const Map = ({ navigation }) => {
         <MapboxGL.UserLocation />
         <MapboxGL.Camera zoomLevel={ 11 } centerCoordinate={[4.4051, 51.2213]} followUserLocation={followUserLocation}/>
 
-        {application.geofences.length > 0 && <GeofencesLayer />}
-
         {retailers && retailers.length > 0 && showMerchantsLayer && 
         <RetailerMarkersLayer 
           retailers={retailers} 
