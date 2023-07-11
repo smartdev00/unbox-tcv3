@@ -33,6 +33,10 @@ jobs:
         run: |
           bundle lock --add-platform x86_64-darwin-19
           bundle install
+      - name: Bump version Android
+        id: bump_version_android
+        run: |
+          bundle exec fastlane bump_version_android
       - name: Bump version iOS
         id: bump_version_ios
         env:
@@ -48,6 +52,61 @@ jobs:
           git add .
           git commit -m "[skip ci] bump build number"
           git push origin ${{ github.ref }}
+  build_android_apk:
+    name: Build Android APK
+    runs-on: ubuntu-latest
+    needs: bump_version
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ssh-key: ${{ secrets.GIT_PRIVATE_KEY }}
+      - name: Install Java
+        uses: actions/setup-java@v2
+        with:
+          java-version: "11"
+          distribution: "adopt"
+          cache: "gradle"
+      - name: Validate Gradle wrapper
+        uses: gradle/wrapper-validation-action@v1
+      - name: Setup Node  
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - name: Git Update and install dependencies
+        run: |
+          git pull origin ${{ github.ref }}
+          yarn install
+          sudo apt-get install -y libxml2-utils
+      - name: Generate Signing Keystore
+        id: generate_signing_keystore
+        env:
+          GOOGLE_KEY_ALIAS: ${{ secrets.GOOGLE_KEYSTORE_ALIAS }}
+          GOOGLE_KEYSTORE_PASSWORD: ${{ secrets.GOOGLE_KEYSTORE_PASSWORD }}
+        run: |
+          echo "${{ secrets.GOOGLE_KEYSTORE_FILE_BASE64 }}" | base64 --decode > android/app/google-release-key.keystore
+      - name: Sign clean and Build android release apk
+        env:
+          GOOGLE_KEYSTORE_ALIAS: ${{ secrets.GOOGLE_KEYSTORE_ALIAS }}
+          GOOGLE_KEYSTORE_PASSWORD: ${{ secrets.GOOGLE_KEYSTORE_PASSWORD }}
+        run: |
+          cd android && ./gradlew assembleRelease -PkeyLocation=google-release-key.keystore -PstorePw=$GOOGLE_KEYSTORE_PASSWORD -PkeyAlias=$GOOGLE_KEYSTORE_ALIAS -PkeyPw=$GOOGLE_KEYSTORE_PASSWORD && cd ..          
+      - name: Sign aab file
+        env:
+          GOOGLE_KEYSTORE_ALIAS: ${{ secrets.GOOGLE_KEYSTORE_ALIAS }}
+          GOOGLE_KEYSTORE_PASSWORD: ${{ secrets.GOOGLE_KEYSTORE_PASSWORD }}
+        run: |
+          cd android && ./gradlew bundleRelease -PkeyLocation=google-release-key.keystore -PstorePw=$GOOGLE_KEYSTORE_PASSWORD -PkeyAlias=$GOOGLE_KEYSTORE_ALIAS -PkeyPw=$GOOGLE_KEYSTORE_PASSWORD && cd ..
+      - name: Upload apk Artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: app-release.apk
+          path: android/app/build/outputs/apk/release/
+      - name: Upload aab Artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: app-release.aab
+          path: android/app/build/outputs/bundle/release/
   build_ios_ipa:
     name: Build iOS .ipa
     runs-on: macos-latest
