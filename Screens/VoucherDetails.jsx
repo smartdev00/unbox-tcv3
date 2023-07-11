@@ -204,12 +204,12 @@ const VoucherDetails = ({ route, navigation }) => {
             >
               <SvgUri width={250} height={250} uri={qrImg} />
             </Box>
-            <Box alignItems={"center"} m={5}>
+            {/* <Box alignItems={"center"} m={5}>
               <Text>Voucher Code:</Text>
               <Text variant={"heading2"} colorScheme={"primary"}>
                 {qrCode}
               </Text>
-            </Box>
+            </Box> */}
           </>
         )}
 
@@ -234,7 +234,7 @@ const VoucherDetails = ({ route, navigation }) => {
           borderColor={"primary.600"}
           rounded={12}
           p={4}
-          mt={3}
+          mt={5}
           mb={11}
         >
           {/* removed for pilot
