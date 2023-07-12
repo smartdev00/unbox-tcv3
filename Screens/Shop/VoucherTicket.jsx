@@ -12,6 +12,7 @@ import * as ThemedSVGs from "../../Components/ThemedSVGs";
 import { useState } from "react";
 import VoucherInfoModal from "./VoucherInfoModal";
 import { useNavigation } from "@react-navigation/native";
+import { useTranslation } from "react-i18next";
 
 import { Heart } from "../../assets/svg";
 
@@ -36,6 +37,7 @@ const VoucherFavorite = ({ isFavorite, onFavoritePress }) => {
 
 const VoucherTicket = ({ voucher, setVouchers, buyMode = false }) => {
   // const [showModal, setShowModal] = useState(false);
+  const { t } = useTranslation()
   const { navigate } = useNavigation();
 
   const [updateVoucherFavorite] = useMutation(
@@ -46,7 +48,7 @@ const VoucherTicket = ({ voucher, setVouchers, buyMode = false }) => {
   );
 
   const handleOpenVoucher = () => {
-    navigate("VoucherDetails", { voucher, buyMode });
+    navigate("VoucherDetails", { voucher, setVouchers, buyMode });
   };
 
   const handleFavoritePress = async (voucher) => {
@@ -102,12 +104,12 @@ const VoucherTicket = ({ voucher, setVouchers, buyMode = false }) => {
             </Text>
           )}
           {!buyMode && voucher.qrStatus !== "purchased" ? (
-            <Button isDisabled={true} mt={2}>
-              Redeemed
+            <Button onPress={handleOpenVoucher} mt={2} bg="secondary.700">
+              {t('vouchers:redeemVoucher.redeemed')}
             </Button>
           ) : (
             <Button onPress={handleOpenVoucher} mt={2}>
-              {buyMode ? "More Info" : "View Voucher"}
+              {buyMode ? "More Info" : t('vouchers:home.viewVoucher')}
             </Button>
           )}
         </Box>

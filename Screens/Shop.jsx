@@ -108,8 +108,9 @@ const Shop = ({ route }) => {
         component={VoucherDetails}
         options={Object({
           headerShown: true,
-          title: 'Voucher Details',
+          title: t('vouchers:form.title'),
           headerTintColor: colors["primary"]["600"],
+          headerBackTitle: t('vouchers:back')
         })}
       />
       <Stack.Screen
@@ -117,8 +118,9 @@ const Shop = ({ route }) => {
         component={MyVoucherDetails}
         options={Object({
           headerShown: true,
-          title: 'Voucher Details',
+          title: t('vouchers:form.title'),
           headerTintColor: colors["primary"]["600"],
+          headerBackTitle: t('vouchers:back')
         })}
       />
       <Stack.Screen
