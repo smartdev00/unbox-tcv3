@@ -7,16 +7,19 @@ import enLitter from './translations/en.json';
 import enFAQ from './translations/en-faq-consumer.json';
 import enLegal from './translations/en-legal.json';
 import enAbout from './translations/en-about.json';
+import enVouchers from './translations/en-vouchers.json';
 import frCommon from './translations/fr-common.json';
 import frLitter from './translations/fr.json';
 import frFAQ from './translations/fr-faq-consumer.json';
 import frLegal from './translations/fr-legal.json';
 import frAbout from './translations/fr-about.json';
+import frVouchers from './translations/fr-vouchers.json';
 import nlCommon from './translations/nl-common.json';
 import nlLitter from './translations/nl.json';
 import nlFAQ from './translations/nl-faq-consumer.json';
 import nlLegal from './translations/nl-legal.json';
 import nlAbout from './translations/nl-about.json';
+import nlVouchers from './translations/nl-vouchers.json';
 
 
 const resources = {
@@ -28,6 +31,7 @@ const resources = {
     faqs: enFAQ,
     legal: enLegal,
     about: enAbout,
+    vouchers: enVouchers,
   },
   fr: {
     common: frCommon,
@@ -37,6 +41,7 @@ const resources = {
     faqs: frFAQ,
     legal: frLegal,
     about: frAbout,
+    vouchers: frVouchers,
   },
   nl: {
     common: nlCommon,
@@ -46,6 +51,7 @@ const resources = {
     faqs: nlFAQ,
     legal: nlLegal,
     about: nlAbout,
+    vouchers: nlVouchers,
   },
 }
 

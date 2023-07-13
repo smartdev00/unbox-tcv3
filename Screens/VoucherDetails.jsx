@@ -88,8 +88,9 @@ const VoucherMarkerLayer = ({ merchant }) => {
 };
 
 const VoucherDetails = ({ route, navigation }) => {
+  const { t } = useTranslation()
   const { colors } = useTheme();
-  const { voucher, buyMode } = route.params;
+  const { voucher, setVouchers, buyMode } = route.params;
   const mapRef = useRef();
   const { navigate } = useNavigation();
   const [showRedeemModal, setShowRedeemModal] = useState(false);
@@ -194,22 +195,36 @@ const VoucherDetails = ({ route, navigation }) => {
 
         {!buyMode && qrImg && (
           <>
-            <Box
-              alignItems={"center"}
-              p={5}
-              m={5}
-              shadow={3}
-              borderRadius="md"
-              bg="white"
-            >
-              <SvgUri width={250} height={250} uri={qrImg} />
-            </Box>
-            <Box alignItems={"center"} m={5}>
-              <Text>Voucher Code:</Text>
-              <Text variant={"heading2"} colorScheme={"primary"}>
-                {qrCode}
-              </Text>
-            </Box>
+            {voucher.qrStatus !== "purchased" ? (
+              <>
+                <Text variant={"body3"} fontWeight={"bold"} my={4} textAlign={"center"}>
+                  {t('vouchers:redeemVoucher.redeemed.description')}
+                </Text>
+                <Text variant={"body2"} fontWeight={"bold"}>
+                  {t('vouchers:redeemVoucher.redeemed.date')}
+                </Text>
+                <Text variant={"body3"} fontWeight={"bold"} colorScheme={"primary"}>
+                  {voucher.dateRedeemed}
+                </Text>
+                <Text variant={"body3"} my={4}>
+                  {t('vouchers:redeemVoucher.redeemed.consumer')}
+                </Text>
+                <Text variant={"body3"}>
+                  {t('vouchers:redeemVoucher.redeemed.retailer')}
+                </Text>
+              </>
+            ) : (
+              <Box
+                alignItems={"center"}
+                p={5}
+                m={5}
+                shadow={3}
+                borderRadius="md"
+                bg="white"
+              >
+                <SvgUri width={250} height={250} uri={qrImg} />
+              </Box>
+            )}
           </>
         )}
 
@@ -234,7 +249,7 @@ const VoucherDetails = ({ route, navigation }) => {
           borderColor={"primary.600"}
           rounded={12}
           p={4}
-          mt={3}
+          mt={5}
           mb={11}
         >
           {/* removed for pilot
@@ -245,13 +260,13 @@ const VoucherDetails = ({ route, navigation }) => {
           Placeholder type
         </Text> */}
           <Text variant={"body2"} fontWeight={"bold"}>
-            {buyMode ? "Price" : "Cost"}
+            {t('vouchers:info.price')}
           </Text>
           <Text variant={"body3"} mb={4}>
             {voucher.price} CUC
           </Text>
           <Text variant={"body2"} fontWeight={"bold"}>
-            Description
+            {t('vouchers:form.description.label')}
           </Text>
           <Text variant={"body3"} mb={4}>
             {voucher.description}
@@ -266,7 +281,7 @@ const VoucherDetails = ({ route, navigation }) => {
         */}
 
           <Text variant={"body2"} fontWeight={"bold"}>
-            Terms
+            {t('vouchers:form.terms.label')}
           </Text>
           <Text variant={"body3"} mb={4}>
             {voucher.terms}
@@ -274,7 +289,7 @@ const VoucherDetails = ({ route, navigation }) => {
           {voucher.retailer && voucher.retailer.website && (
             <>
               <Text variant={"body2"} fontWeight={"bold"}>
-                Website
+                {t('vouchers:form.website.label')}
               </Text>
 
               <HStack justifyContent={"space-between"} mb={4}>
@@ -293,7 +308,7 @@ const VoucherDetails = ({ route, navigation }) => {
           {voucher.visitingAddress && (
             <>
               <Text variant={"body2"} fontWeight={"bold"}>
-                Location
+                {t('vouchers:form.location.label')}
               </Text>
               <Text variant={"body3"} mb={4}>
                 {voucher.visitingAddress}
@@ -339,27 +354,29 @@ const VoucherDetails = ({ route, navigation }) => {
             )}
         </Box>
 
-        {/* {!buyMode && (
+        {!buyMode && voucher.qrStatus === "purchased" && (
           <>
-            <Text variant={"body2"} fontWeight={"bold"}>
-              Notice:
-            </Text>
-            <Text variant={"body3"} mb={6}>
-              Placeholder notice
+            <Text variant={"body3"} mx={2}>
+              {t('vouchers:redeemVoucher.redeemNotice')}
             </Text>
           </>
-        )} */}
+        )}
 
-        {/*todo continue below*/}
-
-        {/* {!buyMode && (
+        
+        {!buyMode && (
           <Button
-            colorScheme={"primary"}
-            onPress={() => setShowRedeemModal(true)}
+            bg={voucher.qrStatus !== "purchased" ? "secondary.700" : "primary.600"}
+            onPress={() => (
+              voucher.qrStatus !== "purchased" ? 
+                navigation.goBack() : setShowRedeemModal(true)
+            )}
+            mt={4}
           >
-            Redeem Now
+            {voucher.qrStatus !== "purchased" 
+              ? t('vouchers:redeemVoucher.close')
+              : t('vouchers:redeemVoucher.redeemNow')}
           </Button>
-        )} */}
+        )}
       </Box>
       <VoucherPurchaseModal
         {...{
@@ -374,6 +391,7 @@ const VoucherDetails = ({ route, navigation }) => {
           showRedeemModal,
           setShowRedeemModal,
           voucher,
+          setVouchers
         }}
       />
     </ScrollView>
