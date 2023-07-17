@@ -26,6 +26,7 @@ import VoucherPurchaseModal from "./Shop/VoucherPurchaseModal";
 
 import { useLazyQuery, gql } from "@apollo/client";
 import * as queries from "../graphql/queries";
+import moment from 'moment';
 
 import Markers from "../Components/Map/Markers";
 
@@ -96,6 +97,7 @@ const VoucherDetails = ({ route, navigation }) => {
   const [showRedeemModal, setShowRedeemModal] = useState(false);
   const [showPurchaseModal, setShowPurchaseModal] = useState(false);
   const [qrImg, setQRImg] = useState();
+  const [dateRedeemed, setDateRedeemed] = useState();
   const [qrCode, setQRCode] = useState();
   const [balance, setBalance] = useContext(BalanceContext);
 
@@ -117,9 +119,10 @@ const VoucherDetails = ({ route, navigation }) => {
     }
 
     if (data) {
-      console.log(JSON.stringify(data, null, 2));
+      console.log(JSON.stringify(data, null, 2), "my vouchers");
       setQRImg(data.myVoucher.qrCodeUrl);
       setQRCode(data.myVoucher.code);
+      setDateRedeemed(data.myVoucher.dateRedeemed);
     }
   };
 
@@ -204,7 +207,7 @@ const VoucherDetails = ({ route, navigation }) => {
                   {t('vouchers:redeemVoucher.redeemed.date')}
                 </Text>
                 <Text variant={"body3"} fontWeight={"bold"} colorScheme={"primary"}>
-                  {voucher.dateRedeemed}
+                  {moment(dateRedeemed).format('DD-MMM yyyy hh:mm:ss')}
                 </Text>
                 <Text variant={"body3"} my={4}>
                   {t('vouchers:redeemVoucher.redeemed.consumer')}
@@ -391,7 +394,8 @@ const VoucherDetails = ({ route, navigation }) => {
           showRedeemModal,
           setShowRedeemModal,
           voucher,
-          setVouchers
+          setVouchers,
+          qrCode
         }}
       />
     </ScrollView>

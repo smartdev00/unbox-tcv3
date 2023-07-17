@@ -3,12 +3,16 @@ import { useNavigation } from '@react-navigation/native'
 import { useTranslation } from "react-i18next";
 import format from "date-fns/format";
 
+import { useMutation, gql } from "@apollo/client";
+import * as mutations from "../../graphql/mutations";
+
 const VoucherRedeemModal = ({
   showRedeemModal,
   setShowRedeemModal,
   voucher,
   setVouchers,
   setShowModal,
+  qrCode
 }) => {
   const { t } = useTranslation()
   const navigation = useNavigation()
@@ -16,19 +20,42 @@ const VoucherRedeemModal = ({
 
   const handleSuccessfullyRedeem = () => navigation.navigate('Shop')
 
-  const handleRedeem = () => {
-    setShowRedeemModal(false)
-    setVouchers((prevState) => {
-      const index = prevState.findIndex((el) => el.id === voucher.id);
-      const newState = [...prevState];
-      newState[index] = {
-        ...voucher,
-        qrStatus: 'redeemed',
-        dateRedeemed: format(new Date(), "dd-MMM yyyy hh:mm:ss")
-      };
-      return newState;
-    });
-    navigation.goBack()
+  const [redeemVoucher] = useMutation(gql(mutations.redeemVoucher), {
+    fetchPolicy: "no-cache",
+  });
+
+  const handleRedeem = async () => {
+    try {
+      console.log("redeeming", qrCode);
+
+      const { data, error } = await redeemVoucher({
+        variables: {
+          code: qrCode,
+        },
+      });
+
+      if (error) {
+        console.log(data, "error found");
+      } 
+
+      if (data) {      
+        console.log(data, "success");
+        setShowRedeemModal(false)
+        setVouchers((prevState) => {
+          const index = prevState.findIndex((el) => el.id === voucher.id);
+          const newState = [...prevState];
+          newState[index] = {
+            ...voucher,
+            qrStatus: data.qrVoucherRedeem.status,
+            dateRedeemed: format(new Date(), "dd-MMM yyyy hh:mm:ss")
+          };
+          return newState;
+        });
+        navigation.goBack()
+      }
+    } finally {
+      setShowRedeemModal(false);
+    }
     // navigation.navigate('Success', {
     //   description: 'Voucher successfully redeemed!',
     //   primaryButtonText: 'Done',
