@@ -161,3 +161,19 @@ export const updateVoucherFavorite = /* GraphQL */ `
     productItemFavorite(id: $id)
   } 
 `;
+
+export const redeemVoucher = /* GraphQL */ `
+  mutation redeemVoucher($code: String!) {
+    qrVoucherRedeem (profile:"vb", code: $code) {
+      id
+      code
+      status
+      retailer {
+        company
+      }
+      product {
+        name
+      }
+    }
+  }
+`;
