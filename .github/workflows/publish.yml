@@ -68,7 +68,7 @@ jobs:
       - name: Install dependencies
         run: |
           git pull origin ${{ github.ref }}
-          # yarn install --frozen-lockfile --network-timeout 300000
+          yarn install --network-timeout 300000
       - name: Restore Pods cache
         uses: actions/cache@v2
         with:
