@@ -16,6 +16,7 @@ import {
   Text,
   VStack,
 } from "native-base";
+import { QueryClient, QueryClientProvider } from "react-query";
 import { SvgUri } from "react-native-svg";
 import * as Location from "expo-location";
 import SearchBar from "./SearchBar";
@@ -27,6 +28,7 @@ import MultiSlider from "@ptomasroos/react-native-multi-slider";
 import { useLazyQuery, gql } from "@apollo/client";
 import * as queries from "../../graphql/queries";
 import { AppConfig } from "../../config";
+import VouchersList from "./VouchersList";
 
 const SortbyType = {
   SORT_CLOSEST: "distance",
@@ -36,6 +38,8 @@ const SortbyType = {
 };
 
 const LIMIT = 10;
+
+const queryClient = new QueryClient();
 
 const FilterSheet = ({
   show,
@@ -51,7 +55,7 @@ const FilterSheet = ({
   const [categoryFilter, setCategoryFilter] = useState([]);
   const [locationFilter, setLocationFilter] = useState([]);
   const [filterChanged, setFilterChanged] = useState();
-  
+
   const [showPriceSection, setShowPriceSection] = useState(false);
   const [showCategorySection, setShowCategorySection] = useState(false);
   const [showLocationSection, setShowLocationSection] = useState(false);
@@ -115,7 +119,7 @@ const FilterSheet = ({
 
   const getLocationPermissions = async () => {
     const { status } = await Location.requestForegroundPermissionsAsync();
-    console.log('location perms', status);    
+    console.log('location perms', status);
     setHasLocationPermission(status === "granted");
   };
 
@@ -188,9 +192,9 @@ const FilterSheet = ({
                 onChange={(value) => setSortBy(value)}
               >
                 {(hasLocationPermission && location) &&
-                <Radio value={SortbyType.SORT_CLOSEST} my={1}>
-                  Closest 
-                </Radio>
+                  <Radio value={SortbyType.SORT_CLOSEST} my={1}>
+                    Closest
+                  </Radio>
                 }
                 <Radio value={SortbyType.SORT_NEWEST} my={1}>
                   Newest
@@ -217,8 +221,8 @@ const FilterSheet = ({
             </Box>
             <Divider my={2} /> */}
             <Box>
-            <Pressable
-              w={"100%"}
+              <Pressable
+                w={"100%"}
                 onPress={() => setShowPriceSection(!showPriceSection)}
                 mb={(showPriceSection) ? 2 : 0}
               >
@@ -291,7 +295,7 @@ const FilterSheet = ({
             <Divider my={2} />
             <Box>
               <Pressable
-              w={"100%"}
+                w={"100%"}
                 onPress={() => setShowCategorySection(!showCategorySection)}
                 mb={(showCategorySection) ? 2 : 0}
               >
@@ -334,8 +338,8 @@ const FilterSheet = ({
             </Box>
             <Divider my={2} />
             <Box>
-            <Pressable
-              w={"100%"}
+              <Pressable
+                w={"100%"}
                 onPress={() => setShowLocationSection(!showLocationSection)}
                 mb={(showLocationSection) ? 2 : 0}
               >
@@ -388,7 +392,7 @@ const FilterSheet = ({
   );
 };
 
-const VouchersTab = () => {  
+const VouchersTab = () => {
   const [vouchers, setVouchers] = useState([]);
   const [refreshing, setRefreshing] = useState(true);
   const [showFilterSheet, setShowFilterSheet] = useState(false);
@@ -398,58 +402,11 @@ const VouchersTab = () => {
   });
   const [categories, setCategories] = useState([]);
   const [locations, setLocations] = useState([]);
-  const [offset, setOffset] = useState(0);  
+  const [offset, setOffset] = useState(0);
   const [total, setTotal] = useState(0);
 
-  const [listVouchersQuery] = useLazyQuery(gql(queries.vouchersListDetailed), {
-    fetchPolicy: "no-cache",
-  });
-
-  const loadVouchers = async () => {
-    try {
-      setVouchers([]);
-      const { data, error } = await listVouchersQuery({
-        variables: queryVariables,
-      });
-      setRefreshing(true);
-      if (error) {
-        console.log("listVouchersQuery", error);
-        // throw GraphQLException(error);
-      }
-
-      if (data) {
-        console.log(JSON.stringify(data, null, 2));
-        setCategories(data.categoryCategories.items);
-        setLocations(data.locationCategories.items);
-        setVouchers(data.vouchersListDetailed.items.map(v => {
-          return {
-            ...v,
-            visitingAddress: v.retailer?.visitingAddress,
-            price: v.price,
-          }
-        }))
-        setTotal(data.vouchersListDetailed.total);
-      }
-    } finally {
-      setRefreshing(false);
-    }
-  };
-
-  useEffect(() => {
-    loadVouchers();
-  }, [queryVariables]);
-
-  useEffect(() => {
-    setQueryVariables((q) => {
-      return {
-        ...q,
-        offset,
-      }
-    })
-  }, [offset])
-
   return (
-    <>    
+    <>
       <SearchBar
         filterSheetShowing={showFilterSheet}
         onShowFilterChanged={() => setShowFilterSheet(!showFilterSheet)}
@@ -472,102 +429,12 @@ const VouchersTab = () => {
         categories={categories}
         locations={locations}
         onClose={() => setShowFilterSheet(false)}
-    />
-      <ScrollView
-        px={15}
-        showsVerticalScrollIndicator={false}
-        bgColor="white"
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={loadVouchers} />
-        }
-      >
-      <Box bgColor={"white"} py={3}>
-        <Text fontWeight={"bold"} >
-          Popular Categories
-        </Text>
-      </Box>
-      <Box>
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          m={0}
-          p={0}
-          bgColor={"white"}
-        >
-          
-          <HStack space={1}>
-            {categories &&
-              categories
-                .filter((c) => c.imageUri)
-                .map((category, key) => (
-                  <Pressable key={key}>
-                      
-                      <VStack w={20} alignItems={"center"}>
-                    <Circle bgColor={"#f3f3f3"} size={"69px"}>
-                        <SvgUri alt={category.name} height={40} width={40} uri={AppConfig.rootUri + category.imageUri}/>
-                        </Circle>
-                        <Text
-                          textAlign={"center"}
-                          mt={1}
-                          fontSize={"12px"}
-                        >
-                          {category.name}
-                        </Text>
-                      </VStack>
-                  </Pressable>
-                ))}         
-          </HStack>
-        </ScrollView>
-      </Box>           
-    
-    
-        
-      <Text lineHight={21} fontWeight={"bold"} py={3}>
-          Offers and vouchers
-        </Text>
-        <HStack alignItems="center" alignSelf="center" flexWrap={"wrap"} mt={6}>
-          {vouchers &&
-            vouchers.map((voucher, key) => (
-              <Box
-                w={"50%"}
-                key={voucher.id}
-                pl={key % 2 === 0 ? 0 : 1}
-                pr={key % 2 === 0 ? 1 : 0}
-                mb={3}
-              >
-                <VoucherTicket
-                  setVouchers={setVouchers}
-                  voucher={voucher}
-                  buyMode={true}
-                />
-              </Box>
-            ))}
-        </HStack>
-
-        {vouchers && 
-        <Box>
-          <HStack
-            mb={5}
-            space={2}
-            justifyContent={"space-between"}
-            alignItems={"center"}
-          >
-            <Button
-              isDisabled={offset === 0}
-              onPress={() => setOffset(offset - LIMIT)}
-            >
-              Previous
-            </Button>
-            <Button
-              isDisabled={offset > total - LIMIT}
-              onPress={() => setOffset(offset + LIMIT)}
-            >
-              Next
-            </Button>
-          </HStack>
-        </Box>
-        }
-      </ScrollView>
+      />
+      <QueryClientProvider client={queryClient}>
+        <VouchersList
+          queryVariables={queryVariables}
+          setQueryVariables={setQueryVariables} />
+      </QueryClientProvider>
     </>
   );
 };
