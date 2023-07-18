@@ -23,6 +23,7 @@ import {
 
 import { RegisterMailThemed } from "../Components/ThemedSVGs";
 import { AppConfig } from "../config";
+import { BackButton } from "../Components";
 
 const SuccessView = ({ navigation, email }) => {
   const { t } = useTranslation();
@@ -51,8 +52,8 @@ const SuccessView = ({ navigation, email }) => {
 
   return (
     <Box flex={1} safeArea bg={"white"}>
-      <Box alignItems={"center"} justifyContent={"center"} h={"56px"}>
-        <UnboxLitterSVG />
+      <Box alignItems={"center"} justifyContent={"center"} h={"80px"}>
+        <UnboxLitterSVG height={45} />
       </Box>
       <Box flex={1} justifyContent={"flex-end"} px={6} pb={6}>
         <Box mb={20} alignItems={"center"}>
@@ -65,7 +66,7 @@ const SuccessView = ({ navigation, email }) => {
           textAlign={"center"}
           mb={7}
         >
-          {t("litter:screens.register.success.title")}
+          {t("litter:screens.register.success.title")}sd
         </Text>
         <Text variant={"paragraph2"} textAlign={"center"} mb={5}>
           {t("litter:screens.register.success.text1")}
@@ -186,8 +187,8 @@ const RegisterScreen = ({ navigation }) => {
       >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
           <ScrollView flex={1}>
-            <Box alignItems={"center"} justifyContent={"center"} h={"56px"}>
-              <UnboxLitterSVG />
+            <Box alignItems={"center"} justifyContent={"center"} h={"80px"}>
+              <UnboxLitterSVG height={45} />
             </Box>
             <Box px={6} pt={53} flex={1}>
               <Text
@@ -385,6 +386,7 @@ const RegisterScreen = ({ navigation }) => {
           </ScrollView>
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
+      <BackButton navigation={navigation} />
     </Box>
   );
 };
