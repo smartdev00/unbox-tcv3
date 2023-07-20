@@ -10,6 +10,7 @@ export const postLogin = /* GraphQL */ `
         claimed
       }
       communities
+      appPushId
     }
     geofences: geofenceList {
       items {
