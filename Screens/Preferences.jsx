@@ -1,11 +1,10 @@
 import { Switch, TouchableOpacity } from "react-native";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import UnboxLitterSvg from "../Components/UnboxLitterSVG";
 import {
   Box,
   Button,
   FormControl,
-  Input,
   ScrollView,
   View,
   Text,
@@ -14,6 +13,10 @@ import {
 import { useTranslation } from "react-i18next";
 import { languages } from "../i18n/config";
 import { useNavigation } from "@react-navigation/native";
+import { UserContext } from "../Context";
+import { gql, useMutation } from "@apollo/client";
+import * as mutations from '../graphql/mutations'
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Preferences = () => {
   const navigation = useNavigation();
@@ -21,22 +24,66 @@ const Preferences = () => {
 
   const { t, i18n } = useTranslation();
   const [selectedLang, setSelectedLang] = useState(i18n.language);
-  const [allowPushNotifications, setAllowPushNotifications] = useState(false);
+
+  const [user, setUser] = useContext(UserContext)
+
+  const [allowPushNotifications, setAllowPushNotifications] = useState(
+    Boolean(user.appPushId)
+  );
+
+  const [setAppPushId] = useMutation(gql(mutations.setAppPushId), {
+    fetchPolicy: 'no-cache',
+  })
 
   const handleToggleNotifications = () => {
-    setAllowPushNotifications((previousState) => !previousState);
+    setAllowPushNotifications((prev) => !prev);
   };
 
   const handleSave = async () => {
-    
-    console.log("handleSave");
-    console.log("selectedLang", selectedLang);
-    console.log("allowPushNotifications", allowPushNotifications);
+    try {
 
-    i18n.changeLanguage(selectedLang);
-    navigation.goBack();
+      if (selectedLang !== i18n.language) {
+        i18n.changeLanguage(selectedLang);
+      }      
+
+      const deviceToken = allowPushNotifications
+        ? await AsyncStorage.getItem("unbox-litter-the-click-3-appPushId")
+        : "";
+
+      updateAppPushId(deviceToken);
+
+      navigation.goBack();
+
+    } catch (error) {
+      console.error("Error handling save:", error);
+    }
   };
 
+  const updateAppPushId = async (deviceToken) => {
+    const input = {
+      appPushId: deviceToken,
+    };
+
+    try {
+      await setAppPushId({
+        variables: {
+          input,
+        },
+      });
+
+      setUser({
+        ...user,
+        appPushId: deviceToken,
+      });
+
+      console.log("Successfully set app push ID:", deviceToken);
+
+    } catch (error) {
+      console.error("Error setting app push ID:", error);
+    }
+  };
+  
+  
 
   return (
     <ScrollView

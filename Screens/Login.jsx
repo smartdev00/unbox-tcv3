@@ -48,33 +48,39 @@ const LoginScreen = ({ navigation, route, appConfig }) => {
   })
 
   const AfterLogin = async () => {
-  try {
-    const [, deviceToken] = await Promise.all([
-      messaging().requestPermission(),
-      messaging().getToken(),
-    ]);
 
-    console.log("Device Token:", deviceToken);
-
-    if (deviceToken) {
-      const input = {
-        appPushId: deviceToken,
-      };
-
+    console.log("AfterLogin");
+    const deviceToken = await AsyncStorage.getItem("unbox-litter-the-click-3-appPushId");
+    if (!deviceToken) {
       try {
-        await setAppPushId({
-          variables: {
-            input,
-          },
-        });
+        await messaging().requestPermission();
+        const deviceToken = await messaging().getToken();
+    
+        console.log("Device Token:", deviceToken);
+    
+        if (deviceToken) {
+          const input = {
+            appPushId: deviceToken,
+          };
+    
+          try {
+            await setAppPushId({
+              variables: {
+                input,
+              },
+            });
+    
+            await AsyncStorage.setItem("unbox-litter-the-click-3-appPushId", deviceToken);
+          } catch (error) {
+            console.error("Error setting app push ID:", error);
+          }
+        }
+    
       } catch (error) {
-        console.error("Error setting app push ID:", error);
+        console.log("Error getting device token:", error);
       }
     }
 
-  } catch (error) {
-    console.log("Error getting device token:", error);
-  }
 };
 
 
@@ -237,6 +243,8 @@ const LoginScreen = ({ navigation, route, appConfig }) => {
         }
       }
 
+      AfterLogin();
+
       const { data, error } = await postLoginQuery();
       if (error) {
         console.log("postLoginQueryError", error);
@@ -244,8 +252,6 @@ const LoginScreen = ({ navigation, route, appConfig }) => {
       }
 
       console.log(data);
-
-      await AfterLogin();
 
       setUser({
         username: data.user.username,
@@ -259,7 +265,7 @@ const LoginScreen = ({ navigation, route, appConfig }) => {
         email: data.user.email,
         badges: data.user.badges,
         communities: data.user.communities,
-        deviceToken: data.user?.appPushId,
+        appPushId: data.user.appPushId,
       });
       await AsyncStorage.setItem(
         "unbox-litter-the-click-3-user",
@@ -275,6 +281,7 @@ const LoginScreen = ({ navigation, route, appConfig }) => {
           email: data.user.email,
           badges: data.user.badges,
           communities: data.user.communities,
+          appPushId: data.user.appPushId,
         })
       );
 
