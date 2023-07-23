@@ -4,24 +4,17 @@ import { useLazyQuery, gql } from '@apollo/client'
 
 import { useTranslation } from 'react-i18next'
 
-import { GoogleThemed, ExpandThemed, AppleThemed } from '../Components/ThemedSVGs'
+import { GoogleThemed, AppleThemed } from '../Components/ThemedSVGs'
 
 import {
   Box,
   Button,
-  Checkbox,
-  FormControl,
   HStack,
-  Image,
-  Input,
   Pressable,
-  Row,
   Spinner,
   Text,
   useTheme,
 } from 'native-base'
-
-import AsyncStorage from '@react-native-async-storage/async-storage'
 
 import {
   ApplicationContext,
@@ -32,14 +25,84 @@ import {
 
 import * as queries from '../graphql/queries'
 
-import * as Components from '../Components'
-
 import { AppConfig } from '../config'
 
-import GraphQLException from '../exceptions'
 import UnboxLitterSVG from "../Components/UnboxLitterSVG";
 import { center } from '@turf/turf'
 import { BackButton } from "../Components";
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import { RegisterMailThemed } from "../Components/ThemedSVGs";
+
+const SuccessView = ({ navigation, email }) => {
+  const { t } = useTranslation();
+  const [counter, setCounter] = useState(0);
+
+  const handleResendEmail = async () => {
+    setCounter((prevState) => prevState + 1);
+
+    // prevent multiple resends
+    if (counter >= 2) return;
+
+    const input = {
+      email,
+      ssoIdentifier: "API Consumer Registration",
+    };
+
+    await fetch(AppConfig.resendUri, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(input),
+    });
+  };
+
+  return (
+    <Box flex={1} safeArea bg={"white"}>
+      <Box alignItems={"center"} justifyContent={"center"} h={"80px"}>
+        <UnboxLitterSVG height={45} />
+      </Box>
+      <Box flex={1} justifyContent={"flex-end"} px={6} pb={6}>
+        <Box mb={20} alignItems={"center"}>
+          <RegisterMailThemed />
+        </Box>
+        <Text
+          fontSize={31}
+          fontWeight={700}
+          color={"primary.600"}
+          textAlign={"center"}
+          mb={7}
+        >
+          {t("litter:screens.register.success.title")}
+        </Text>
+        <Text variant={"paragraph2"} textAlign={"center"} mb={5}>
+          {t("litter:screens.register.success.text1")}
+        </Text>
+        <Text variant={"paragraph2"} textAlign={"center"} mb={50}>
+          {t("litter:screens.register.success.text2")}
+        </Text>
+        <Button onPress={handleResendEmail} mb={2}>
+          {t("litter:screens.register.success.resendButton")}
+        </Button>
+        <Button onPress={() => navigation.navigate("SSOLogin")} mb={9}>
+          {t("litter:screens.register.success.loginButton")}
+        </Button>
+        <Text
+          variant={"paragraph2"}
+          color={"primary.600"}
+          fontWeight={700}
+          textAlign={"center"}
+          onPress={() =>
+            Linking.openURL("https://uat.the-click.app/consumer/faqs")
+          }
+        >
+          {t("litter:screens.register.success.help")}
+        </Text>
+      </Box>
+    </Box>
+  );
+};
 
 const SSORegisterScreen = ({ navigation, route, appConfig }) => {
 
@@ -57,207 +120,228 @@ const SSORegisterScreen = ({ navigation, route, appConfig }) => {
   }
 
   const { t } = useTranslation()
-  const { colors } = useTheme();
-  const [application, setApplication] = useContext(ApplicationContext)
-  const [auth, setAuth] = useContext(AuthContext)
-  const [user, setUser] = useContext(UserContext)
-  // const [wallet, setWallet] = useContext(WalletContext);
-  // const [userProgress, setUserProgress] = useContext(UserProgressContext)
-  const [balance, setBalance] = useContext(BalanceContext);
 
   const [err, setErr] = useState()
-  const [email, setEmail] = useState(route.params?.username || "")
-  const [password, setPassword] = useState(route.params?.releaseToken || "")
+  const [registering, setRegistering] = useState(false);
+  const [success, setSuccess] = useState(false);
 
-  const [showPassword, setShowPassword] = useState(false)
+  let global_data = {};
 
-  const [missingEmail, setMissingEmail] = useState(false)
-  const [missingPassword, setMissingPassword] = useState(false)
-
-  const [stayLoggedIn, setStayLoggedIn] = useState()
-  const [loggingIn, setLoggingIn] = useState(false)
-
-  const [postLoginQuery] = useLazyQuery(gql(queries.postLogin), {
-    fetchPolicy: 'no-cache',
-  })
-
-  // const [currentUserQuery] = useLazyQuery(gql(queries.currentUser), {
-  //   fetchPolicy: "no-cache",
-  // });
-
-  // const [geofencesQuery] = useLazyQuery(gql(queries.geofences), {
-  //   fetchPolicy: "no-cache",
-  // });
-
-  const handleCheckboxChange = (state, name) => {
-    if (name === 'stayLoggedIn') setStayLoggedIn(state)
-  }
-
-  const loginWithGoogle = () => {
-    console.log('login with Google')
-  }
-
-  const loginWithFacebook = () => {
-    console.log('login with Facebook')
-  }
-
-  const loginWithApple = () => {
-    console.log('login with Apple')
-  }
-
-  useEffect(() => {
-    setMissingEmail(false)
-    setErr(null)
-  }, [email])
-
-  useEffect(() => {
-    setMissingPassword(false)
-    setErr(null)
-  }, [password])
-
-  // const loadUser = async () => {
-  //   // const { data, error } = await userQuery({ variables: { username } });
-  //   const { data, error } = await currentUserQuery();
-
-  //   if (error) throw GraphQLException(error);
-  //   if (!data) throw UserNotFoundException(username);
-
-  //   return data;
-  // };
-
-  // const loadGeofences = async () => {
-  //   const { data, error } = await geofencesQuery();
-
-  //   if (error) throw GraphQLException(error);
-
-  //   return data;
-  // };
-
-  const submitLogin = async () => {
-    // make auth request and set token in local storage.
-
-    if (!email) setMissingEmail(true)
-    if (!password) setMissingPassword(true)
-
-    if (!email || !password) return
+  const generateToken = async (email, identityProvider) => {
+    console.log('generateToken');
+    const input = {
+      email,
+      identityProvider
+    };
+    console.log(JSON.stringify(input));
 
     try {
-      setLoggingIn(true)
-      console.log('logging in')
-      console.log(AppConfig)
+      setRegistering(true);
 
-      console.log(AppConfig.authUri)
-
-      if (AppConfig.authUri) {
-        const response = await fetch(AppConfig.authUri, {
-          method: 'POST',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            identity: email,
-            credential: password,
-            refresh: true,
-          }),
-        })
-
-        const responseJson = await response.json()
-        console.log('responseJson', responseJson)
-
-        if (!responseJson.success) {
-          throw LoginException(responseJson.error)
-        }
-
-        const token = responseJson.result.session.value;
-        const tokenExpires = responseJson.result.session.expires;
-        const refreshToken = responseJson.result.refresh.value;
-        const refreshExpires = responseJson.result.refresh.expires;
-
-        console.log('token', token)
-        console.log('refreshToken', refreshToken)
-
-        try {
-          await AsyncStorage.setItem("unbox-litter-the-click-3-token", token);
-          await AsyncStorage.setItem("unbox-litter-the-click-3-tokenExpires", tokenExpires);
-          await AsyncStorage.setItem("unbox-litter-the-click-3-refreshToken", refreshToken);
-          await AsyncStorage.setItem("unbox-litter-the-click-3-refreshTokenExpires", refreshExpires);
-        } catch (e) {
-          console.log('err', e)
-          throw AsyncSetItemException()
-        }
-
-        if (responseJson.result.user.releaseToken) {
-          navigation.navigate('ValidateAccount')
-          setUser({ password })
-          return;
-        }
-      }
-
-      const { data, error } = await postLoginQuery()
-      if (error) {
-        console.log('postLoginQueryError', error)
-        // throw GraphQLException(error)
-      }
-
-      console.log(data)
-      setUser({
-        username: data.user.username,
-        givenName: data.user.firstName,
-        familyName: data.user.lastName,
-        nickname: `${data.user.firstName} ${data.user.lastName}`,
-        displayName: `${data.user.firstName} ${data.user.lastName}`,
-        initials: `${data.user.firstName[0] ||
-          ' '} ${data.user.lastName[0] || ' '}`,
-        email: data.user.email,
-        badges: data.user.badges,
-        communities: data.user.communities,
-      })
-      await AsyncStorage.setItem("unbox-litter-the-click-3-user", JSON.stringify({
-        username: data.user.username,
-        givenName: data.user.firstName,
-        familyName: data.user.lastName,
-        nickname: `${data.user.firstName} ${data.user.lastName}`,
-        displayName: `${data.user.firstName} ${data.user.lastName}`,
-        initials: `${data.user.firstName[0] ||
-          ' '} ${data.user.lastName[0] || ' '}`,
-        email: data.user.email,
-        badges: data.user.badges,
-        communities: data.user.communities,
-      }));
-
-      setBalance({
-        value: data.balance.remaining
+      const response = await fetch(AppConfig.generateTokenUri, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(input),
       });
 
-      // setWallet(data.wallet);
-      // setUserProgress(data.progress);
+      const responseJson = await response.json();
+      console.log(responseJson, "api/userflow/generatetoken");
 
+      if (!responseJson.success) {
+        setErr(true);
+        return;
+      }
 
+      const spamToken = responseJson.result.replaceAll('"', "");
+      checkEmail(email, spamToken, identityProvider);
 
-      setApplication((a) => {
-        return {
-          ...a,
-          geofences: data.geofences.items,
-        }
-      })
-
-      setAuth((auth) => {
-        return {
-          ...auth,
-          authenticated: true,
-        }
-      })
-      await AsyncStorage.setItem("unbox-litter-the-click-3-auth", JSON.stringify({ authenticated: true }));
-
-    } catch (e) {
-      console.log('err handler')
-      console.log('err', e)
-      setErr(e)
-    } finally {
-      setLoggingIn(false)
+    } catch (err) {
+      console.log(err, "Error found");
+      setRegistering(false);
     }
   }
+
+  const checkEmail = async (email, spamToken, identityProvider) => {
+    console.log('checkEmail');
+    const input = {
+      email,
+      spamToken,
+      identityProvider
+    };
+    console.log(input, "checkEmail request body");
+
+    try {
+      setRegistering(true);
+
+      const response = await fetch(AppConfig.checkEmailUri, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(input),
+      });
+
+      const responseJson = await response.json();
+      console.log(responseJson, "api/userflow/checkemail");
+
+      if (!responseJson.success) {
+        setErr(true);
+        return;
+      }
+
+      if (responseJson.result.includes("notFound")) {
+        if (identityProvider === "GoogleN") {
+          signupWithGoogle();
+        } else {
+          signupWithApple();
+        }
+      } else if (responseJson.result.includes("unKnown")) {
+        console.log("unKnown");
+      } else {
+        alert("Already exists, Please try to login.");
+      }
+
+    } catch (err) {
+      console.log(err, "Error found");
+      setRegistering(false);
+    }
+  }
+
+  const handleGoogleRegister = async () => {
+    console.log('login with Google');
+
+    try {
+      await GoogleSignin.hasPlayServices();
+      // const {accessToken, user} = await GoogleSignin.signIn();
+      await GoogleSignin.signIn().then(async result => {
+        console.log(result, "Google login result");
+        const userInfo = result.user;
+        setRegistering(true);
+
+        global_data = {
+          "identity": userInfo.email,
+          "firstName": userInfo.givenName,
+          "lastName": userInfo.familyName,
+          "promocode": "",
+          "ssoIdentifier": "GoogleN",
+          "credential": result.idToken,
+          "code": result.serverAuthCode
+        };
+
+        generateToken(userInfo.email, "GoogleN");
+      });
+    } catch (error) {
+      console.log(error, 'Error found');
+      setRegistering(false);
+    }
+  };
+
+  const handleAppleLogin = async () => {
+    console.log('login with Apple')
+    try {
+      const appleResponse = await AppleAuthentication.signInAsync({
+        requestedScopes: [
+          AppleAuthentication.AppleAuthenticationScope.FULL_NAME,
+          AppleAuthentication.AppleAuthenticationScope.EMAIL,
+        ],
+      });
+      // signed in
+      console.log(appleResponse, "Apple login response")
+      var decoded = jwt_decode(appleResponse.identityToken);
+      console.log(decoded);
+
+      setGlobalEmail(decoded.email);
+      setGlobalIdentifier("Apple");
+
+      global_data = {
+        "email": decoded.email,
+        "user": appleResponse.fullName || {},
+        "firstName": appleResponse.fullName.givenName || "",
+        "lastName": appleResponse.fullName.familyName || "",
+        "ssoIdentifier": "Apple",
+        "authorization_code": appleResponse.authorizationCode,
+        "id_token": appleResponse.identityToken,
+        "code": appleResponse.authorizationCode
+      };
+
+      generateToken(decoded.email, "Apple");
+    } catch (error) {
+      console.log(error, 'Error found');
+      setLoggingIn(false);
+    }
+  }
+
+  const signupWithGoogle = async () => {
+    console.log(global_data, "signupWithGoogle");
+
+    try {
+      setRegistering(true);
+      const response = await fetch(AppConfig.googleAuthUri, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(global_data),
+      });
+
+      const responseJson = await response.json();
+      console.log(responseJson, "api/userflow/google");
+
+      if (!responseJson.success) {
+        throw LoginException(responseJson.error)
+      }
+
+      setSuccess(true);
+
+    } catch (err) {
+      console.log(err, "Error found");
+      setRegistering(false);
+    }
+  }
+
+  const signupWithApple = async () => {
+    console.log(global_data, "signupWithApple");
+
+    try {
+      setRegistering(true);
+      const response = await fetch(AppConfig.appleAuthUri, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(global_data),
+      });
+
+      const responseJson = await response.json();
+      console.log(responseJson, "api/userflow/apple");
+
+      if (!responseJson.success) {
+        throw LoginException(responseJson.error)
+      }
+
+      setSuccess(true);
+
+    } catch (err) {
+      console.log(err, "Error found");
+      setRegistering(false);
+    }
+  }
+
+  useEffect(() => {
+    GoogleSignin.configure({
+      scopes: ['email', 'profile'],
+      webClientId: AppConfig.googleClientID,
+      offlineAccess: true,
+    });
+  }, []);
+
+  if (success) return <SuccessView navigation={navigation} email={email} />;
 
   return (
     <Box flex={1} safeArea bg={'white'}>
@@ -289,6 +373,7 @@ const SSORegisterScreen = ({ navigation, route, appConfig }) => {
           borderColor={"secondary.700"}
           h={46}
           rounded={50}
+          onPress={() => handleGoogleRegister()}
         >
           <HStack alignItems={"center"} h={'100%'} w={'100%'}
             px={6} space={1}
@@ -308,6 +393,7 @@ const SSORegisterScreen = ({ navigation, route, appConfig }) => {
           h={46}
           mt={2}
           rounded={50}
+          onPress={() => handleAppleLogin()}
         >
           <HStack alignItems={"center"} h={'100%'} w={'100%'}
             px={6} space={1}
@@ -339,10 +425,11 @@ const SSORegisterScreen = ({ navigation, route, appConfig }) => {
           borderColor={"primary.600"}
           h={46}
           rounded={50}
+          mb={6}
           onPress={() => navigation.navigate('Register')}
         >
           <HStack alignItems={"center"} h={'100%'} w={'100%'}
-            px={6} space={1}  
+            px={6} space={1}
             justifyContent={center}
           >
             <Text variant={"body2"} colorScheme={"primary"} fontWeight={"bold"}>
@@ -351,9 +438,11 @@ const SSORegisterScreen = ({ navigation, route, appConfig }) => {
           </HStack>
         </Pressable>
 
+        {registering && <Spinner color={"primary.500"} />}
+
         <Box flex={1} justifyContent={'flex-end'} mb={6}>
-        <HStack justifyContent={"center"} space={1}>
-          <Text variant={"body3"}>
+          <HStack justifyContent={"center"} space={1}>
+            <Text variant={"body3"}>
               {t("litter:screens.register.noAccountYet")}
             </Text>
             <Text

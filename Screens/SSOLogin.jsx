@@ -1,24 +1,17 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { useLazyQuery, gql } from '@apollo/client'
 
 import { useTranslation } from 'react-i18next'
 
-import { GoogleThemed, ExpandThemed, AppleThemed } from '../Components/ThemedSVGs'
+import { GoogleThemed, AppleThemed } from '../Components/ThemedSVGs'
 
 import {
   Box,
-  Button,
-  Checkbox,
-  FormControl,
   HStack,
-  Image,
-  Input,
   Pressable,
-  Row,
   Spinner,
   Text,
-  useTheme,
 } from 'native-base'
 
 import AsyncStorage from '@react-native-async-storage/async-storage'
@@ -36,9 +29,12 @@ import * as Components from '../Components'
 
 import { AppConfig } from '../config'
 
-import GraphQLException from '../exceptions'
 import UnboxLitterSVG from "../Components/UnboxLitterSVG";
 import { center } from '@turf/turf'
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import * as AppleAuthentication from 'expo-apple-authentication';
+import SSOLinkModal from "./SSOLinkModal";
+import jwt_decode from "jwt-decode";
 
 const SSOLoginScreen = ({ navigation, route, appConfig }) => {
 
@@ -56,141 +52,214 @@ const SSOLoginScreen = ({ navigation, route, appConfig }) => {
   }
 
   const { t } = useTranslation()
-  const { colors } = useTheme();
-  const [application, setApplication] = useContext(ApplicationContext)
-  const [auth, setAuth] = useContext(AuthContext)
-  const [user, setUser] = useContext(UserContext)
-  // const [wallet, setWallet] = useContext(WalletContext);
-  // const [userProgress, setUserProgress] = useContext(UserProgressContext)
-  const [balance, setBalance] = useContext(BalanceContext);
-
-  const [err, setErr] = useState()
-  const [email, setEmail] = useState(route.params?.username || "")
-  const [password, setPassword] = useState(route.params?.releaseToken || "")
-
-  const [showPassword, setShowPassword] = useState(false)
-
-  const [missingEmail, setMissingEmail] = useState(false)
-  const [missingPassword, setMissingPassword] = useState(false)
-
-  const [stayLoggedIn, setStayLoggedIn] = useState()
+  const [showLinkModal, setShowLinkModal] = useState(false)
+  const [globalEmail, setGlobalEmail] = useState("")
+  const [globalIdentifier, setGlobalIdentifier] = useState("")
+  const [isCreate, setIsCreate] = useState(false)
   const [loggingIn, setLoggingIn] = useState(false)
 
   const [postLoginQuery] = useLazyQuery(gql(queries.postLogin), {
     fetchPolicy: 'no-cache',
   })
 
-  // const [currentUserQuery] = useLazyQuery(gql(queries.currentUser), {
-  //   fetchPolicy: "no-cache",
-  // });
+  let global_data = {};
 
-  // const [geofencesQuery] = useLazyQuery(gql(queries.geofences), {
-  //   fetchPolicy: "no-cache",
-  // });
-
-  const handleCheckboxChange = (state, name) => {
-    if (name === 'stayLoggedIn') setStayLoggedIn(state)
-  }
-
-  const loginWithGoogle = () => {
-    console.log('login with Google')
-  }
-
-  const loginWithFacebook = () => {
-    console.log('login with Facebook')
-  }
-
-  const loginWithApple = () => {
-    console.log('login with Apple')
-  }
-
-  useEffect(() => {
-    setMissingEmail(false)
-    setErr(null)
-  }, [email])
-
-  useEffect(() => {
-    setMissingPassword(false)
-    setErr(null)
-  }, [password])
-
-  // const loadUser = async () => {
-  //   // const { data, error } = await userQuery({ variables: { username } });
-  //   const { data, error } = await currentUserQuery();
-
-  //   if (error) throw GraphQLException(error);
-  //   if (!data) throw UserNotFoundException(username);
-
-  //   return data;
-  // };
-
-  // const loadGeofences = async () => {
-  //   const { data, error } = await geofencesQuery();
-
-  //   if (error) throw GraphQLException(error);
-
-  //   return data;
-  // };
-
-  const submitLogin = async () => {
-    // make auth request and set token in local storage.
-
-    if (!email) setMissingEmail(true)
-    if (!password) setMissingPassword(true)
-
-    if (!email || !password) return
+  const handleGoogleLogin = async () => {
+    console.log('login with Google');
+    // generateToken("tony.rop@unboxuniverse.com", "GoogleNId");
+    // return;
 
     try {
-      setLoggingIn(true)
-      console.log('logging in')
-      console.log(AppConfig)
+      await GoogleSignin.hasPlayServices();
+      // const {accessToken, user} = await GoogleSignin.signIn();
+      await GoogleSignin.signIn().then(async result => {
+        console.log(result, "Google login result");
+        const userInfo = result.user;
 
-      console.log(AppConfig.authUri)
+        setGlobalEmail(userInfo.email);
+        setGlobalIdentifier("GoogleN");
 
-      if (AppConfig.authUri) {
-        const response = await fetch(AppConfig.authUri, {
-          method: 'POST',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            identity: email,
-            credential: password,
-            refresh: true,
-          }),
-        })
+        global_data = {
+          "identity": userInfo.email,
+          "firstName": userInfo.givenName,
+          "lastName": userInfo.familyName,
+          "promocode": "",
+          "ssoIdentifier": "GoogleN",
+          "credential": result.idToken,
+          "code": result.serverAuthCode
+        };
 
-        const responseJson = await response.json()
-        console.log('responseJson', responseJson)
+        generateToken(userInfo.email, "GoogleN");
+      });
+    } catch (error) {
+      console.log(error, 'Error found');
+      setLoggingIn(false);
+    }
+  };
 
-        if (!responseJson.success) {
-          throw LoginException(responseJson.error)
+  const handleAppleLogin = async () => {
+    console.log('login with Apple')
+    try {
+      const appleResponse = await AppleAuthentication.signInAsync({
+        requestedScopes: [
+          AppleAuthentication.AppleAuthenticationScope.FULL_NAME,
+          AppleAuthentication.AppleAuthenticationScope.EMAIL,
+        ],
+      });
+      // signed in
+      console.log(appleResponse, "Apple login response")
+      var decoded = jwt_decode(appleResponse.identityToken);
+      console.log(decoded);
+
+      setGlobalEmail(decoded.email);
+      setGlobalIdentifier("Apple");
+
+      global_data = {
+        "email": decoded.email,
+        "user": appleResponse.fullName || {},
+        "firstName": appleResponse.fullName.givenName || "",
+        "lastName": appleResponse.fullName.familyName || "",
+        "ssoIdentifier": "Apple",
+        "authorization_code": appleResponse.authorizationCode,
+        "id_token": appleResponse.identityToken,
+        "code": appleResponse.authorizationCode
+      };
+
+      generateToken(decoded.email, "Apple");
+    } catch (error) {
+      console.log(error, 'Error found');
+      setLoggingIn(false);
+    }
+  }
+
+  const generateToken = async (email, identityProvider) => {
+    console.log('generateToken');
+    const input = {
+      email,
+      identityProvider
+    };
+    console.log(JSON.stringify(input));
+
+    try {
+      setLoggingIn(true);
+
+      const response = await fetch(AppConfig.generateTokenUri, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(input),
+      });
+
+      const responseJson = await response.json();
+      console.log(responseJson, "api/userflow/generatetoken");
+
+      if (!responseJson.success) {
+        setErr(true);
+        return;
+      }
+
+      const spamToken = responseJson.result.replaceAll('"', "");
+      checkEmail(email, spamToken, identityProvider);
+
+    } catch (err) {
+      console.log(err, "Error found");
+      setLoggingIn(false);
+    }
+  }
+
+  const checkEmail = async (email, spamToken, identityProvider) => {
+    console.log('checkEmail');
+    const input = {
+      email,
+      spamToken,
+      identityProvider
+    };
+    console.log(input, "checkEmail request body");
+
+    try {
+      setLoggingIn(true);
+
+      const response = await fetch(AppConfig.checkEmailUri, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(input),
+      });
+
+      const responseJson = await response.json();
+      console.log(responseJson, "api/userflow/checkemail");
+
+      if (!responseJson.success) {
+        setErr(true);
+        return;
+      }
+      setLoggingIn(false);
+
+      if (responseJson.result.includes("notFound")) {
+        setShowLinkModal(true);
+      } else if (responseJson.result.includes("unKnown")) {
+        console.log("unKnown");
+      } else {
+        if (identityProvider === "GoogleN") {
+          loginWithGoogle();
+        } else {
+          loginWithApple();
         }
+      }
 
-        const token = responseJson.result.session.value;
-        const tokenExpires = responseJson.result.session.expires;
-        const refreshToken = responseJson.result.refresh.value;
-        const refreshExpires = responseJson.result.refresh.expires;
+    } catch (err) {
+      console.log(err, "Error found");
+      setLoggingIn(false);
+    }
+  }
 
-        console.log('token', token)
-        console.log('refreshToken', refreshToken)
+  const loginWithGoogle = async () => {
+    console.log(global_data, "loginWithGoogle");
 
-        try {
-          await AsyncStorage.setItem("unbox-litter-the-click-3-token", token);
-          await AsyncStorage.setItem("unbox-litter-the-click-3-tokenExpires", tokenExpires);
-          await AsyncStorage.setItem("unbox-litter-the-click-3-refreshToken", refreshToken);
-          await AsyncStorage.setItem("unbox-litter-the-click-3-refreshTokenExpires", refreshExpires);
-        } catch (e) {
-          console.log('err', e)
-          throw AsyncSetItemException()
-        }
+    try {
+      setLoggingIn(true);
+      const response = await fetch(AppConfig.googleAuthUri, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(global_data),
+      });
 
-        if (responseJson.result.user.releaseToken) {
-          navigation.navigate('ValidateAccount')
-          setUser({ password })
-          return;
-        }
+      const responseJson = await response.json();
+      console.log(responseJson, "api/userflow/google");
+
+      if (!responseJson.success) {
+        throw LoginException(responseJson.error)
+      }
+
+      const token = responseJson.result.session.value;
+      const tokenExpires = responseJson.result.session.expires;
+      const refreshToken = responseJson.result.refresh.value;
+      const refreshExpires = responseJson.result.refresh.expires;
+
+      console.log('token', token)
+      console.log('refreshToken', refreshToken)
+
+      try {
+        await AsyncStorage.setItem("unbox-litter-the-click-3-token", token);
+        await AsyncStorage.setItem("unbox-litter-the-click-3-tokenExpires", tokenExpires);
+        await AsyncStorage.setItem("unbox-litter-the-click-3-refreshToken", refreshToken);
+        await AsyncStorage.setItem("unbox-litter-the-click-3-refreshTokenExpires", refreshExpires);
+      } catch (e) {
+        console.log('err', e)
+        throw AsyncSetItemException()
+      }
+
+      if (responseJson.result.user.releaseToken) {
+        navigation.navigate('ValidateAccount')
+        setUser({ password })
+        return;
       }
 
       const { data, error } = await postLoginQuery()
@@ -232,7 +301,111 @@ const SSOLoginScreen = ({ navigation, route, appConfig }) => {
       // setWallet(data.wallet);
       // setUserProgress(data.progress);
 
+      setApplication((a) => {
+        return {
+          ...a,
+          geofences: data.geofences.items,
+        }
+      })
 
+      setAuth((auth) => {
+        return {
+          ...auth,
+          authenticated: true,
+        }
+      })
+      await AsyncStorage.setItem("unbox-litter-the-click-3-auth", JSON.stringify({ authenticated: true }));
+      setLoggingIn(false);
+
+    } catch (err) {
+      console.log(err, "Error found");
+      setLoggingIn(false);
+    }
+  }
+
+  const loginWithApple = async () => {
+    console.log(global_data, "loginWithApple");
+
+    try {
+      setLoggingIn(true);
+      const response = await fetch(AppConfig.appleAuthUri, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(global_data),
+      });
+
+      const responseJson = await response.json();
+      console.log(responseJson, "api/userflow/apple");
+
+      if (!responseJson.success) {
+        throw LoginException(responseJson.error)
+      }
+
+      const token = responseJson.result.session.value;
+      const tokenExpires = responseJson.result.session.expires;
+      const refreshToken = responseJson.result.refresh.value;
+      const refreshExpires = responseJson.result.refresh.expires;
+
+      console.log('token', token)
+      console.log('refreshToken', refreshToken)
+
+      try {
+        await AsyncStorage.setItem("unbox-litter-the-click-3-token", token);
+        await AsyncStorage.setItem("unbox-litter-the-click-3-tokenExpires", tokenExpires);
+        await AsyncStorage.setItem("unbox-litter-the-click-3-refreshToken", refreshToken);
+        await AsyncStorage.setItem("unbox-litter-the-click-3-refreshTokenExpires", refreshExpires);
+      } catch (e) {
+        console.log('err', e)
+        throw AsyncSetItemException()
+      }
+
+      if (responseJson.result.user.releaseToken) {
+        navigation.navigate('ValidateAccount')
+        setUser({ password })
+        return;
+      }
+
+      const { data, error } = await postLoginQuery()
+      if (error) {
+        console.log('postLoginQueryError', error)
+        // throw GraphQLException(error)
+      }
+
+      console.log(data)
+      setUser({
+        username: data.user.username,
+        givenName: data.user.firstName,
+        familyName: data.user.lastName,
+        nickname: `${data.user.firstName} ${data.user.lastName}`,
+        displayName: `${data.user.firstName} ${data.user.lastName}`,
+        initials: `${data.user.firstName[0] ||
+          ' '} ${data.user.lastName[0] || ' '}`,
+        email: data.user.email,
+        badges: data.user.badges,
+        communities: data.user.communities,
+      })
+      await AsyncStorage.setItem("unbox-litter-the-click-3-user", JSON.stringify({
+        username: data.user.username,
+        givenName: data.user.firstName,
+        familyName: data.user.lastName,
+        nickname: `${data.user.firstName} ${data.user.lastName}`,
+        displayName: `${data.user.firstName} ${data.user.lastName}`,
+        initials: `${data.user.firstName[0] ||
+          ' '} ${data.user.lastName[0] || ' '}`,
+        email: data.user.email,
+        badges: data.user.badges,
+        communities: data.user.communities,
+      }));
+
+      setBalance({
+        value: data.balance.remaining
+      });
+
+      // setWallet(data.wallet);
+      // setUserProgress(data.progress);
 
       setApplication((a) => {
         return {
@@ -248,15 +421,25 @@ const SSOLoginScreen = ({ navigation, route, appConfig }) => {
         }
       })
       await AsyncStorage.setItem("unbox-litter-the-click-3-auth", JSON.stringify({ authenticated: true }));
+      setLoggingIn(false);
 
-    } catch (e) {
-      console.log('err handler')
-      console.log('err', e)
-      setErr(e)
-    } finally {
-      setLoggingIn(false)
+    } catch (err) {
+      console.log(err, "Error found");
+      setLoggingIn(false);
     }
   }
+
+  useEffect(() => {
+    if (isCreate) loginWithGoogle();
+  }, [isCreate])
+
+  useEffect(() => {
+    GoogleSignin.configure({
+      scopes: ['email', 'profile'],
+      webClientId: AppConfig.googleClientID,
+      offlineAccess: true,
+    });
+  }, []);
 
   return (
     <Box flex={1} safeArea bg={'white'}>
@@ -280,7 +463,7 @@ const SSOLoginScreen = ({ navigation, route, appConfig }) => {
           {t('onboarding:welcome.info')}
         </Text>
 
-        {/*<Components.LanguageSelector mb={5} />*/}
+        {/* <Components.LanguageSelector mb={5} /> */}
 
         <Pressable
           bg={"white"}
@@ -288,6 +471,7 @@ const SSOLoginScreen = ({ navigation, route, appConfig }) => {
           borderColor={"secondary.700"}
           h={46}
           rounded={50}
+          onPress={() => handleGoogleLogin()}
         >
           <HStack alignItems={"center"} h={'100%'} w={'100%'}
             px={6} space={1}
@@ -307,6 +491,7 @@ const SSOLoginScreen = ({ navigation, route, appConfig }) => {
           h={46}
           mt={2}
           rounded={50}
+          onPress={() => handleAppleLogin()}
         >
           <HStack alignItems={"center"} h={'100%'} w={'100%'}
             px={6} space={1}
@@ -337,11 +522,12 @@ const SSOLoginScreen = ({ navigation, route, appConfig }) => {
           borderWidth={1}
           borderColor={"primary.600"}
           h={46}
+          mb={6}
           rounded={50}
           onPress={() => navigation.navigate('Login')}
         >
           <HStack alignItems={"center"} h={'100%'} w={'100%'}
-            px={6} space={1}  
+            px={6} space={1}
             justifyContent={center}
           >
             <Text variant={"body2"} colorScheme={"primary"} fontWeight={"bold"}>
@@ -349,6 +535,8 @@ const SSOLoginScreen = ({ navigation, route, appConfig }) => {
             </Text>
           </HStack>
         </Pressable>
+
+        {loggingIn && <Spinner color={"primary.500"} />}
 
         <Box flex={1} justifyContent={'flex-end'} mb={6}>
           <HStack justifyContent={'center'} space={1}>
@@ -366,6 +554,13 @@ const SSOLoginScreen = ({ navigation, route, appConfig }) => {
           </HStack>
         </Box>
       </Box>
+
+      <SSOLinkModal
+        show={showLinkModal}
+        onClose={() => setShowLinkModal(false)}
+        ipemail={globalEmail}
+        identityProvider={globalIdentifier}
+        setIsCreate />
     </Box>
   )
 }
