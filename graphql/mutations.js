@@ -177,3 +177,11 @@ export const redeemVoucher = /* GraphQL */ `
     }
   }
 `;
+
+export const setAppPushId = /* GraphQL */ `
+  mutation SetAppPushId($input: InputUser!) {
+    userUpdate(input: $input) {
+      id
+    }
+  }
+`;

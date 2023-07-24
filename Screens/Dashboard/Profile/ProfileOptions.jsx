@@ -70,7 +70,23 @@ const ProfileOptions = () => {
                 {t("litter:screens.dashboard.tabs.profile.deleteAccount")}
               </Text>
             </Box>
-          </Pressable>          
+          </Pressable>
+          <Pressable onPress={() => {
+            navigate("Preferences")
+          }}>
+          <Box
+              bgColor="white"
+              borderBottomRadius={12}
+              borderTopWidth={1}
+              borderColor={"primary.600"}
+              py={3}
+              pl={30}
+            >
+              <Text variant={"paragraph2"}>
+                {t("litter:screens.dashboard.tabs.profile.preferences")}
+              </Text>
+            </Box>
+          </Pressable>         
         </VStack>
       </Box>
       <Text variant={"paragraph1"} fontWeight={"bold"}>

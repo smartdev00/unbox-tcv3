@@ -25,6 +25,7 @@ import About from "./About";
 import CommunityDetails from "./CommunityDetails";
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Preferences from "./Preferences";
 
 const Stack = createNativeStackNavigator();
 
@@ -155,7 +156,12 @@ const Dashboard = () => {
           ({ route }) =>  
             Object({ headerShown: true, headerTintColor: colors["primary"]["600"], title: route.params.headerTitle || "Community Details",})          
         }              
-      />            
+      />
+      <Stack.Screen
+        name="Preferences"
+        component={Preferences}
+        options={Object({ headerShown: true, headerTintColor: colors["primary"]["600"], title: 'Preferences',})}
+      />      
     </Stack.Navigator>
   );
 };
