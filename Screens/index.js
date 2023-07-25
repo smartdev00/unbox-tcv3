@@ -5,6 +5,8 @@ import Dashboard from './Dashboard';
 import ForgotPassword from './ForgotPassword';
 import ForgotPasswordConfirm from './ForgotPasswordConfirm';
 import Login from './Login';
+import SSOLogin from './SSOLogin';
+import SSORegister from './SSORegister';
 import Map from './Map';
 // import Market from './Market';
 import { 
@@ -33,10 +35,12 @@ export {
   ForgotPassword,
   ForgotPasswordConfirm,
   LocationDenied,
+  SSOLogin,
   Login,
   Map,
   // Market,
   Profile,
+  SSORegister,
   Register,
   RequestCamera,
   RequestLocation,

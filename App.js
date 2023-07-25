@@ -222,7 +222,7 @@ const App = () => {
     value: 0
   });
 
-  const [initialRouteName, setInitialRouteName] = useState("Login");
+  const [initialRouteName, setInitialRouteName] = useState("SSOLogin");
   const [achievements, setAchievements] = useState([]);
 
   const [fontsLoaded] = useFonts({
@@ -346,12 +346,20 @@ const App = () => {
                                   component={Screens.ForgotPasswordConfirm}
                                 />
                                 <Stack.Screen
+                                  name="SSOLogin"
+                                  component={Screens.SSOLogin}
+                                />
+                                <Stack.Screen
                                   name="Login"
                                   component={Screens.Login}
                                 />
                                 <Stack.Screen
                                   name="Register"
                                   component={Screens.Register}
+                                />
+                                <Stack.Screen
+                                  name="SSORegister"
+                                  component={Screens.SSORegister}
                                 />
                                 <Stack.Screen
                                   name="TermsAndConditions"

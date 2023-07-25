@@ -29,7 +29,7 @@ import {
   AuthContext,
   BalanceContext,
   UserContext,
-} from "../Context";
+} from '../Context'
 
 import * as queries from "../graphql/queries";
 
@@ -39,6 +39,7 @@ import { AppConfig } from "../config";
 
 import GraphQLException from "../exceptions";
 import UnboxLitterSVG from "../Components/UnboxLitterSVG";
+import { BackButton } from "../Components";
 
 
 const LoginScreen = ({ navigation, route, appConfig }) => {
@@ -105,11 +106,11 @@ const LoginScreen = ({ navigation, route, appConfig }) => {
   // const [userProgress, setUserProgress] = useContext(UserProgressContext)
   const [balance, setBalance] = useContext(BalanceContext);
 
-  const [err, setErr] = useState();
-  const [email, setEmail] = useState(route.params?.username || "");
-  const [password, setPassword] = useState(route.params?.releaseToken || "");
+  const [err, setErr] = useState()
+  const [email, setEmail] = useState(route.params?.username || "")
+  const [password, setPassword] = useState(route.params?.releaseToken || "")
 
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false)
 
   const [missingEmail, setMissingEmail] = useState(false);
   const [missingPassword, setMissingPassword] = useState(false);
@@ -172,6 +173,83 @@ const LoginScreen = ({ navigation, route, appConfig }) => {
 
   //   return data;
   // };
+
+  const linkAccount = async () => {
+    // make auth request and set token in local storage.
+    const global_email = route.params?.ipemail || ""
+    const global_identityProvider = route.params?.identityProvider || ""
+
+    if (!email) setMissingEmail(true)
+    if (!password) setMissingPassword(true)
+
+    if (!email || !password) return
+
+    try {
+      setLoggingIn(true)
+      console.log('logging in')
+
+      console.log(AppConfig.ipAuthUri)
+
+      const input = {
+        identity: email,
+        credential: password,
+        identityProvider: global_identityProvider,
+        ipemail: global_email
+      };
+      console.log(input, "IP Auth request")
+
+      if (AppConfig.authUri) {
+        const response = await fetch(AppConfig.ipAuthUri, {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(input),
+        })
+
+        const responseJson = await response.json()
+        console.log(responseJson, 'Auth ResponseJson')
+
+        if (!responseJson.success) {
+          throw LoginException(responseJson.error)
+        }
+
+        if (route.params?.ipemail) {
+          const ip_data = {
+            email: global_email,
+            // identity: email,
+            identityProvider: "googleId"
+          };
+          console.log(ip_data, 'setidentityprovider Request')
+
+          const ipResponse = await fetch(AppConfig.setIdentityProviderUrl, {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(ip_data),
+          })
+
+          const ipResponseJson = await ipResponse.json()
+          console.log(ipResponseJson, 'setidentityprovider ResponseJson')
+
+          if (!ipResponseJson.success) {
+            throw LoginException(ipResponseJson.error)
+          }
+          submitLogin();
+        }
+      }
+    } catch (e) {
+      console.log('err handler')
+      console.log('err', e)
+      setErr(e)
+    } finally {
+      setLoggingIn(false)
+    }
+
+  }
 
   const submitLogin = async () => {
     // make auth request and set token in local storage.
@@ -319,9 +397,9 @@ const LoginScreen = ({ navigation, route, appConfig }) => {
   };
 
   return (
-    <Box flex={1} safeArea bg={"white"}>
-      <Box alignItems={"center"} justifyContent={"center"} h={"100px"}>
-        <UnboxLitterSVG />
+    <Box flex={1} safeArea bg={'white'}>
+      <Box alignItems={"center"} justifyContent={"center"} h={"80px"}>
+        <UnboxLitterSVG height={45} />
       </Box>
       <Box px={6} pt={33} flex={1}>
         <Text
@@ -446,7 +524,7 @@ const LoginScreen = ({ navigation, route, appConfig }) => {
         <Box flex={1} justifyContent={"flex-end"} mb={6}>
           <Button
             mb={6}
-            onPress={() => submitLogin()}
+            onPress={() => route.params?.ipemail ? linkAccount() : submitLogin()}
             _text={Object({
               fontSize: 14,
               fontWeight: 700,
@@ -470,40 +548,8 @@ const LoginScreen = ({ navigation, route, appConfig }) => {
             </Text>
           </HStack>
         </Box>
-
-        {/* <Text my={2} color="secondary.700" fontSize={14} fontWeight={700}>
-          {t("litter:screens.login.text.connectWithSocial")}
-        </Text> */}
-
-        {/* <Box width={"100%"} alignItems={"center"}>
-          <Button
-            my={1}
-            bg="secondary.700"
-            width="80%"
-            onPress={() => loginWithGoogle()}
-          >
-            {t("buttons.connectWith", { service: "Google" })}
-          </Button>
-          <Button
-            my={1}
-            bg="secondary.700"
-            width="80%"
-            onPress={() => loginWithFacebook()}
-          >
-            {t("buttons.connectWith", { service: "Facebook" })}
-          </Button>
-          <Button
-            my={1}
-            bg="secondary.700"
-            width="80%"
-            onPress={() => loginWithApple()}
-          >
-            {t("buttons.connectWith", { service: "Apple" })}
-          </Button>
-        </Box> */}
-
-        {/*<Components.ContactUs navigation={navigation} />*/}
       </Box>
+      <BackButton navigation={navigation} />
     </Box>
   );
 };

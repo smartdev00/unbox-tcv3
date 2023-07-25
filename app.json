@@ -7,8 +7,12 @@
       "**/*"
     ],
     "ios": {
-      "bundleIdentifier": ""
+      "bundleIdentifier": "",
+      "googleServicesFile": "./GoogleService-Info.plist"
     },  
+    "android": {
+      "googleServicesFile": "./google-services.json"
+    },
     "splash": {
       "image": "./assets/images/products.png",
       "backgroundColor": "#EB1878"

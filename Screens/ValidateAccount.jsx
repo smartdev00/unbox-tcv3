@@ -21,7 +21,7 @@ const SuccessView = ({ navigation }) => {
 
   const handleRedirect = () => {
     setUser()
-    navigation.navigate('Login')
+    navigation.navigate('SSOLogin')
   }
 
   return (
@@ -29,9 +29,9 @@ const SuccessView = ({ navigation }) => {
       <Box
         alignItems={'center'}
         justifyContent={'center'}
-        h={'100px'}
+        h={'80px'}
       >
-        <UnboxLitterSVG />
+        <UnboxLitterSVG height={45} />
       </Box>
       <Box
         px={6} pt={33}
@@ -154,9 +154,9 @@ const ValidateAccount = ({ route, navigation }) => {
       <Box
         alignItems={'center'}
         justifyContent={'center'}
-        h={'56px'}
+        h={'80px'}
       >
-        <UnboxLitterSVG />
+        <UnboxLitterSVG height={45} />
       </Box>
       <Box px={6} pt={53} flex={1}>
         <Text
