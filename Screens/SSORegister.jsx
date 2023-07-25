@@ -255,20 +255,20 @@ const SSORegisterScreen = ({ navigation, route, appConfig }) => {
       console.log(decoded);
 
       setGlobalEmail(decoded.email);
-      setGlobalIdentifier("Apple");
+      setGlobalIdentifier("AppleN");
 
       global_data = {
         "email": decoded.email,
         "user": appleResponse.fullName || {},
         "firstName": appleResponse.fullName.givenName || "",
         "lastName": appleResponse.fullName.familyName || "",
-        "ssoIdentifier": "Apple",
+        "ssoIdentifier": "AppleN",
         "authorization_code": appleResponse.authorizationCode,
         "id_token": appleResponse.identityToken,
         "code": appleResponse.authorizationCode
       };
 
-      generateToken(decoded.email, "Apple");
+      generateToken(decoded.email, "appleId");
     } catch (error) {
       console.log(error, 'Error found');
       setLoggingIn(false);

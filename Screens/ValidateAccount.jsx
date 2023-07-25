@@ -21,7 +21,7 @@ const SuccessView = ({ navigation }) => {
 
   const handleRedirect = () => {
     setUser()
-    navigation.navigate('Login')
+    navigation.navigate('SSOLogin')
   }
 
   return (

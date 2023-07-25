@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 import { useLazyQuery, gql } from '@apollo/client'
 
@@ -57,6 +57,13 @@ const SSOLoginScreen = ({ navigation, route, appConfig }) => {
   const [globalIdentifier, setGlobalIdentifier] = useState("")
   const [isCreate, setIsCreate] = useState(false)
   const [loggingIn, setLoggingIn] = useState(false)
+  const [auth, setAuth] = useContext(AuthContext)
+  const [user, setUser] = useContext(UserContext)
+  const [application, setApplication] = useContext(ApplicationContext)
+  const [balance, setBalance] = useContext(BalanceContext)
+  const [err, setErr] = useState()
+  const [email, setEmail] = useState(route.params?.username || "")
+  const [password, setPassword] = useState(route.params?.releaseToken || "")
 
   const [postLoginQuery] = useLazyQuery(gql(queries.postLogin), {
     fetchPolicy: 'no-cache',
@@ -66,9 +73,6 @@ const SSOLoginScreen = ({ navigation, route, appConfig }) => {
 
   const handleGoogleLogin = async () => {
     console.log('login with Google');
-    // generateToken("tony.rop@unboxuniverse.com", "GoogleNId");
-    // return;
-
     try {
       await GoogleSignin.hasPlayServices();
       // const {accessToken, user} = await GoogleSignin.signIn();
@@ -89,7 +93,7 @@ const SSOLoginScreen = ({ navigation, route, appConfig }) => {
           "code": result.serverAuthCode
         };
 
-        generateToken(userInfo.email, "GoogleN");
+        generateToken(userInfo.email, "googleId");
       });
     } catch (error) {
       console.log(error, 'Error found');
@@ -112,20 +116,23 @@ const SSOLoginScreen = ({ navigation, route, appConfig }) => {
       console.log(decoded);
 
       setGlobalEmail(decoded.email);
-      setGlobalIdentifier("Apple");
+      setGlobalIdentifier("AppleN");
 
       global_data = {
         "email": decoded.email,
         "user": appleResponse.fullName || {},
         "firstName": appleResponse.fullName.givenName || "",
         "lastName": appleResponse.fullName.familyName || "",
-        "ssoIdentifier": "Apple",
-        "authorization_code": appleResponse.authorizationCode,
+        "ssoIdentifier": "AppleN",
+        "authorization_code": {
+          "id_token": appleResponse.identityToken,
+          "code": appleResponse.authorizationCode
+        },
         "id_token": appleResponse.identityToken,
         "code": appleResponse.authorizationCode
       };
 
-      generateToken(decoded.email, "Apple");
+      generateToken(decoded.email, "appleId");
     } catch (error) {
       console.log(error, 'Error found');
       setLoggingIn(false);
@@ -204,10 +211,10 @@ const SSOLoginScreen = ({ navigation, route, appConfig }) => {
       } else if (responseJson.result.includes("unKnown")) {
         console.log("unKnown");
       } else {
-        if (identityProvider === "GoogleN") {
-          loginWithGoogle();
-        } else {
+        if (identityProvider === "appleId") {
           loginWithApple();
+        } else {
+          loginWithGoogle();
         }
       }
 
@@ -267,6 +274,8 @@ const SSOLoginScreen = ({ navigation, route, appConfig }) => {
         console.log('postLoginQueryError', error)
         // throw GraphQLException(error)
       }
+
+      setLoggingIn(false)
 
       console.log(data)
       setUser({
