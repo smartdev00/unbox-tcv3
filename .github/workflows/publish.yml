@@ -236,7 +236,7 @@ jobs:
           APP_IPA_PATH: ios/build-ipa/the-click-3.ipa
         run: |
           bundle install
-          bundle exec fastlane push_testflight_release
+          bundle exec fastlane push_testflight_release CHANGELOG_TESTFLIGHT:"$(cat fastlane/metadata/changelog.txt)"
   deploy_appstore:
     name: AppStore Deployment
     needs: build_ios_ipa
