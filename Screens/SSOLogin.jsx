@@ -64,12 +64,11 @@ const SSOLoginScreen = ({ navigation, route, appConfig }) => {
   const [err, setErr] = useState()
   const [email, setEmail] = useState(route.params?.username || "")
   const [password, setPassword] = useState(route.params?.releaseToken || "")
+  const [globalData, setGlobalData] = useState({})
 
   const [postLoginQuery] = useLazyQuery(gql(queries.postLogin), {
     fetchPolicy: 'no-cache',
   })
-
-  let global_data = {};
 
   const handleGoogleLogin = async () => {
     console.log('login with Google');
@@ -83,17 +82,18 @@ const SSOLoginScreen = ({ navigation, route, appConfig }) => {
         setGlobalEmail(userInfo.email);
         setGlobalIdentifier("GoogleN");
 
-        global_data = {
+        const data = {
           "identity": userInfo.email,
           "firstName": userInfo.givenName,
           "lastName": userInfo.familyName,
           "promocode": "",
           "ssoIdentifier": "GoogleN",
           "credential": result.idToken,
-          "code": result.serverAuthCode
+          "code": result.serverAuthCode,
+          "debug": "true"
         };
-
-        generateToken(userInfo.email, "googleId");
+        setGlobalData(data);
+        generateToken(userInfo.email, "googleId", data);
       });
     } catch (error) {
       console.log(error, 'Error found');
@@ -113,14 +113,20 @@ const SSOLoginScreen = ({ navigation, route, appConfig }) => {
       // signed in
       console.log(appleResponse, "Apple login response")
       var decoded = jwt_decode(appleResponse.identityToken);
-      console.log(decoded);
+      console.log(decoded, "identityToken");
 
       setGlobalEmail(decoded.email);
       setGlobalIdentifier("AppleN");
 
-      global_data = {
+      const data = {
         "email": decoded.email,
-        "user": appleResponse.fullName || {},
+        "user": {
+          "name": {
+            "firstName": appleResponse.fullName.givenName || "",
+            "lastName": appleResponse.fullName.familyName || "",
+          },
+          "email": decoded.email
+        },
         "firstName": appleResponse.fullName.givenName || "",
         "lastName": appleResponse.fullName.familyName || "",
         "ssoIdentifier": "AppleN",
@@ -129,17 +135,18 @@ const SSOLoginScreen = ({ navigation, route, appConfig }) => {
           "code": appleResponse.authorizationCode
         },
         "id_token": appleResponse.identityToken,
-        "code": appleResponse.authorizationCode
+        "code": appleResponse.authorizationCode,
       };
-
-      generateToken(decoded.email, "appleId");
+      setGlobalData(data);
+      generateToken(decoded.email, "appleId", data);
+      
     } catch (error) {
       console.log(error, 'Error found');
       setLoggingIn(false);
     }
   }
 
-  const generateToken = async (email, identityProvider) => {
+  const generateToken = async (email, identityProvider, data) => {
     console.log('generateToken');
     const input = {
       email,
@@ -168,7 +175,7 @@ const SSOLoginScreen = ({ navigation, route, appConfig }) => {
       }
 
       const spamToken = responseJson.result.replaceAll('"', "");
-      checkEmail(email, spamToken, identityProvider);
+      checkEmail(email, spamToken, identityProvider, data);
 
     } catch (err) {
       console.log(err, "Error found");
@@ -176,7 +183,7 @@ const SSOLoginScreen = ({ navigation, route, appConfig }) => {
     }
   }
 
-  const checkEmail = async (email, spamToken, identityProvider) => {
+  const checkEmail = async (email, spamToken, identityProvider, data) => {
     console.log('checkEmail');
     const input = {
       email,
@@ -212,9 +219,9 @@ const SSOLoginScreen = ({ navigation, route, appConfig }) => {
         console.log("unKnown");
       } else {
         if (identityProvider === "appleId") {
-          loginWithApple();
+          loginWithApple(data);
         } else {
-          loginWithGoogle();
+          loginWithGoogle(data);
         }
       }
 
@@ -224,8 +231,8 @@ const SSOLoginScreen = ({ navigation, route, appConfig }) => {
     }
   }
 
-  const loginWithGoogle = async () => {
-    console.log(global_data, "loginWithGoogle");
+  const loginWithGoogle = async (data) => {
+    console.log(data, "loginWithGoogle");
 
     try {
       setLoggingIn(true);
@@ -235,7 +242,7 @@ const SSOLoginScreen = ({ navigation, route, appConfig }) => {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(global_data),
+        body: JSON.stringify(data),
       });
 
       const responseJson = await response.json();
@@ -245,86 +252,7 @@ const SSOLoginScreen = ({ navigation, route, appConfig }) => {
         throw LoginException(responseJson.error)
       }
 
-      const token = responseJson.result.session.value;
-      const tokenExpires = responseJson.result.session.expires;
-      const refreshToken = responseJson.result.refresh.value;
-      const refreshExpires = responseJson.result.refresh.expires;
-
-      console.log('token', token)
-      console.log('refreshToken', refreshToken)
-
-      try {
-        await AsyncStorage.setItem("unbox-litter-the-click-3-token", token);
-        await AsyncStorage.setItem("unbox-litter-the-click-3-tokenExpires", tokenExpires);
-        await AsyncStorage.setItem("unbox-litter-the-click-3-refreshToken", refreshToken);
-        await AsyncStorage.setItem("unbox-litter-the-click-3-refreshTokenExpires", refreshExpires);
-      } catch (e) {
-        console.log('err', e)
-        throw AsyncSetItemException()
-      }
-
-      if (responseJson.result.user.releaseToken) {
-        navigation.navigate('ValidateAccount')
-        setUser({ password })
-        return;
-      }
-
-      const { data, error } = await postLoginQuery()
-      if (error) {
-        console.log('postLoginQueryError', error)
-        // throw GraphQLException(error)
-      }
-
-      setLoggingIn(false)
-
-      console.log(data)
-      setUser({
-        username: data.user.username,
-        givenName: data.user.firstName,
-        familyName: data.user.lastName,
-        nickname: `${data.user.firstName} ${data.user.lastName}`,
-        displayName: `${data.user.firstName} ${data.user.lastName}`,
-        initials: `${data.user.firstName[0] ||
-          ' '} ${data.user.lastName[0] || ' '}`,
-        email: data.user.email,
-        badges: data.user.badges,
-        communities: data.user.communities,
-      })
-      await AsyncStorage.setItem("unbox-litter-the-click-3-user", JSON.stringify({
-        username: data.user.username,
-        givenName: data.user.firstName,
-        familyName: data.user.lastName,
-        nickname: `${data.user.firstName} ${data.user.lastName}`,
-        displayName: `${data.user.firstName} ${data.user.lastName}`,
-        initials: `${data.user.firstName[0] ||
-          ' '} ${data.user.lastName[0] || ' '}`,
-        email: data.user.email,
-        badges: data.user.badges,
-        communities: data.user.communities,
-      }));
-
-      setBalance({
-        value: data.balance.remaining
-      });
-
-      // setWallet(data.wallet);
-      // setUserProgress(data.progress);
-
-      setApplication((a) => {
-        return {
-          ...a,
-          geofences: data.geofences.items,
-        }
-      })
-
-      setAuth((auth) => {
-        return {
-          ...auth,
-          authenticated: true,
-        }
-      })
-      await AsyncStorage.setItem("unbox-litter-the-click-3-auth", JSON.stringify({ authenticated: true }));
-      setLoggingIn(false);
+      postLogin(responseJson);
 
     } catch (err) {
       console.log(err, "Error found");
@@ -332,9 +260,8 @@ const SSOLoginScreen = ({ navigation, route, appConfig }) => {
     }
   }
 
-  const loginWithApple = async () => {
-    console.log(global_data, "loginWithApple");
-
+  const loginWithApple = async (data) => {
+    console.log(data, "loginWithApple");
     try {
       setLoggingIn(true);
       const response = await fetch(AppConfig.appleAuthUri, {
@@ -343,7 +270,7 @@ const SSOLoginScreen = ({ navigation, route, appConfig }) => {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(global_data),
+        body: JSON.stringify(data),
       });
 
       const responseJson = await response.json();
@@ -353,6 +280,17 @@ const SSOLoginScreen = ({ navigation, route, appConfig }) => {
         throw LoginException(responseJson.error)
       }
 
+      postLogin(responseJson);
+
+    } catch (err) {
+      console.log(err, "Error found");
+      setLoggingIn(false);
+    }
+  }
+
+  const postLogin = async (responseJson) => {
+    try {
+
       const token = responseJson.result.session.value;
       const tokenExpires = responseJson.result.session.expires;
       const refreshToken = responseJson.result.refresh.value;
@@ -395,6 +333,7 @@ const SSOLoginScreen = ({ navigation, route, appConfig }) => {
         email: data.user.email,
         badges: data.user.badges,
         communities: data.user.communities,
+        sso: "google"
       })
       await AsyncStorage.setItem("unbox-litter-the-click-3-user", JSON.stringify({
         username: data.user.username,
@@ -430,16 +369,23 @@ const SSOLoginScreen = ({ navigation, route, appConfig }) => {
         }
       })
       await AsyncStorage.setItem("unbox-litter-the-click-3-auth", JSON.stringify({ authenticated: true }));
-      setLoggingIn(false);
 
-    } catch (err) {
-      console.log(err, "Error found");
-      setLoggingIn(false);
+    } catch (e) {
+      console.log('err handler')
+      console.log('err', e)
+      setErr(e)
+    } finally {
+      setLoggingIn(false)
     }
-  }
+  };
 
   useEffect(() => {
-    if (isCreate) loginWithGoogle();
+    if (isCreate) {
+      setShowLinkModal(false);
+      console.log(globalIdentifier, "globalIdentifier");
+      if (globalIdentifier === "AppleN") loginWithApple(globalData);
+      else loginWithGoogle(globalData);
+    }
   }, [isCreate])
 
   useEffect(() => {
@@ -569,7 +515,7 @@ const SSOLoginScreen = ({ navigation, route, appConfig }) => {
         onClose={() => setShowLinkModal(false)}
         ipemail={globalEmail}
         identityProvider={globalIdentifier}
-        setIsCreate />
+        setIsCreate={setIsCreate} />
     </Box>
   )
 }

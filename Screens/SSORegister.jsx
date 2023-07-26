@@ -32,6 +32,8 @@ import { center } from '@turf/turf'
 import { BackButton } from "../Components";
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { RegisterMailThemed } from "../Components/ThemedSVGs";
+import * as AppleAuthentication from 'expo-apple-authentication';
+import jwt_decode from "jwt-decode";
 
 const SuccessView = ({ navigation, email }) => {
   const { t } = useTranslation();
@@ -194,16 +196,18 @@ const SSORegisterScreen = ({ navigation, route, appConfig }) => {
       }
 
       if (responseJson.result.includes("notFound")) {
-        if (identityProvider === "GoogleN") {
-          signupWithGoogle();
-        } else {
+        if (identityProvider === "appleId") {
           signupWithApple();
+        } else {
+          signupWithGoogle();
         }
       } else if (responseJson.result.includes("unKnown")) {
         console.log("unKnown");
       } else {
         alert("Already exists, Please try to login.");
       }
+
+      setRegistering(false);
 
     } catch (err) {
       console.log(err, "Error found");
@@ -232,7 +236,7 @@ const SSORegisterScreen = ({ navigation, route, appConfig }) => {
           "code": result.serverAuthCode
         };
 
-        generateToken(userInfo.email, "GoogleN");
+        generateToken(userInfo.email, "googleId");
       });
     } catch (error) {
       console.log(error, 'Error found');
@@ -254,16 +258,24 @@ const SSORegisterScreen = ({ navigation, route, appConfig }) => {
       var decoded = jwt_decode(appleResponse.identityToken);
       console.log(decoded);
 
-      setGlobalEmail(decoded.email);
-      setGlobalIdentifier("AppleN");
+      setRegistering(true);
 
       global_data = {
         "email": decoded.email,
-        "user": appleResponse.fullName || {},
+        "user": {
+          "name": {
+            "firstName": appleResponse.fullName.givenName || "",
+            "lastName": appleResponse.fullName.familyName || "",
+          },
+          "email": decoded.email
+        },
         "firstName": appleResponse.fullName.givenName || "",
         "lastName": appleResponse.fullName.familyName || "",
         "ssoIdentifier": "AppleN",
-        "authorization_code": appleResponse.authorizationCode,
+        "authorization_code": {
+          "id_token": appleResponse.identityToken,
+          "code": appleResponse.authorizationCode
+        },
         "id_token": appleResponse.identityToken,
         "code": appleResponse.authorizationCode
       };
@@ -271,7 +283,7 @@ const SSORegisterScreen = ({ navigation, route, appConfig }) => {
       generateToken(decoded.email, "appleId");
     } catch (error) {
       console.log(error, 'Error found');
-      setLoggingIn(false);
+      setRegistering(false);
     }
   }
 
