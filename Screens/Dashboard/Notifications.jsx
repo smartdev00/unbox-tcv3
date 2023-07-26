@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // import ProfileHeader from "./Profile/ProfileHeader";
 // import ProfileOptions from "./Profile/ProfileOptions";
 import { useNavigation } from "@react-navigation/native";
@@ -9,81 +9,73 @@ import { useTranslation } from "react-i18next";
 import CarouselComp from "../../Components/Carousel";
 import Pagination from "../../Components/Pagination";
 import { CloseIconThemed } from "../../Components/ThemedSVGs";
-import { TouchableOpacity } from "react-native";
-
-const Notification = ({ notification }) => {
-  return (
-    <VStack justifyContent={"space-between"} mb={3} w={"100%"}>
-      <Text color="primary.600" fontWeight={700}>
-        {notification.subject}
-      </Text>
-      <Text>{notification.body}</Text>
-    </VStack>
-  );
-};
+import { Alert, TouchableOpacity } from "react-native";
+import { gql, useLazyQuery } from "@apollo/client";
+import * as queries from "../../graphql/queries";
+import { AppConfig } from "../../config";
 
 const Notifications = () => {
   const { t } = useTranslation();
 
-  const [notifications, setNotifications] = useState([
-    {
-      subject: "A message from The Click",
-      body: "Don't forget to Click today!",
-    },
-    {
-      subject: "A message from The Click 1",
-      body: "Don't forget to Click today 1!",
-    },
-    {
-      subject: "A message from The Click 2",
-      body: "Don't forget to Click today 2!",
-    },
-    {
-      subject: "A message from The Click 3",
-      body: "Don't forget to Click today 3!",
-    },
-    {
-      subject: "A message from The Click 4",
-      body: "Don't forget to Click today 4!",
-    }
+  const [notifications, setNotifications] = useState([]);
 
-    // {
-    //   subject: "A message from The Click 2",
-    //   body: "Don't forget to Click today 2!",
-    // },
-  ]);
+  const [fetchNotifications] = useLazyQuery(gql(queries.pushNotificationList), {
+    fetchPolicy: "no-cache",
+  });
+  
+  const fetchPushNotifications= async () => {
+    const start = performance.now();
+    const { data, error } = await fetchNotifications();
+
+    if (error) {
+      Alert.alert("Error", error.message);
+      return;
+    }
+    
+    setNotifications(data.pushNotificationList.items);
+
+    const end = performance.now();
+
+    console.log(`fetchPushNotifications: ${end - start} ms`);
+  };
+  
+  useEffect(() => {
+    fetchPushNotifications();
+
+  }, [fetchNotifications]);
+  
 
   //carousel index
   const [index, setIndex] = useState(0);
 
 
   const renderItem = ({ item }) => {
+
     return (
-        <Box
-          flex={1}
-        >
-          <Text color="primary.600" fontWeight={700}> {item.subject} </Text>
-          <Text> {item.body} </Text>
-          
-          {/* using random image for the moment*/}
-          <Image
-              source={{ uri: "https://picsum.photos/200/300" }}
-              alt="image base"
-              resizeMode="cover"
-              height={100}
-              roundedTop="md"
-              roundedBottom="md"
-              m={2}
-            />
-            <Text color="primary.600" fontWeight={700} 
-            textAlign={"center"}
-          > {item.subject} ?</Text>
-        </Box>
+        <ScrollView>
+          <Box
+            flex={1}
+          >
+            <Text color="primary.600" fontWeight={700}> {item.subject} </Text>
+            <Text> {item.body} </Text>
+
+            <Image
+              alignSelf={"center"}
+                source={Object({
+                  uri: AppConfig.rootUri + item.image,
+                })}
+                alt={item.subject}
+                resizeMode="contain"
+                width={"70px"}
+                height={"70px"}
+              />
+
+          </Box>
+        </ScrollView>
     )
   };
 
-
-  if (!notifications || notifications.length === 0 ) return null;
+  if(!notifications || notifications.length === 0) return null;
 
   return (
     <Box
@@ -109,7 +101,7 @@ const Notifications = () => {
             position: "absolute",
             top: 0,
             right: 0,
-            padding: 10,
+            margin: 10,
           }}
           
           onPress={() => {
@@ -121,8 +113,11 @@ const Notifications = () => {
 
       </Box>
 
-      <Pagination data={notifications} index={index} />
-      
+        <Box
+          alignItems={"center"}
+        >
+          <Pagination data={notifications} index={index} />
+        </Box>
     </Box>
   );
 };

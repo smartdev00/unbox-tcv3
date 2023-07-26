@@ -15,13 +15,13 @@ const CloseIconThemed = () => {
     >
       <Path
         d='M2.70923 15.1561L16.3932 2.17341'
-        stroke='#EB1878'
+        stroke={colors.primary[600]}
         stroke-width='3.5'
         stroke-linecap='round'
       />
       <Path
         d='M2.70923 2.17334L16.3932 15.1561'
-        stroke='#EB1878'
+        stroke={colors.primary[600]}
         stroke-width='3.5'
         stroke-linecap='round'
       />

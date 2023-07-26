@@ -525,3 +525,22 @@ export const merchantsList = /* GraphQL */ `
     }
   }
 `;
+
+export const pushNotificationList = /* GraphQL */ `
+  query PushNotificationList {
+    pushNotificationList {
+      items {
+        id
+        status
+        dateAdded
+        dateSent
+        subject
+        viewOnline
+        body
+        image
+      }
+      total
+      count
+    }
+  }
+`;

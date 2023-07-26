@@ -1,12 +1,45 @@
-import { View, Text, TouchableOpacity } from 'react-native'
-import React from 'react'
+import { View, Text, TouchableOpacity, ScrollView, Dimensions } from 'react-native'
+import React, { useRef, useEffect } from 'react'
 import { Box, useTheme } from 'native-base'
 
 const Pagination = ({ data, index }) => {
   const { colors } = useTheme()
+  const scrollViewRef = useRef(null);
+
+  useEffect(() => {
+    if (scrollViewRef.current && data.length > 0) {
+      const dotWidth = 20;
+      const numOfDots = data.length;
+      const scrollViewWidth = numOfDots * dotWidth;
+  
+      const centerScrollView = scrollViewWidth / 2;
+  
+      const centerActiveDot = (index + 0.5) * dotWidth;
+  
+      const offset = centerActiveDot - centerScrollView;
+  
+      scrollViewRef.current.scrollTo({
+        x: Math.max(0, offset),
+        y: 0,
+        animated: true,
+      });
+    }
+  }, [data, index]);
+
+  
 
   return (
-    <Box flexDirection='row' justifyContent='center' alignItems='center' mt={2}>
+    <ScrollView
+      ref={scrollViewRef}
+      horizontal
+      showsHorizontalScrollIndicator={false}
+      contentContainerStyle={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginTop: 2,
+        justifyContent: 'center',
+      }}
+    >
       {data.map((_, i) => {
         return (
           <Box
@@ -22,7 +55,7 @@ const Pagination = ({ data, index }) => {
           />
         )
       })}
-    </Box>
+    </ScrollView>
   )
 }
 
