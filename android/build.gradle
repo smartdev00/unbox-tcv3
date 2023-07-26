@@ -8,7 +8,7 @@ buildscript {
         minSdkVersion = Integer.parseInt(findProperty('android.minSdkVersion') ?: '21')
         compileSdkVersion = Integer.parseInt(findProperty('android.compileSdkVersion') ?: '33')
         targetSdkVersion = Integer.parseInt(findProperty('android.targetSdkVersion') ?: '33')
-        googlePlayServicesAuthVersion = Integer.parseInt(findProperty('android.googlePlayServicesAuthVersion') ?: '19.2.0')
+        googlePlayServicesAuthVersion = findProperty('android.googlePlayServicesAuthVersion') ?: '19.2.0'
         if (findProperty('android.kotlinVersion')) {
             kotlinVersion = findProperty('android.kotlinVersion')
         }
