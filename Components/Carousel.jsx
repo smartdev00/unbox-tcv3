@@ -5,7 +5,13 @@ import Carousel from 'react-native-reanimated-carousel'
 
 const CarouselComp = ({ data, renderItem, setIndex }) => {
   const { colors } = useTheme()
- 
+
+
+  const aspectRatio = 16 / 9;
+
+
+  const width = Dimensions.get('window').width * 0.8
+  const height = width / aspectRatio
   return (
     <Box flex={1}
     >
@@ -14,8 +20,8 @@ const CarouselComp = ({ data, renderItem, setIndex }) => {
         panGestureHandlerProps={{
           activeOffsetX: [-10, 10],
         }}
-        width={Dimensions.get('window').width * 0.8}
-        height={Dimensions.get('window').height * 0.2}
+        width={width}
+        height={height}
         autoPlay={true}
         data={data}
         scrollAnimationDuration={1500}

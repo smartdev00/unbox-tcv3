@@ -24,19 +24,15 @@ const Notifications = () => {
   });
   
   const fetchPushNotifications= async () => {
-    const start = performance.now();
     const { data, error } = await fetchNotifications();
 
     if (error) {
-      Alert.alert("Error", error.message);
+      console.log(error);
       return;
     }
     
     setNotifications(data.pushNotificationList.items);
 
-    const end = performance.now();
-
-    console.log(`fetchPushNotifications: ${end - start} ms`);
   };
   
   useEffect(() => {
@@ -52,26 +48,24 @@ const Notifications = () => {
   const renderItem = ({ item }) => {
 
     return (
-        <ScrollView>
-          <Box
-            flex={1}
-          >
-            <Text color="primary.600" fontWeight={700}> {item.subject} </Text>
-            <Text> {item.body} </Text>
+        <Box
+          flex={1}
+        >
+          <Text color="primary.600" fontWeight={700}> {item.subject} </Text>
+          <Text> {item.body} </Text>
 
-            <Image
-              alignSelf={"center"}
-                source={Object({
-                  uri: AppConfig.rootUri + item.image,
-                })}
-                alt={item.subject}
-                resizeMode="contain"
-                width={"70px"}
-                height={"70px"}
-              />
+          <Image
+            alignSelf={"center"}
+              source={Object({
+                uri: AppConfig.rootUri + item.image,
+              })}
+              alt={item.subject}
+              resizeMode="contain"
+              width={"70px"}
+              height={"70px"}
+            />
 
-          </Box>
-        </ScrollView>
+        </Box>
     )
   };
 
