@@ -1,10 +1,12 @@
 name: Sign, Build and Publish App
 
 on:
+  push:
+    branches:
+      - main
   pull_request:
     branches: 
       - develop
-      - main
     types:
       - closed
 
@@ -144,14 +146,38 @@ jobs:
         with:
           ruby-version: 2.7.5
           bundler-cache: true
-      - name: Install Pods
-        id: pod_install
+      - name: Build ipa for FOSTPLUS
+        if: github.ref == 'refs/heads/main'
+        id: build_ipa_fastlane_production
+        env:
+          APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID_PRODUCTION }}
+          APP_STORE_CONNECT_API_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_API_ISSUER_ID_PRODUCTION }}
+          APP_STORE_CONNECT_API_KEY_CONTENT: ${{ secrets.APP_STORE_CONNECT_API_KEY_CONTENT_PRODUCTION }}
+          GIT_PRIVATE_KEY: ${{ secrets.GIT_PRIVATE_KEY }}
+          IOS_TEAM_ID: ${{ secrets.IOS_TEAM_ID_PRODUCTION }}
+          MATCH_PASSWORD: ${{ secrets.FASTLANE_MATCH_PASSWORD }}
+          GIT_URL: "git@github.com:Unbox-infinity/fastlane_match-unlitter-usa.git"
+          APP_IDENTIFIER: "be.fostplus.theclick"
+          XCODEPROJ_PATH: "ios/the-click-3.xcodeproj"
+          XARCHIVE_PATH: "ios/the-click-3.xcarchive"
+          XWORKSPACE_PATH: "ios/the-click-3.xcworkspace"
+          XCODE_SCHEMA: "the-click-3"
+          GIT_USERNAME: "yunan.fatah@unboxuniverse.com"
+          CODE_SIGN_IDENTITY: "Apple Distribution: NBX (${{ secrets.IOS_TEAM_ID_PRODUCTION }})"
         run: |
-          ls -lah /Applications
-          gem install ffi -v '1.14.0'
-          cd ios
-          arch -x86_64 pod install --repo-update
-      - name: Build ipa using fastlane
+          bundle lock --add-platform x86_64-darwin-19
+          bundle install
+          bundle exec fastlane run update_app_identitifer xcodeproj:"ios/the-click-3.xcodeproj" app_identifier:"be.fostplus.theclick" plist_path:"/Users/runner/work/app-native-the-click-v3/app-native-the-click-v3/ios/the-click-3/Info.plist"
+          bundle exec fastlane ios match_mobileprovision
+          ls -lah /Users/runner/Library/MobileDevice/Provisioning\ Profiles
+          ls -AU ~/Library/MobileDevice/Provisioning\ Profiles | head -1
+          echo "$(security find-identity -p codesigning -v | head -1)"
+          gem install ffi -v '1.14.0' && cd ios && arch -x86_64 pod install --repo-update && cd ..
+          bundle exec fastlane beta PROVISIONING_PROFILE_PATH:"/Users/runner/Library/MobileDevice/Provisioning Profiles/$(ls -AU ~/Library/MobileDevice/Provisioning\ Profiles | head -1)"
+          mkdir ios/build-ipa
+          cp /Users/runner/work/app-native-the-click-v3/app-native-the-click-v3/the-click-3.ipa ios/build-ipa/the-click-3.ipa
+      - name: Build ipa for Internal
+        if: github.base_ref == 'develop'
         id: build_ipa_fastlane
         env:
           APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
@@ -168,13 +194,15 @@ jobs:
           XCODE_SCHEMA: "the-click-3"
           GIT_USERNAME: "yunan.fatah@unboxuniverse.com"
           CODE_SIGN_IDENTITY: "Apple Distribution: NBX (${{ secrets.IOS_TEAM_ID }})"
-          PROVISIONING_PROFILE_PATH: "/Users/runner/Library/MobileDevice/Provisioning Profiles/a3c94ecd-f01d-41ed-ae50-33085dcf9dbe.mobileprovision"
         run: |
           bundle lock --add-platform x86_64-darwin-19
           bundle install
           bundle exec fastlane ios match_mobileprovision
           ls -lah /Users/runner/Library/MobileDevice/Provisioning\ Profiles
-          bundle exec fastlane beta
+          ls -AU ~/Library/MobileDevice/Provisioning\ Profiles | head -1
+          echo "$(security find-identity -p codesigning -v | head -1)"
+          gem install ffi -v '1.14.0' && cd ios && arch -x86_64 pod install --repo-update && cd ..
+          bundle exec fastlane beta PROVISIONING_PROFILE_PATH:"/Users/runner/Library/MobileDevice/Provisioning Profiles/$(ls -AU ~/Library/MobileDevice/Provisioning\ Profiles | head -1)"
           mkdir ios/build-ipa
           cp /Users/runner/work/app-native-the-click-v3/app-native-the-click-v3/the-click-3.ipa ios/build-ipa/the-click-3.ipa
       - name: Save .ipa to artifact
@@ -208,4 +236,30 @@ jobs:
           APP_IPA_PATH: ios/build-ipa/the-click-3.ipa
         run: |
           bundle install
-          bundle exec fastlane push_testflight_release
+          bundle exec fastlane push_testflight_release CHANGELOG_TESTFLIGHT:"$(cat fastlane/metadata/changelog.txt)"
+  deploy_appstore:
+    name: AppStore Deployment
+    needs: build_ios_ipa
+    if: github.ref == 'refs/heads/main'
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/download-artifact@master
+        with:
+          name: the-click-3.ipa
+          path: ios/build-ipa/
+      - name: Setup Ruby (bundle)
+        id: ruby_setup
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7.5
+          bundler-cache: true
+      - name: Deploy to AppStore
+        env:
+          APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID_PRODUCTION }}
+          APP_STORE_CONNECT_API_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_API_ISSUER_ID_PRODUCTION }}
+          APP_STORE_CONNECT_API_KEY_CONTENT: ${{ secrets.APP_STORE_CONNECT_API_KEY_CONTENT_PRODUCTION }}
+          APP_IPA_PATH: ios/build-ipa/the-click-3.ipa
+        run: |
+          bundle install
+          bundle exec fastlane push_appstore_release
