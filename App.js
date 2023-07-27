@@ -59,6 +59,7 @@ import * as Unbox from './CommonComponents';
 import extendedTheme from "./extendedTheme";
 import UnboxLitterSVG from "./Components/UnboxLitterSVG";
 import Splash from "./Screens/Splash";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 const theme = extendTheme(extendedTheme);
 
@@ -303,6 +304,7 @@ const App = () => {
   if (!ready) return null;
 
   return (
+    <GestureHandlerRootView style={{ flex: 1 }}>
     <ApolloProvider client={client}>
       <AuthContext.Provider value={[auth, setAuth]}>
         <LocaleContext.Provider value={[locale, setLocale]}>
@@ -387,6 +389,7 @@ const App = () => {
         </LocaleContext.Provider>
       </AuthContext.Provider>
     </ApolloProvider>
+    </GestureHandlerRootView>
   );
 };
 
