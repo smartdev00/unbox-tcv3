@@ -25,6 +25,9 @@ const CarouselComp = ({ data, renderItem, setIndex }) => {
         autoPlay={true}
         data={data}
         scrollAnimationDuration={1500}
+        onAnimatedValueChange={(value) => {
+          console.log(value)
+        }}
         onSnapToItem={(index) => {
           setIndex(index)
         }}
