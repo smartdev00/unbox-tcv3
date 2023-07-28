@@ -527,8 +527,8 @@ export const merchantsList = /* GraphQL */ `
 `;
 
 export const pushNotificationList = /* GraphQL */ `
-  query PushNotificationList {
-    pushNotificationList {
+  query PushNotificationList($filter: InputFilter) {
+    pushNotificationList(filter: $filter) {
       items {
         id
         status

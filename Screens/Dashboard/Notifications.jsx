@@ -10,8 +10,9 @@ import CarouselComp from "../../Components/Carousel";
 import Pagination from "../../Components/Pagination";
 import { CloseIconThemed } from "../../Components/ThemedSVGs";
 import { Alert, TouchableOpacity } from "react-native";
-import { gql, useLazyQuery } from "@apollo/client";
+import { gql, useLazyQuery, useMutation } from "@apollo/client";
 import * as queries from "../../graphql/queries";
+import * as mutations from "../../graphql/mutations";
 import { AppConfig } from "../../config";
 
 const Notifications = () => {
@@ -19,20 +20,31 @@ const Notifications = () => {
 
   const [notifications, setNotifications] = useState([]);
 
+  const [removePushNotification] = useMutation(gql(mutations.readPushNotification), {
+    fetchPolicy: 'no-cache',
+  })
+
   const [fetchNotifications] = useLazyQuery(gql(queries.pushNotificationList), {
     fetchPolicy: "no-cache",
   });
   
   const fetchPushNotifications= async () => {
-    const { data, error } = await fetchNotifications();
+
+    const { data, error } = await fetchNotifications({
+      variables: {
+        filter: {
+          field: "status",
+          value: "SENT",
+        }
+      }
+    });
 
     if (error) {
       console.log(error);
       return;
     }
-    
-    setNotifications(data.pushNotificationList.items);
 
+    setNotifications(data.pushNotificationList.items);
   };
   
   useEffect(() => {
@@ -54,7 +66,8 @@ const Notifications = () => {
           <Text color="primary.600" fontWeight={700}> {item.subject} </Text>
           <Text> {item.body} </Text>
 
-          <Image
+          { item.image && (
+            <Image
             alignSelf={"center"}
               source={Object({
                 uri: AppConfig.rootUri + item.image,
@@ -64,6 +77,7 @@ const Notifications = () => {
               width={"70px"}
               height={"70px"}
             />
+          )}
 
         </Box>
     )
@@ -98,8 +112,24 @@ const Notifications = () => {
             margin: 10,
           }}
           
-          onPress={() => {
-            setNotifications(notifications.filter((_, i) => i !== index));
+          onPress={async () => {
+            try {
+              const notfication = notifications[index];
+
+              setNotifications(notifications.filter((item) => item.id !== notfication.id));
+              
+              const { data } = await removePushNotification({
+                variables: {
+                  id: notfication.id,
+                },
+              })
+
+              console.log("successfully changed status of in-app notification to open: ", data);
+
+            } catch (error) {
+              console.log(error);
+            }
+
           }}
         >
           <CloseIconThemed />
