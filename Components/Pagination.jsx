@@ -2,7 +2,7 @@ import { View, Text, TouchableOpacity, ScrollView, Dimensions } from 'react-nati
 import React, { useRef, useEffect } from 'react'
 import { Box, useTheme } from 'native-base'
 
-const Pagination = ({ data, index }) => {
+const Pagination = ({ data, index, kind = "notification" }) => {
   const { colors } = useTheme()
   const scrollViewRef = useRef(null);
 
@@ -11,13 +11,13 @@ const Pagination = ({ data, index }) => {
       const dotWidth = 20;
       const numOfDots = data.length;
       const scrollViewWidth = numOfDots * dotWidth;
-  
+
       const centerScrollView = scrollViewWidth / 2;
-  
+
       const centerActiveDot = (index + 0.5) * dotWidth;
-  
+
       const offset = centerActiveDot - centerScrollView;
-  
+
       scrollViewRef.current.scrollTo({
         x: Math.max(0, offset),
         y: 0,
@@ -26,7 +26,7 @@ const Pagination = ({ data, index }) => {
     }
   }, [data, index]);
 
-  
+
 
   return (
     <ScrollView
@@ -50,7 +50,9 @@ const Pagination = ({ data, index }) => {
               borderRadius: 4,
               marginHorizontal: 2,
               backgroundColor:
-                index === i ? colors.purple[600] : colors.gray[300],
+                index === i
+                  ? (kind === "notification" ? colors.purple[600] : colors.primary[600])
+                  : colors.gray[300],
             }}
           />
         )

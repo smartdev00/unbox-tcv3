@@ -3,7 +3,7 @@ import * as React from 'react'
 import { Alert, Dimensions } from 'react-native'
 import Carousel from 'react-native-reanimated-carousel'
 
-const CarouselComp = ({ data, renderItem, setIndex }) => {
+const CarouselComp = ({ data, renderItem, setIndex, kind='notification' }) => {
   const { colors } = useTheme()
 
 
@@ -21,10 +21,10 @@ const CarouselComp = ({ data, renderItem, setIndex }) => {
           activeOffsetX: [-10, 10],
         }}
         width={width}
-        height={height}
+        height={(kind === 'notification') ? height : 260}
         autoPlay={true}
         data={data}
-        scrollAnimationDuration={1500}
+        scrollAnimationDuration={(kind === 'notification') ? 1500 : 3000}
         onAnimatedValueChange={(value) => {
           console.log(value)
         }}

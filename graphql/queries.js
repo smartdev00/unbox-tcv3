@@ -442,8 +442,21 @@ export const getUserStatistics = /* GraphQL */ `
         year
         month
         week
+        dayPeak
         daily {
           current
+          data
+        }
+        monthly {
+          current
+          data
+        }
+        contribution {
+          current
+          data {
+            key
+            value
+          }
         }
         today
         streak
