@@ -185,3 +185,16 @@ export const setAppPushId = /* GraphQL */ `
     }
   }
 `;
+
+export const readPushNotification = /* GraphQL */ `
+  mutation readPushNotifications($id: Int!) {
+    pushNotificationRead (id: $id) {
+      dateAdded
+      dateSent
+      status
+      subject
+      body
+      image
+    }
+  }
+`;
