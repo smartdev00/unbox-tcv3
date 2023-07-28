@@ -6,6 +6,10 @@ import { BalanceContext, UserContext } from "../../Context";
 
 import { useLazyQuery, gql } from "@apollo/client";
 import * as queries from "../../graphql/queries";
+import ClickChart from '../../Components/ClickChart';
+import ContributionChart from '../../Components/ContributionChart';
+import CarouselComp from "../../Components/Carousel";
+import Pagination from "../../Components/Pagination";
 
 import {
   Box,
@@ -47,6 +51,7 @@ const Statistics = () => {
   const { t } = useTranslation();
 
   const [statistics, setStatistics] = useState();
+  const [index, setIndex] = useState(0);
 
   const [userStatisticsQuery] = useLazyQuery(gql(queries.getUserStatistics), {
     fetchPolicy: "no-cache",
@@ -57,7 +62,9 @@ const Statistics = () => {
 
     if (error) console.log(error);
     // throw GraphQLException(error);
-    setStatistics(data.userGet.statistics);
+    console.log(data.userGet.statistics, "stattistics data");
+    if (data.userGet.statistics)
+      setStatistics(data.userGet.statistics);
   };
 
   useEffect(() => {
@@ -66,7 +73,33 @@ const Statistics = () => {
     loadStatistics();
   }, []);
 
-  if (!statistics) return null;
+  const renderItem = ({ item }) => {
+    const index = caArray.indexOf(item);
+    return (
+      <Box flex={1} pt={4} alignItems={'center'} >
+        {index === 0 ? (
+          <Box alignSelf="center" alignItems="center">
+            <ClickChart chartType={'daily'} chartData={item} />
+            <Text m={2} color={'primary.600'} bold>{t('Daily')}</Text>
+          </Box>
+        ) : index === 1 ? (
+          <Box alignSelf="center" alignItems="center">
+            <ClickChart chartType={'monthly'} chartData={statistics.monthly} />
+            <Text m={2} color={'primary.600'} bold>{t('Monthly')}</Text>
+          </Box>
+        ) : (
+          <Box alignSelf="center" alignItems="center">
+            <ContributionChart chartType={'contribution'} chartData={statistics.contribution} />
+            <Text m={2} color={'primary.600'} bold>{t('Calendar')}</Text>
+          </Box>
+        )}
+      </Box>
+    )
+  };
+
+  if (!statistics) return <></>;
+
+  const caArray = [statistics.daily, statistics.monthly, statistics.contribution];
 
   return (
     <Box
@@ -77,49 +110,59 @@ const Statistics = () => {
       mb={3}
     >
       <Text fontSize={"13px"} fontWeight={700} mb={2}>
-        {t("litter:statistics.userTitle")}
+        {t("litter:screens.dashboard.tabs.myOverview.title")}
       </Text>
 
-      <VStack space={2}>
-        <HStack>
-          <ProgressItem
-            label={"D"}
-            title={t("litter:statistics.today")}
-            value={statistics.today}
-          />
-          <ProgressItem
-            label={"W"}
-            title={t("litter:statistics.week")}
-            value={statistics.week}
-          />
-        </HStack>
-        <HStack>
-          <ProgressItem
-            label={"M"}
-            title={t("litter:statistics.month")}
-            value={statistics.month}
-          />
-          <ProgressItem
-            label={"Y"}
-            title={t("litter:statistics.year")}
-            value={statistics.year}
-          />
-        </HStack>
-        <HStack>
-          <ProgressItem
-            label={"D"}
-            title={t("litter:statistics.streak")}
-            value={statistics.streak}
-          />
-          <ProgressItem
-            label={"D"}
-            title={t("litter:statistics.daily")}
-            value={statistics.daily.current}
-          />
-        </HStack>
-      </VStack>
-    </Box>
-  );
+      <HStack w={"100%"}>
+        <CarouselComp data={caArray} renderItem={renderItem} setIndex={setIndex} kind={"statistics"} />
+      </HStack>
+
+      <Box alignItems={"center"} mb={6}>
+        <Pagination data={caArray} index={index} kind={"statistics"}/>
+      </Box>
+
+      <Box flex={1}>
+        <VStack space={2}>
+          <HStack>
+            <ProgressItem
+              label={"D"}
+              title={t("litter:statistics.today")}
+              value={statistics.today}
+            />
+            <ProgressItem
+              label={"W"}
+              title={t("litter:statistics.week")}
+              value={statistics.week}
+            />
+          </HStack>
+          <HStack>
+            <ProgressItem
+              label={"M"}
+              title={t("litter:statistics.month")}
+              value={statistics.month}
+            />
+            <ProgressItem
+              label={"Y"}
+              title={t("litter:statistics.year")}
+              value={statistics.year}
+            />
+          </HStack>
+          <HStack>
+            <ProgressItem
+              label={"D"}
+              title={t("litter:statistics.streak")}
+              value={statistics.streak}
+            />
+            <ProgressItem
+              label={"D"}
+              title={t("litter:statistics.daily")}
+              value={statistics.daily.current}
+            />
+          </HStack>
+        </VStack>
+      </Box>
+    </Box >
+  )
 };
 
 const CommunityStatistics = ({ community }) => {
@@ -167,7 +210,7 @@ const CommunityStatistics = ({ community }) => {
             title={t("litter:statistics.year")}
             value={statistics.year}
           />
-        </HStack>        
+        </HStack>
         <HStack>
           <ProgressItem
             label={"D"}
