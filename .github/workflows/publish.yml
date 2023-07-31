@@ -173,6 +173,7 @@ jobs:
           ls -AU ~/Library/MobileDevice/Provisioning\ Profiles | head -1
           echo "$(security find-identity -p codesigning -v | head -1)"
           gem install ffi -v '1.14.0' && cd ios && arch -x86_64 pod install --repo-update && cd ..
+          ls -lah ios && yarn build:ios && ls -lah ios
           bundle exec fastlane beta PROVISIONING_PROFILE_PATH:"/Users/runner/Library/MobileDevice/Provisioning Profiles/$(ls -AU ~/Library/MobileDevice/Provisioning\ Profiles | head -1)"
           mkdir ios/build-ipa
           cp /Users/runner/work/app-native-the-click-v3/app-native-the-click-v3/the-click-3.ipa ios/build-ipa/the-click-3.ipa
@@ -202,6 +203,7 @@ jobs:
           ls -AU ~/Library/MobileDevice/Provisioning\ Profiles | head -1
           echo "$(security find-identity -p codesigning -v | head -1)"
           gem install ffi -v '1.14.0' && cd ios && arch -x86_64 pod install --repo-update && cd ..
+          ls -lah ios && yarn build:ios && ls -lah ios
           bundle exec fastlane beta PROVISIONING_PROFILE_PATH:"/Users/runner/Library/MobileDevice/Provisioning Profiles/$(ls -AU ~/Library/MobileDevice/Provisioning\ Profiles | head -1)"
           mkdir ios/build-ipa
           cp /Users/runner/work/app-native-the-click-v3/app-native-the-click-v3/the-click-3.ipa ios/build-ipa/the-click-3.ipa
