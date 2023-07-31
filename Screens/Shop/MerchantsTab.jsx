@@ -1,4 +1,4 @@
-import { Box, Button, HStack, ScrollView, VStack } from "native-base";
+import { Box, Button, HStack, ScrollView, Text, VStack } from "native-base";
 import SearchBar from "./SearchBar";
 import MerchantTicket from "./MerchantTicket";
 import { useEffect, useState } from "react";
@@ -13,6 +13,7 @@ const MerchantsTab = () => {
   const [refreshing, setRefreshing] = useState(false);
   const [offset, setOffset] = useState(0);
   const [total, setTotal] = useState(0);
+  const [queryVariables, setQueryVariables] = useState()
 
   const [listRetailersQuery] = useLazyQuery(gql(queries.retailersDetailed), {
     fetchPolicy: "no-cache",
@@ -20,11 +21,12 @@ const MerchantsTab = () => {
 
   const loadRetailers = async () => {
     try {
-      setRetailers();
       const { data, error } = await listRetailersQuery({
         variables: {
+          ...queryVariables,
           limit: LIMIT,
           offset,
+          
         },
       });
       setRefreshing(true);
@@ -34,7 +36,7 @@ const MerchantsTab = () => {
       }
 
       if (data) {
-        // console.log(JSON.stringify(data, null, 2));
+        console.log(JSON.stringify(data, null, 2));
         setRetailers(data.retailersDetailed.items);
         setTotal(data.retailersDetailed.total);
       }
@@ -45,11 +47,30 @@ const MerchantsTab = () => {
 
   useEffect(() => {
     loadRetailers();
-  }, [offset]);
+  }, [offset, queryVariables]);
 
   return (
     <>
-      <SearchBar showFilter={false}/>
+      <SearchBar showFilter={false}
+        onSearch={(search) => {
+
+          if (search === "") {
+            setQueryVariables();
+            return;
+          }
+          setQueryVariables((q) => {
+            return {
+              ...q,
+              filter: {
+                field: "company",
+                operator: "LI",
+                value: search,
+              }
+            };
+          });
+        }}
+      />
+
       <ScrollView
         px={15}
         showsVerticalScrollIndicator={false}
@@ -58,13 +79,14 @@ const MerchantsTab = () => {
           <RefreshControl refreshing={refreshing} onRefresh={loadRetailers} />
         }
       >
+
         <VStack mt={6}>
           {retailers &&
             retailers.map((merchant, key) => (
               <MerchantTicket merchant={merchant} key={key} />
             ))}
         </VStack>
-        {retailers && (retailers.length > 0) && (
+        {retailers && (retailers.length > 10) && (
           <Box>
             <HStack
               mb={5}

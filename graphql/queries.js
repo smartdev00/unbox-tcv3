@@ -83,8 +83,8 @@ export const retailersCount = /* GraphQL */ `
 `;
 
 export const retailersDetailed = /* GraphQL */ `
-  query RetailersDetailed($limit: Int, $offset: Int) {
-    retailersDetailed: retailerList(order: "company", limit: $limit, offset: $offset) {
+  query RetailersDetailed($limit: Int, $offset: Int, $filter: InputFilter) {
+    retailersDetailed: retailerList(order: "company", limit: $limit, offset: $offset, filter: $filter) {
       items {
         id
         img: avatarUrl(width: 256, height: 256, fit: "inside")
