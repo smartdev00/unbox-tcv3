@@ -68,6 +68,14 @@ Increments patch build version
 
 Push a new build to Testflight
 
+### ios push_appstore_release
+
+```sh
+[bundle exec] fastlane ios push_appstore_release
+```
+
+Push a new build to App Store
+
 ### ios match_mobileprovision
 
 ```sh

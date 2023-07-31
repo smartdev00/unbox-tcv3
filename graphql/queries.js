@@ -442,8 +442,21 @@ export const getUserStatistics = /* GraphQL */ `
         year
         month
         week
+        dayPeak
         daily {
           current
+          data
+        }
+        monthly {
+          current
+          data
+        }
+        contribution {
+          current
+          data {
+            key
+            value
+          }
         }
         today
         streak
@@ -522,6 +535,25 @@ export const merchantsList = /* GraphQL */ `
     merchants {
       id
       name
+    }
+  }
+`;
+
+export const pushNotificationList = /* GraphQL */ `
+  query PushNotificationList($filter: InputFilter) {
+    pushNotificationList(filter: $filter) {
+      items {
+        id
+        status
+        dateAdded
+        dateSent
+        subject
+        viewOnline
+        body
+        image
+      }
+      total
+      count
     }
   }
 `;
