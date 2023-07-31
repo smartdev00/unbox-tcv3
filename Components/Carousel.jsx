@@ -1,4 +1,4 @@
-import { Box, useTheme } from 'native-base'
+import { Box, Text, useTheme } from 'native-base'
 import * as React from 'react'
 import { Alert, Dimensions } from 'react-native'
 import Carousel from 'react-native-reanimated-carousel'
@@ -15,14 +15,15 @@ const CarouselComp = ({ data, renderItem, setIndex, kind='notification' }) => {
   return (
     <Box flex={1}
     >
-      <Carousel
+      {data.length > 0 ? (
+        <Carousel
         loop
         panGestureHandlerProps={{
           activeOffsetX: [-10, 10],
         }}
         width={width}
         height={(kind === 'notification') ? height : 260}
-        autoPlay={true}
+        autoPlay={false}
         data={data}
         scrollAnimationDuration={(kind === 'notification') ? 1500 : 3000}
         onAnimatedValueChange={(value) => {
@@ -33,6 +34,20 @@ const CarouselComp = ({ data, renderItem, setIndex, kind='notification' }) => {
         }}
         renderItem={renderItem}
       />
+      ) : (
+        <Box
+          flex={1}
+          justifyContent="center"
+          alignItems="center"
+        >
+          <Text color={colors.primary['600']}
+            fontWeight={700}
+            fontSize="sm"
+          >
+            No new notifications
+          </Text>
+        </Box>
+      )}
     </Box>
   )
 }

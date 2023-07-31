@@ -83,7 +83,6 @@ const Notifications = () => {
     )
   };
 
-  if(!notifications || notifications.length === 0) return null;
 
   return (
     <Box
@@ -104,7 +103,8 @@ const Notifications = () => {
           <CarouselComp data={notifications} renderItem={renderItem} setIndex={setIndex} />
         </HStack> 
 
-        <TouchableOpacity
+        {notifications.length > 0 && (
+          <TouchableOpacity
           style={{
             position: "absolute",
             top: 0,
@@ -135,6 +135,7 @@ const Notifications = () => {
           <CloseIconThemed />
         </TouchableOpacity>
 
+        )}
       </Box>
 
         <Box
