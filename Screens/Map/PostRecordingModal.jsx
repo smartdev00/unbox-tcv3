@@ -252,7 +252,7 @@ const PostRecordingModal = ({
     console.log(cleanliness);
     setCleanliness(cleanliness);
 
-
+    console.log(gpx);
 
     const { data } = await createPlog({
       variables: {

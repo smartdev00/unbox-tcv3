@@ -30,6 +30,7 @@ const storageRecording = "the-click-3-plogging-recording";
 const storageRecordingStart = "the-click-3-plogging-recording-start";
 const storageRecordingDistance = "the-click-3-plogging-recording-distance";
 const storageLocations = "the-click-3-plogging-background-locations";
+const storageRecordingLitters = "the-click-3-plogging-data";
 
 TaskManager.defineTask(LOCATION_TASK_NAME, async ({ data, error }) => {
   if (error) {
@@ -309,14 +310,18 @@ const Map = ({ navigation }) => {
 
 
     gpxData.setSegmentPoints(JSON.parse(jsonStorageLocations).map(p => {
-      return new Point(p.latitude, p.longitude, { time: p.timestamp, });
+      return new Point(p.latitude, p.longitude, { time: new Date(p.timestamp), });
     }));
 
-    // gpxData.setWayPoints(clickLocations.map(c => {
-    //   return new Point(c.latitude, c.longitude, { time: c.timestamp, extensions: { id: c.id } } )
-    // }));
+
+    const littersData = await AsyncStorage.getItem(storageRecordingLitters)
     
-    const gpx = buildGPX(gpxData.toObject());        
+    gpxData.setWayPoints(JSON.parse(littersData).map(c => {
+      return new Point(c.latitude, c.longitude, { time: new Date(c.dateAdded), extensions: { id: c.id } } )
+    }));
+    
+    
+    const gpx = buildGPX(gpxData.toObject());
     return gpx;
   } 
 
@@ -335,6 +340,7 @@ const Map = ({ navigation }) => {
       await AsyncStorage.setItem(storageRecording, JSON.stringify(false));
       await AsyncStorage.setItem(storageLocations, JSON.stringify([]));
       await AsyncStorage.setItem(storageRecordingDistance, JSON.stringify(0));
+      await AsyncStorage.setItem(storageRecordingLitters, JSON.stringify([]));
       setElapsedTime();
       setDistance();
     } catch (err) {
