@@ -21,8 +21,8 @@ import { AppConfig } from "../../config";
 const SortbyType = {
   SORT_CLOSEST: "distance",
   SORT_NEWEST: "-id",
-  SORT_AZ: "name",
-  SORT_ZA: "-name",
+  SORT_AZ: "retailerCompany",
+  SORT_ZA: "-retailerCompany",
 };
 
 const LIMIT = 10;
