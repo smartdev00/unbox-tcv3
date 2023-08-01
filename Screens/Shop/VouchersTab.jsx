@@ -279,6 +279,7 @@ const FilterSheet = ({
                       onValuesChange={(v) => {
                         setMinPrice(v[0]);
                         setMaxPrice(v[1]);
+                        setFilterChanged(new Date());
                       }}
                       values={[minPrice, maxPrice]}
                       selectedStyle={Object({
