@@ -88,15 +88,14 @@ export const retailersDetailed = /* GraphQL */ `
       items {
         id
         img: avatarUrl(width: 256, height: 256, fit: "inside")
-        type: hierarchy2
-        phone: hierarchy3
-        website: hierarchy5
-        details: description
-        name: company
+        company
+        department
         visitingAddress
+        phone
+        category
         location {
-          latitude
           longitude
+          latitude
         }
       }
       total
@@ -110,12 +109,11 @@ export const retailerGet = /* GraphQL */ `
     retailerGet(id: $merchantId) {
       id
       img: avatarUrl(width: 256, height: 256, fit: "inside")
-      type: hierarchy2
-      phone: hierarchy3
-      website: hierarchy5
-      details: description
-      name: company
+      company
       visitingAddress
+      category
+      department
+      phone
       location {
         longitude
         latitude

@@ -14,6 +14,7 @@ const MerchantsTab = () => {
   const [offset, setOffset] = useState(0);
   const [total, setTotal] = useState(0);
   const [queryVariables, setQueryVariables] = useState()
+  const [count, setCount] = useState(0);
 
   const [listRetailersQuery] = useLazyQuery(gql(queries.retailersDetailed), {
     fetchPolicy: "no-cache",
@@ -39,6 +40,7 @@ const MerchantsTab = () => {
         console.log(JSON.stringify(data, null, 2));
         setRetailers(data.retailersDetailed.items);
         setTotal(data.retailersDetailed.total);
+        setCount(data.retailersDetailed.count);
       }
     } finally {
       setRefreshing(false);
@@ -86,7 +88,7 @@ const MerchantsTab = () => {
               <MerchantTicket merchant={merchant} key={key} />
             ))}
         </VStack>
-        {retailers && (retailers.length > 10) && (
+        {count > 10 && (
           <Box>
             <HStack
               mb={5}

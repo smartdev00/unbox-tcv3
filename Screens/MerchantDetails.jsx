@@ -21,7 +21,7 @@ import { useNavigation } from "@react-navigation/native";
 import { AppConfig } from "../config";
 import { useLazyQuery, gql } from "@apollo/client";
 import * as queries from "../graphql/queries";
-import { Linking } from "react-native";
+import { ActivityIndicator, Linking } from "react-native";
 
 MapboxGL.setWellKnownTileServer(MapboxGL.TileServers.Mapbox);
 MapboxGL.setAccessToken(AppConfig.mapboxAccessToken);
@@ -85,6 +85,7 @@ const MerchantDetails = ({ route, navigation }) => {
   const mapRef = useRef();
   const { navigate } = useNavigation();
   const [merchant, setMerchant] = useState();
+  const [loading, setLoading] = useState(true);
 
   console.log(route.params);
 
@@ -119,13 +120,15 @@ const MerchantDetails = ({ route, navigation }) => {
         ...data.retailerGet,        
       });
     }
+    setLoading(false);
   };
 
   useEffect(() => {
     loadMerchant();
   }, []);
 
-  if (!merchant) return <Text>no merchant</Text>;
+  if (loading) return <ActivityIndicator color={colors.primary[600]} />;
+  if (!merchant) return <Text>Merchant not found</Text>;
 
   return (
     <ScrollView px={30} showsVerticalScrollIndicator={false} bgColor="white">
@@ -154,7 +157,7 @@ const MerchantDetails = ({ route, navigation }) => {
             Category
           </Text>
           <Text variant={"body3"} mb={4}>
-            {merchant.type}
+            {merchant.category}
           </Text>
           {merchant.description && (
             <>
