@@ -252,7 +252,7 @@ const SSOLoginScreen = ({ navigation, route, appConfig }) => {
         throw LoginException(responseJson.error)
       }
 
-      postLogin(responseJson);
+      postLogin(responseJson, "google");
 
     } catch (err) {
       console.log(err, "Error found");
@@ -280,7 +280,7 @@ const SSOLoginScreen = ({ navigation, route, appConfig }) => {
         throw LoginException(responseJson.error)
       }
 
-      postLogin(responseJson);
+      postLogin(responseJson, "apple");
 
     } catch (err) {
       console.log(err, "Error found");
@@ -288,7 +288,7 @@ const SSOLoginScreen = ({ navigation, route, appConfig }) => {
     }
   }
 
-  const postLogin = async (responseJson) => {
+  const postLogin = async (responseJson, sso) => {
     try {
 
       const token = responseJson.result.session.value;
@@ -321,7 +321,7 @@ const SSOLoginScreen = ({ navigation, route, appConfig }) => {
         // throw GraphQLException(error)
       }
 
-      console.log(data)
+      console.log(data, "postlogin data")
       setUser({
         username: data.user.username,
         givenName: data.user.firstName,
@@ -333,7 +333,7 @@ const SSOLoginScreen = ({ navigation, route, appConfig }) => {
         email: data.user.email,
         badges: data.user.badges,
         communities: data.user.communities,
-        sso: "google"
+        sso
       })
       await AsyncStorage.setItem("unbox-litter-the-click-3-user", JSON.stringify({
         username: data.user.username,

@@ -126,6 +126,7 @@ const SSORegisterScreen = ({ navigation, route, appConfig }) => {
   const [err, setErr] = useState()
   const [registering, setRegistering] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [email, setEmail] = useState();
 
   let global_data = {};
 
@@ -195,6 +196,7 @@ const SSORegisterScreen = ({ navigation, route, appConfig }) => {
         return;
       }
 
+      setEmail(email);
       if (responseJson.result.includes("notFound")) {
         if (identityProvider === "appleId") {
           signupWithApple();
