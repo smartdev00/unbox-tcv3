@@ -1,3 +1,4 @@
-SSO login
-test note
-carousel notifications
+Filtering by A-Z
+Filtering by Z-A
+Filter by name
+Filter by A-Z and price
