@@ -29,6 +29,7 @@ import * as turf from "@turf/turf";
 
 import { ApplicationContext, BalanceContext } from "../Context";
 import { isConstValueNode } from "graphql";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const ScanningStatusTypes = {
   NONE: null,
@@ -562,6 +563,29 @@ const Scan = ({ navigation, route }) => {
     if (data) {
       await updateBalance();
     }
+
+
+    const storageRecording = "the-click-3-plogging-recording";
+    const storageRecordingLitters = "the-click-3-plogging-data";
+    
+    const isRecording = await AsyncStorage.getItem(storageRecording);
+    
+    if (isRecording) {
+      const littersPloggingData = await AsyncStorage.getItem(storageRecordingLitters);
+      const littersPlogging = littersPloggingData ? JSON.parse(littersPloggingData) : [];
+      
+        const newData = {
+        id: data.litterCreate.id,
+        latitude: data.litterCreate.location.latitude,
+        longitude: data.litterCreate.location.longitude,
+        dateAdded: data.litterCreate.dateAdded,
+      };
+
+      littersPlogging.push(newData);
+    
+      await AsyncStorage.setItem(storageRecordingLitters, JSON.stringify(littersPlogging));
+    }
+    
 
     closeModal();
   };
