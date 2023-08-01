@@ -86,19 +86,23 @@ jobs:
           GOOGLE_KEY_ALIAS: ${{ secrets.GOOGLE_KEYSTORE_ALIAS }}
           GOOGLE_KEYSTORE_PASSWORD: ${{ secrets.GOOGLE_KEYSTORE_PASSWORD }}
         run: |
-          echo "${{ secrets.GOOGLE_KEYSTORE_FILE_BASE64 }}" | base64 --decode > android/app/google-release-key.keystore
+          echo "${{ secrets.GOOGLE_KEYSTORE_FILE_BASE64 }}" | base64 --decode > android/app/google-release-key.jks
+      - name: Add Google service for chraslytic report
+        run: |
+          echo "${{ secrets.GOOGLE_SERVICE_JSON_BASE64 }}" | base64 --decode > android/app/google-services.json
+          ls -lah android/app
       - name: Sign clean and Build android release apk
         env:
           GOOGLE_KEYSTORE_ALIAS: ${{ secrets.GOOGLE_KEYSTORE_ALIAS }}
           GOOGLE_KEYSTORE_PASSWORD: ${{ secrets.GOOGLE_KEYSTORE_PASSWORD }}
         run: |
-          cd android && ./gradlew assembleRelease -PkeyLocation=google-release-key.keystore -PstorePw=$GOOGLE_KEYSTORE_PASSWORD -PkeyAlias=$GOOGLE_KEYSTORE_ALIAS -PkeyPw=$GOOGLE_KEYSTORE_PASSWORD && cd ..          
+          cd android && ./gradlew assembleRelease -PkeyLocation=google-release-key.jks -PstorePw=$GOOGLE_KEYSTORE_PASSWORD -PkeyAlias=$GOOGLE_KEYSTORE_ALIAS -PkeyPw=$GOOGLE_KEYSTORE_PASSWORD && cd ..
       - name: Sign aab file
         env:
           GOOGLE_KEYSTORE_ALIAS: ${{ secrets.GOOGLE_KEYSTORE_ALIAS }}
           GOOGLE_KEYSTORE_PASSWORD: ${{ secrets.GOOGLE_KEYSTORE_PASSWORD }}
         run: |
-          cd android && ./gradlew bundleRelease -PkeyLocation=google-release-key.keystore -PstorePw=$GOOGLE_KEYSTORE_PASSWORD -PkeyAlias=$GOOGLE_KEYSTORE_ALIAS -PkeyPw=$GOOGLE_KEYSTORE_PASSWORD && cd ..
+          cd android && ./gradlew bundleRelease -PkeyLocation=google-release-key.jks -PstorePw=$GOOGLE_KEYSTORE_PASSWORD -PkeyAlias=$GOOGLE_KEYSTORE_ALIAS -PkeyPw=$GOOGLE_KEYSTORE_PASSWORD && cd ..
       - name: Upload apk Artifact
         uses: actions/upload-artifact@v1
         with:
