@@ -33,11 +33,9 @@ const MerchantsTab = () => {
       setRefreshing(true);
       if (error) {
         console.log("listRetailersQuery", error);
-        // throw GraphQLException(error);
       }
 
       if (data) {
-        console.log(JSON.stringify(data, null, 2));
         setRetailers(data.retailersDetailed.items);
         setTotal(data.retailersDetailed.total);
         setCount(data.retailersDetailed.count);
@@ -54,20 +52,11 @@ const MerchantsTab = () => {
   return (
     <>
       <SearchBar showFilter={false}
-        onSearch={(search) => {
-
-          if (search === "") {
-            setQueryVariables();
-            return;
-          }
+        onSearch={(s) => {
           setQueryVariables((q) => {
             return {
               ...q,
-              filter: {
-                field: "company",
-                operator: "LI",
-                value: search,
-              }
+              search: s,
             };
           });
         }}
