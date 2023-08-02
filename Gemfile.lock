@@ -182,8 +182,6 @@ GEM
       webrick
     google-apis-discovery_v1 (0.14.0)
       google-apis-core (>= 0.11.0, < 2.a)
-    google-apis-drive_v3 (0.43.0)
-      google-apis-core (>= 0.11.0, < 2.a)
     google-apis-firebaseappdistribution_v1 (0.3.0)
       google-apis-core (>= 0.11.0, < 2.a)
     google-apis-generator (0.12.0)
@@ -296,6 +294,7 @@ GEM
       xcpretty (~> 0.2, >= 0.0.7)
 
 PLATFORMS
+  arm64-darwin-21
   x86_64-darwin-19
 
 DEPENDENCIES
@@ -306,11 +305,10 @@ DEPENDENCIES
   fastlane-plugin-increment_version_code
   fastlane-plugin-increment_version_name
   fastlane-plugin-load_json
-  google-apis-drive_v3
   json
 
 RUBY VERSION
    ruby 2.7.5p203
 
 BUNDLED WITH
-   2.4.18
+   2.4.12
