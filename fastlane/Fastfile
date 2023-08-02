@@ -27,10 +27,12 @@ platform :android do
 
   desc "Submit to Play Console Internal Testing"
   lane :push_play_store_internal_testing do
-    upload_to_play_store_internal_app_sharing(
-      package_name: ENV['APP_IDENTIFIER'],
-      json_key: ENV["PLAYSTORE_LOGIN_CREDENTIALS"],
+    upload_to_play_store(
       aab: ENV['PATH_TO_AAB'],
+      track: 'internal',
+      release_status: 'draft',
+      json_key: ENV["PLAYSTORE_LOGIN_CREDENTIALS"],
+      package_name: ENV['PACKAGE_NAME'],
     )
   end
 end
