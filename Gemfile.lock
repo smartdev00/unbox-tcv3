@@ -232,7 +232,7 @@ GEM
     minitest (5.19.0)
     molinillo (0.8.0)
     multi_json (1.15.0)
-    multipart-post (2.0.0)
+    multipart-post (2.3.0)
     nanaimo (0.3.0)
     nap (1.1.0)
     naturally (2.2.1)
