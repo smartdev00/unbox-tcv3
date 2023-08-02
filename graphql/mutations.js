@@ -198,3 +198,20 @@ export const readPushNotification = /* GraphQL */ `
     }
   }
 `;
+
+export const partnerSubmit = /* GraphQL */ `
+  mutation partnerSubmit($profile: String!, $partner: String!, $password: String!, $value: String!) {
+    partnerSubmit (profile: $profile, partner: $partner, password: $password, value:$value) {
+      success
+      response
+      transaction {
+        id
+        amount
+        reason
+        referrer
+        reference
+        type
+      }
+    }
+  }
+`;
