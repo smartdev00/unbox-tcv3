@@ -315,34 +315,3 @@ jobs:
         run: |
           bundle install
           bundle exec fastlane push_appstore_release
-  deploy_internal_testing:
-    name: Deploy Internal Testing
-    needs: build_android_aab
-    if: github.base_ref == 'develop'
-    runs-on: macos-latest
-    steps:
-      - uses: actions/checkout@master
-      - uses: actions/download-artifact@master
-        with:
-          name: app-release.aab
-          path: android/build-aab
-      - name: Decode PlayStore service acccount
-        run: |
-          echo "${{ secrets.GOOGLE_PLAYSTORE_DISTRIBUTION_SERVICE_ACCOUNT_BASE64 }}" > service-account-prod.base64.txt
-          base64 --decode -i service-account-prod.base64.txt -o android/google-playstore-service-account.json
-      - name: Setup Ruby (bundle)
-        id: ruby_setup
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 2.7.5
-          bundler-cache: true
-      - name: Bundle install & Deploy
-        env: 
-          PLAYSTORE_LOGIN_CREDENTIALS: android/google-playstore-service-account.json
-          PACKAGE_NAME: "be.fostplus.theclick.development"
-          PATH_TO_AAB: "android/build-aab/app-release.aab"
-        run: |
-          ls -lah android/build-aab
-          bundle install
-          bundle exec fastlane android validate_play_store_service_account
-          bundle exec fastlane android push_play_store_internal_testing
