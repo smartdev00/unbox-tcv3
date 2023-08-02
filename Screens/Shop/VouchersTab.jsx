@@ -101,16 +101,22 @@ const FilterSheet = ({
     }
 
     if (categoryFilter.length) {
-      query.filters.push({
-        field: "category",
-        value: categoryFilter.join(","),
+      categoryFilter.forEach((categoryItem) => {
+        query.filters.push({
+          field: "categoryCsv",
+          operator: "CSV",
+          value: categoryItem,
+        });
       });
     }
 
     if (locationFilter.length) {
-      query.filters.push({
-        field: "category",
-        value: locationFilter.join(","),
+      locationFilter.forEach((locationItem) => {
+        query.filters.push({
+          field: "categoryCsv",
+          operator: "CSV",
+          value: locationItem,
+        });
       });
     }
 
@@ -434,7 +440,9 @@ const VouchersTab = () => {
       <QueryClientProvider client={queryClient}>
         <VouchersList
           queryVariables={queryVariables}
-          setQueryVariables={setQueryVariables} />
+          setQueryVariables={setQueryVariables}
+          setCats={setCategories}
+          setLocs={setLocations} />
       </QueryClientProvider>
     </>
   );
