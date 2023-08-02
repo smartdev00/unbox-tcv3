@@ -245,6 +245,7 @@
   "screens.community.back": "Retour aux groupes",
   "screens.community.leave": "Quitter le groupe",
   "screens.communities.joinModal.title": "Participer",
+  "screens.communities.joinModal.incorrectPIN":"NIP incorrect",
   "screens.communities.joinModal.instructions": "Si vous avez été invité à rejoindre ce groupe, veuillez saisir le code PIN qui vous a été fourni ci-dessous :",
   "screens.communities.joinModal.button.join": "Confirmer",
   "screens.communities.joinModal.button.cancel": "Annuler",

@@ -245,6 +245,7 @@
   "screens.community.back": "Back to Groups",
   "screens.community.leave": "Leave Group",
   "screens.communities.joinModal.title": "Participate",
+  "screens.communities.joinModal.incorrectPIN":"Incorrect PIN",
   "screens.communities.joinModal.instructions": "If you have been invited to join this group, please enter the PIN provided to you below:",
   "screens.communities.joinModal.button.join": "Confirm",
   "screens.communities.joinModal.button.cancel": "Cancel",
