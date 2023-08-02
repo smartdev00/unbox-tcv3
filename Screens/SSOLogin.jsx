@@ -430,7 +430,7 @@ const SSOLoginScreen = ({ navigation, route, appConfig }) => {
         >
           <HStack alignItems={"center"} h={'100%'} w={'100%'}
             px={6} space={1}
-            justifyContent={center}
+            justifyContent={'center'}
           >
             <GoogleThemed />
             <Text variant={"body2"} px={4}>
@@ -450,7 +450,7 @@ const SSOLoginScreen = ({ navigation, route, appConfig }) => {
         >
           <HStack alignItems={"center"} h={'100%'} w={'100%'}
             px={6} space={1}
-            justifyContent={center}
+            justifyContent={'center'}
           >
             <AppleThemed />
             <Text variant={"body2"} px={6}>
@@ -462,7 +462,7 @@ const SSOLoginScreen = ({ navigation, route, appConfig }) => {
         <Box my={10}>
           <HStack alignItems={"center"} w={'100%'}
             px={6}
-            justifyContent={center}
+            justifyContent={'center'}
           >
             <Text h={'1px'} w={'48%'} bg="secondary.700" />
             <Text variant={"body2"} px={4}>
@@ -483,7 +483,7 @@ const SSOLoginScreen = ({ navigation, route, appConfig }) => {
         >
           <HStack alignItems={"center"} h={'100%'} w={'100%'}
             px={6} space={1}
-            justifyContent={center}
+            justifyContent={'center'}
           >
             <Text variant={"body2"} colorScheme={"primary"} fontWeight={"bold"}>
               {t('onboarding:login.email')}

@@ -15,13 +15,13 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 ## Android
 
-### android push_firebase_release
+### android validate_play_store_service_account
 
 ```sh
-[bundle exec] fastlane android push_firebase_release
+[bundle exec] fastlane android validate_play_store_service_account
 ```
 
-Submit to Firebase App Distribution
+Validate PlayStore Service Account
 
 ### android bump_version_android
 
@@ -31,13 +31,21 @@ Submit to Firebase App Distribution
 
 Bump version code Android
 
-### android version_number
+### android version_patch
 
 ```sh
-[bundle exec] fastlane android version_number
+[bundle exec] fastlane android version_patch
 ```
 
 Bump version number Android
+
+### android push_play_store_internal_testing
+
+```sh
+[bundle exec] fastlane android push_play_store_internal_testing
+```
+
+Submit to Play Console Internal Testing
 
 ----
 

@@ -83,20 +83,19 @@ export const retailersCount = /* GraphQL */ `
 `;
 
 export const retailersDetailed = /* GraphQL */ `
-  query RetailersDetailed($limit: Int, $offset: Int, $filter: InputFilter) {
-    retailersDetailed: retailerList(order: "company", limit: $limit, offset: $offset, filter: $filter) {
+  query RetailersDetailed($limit: Int, $offset: Int, $search: String) {
+    retailersDetailed: retailerList(order: "company", limit: $limit, offset: $offset, search: $search) {
       items {
         id
         img: avatarUrl(width: 256, height: 256, fit: "inside")
-        type: hierarchy2
-        phone: hierarchy3
-        website: hierarchy5
-        details: description
-        name: company
+        company
+        department
         visitingAddress
+        phone
+        category
         location {
-          latitude
           longitude
+          latitude
         }
       }
       total
@@ -110,12 +109,11 @@ export const retailerGet = /* GraphQL */ `
     retailerGet(id: $merchantId) {
       id
       img: avatarUrl(width: 256, height: 256, fit: "inside")
-      type: hierarchy2
-      phone: hierarchy3
-      website: hierarchy5
-      details: description
-      name: company
+      company
       visitingAddress
+      category
+      department
+      phone
       location {
         longitude
         latitude

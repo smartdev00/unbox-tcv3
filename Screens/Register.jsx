@@ -66,7 +66,7 @@ const SuccessView = ({ navigation, email }) => {
           textAlign={"center"}
           mb={7}
         >
-          {t("litter:screens.register.success.title")}sd
+          {t("litter:screens.register.success.title")}
         </Text>
         <Text variant={"paragraph2"} textAlign={"center"} mb={5}>
           {t("litter:screens.register.success.text1")}

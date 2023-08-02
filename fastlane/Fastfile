@@ -1,13 +1,11 @@
+require 'json'
 default_platform(:ios)
 
 platform :android do
-  desc "Submit to Firebase App Distribution"
-  lane :push_firebase_release do
-    firebase_app_distribution(
-      app: ENV["FIREBASE_APP_ID"],
-      apk_path: 'android/app/build/outputs/apk/release/app-release.apk',
-      groups: 'unlitter-usa-testers',
-      service_credentials_file: ENV["FIREBASE_LOGIN_CREDENTIALS"]
+  desc "Validate PlayStore Service Account"
+  lane :validate_play_store_service_account do
+    validate_play_store_json_key(
+      json_key: ENV["PLAYSTORE_LOGIN_CREDENTIALS"]
     )
   end
 
@@ -18,10 +16,23 @@ platform :android do
     )
   end
   desc "Bump version number Android"
-  lane :version_number do |options|
+  lane :version_patch do
+    file = File.read('./../package.json')
+    data_hash = JSON.parse(file)
     increment_version_name(
-      version_name: options[:CODE],
+      version_name: data_hash['version'],
       gradle_file_path: "android/app/build.gradle"
+    )
+  end
+
+  desc "Submit to Play Console Internal Testing"
+  lane :push_play_store_internal_testing do
+    upload_to_play_store(
+      aab: ENV['PATH_TO_AAB'],
+      track: 'internal',
+      release_status: 'draft',
+      json_key: ENV["PLAYSTORE_LOGIN_CREDENTIALS"],
+      package_name: ENV['PACKAGE_NAME'],
     )
   end
 end

@@ -244,6 +244,7 @@
   "screens.community.back": "Terug naar Groepen",
   "screens.community.leave": "Groep verlaten",
   "screens.communities.joinModal.title": "Deelnemen ",
+  "screens.communities.joinModal.incorrectPIN":"Onjuiste pincode",
   "screens.communities.joinModal.instructions": "Als je bent uitgenodigd om lid te worden van deze groep, voer dan hieronder de aan jou verstrekte pincode in:",
   "screens.communities.joinModal.button.join": "Bevestigen",
   "screens.communities.joinModal.button.cancel": "Annuleren",
