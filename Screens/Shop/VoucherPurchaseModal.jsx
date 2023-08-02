@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext,useState } from "react";
 import { Button, Modal, Text, useTheme } from "native-base";
 import { useNavigation } from "@react-navigation/native";
 
@@ -15,6 +15,7 @@ const VoucherPurchaseModal = ({
   const { navigate } = useNavigation();
   const { colors } = useTheme();
   const [balance, setBalance] = useContext(BalanceContext);
+  const [loader, setLoader] = useState(false)
 
   const [myBalanceQuery] = useLazyQuery(gql(queries.myBalance), {
     fetchPolicy: "no-cache",
@@ -42,6 +43,7 @@ const VoucherPurchaseModal = ({
   const handlePurchase = async () => {
     try {
       console.log("buying", voucher.id);
+      setLoader(true);
       const { data, error } = await updateUserPassword({
         variables: {
           productId: voucher.id,
@@ -49,6 +51,7 @@ const VoucherPurchaseModal = ({
       });
 
       if (error) {
+        setLoader(false);
         console.log(data);
       }
 
@@ -67,7 +70,7 @@ const VoucherPurchaseModal = ({
       setShowPurchaseModal(false);
     }
   };
-
+  
   return (
     <Modal
       isOpen={showPurchaseModal}
@@ -100,6 +103,7 @@ const VoucherPurchaseModal = ({
             onPress={handlePurchase}
             colorScheme={"primary"}
             _text={Object({ fontWeight: "bold" })}
+            isLoading={loader}
           >
             Confirm
           </Button>
