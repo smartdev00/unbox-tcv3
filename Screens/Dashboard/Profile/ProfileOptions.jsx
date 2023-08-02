@@ -238,7 +238,7 @@ const ProfileOptions = () => {
             variant={'paragraph2'}
             color={'black'}
             underline
-            onPress={() => Linking.openURL('www.the-click.be')}
+            onPress={() => Linking.openURL('https://www.the-click.be/')}
           >
             www.the-click.be
             </Text>
