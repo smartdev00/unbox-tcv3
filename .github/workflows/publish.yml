@@ -328,9 +328,6 @@ jobs:
           path: android/build-aab
       - name: Decode PlayStore service acccount
         run: |
-          ls -lah android/app/build/outputs
-          ls -lah android/app/build/outputs/bundle
-          ls -lah android/app/build/outputs/bundle/release
           echo "${{ secrets.GOOGLE_PLAYSTORE_DISTRIBUTION_SERVICE_ACCOUNT_BASE64 }}" > service-account-prod.base64.txt
           base64 --decode -i service-account-prod.base64.txt -o android/google-playstore-service-account.json
       - name: Setup Ruby (bundle)
