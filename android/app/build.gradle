@@ -144,10 +144,10 @@ android {
     compileSdkVersion rootProject.ext.compileSdkVersion
 
     defaultConfig {
-        applicationId "be.fostplus.theclick"
+        applicationId "be.fostplus.theclick.development"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 20
+        versionCode 23
         versionName "3.0"
         buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
 
@@ -167,7 +167,7 @@ android {
                     cppFlags "-std=c++17"
                     // Make sure this target name is the same you specify inside the
                     // src/main/jni/Android.mk file for the `LOCAL_MODULE` variable.
-                    targets "be.fostplus.theclick_appmodules"
+                    targets "be.fostplus.theclick.development_appmodules"
 
                     // Fix for windows limit on number of character in file paths and in command lines
                     if (Os.isFamily(Os.FAMILY_WINDOWS)) {
@@ -233,6 +233,14 @@ android {
         }
     }
     signingConfigs {
+        release {
+            if (project.hasProperty('keyLocation')) {
+                storeFile project.hasProperty('keyLocation') ? file(project.keyLocation) : 'default'
+                storePassword project.hasProperty('storePw') ? project.storePw : 'default'
+                keyAlias project.hasProperty('keyAlias') ? project.keyAlias : 'default'
+                keyPassword project.hasProperty('keyPw') ? project.keyPw : 'default'
+            }
+        }
         debug {
             storeFile file('debug.keystore')
             storePassword 'android'
@@ -247,7 +255,7 @@ android {
         release {
             // Caution! In production, you need to generate your own keystore file.
             // see https://reactnative.dev/docs/signed-apk-android.
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }

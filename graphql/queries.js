@@ -123,7 +123,7 @@ export const retailerGet = /* GraphQL */ `
 `;
 
 export const vouchersListDetailed = /* GraphQL */ `
-  query VouchersDetailed($limit: Int, $offset: Int, $filters: [InputFilter], $order: String) {
+  query VouchersDetailed($limit: Int, $offset: Int, $filters: [InputFilter], $order: String, $search: String) {
     categoryCategories: categoryList(      
       filters: [{ field: "depth", value: "2" }]
     ) {
@@ -148,7 +148,7 @@ export const vouchersListDetailed = /* GraphQL */ `
         depth
       }
     }
-    vouchersListDetailed: productItemList(limit: $limit, offset: $offset, filters: $filters, order: $order) {
+    vouchersListDetailed: productItemList(limit: $limit, offset: $offset, filters: $filters, order: $order, search: $search) {
       items {
         img: assetDetailUrl(height: 100, fit: "contain")
         id
