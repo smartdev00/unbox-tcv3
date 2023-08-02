@@ -21,11 +21,11 @@ const MerchantMapTicket = ({ merchant }) => {
           />
         )}
 
-        <VStack align={"start"} m={3}>
+        <VStack align={"start"} m={3} flex={1}>
           <Text variant={"body1"} fontWeight={"bold"}>
-            {merchant.name}
+            {merchant.company}
           </Text>
-          <Text variant={"paragraph3"}>{merchant.type}</Text>
+          <Text variant={"paragraph3"}>{merchant.category}</Text>
           {/* <Text
               variant={'body3'}
               colorScheme={'primary'}
