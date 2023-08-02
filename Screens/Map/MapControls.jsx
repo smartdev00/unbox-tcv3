@@ -21,10 +21,10 @@ const CenterControl = ({
       <Circle
         borderColor={"primary.600"}
         borderWidth={1}
-        bgColor={selected ? "primary.600" : "white"}
+        bgColor={"primary.600"}
         size={"45px"}        
       >
-        <CurrentLocation fillColor={selected ? "white" : colors.primary['600']} />
+        <CurrentLocation fillColor={"white"} />
       </Circle>
     </Pressable>
   );
