@@ -339,7 +339,7 @@ jobs:
       - name: Bundle install & Deploy
         env: 
           PLAYSTORE_LOGIN_CREDENTIALS: android/google-playstore-service-account.json
-          APP_IDENTIFIER: "be.fostplus.theclick.development"
+          PACKAGE_NAME: "be.fostplus.theclick.development"
           PATH_TO_AAB: "android/build-aab/app-release.aab"
         run: |
           ls -lah android/build-aab
