@@ -16,7 +16,7 @@ jobs:
     if: github.event.pull_request.merged == true || github.ref == 'refs/heads/main'
     permissions:
       contents: read
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3
         with:
@@ -39,6 +39,7 @@ jobs:
       - name: Bundle Install
         id: bundle_install
         run: |
+          bundle lock --add-platform x86_64-darwin-19
           bundle install
       - name: Bump version Android
         id: bump_version_android
