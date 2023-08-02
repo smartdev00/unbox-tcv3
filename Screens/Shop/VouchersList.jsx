@@ -28,7 +28,9 @@ const SortbyType = {
 const LIMIT = 10;
 
 const VouchersList = ({
-  queryVariables
+  queryVariables,
+  setCats,
+  setLocs
 }) => {
   const [vouchers, setVouchers] = useState([]);
   const [refreshing, setRefreshing] = useState(true);
@@ -59,7 +61,10 @@ const VouchersList = ({
 
       if (data) {
         setCategories(data.categoryCategories.items);
+        setCats(data.categoryCategories.items);
+        setLocs(data.locationCategories.items);
         setLocations(data.locationCategories.items);
+        console.log(data.vouchersListDetailed.items, "items");
         const items = data.vouchersListDetailed.items.map(v => {
           return {
             ...v,
