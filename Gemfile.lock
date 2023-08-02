@@ -277,6 +277,7 @@ GEM
       xcpretty (~> 0.2, >= 0.0.7)
 
 PLATFORMS
+  arm64-darwin-21
   x86_64-darwin-19
 
 DEPENDENCIES
@@ -287,9 +288,10 @@ DEPENDENCIES
   fastlane-plugin-increment_version_code
   fastlane-plugin-increment_version_name
   fastlane-plugin-load_json
+  json
 
 RUBY VERSION
    ruby 2.7.5p203
 
 BUNDLED WITH
-   2.4.17
+   2.4.12
