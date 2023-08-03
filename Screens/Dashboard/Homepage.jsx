@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 
 import { useTranslation } from "react-i18next";
-import { useLazyQuery, gql } from "@apollo/client";
+import { useLazyQuery, gql, useMutation } from "@apollo/client";
 
 import { ApplicationContext, BalanceContext, UserContext } from "../../Context";
 
 import * as queries from "../../graphql/queries";
+import * as mutations from "../../graphql/mutations";
 
 import messaging from '@react-native-firebase/messaging';
 
@@ -34,13 +35,14 @@ import Achievements from "./Achievements";
 
 
 import { Merchant } from "../../assets/svg";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const HomepageTab = () => {
   const { colors } = useTheme();
   const { t } = useTranslation();
   const [balance, setBalance] = useContext(BalanceContext);
   const [application, setApplication,] = useContext(ApplicationContext);
-  const [user] = useContext(UserContext);
+  const [user, setUser] = useContext(UserContext);
   const [retailersCount, setRetailersCount] = useState(0);
   const { navigate } = useNavigation();
   const [loaded, setLoaded] = useState(false);
@@ -117,11 +119,62 @@ const HomepageTab = () => {
     }
   }
 
+
+  const [setAppPushId] = useMutation(gql(mutations.setAppPushId), {
+    fetchPolicy: 'no-cache',
+  })
+
+  const AfterLogin = async () => {
+
+    console.log("AfterLogin");
+    const deviceToken = await AsyncStorage.getItem("unbox-litter-the-click-3-appPushId");
+    if (!deviceToken) {
+      try {
+        const deviceToken = await messaging().getToken();
+    
+        console.log("Device Token:", deviceToken);
+    
+        if (deviceToken) {
+          const input = {
+            appPushId: deviceToken,
+          };
+    
+          try {
+            await setAppPushId({
+              variables: {
+                input,
+              },
+            });
+
+            setUser((u) => {
+              return {
+                ...u,
+                appPushId: deviceToken,
+              }
+            })
+    
+            await AsyncStorage.setItem("unbox-litter-the-click-3-appPushId", deviceToken);
+            await AsyncStorage.setItem("unbox-litter-the-click-3-user", JSON.stringify(user));
+          } catch (error) {
+            console.error("Error setting app push ID:", error);
+          }
+        }
+    
+      } catch (error) {
+        console.log("Error getting device token:", error);
+      }
+    }
+
+  };
+
+
+
   const requestUserNotificationPermission = async () => {
     const authorizationStatus = await messaging().requestPermission();
   
     if (authorizationStatus) {
       console.log('Permission status:', authorizationStatus);
+      AfterLogin();
     }
   }
 
