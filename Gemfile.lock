@@ -182,8 +182,6 @@ GEM
       webrick
     google-apis-discovery_v1 (0.14.0)
       google-apis-core (>= 0.11.0, < 2.a)
-    google-apis-drive_v3 (0.43.0)
-      google-apis-core (>= 0.11.0, < 2.a)
     google-apis-firebaseappdistribution_v1 (0.3.0)
       google-apis-core (>= 0.11.0, < 2.a)
     google-apis-generator (0.12.0)
@@ -306,7 +304,6 @@ DEPENDENCIES
   fastlane-plugin-increment_version_code
   fastlane-plugin-increment_version_name
   fastlane-plugin-load_json
-  google-apis-drive_v3
   json
 
 RUBY VERSION

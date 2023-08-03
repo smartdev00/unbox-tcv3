@@ -2,5 +2,7 @@ Filtering by A-Z
 Filtering by Z-A
 Filter by name
 Filter by A-Z and price
+Filter by location and category
 Merchant details fix
+'Centre on my Location' button on Maps page
 push notifications AppPushId

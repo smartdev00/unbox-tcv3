@@ -5,7 +5,6 @@ ruby '2.7.5'
 
 gem 'cocoapods', '~> 1.11', '>= 1.11.2'
 gem 'fastlane', '2.214.0'
-gem 'google-apis-drive_v3'
 gem 'json'
 
 plugins_path = File.join(File.dirname(__FILE__), 'fastlane', 'Pluginfile')
