@@ -309,12 +309,6 @@ const SSOLoginScreen = ({ navigation, route, appConfig }) => {
         throw AsyncSetItemException()
       }
 
-      // if (responseJson.result.user.releaseToken) {
-      //   navigation.navigate('ValidateAccount')
-      //   setUser({ password })
-      //   return;
-      // }
-
       const { data, error } = await postLoginQuery()
       if (error) {
         console.log('postLoginQueryError', error)
