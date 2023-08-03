@@ -122,7 +122,7 @@ const Dashboard = () => {
       <Stack.Screen
         name="PersonalDetails"
         component={PersonalDetails}        
-        options={Object({ headerShown: true, headerTintColor: colors["primary"]["600"], title: 'Personal Details',})}
+        options={Object({ headerShown: true, headerTintColor: colors["primary"]["600"], headerBackTitle: t("litter:screens.dashboard.tabs.profile.Back"), title: t("litter:screens.dashboard.tabs.profile.personalDetails")})}
       />
       <Stack.Screen
         name="EditDetails"
@@ -132,12 +132,12 @@ const Dashboard = () => {
       <Stack.Screen
         name="ChangePassword"
         component={ChangePassword}
-        options={Object({ headerShown: true, headerTintColor: colors["primary"]["600"], title: 'Change Password',})}
+        options={Object({ headerShown: true, headerTintColor: colors["primary"]["600"], headerBackTitle: t("litter:screens.dashboard.tabs.profile.Back"), title: t("litter:screens.dashboard.tabs.profile.changePassword")})}
       />       
       <Stack.Screen
         name="FAQ"
         component={FAQ}
-        options={Object({ headerShown: true, headerTintColor: colors["primary"]["600"], title: 'FAQs',})}
+        options={Object({ headerShown: true, headerTintColor: colors["primary"]["600"], headerBackTitle: t("litter:screens.dashboard.tabs.profile.Back"), title: t("litter:screens.dashboard.tabs.profile.faq")})}
       />            
       <Stack.Screen
         name="Legal"
@@ -147,7 +147,7 @@ const Dashboard = () => {
       <Stack.Screen
         name="About"
         component={About}
-        options={Object({ headerShown: true, headerTintColor: colors["primary"]["600"], title: 'About',})}
+        options={Object({ headerShown: true, headerTintColor: colors["primary"]["600"], headerBackTitle: t("litter:screens.dashboard.tabs.profile.Back"), title: t("litter:screens.dashboard.tabs.profile.about")})}
       />      
       <Stack.Screen
         name="CommunityDetails"

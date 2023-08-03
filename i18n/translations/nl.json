@@ -114,6 +114,7 @@
   "screens.dashboard.tabs.profile.account": "Account",
   "screens.dashboard.tabs.profile.deleteAccount": "Delete Account",
   "screens.dashboard.tabs.profile.personalDetails": "Persoonlijke details",
+  "screens.dashboard.tabs.profile.Back": "Terug",
   "screens.dashboard.tabs.profile.personalDetails.title": "Profiel",
   "screens.dashboard.tabs.profile.personalDetails.type": "Account type",
   "screens.dashboard.tabs.profile.personalDetails.givenName": "Voornaam",
@@ -255,5 +256,6 @@
   "screens.achievements.button.claimBadge": "Badge Claimen",
   "screens.achievements.claimModal.reward": "Beloning",
   "screens.achievements.claimModal.button.claim": "Beloning claimen",
-  "screens.achievements.claimModal.button.cancel": "Annuleren"
+  "screens.achievements.claimModal.button.cancel": "Annuleren",
+  "screens.achievements.title.progress": "Achievements Progress"
 }

@@ -114,6 +114,7 @@
   "screens.dashboard.tabs.profile.account": "Account",
   "screens.dashboard.tabs.profile.deleteAccount": "Delete Account",
   "screens.dashboard.tabs.profile.personalDetails": "Personal Details",
+  "screens.dashboard.tabs.profile.Back": "Back",
   "screens.dashboard.tabs.profile.personalDetails.title": "Profile",
   "screens.dashboard.tabs.profile.personalDetails.type": "Account Type",
   "screens.dashboard.tabs.profile.personalDetails.givenName": "Given Name",
@@ -256,5 +257,6 @@
   "screens.achievements.button.claimBadge": "Badge Claim",
   "screens.achievements.claimModal.reward": "Reward",
   "screens.achievements.claimModal.button.claim": "Claim",
-  "screens.achievements.claimModal.button.cancel": "Cancel"
+  "screens.achievements.claimModal.button.cancel": "Cancel",
+  "screens.achievements.title.progress": "Achievements Progress"
 }
