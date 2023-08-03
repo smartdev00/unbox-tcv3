@@ -30,6 +30,7 @@ const LogOutModal = ({
     await AsyncStorage.removeItem("unbox-litter-the-click-3-tokenExpires");
     await AsyncStorage.removeItem("unbox-litter-the-click-3-refreshToken");
     await AsyncStorage.removeItem("unbox-litter-the-click-3-refreshTokenExpires");
+    await AsyncStorage.removeItem("unbox-litter-the-click-3-appPushId");
 
 
     setAuth((a) => {

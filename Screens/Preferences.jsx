@@ -1,5 +1,5 @@
-import { Switch, TouchableOpacity } from "react-native";
-import React, { useContext, useState } from "react";
+import { Alert, Switch, TouchableOpacity } from "react-native";
+import React, { useContext, useEffect, useState } from "react";
 import UnboxLitterSvg from "../Components/UnboxLitterSVG";
 import {
   Box,
@@ -77,6 +77,14 @@ const Preferences = () => {
       });
 
       console.log("Successfully set app push ID:", deviceToken);
+
+      await AsyncStorage.setItem(
+        "unbox-litter-the-click-3-user",
+        JSON.stringify({
+          ...user,
+          appPushId: deviceToken,
+        })
+      );
 
     } catch (error) {
       console.error("Error setting app push ID:", error);
