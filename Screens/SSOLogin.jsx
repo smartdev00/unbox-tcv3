@@ -309,12 +309,6 @@ const SSOLoginScreen = ({ navigation, route, appConfig }) => {
         throw AsyncSetItemException()
       }
 
-      if (responseJson.result.user.releaseToken) {
-        navigation.navigate('ValidateAccount')
-        setUser({ password })
-        return;
-      }
-
       const { data, error } = await postLoginQuery()
       if (error) {
         console.log('postLoginQueryError', error)
@@ -368,7 +362,10 @@ const SSOLoginScreen = ({ navigation, route, appConfig }) => {
           authenticated: true,
         }
       })
-      await AsyncStorage.setItem("unbox-litter-the-click-3-auth", JSON.stringify({ authenticated: true }));
+      await AsyncStorage.setItem(
+        "unbox-litter-the-click-3-auth",
+        JSON.stringify({ authenticated: true })
+      );
 
     } catch (e) {
       console.log('err handler')
