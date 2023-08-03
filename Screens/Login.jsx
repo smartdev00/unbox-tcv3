@@ -179,7 +179,7 @@ const LoginScreen = ({ navigation, route, appConfig }) => {
           const ip_data = {
             email: global_email,
             // identity: email,
-            identityProvider: "googleId"
+            identityProvider: global_identityProvider === "AppleN" ? "appleId" : "googleId"
           };
           console.log(ip_data, 'setidentityprovider Request')
 
