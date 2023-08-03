@@ -4,7 +4,7 @@ import { Box, Button, FormControl, Image, Input, Modal, Text, useTheme } from "n
 
 import { AppConfig } from "../../config";
 import { Alert, Pressable, } from "react-native";
-import HTML from 'react-native-render-html';
+import HTML, { HTMLContentModel, defaultHTMLElementModels } from 'react-native-render-html';
 import { LocaleContext } from "../../Context";
 
 import { gql, useMutation } from "@apollo/client";
@@ -19,20 +19,115 @@ const PartnerAPI = ({ partner, }) => {
   const [inputValue, setInputValue] = React.useState("")
   const [password, setPassword] = React.useState("")
   const [showPassword, setShowPassword] = React.useState(false)
+
   const [isValid, setIsValid] = React.useState(true)
   const [validPassword, setValidPassword] = React.useState(true)
   
   const [loading, setLoading] = React.useState(false)
+
 
   const valueInputRef = React.useRef()
   const passwordInputRef = React.useRef()
 
   const [locale] = useContext(LocaleContext);
 
+  const regex = new RegExp(partner.inputValidationRegex.slice(1, -1))
+
   const [partnerSubmit] = useMutation(gql(mutations.partnerSubmit), {
     fetchPolicy: 'no-cache',
   })
 
+
+  const handleInputChange = (text) => {
+    setInputValue(text);
+    setIsValid(regex.test(text));
+  };
+
+  const handlePasswordChange = (text) => {
+    setPassword(text);
+    setValidPassword(text.length >= 1);
+  };
+
+
+  const handlePartnerSubmit = async () => {
+    
+    if (!inputValue || partner.inputPassword && !password) {
+      
+      if (!inputValue) {
+        setIsValid(false);
+      }
+      
+      if (!password) {
+        setValidPassword(false);
+      }
+
+      return;
+    }
+
+    if (!isValid || !validPassword) {
+      return;
+    }
+
+    
+    try {
+      setLoading(true)
+      const { data, error } = await partnerSubmit({
+        variables: {
+          profile: `partners-${locale.language}`,
+          partner: partner.identifier,
+          value: inputValue,
+          password: password,
+        },
+      });
+
+      if (error) {
+        console.log("partnerSubmit", error);
+      }
+
+      if (data) {
+
+        if(data.partnerSubmit.status === 'success') {
+
+          const h3 = data.partnerSubmit.response.match(/<h3>(.*?)<\/h3>/)[1]
+          const p = data.partnerSubmit.response.match(/<p>(.*?)<\/p>/)[1]
+          Alert.alert(
+            h3,
+            p,
+            [
+              { text: "OK", onPress: () => {
+               
+              } }
+            ]
+          );
+        }
+        else {
+
+          const h3 = data.partnerSubmit.response.match(/<h3>(.*?)<\/h3>/)[1]
+          const p = data.partnerSubmit.response.match(/<p>(.*?)<\/p>/)[1]
+          Alert.alert(
+            h3,
+            p,
+            [
+              { text: "OK", onPress: () => {
+              } }
+            ]
+          );
+        }
+
+      }
+    } catch (e) {
+      Alert.alert( "Error", e.message, [
+        { text: "OK", onPress: () => {
+        } }
+      ]);
+      console.log(e)
+    }
+    finally {
+      setLoading(false)
+    }
+
+
+  };
 
   return (
     <Box alignItems={"center"}>
@@ -51,6 +146,7 @@ const PartnerAPI = ({ partner, }) => {
           setPassword()
           setShowPassword(false)
           setIsValid(true)
+          setValidPassword(true)
           
           valueInputRef.current.blur()
           passwordInputRef.current.blur()
@@ -83,9 +179,7 @@ const PartnerAPI = ({ partner, }) => {
               <Input 
                   ref={valueInputRef}
                   value={inputValue}
-                  onChangeText={(text) => {
-                    setInputValue(text)
-                  }}
+                  onChangeText={(text) => { handleInputChange(text) }}
                   />
 
             
@@ -102,7 +196,7 @@ const PartnerAPI = ({ partner, }) => {
               <Input 
                   ref={passwordInputRef}
                   value={password}
-                  onChangeText={(text) => { setPassword(text) }}
+                  onChangeText={(text) => { handlePasswordChange(text) }}
                   secureTextEntry={!showPassword}
                   InputRightElement={
                     <Pressable onPress={() => setShowPassword(!showPassword)}>
@@ -136,8 +230,8 @@ const PartnerAPI = ({ partner, }) => {
             )}
 
             <Button
-              // isDisabled={true}
-              onPress={async () => {}}
+              isLoading={loading}
+              onPress={() => { handlePartnerSubmit() }}
               mt={50}
             >
               Submit
@@ -156,7 +250,14 @@ const PartnerPage = ({ partner, }) => {
   const {colors} = useTheme()
 
   var htmlContent = partner.contentBody;
-  htmlContent = htmlContent.replaceAll('src="/assets/', 'src="' + AppConfig.rootUri + '/assets/');
+  htmlContent = htmlContent.replaceAll('src="/assets/', 'src="' + AppConfig.rootUri + '/assets/');  
+
+  const customHTMLElementModels = {
+    img: defaultHTMLElementModels.img.extend({
+      contentModel: HTMLContentModel.mixed,
+    })
+  };
+
   
   return (
     <Box alignItems={"center"}>
@@ -169,8 +270,6 @@ const PartnerPage = ({ partner, }) => {
         >
           {partner.contentListButton}
       </Button>   
-      {/* <HTML source={{ html: htmlContent }} /> */}
-
       <Modal
         isOpen={show}
         onClose={() => {
@@ -195,7 +294,7 @@ const PartnerPage = ({ partner, }) => {
 
           <Modal.Body pt={11}>
             <Image resizeMode={'contain'} width={"100%"} height={"100px"} source={Object({uri: AppConfig.rootUri + partner.contentImage})} alt={partner.identifier}/>
-            <HTML source={{ html: htmlContent }} />
+            <HTML source={{ html: htmlContent }} customHTMLElementModels={customHTMLElementModels} />
           </Modal.Body>
         </Modal.Content>
 
