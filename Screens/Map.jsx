@@ -42,8 +42,6 @@ TaskManager.defineTask(LOCATION_TASK_NAME, async ({ data, error }) => {
       const { locations } = data;
       const { latitude, longitude, accuracy } = locations[0].coords;
       if (accuracy < 25) {
-        //TODO: make accuracy configurable
-        const { timestamp } = locations[0];
 
         const isRecording = await AsyncStorage.getItem(storageRecording);
 
@@ -55,10 +53,10 @@ TaskManager.defineTask(LOCATION_TASK_NAME, async ({ data, error }) => {
             let previousLocations = JSON.parse(previousLocationsValue) || [];
             let totalDistance = 0;
 
-            const previousLocation =
-              previousLocations[previousLocations.length - 1];
 
-            if (previousLocation) {
+            if (previousLocations.length > 0) {
+              const previousLocation = previousLocations[previousLocations.length - 1];
+
               const from = turf.point([
                 previousLocation.longitude,
                 previousLocation.latitude,
@@ -66,21 +64,16 @@ TaskManager.defineTask(LOCATION_TASK_NAME, async ({ data, error }) => {
               const to = turf.point([longitude, latitude]);
               const distance = turf.distance(from, to, { units: "meters" });
 
-              const previousDistanceValue = await AsyncStorage.getItem(
-                storageRecordingDistance
-              );
-              totalDistance = Math.floor(JSON.parse(previousDistanceValue) + distance);
+              const previousDistanceValue = JSON.parse(await AsyncStorage.getItem(storageRecordingDistance));
+              totalDistance = Math.floor(previousDistanceValue + distance);
             }
 
             // console.log({ latitude, longitude, timestamp, totalDistance });
 
-            previousLocations.push({ latitude, longitude, timestamp });
-            const jsonLocations = JSON.stringify(previousLocations);
-            await AsyncStorage.setItem(storageLocations, jsonLocations);
-            await AsyncStorage.setItem(
-              storageRecordingDistance,
-              JSON.stringify(totalDistance)
-            );
+            previousLocations.push({ latitude, longitude, timestamp: new Date().getTime() });
+            await AsyncStorage.setItem(storageLocations, JSON.stringify(previousLocations));
+            await AsyncStorage.setItem(storageRecordingDistance, JSON.stringify(totalDistance));
+            
           } catch (err) {
             console.log(err);
           }
@@ -251,7 +244,7 @@ const Map = ({ navigation }) => {
   
 
   const [showPloggingMenu, setShowPloggingMenu] = useState(false);
-  const recordingRef = useRef(recording);
+
   const [recording, setRecording] = useState(false);
   const [recordingCount, setRecordingCount] = useState(0);
   const [gpx, setGpx] = useState();
@@ -281,54 +274,71 @@ const Map = ({ navigation }) => {
 
 
   const handleRecordingStart = async () => {
-    setRecordingCount(recordingCount + 1);
-    setRecording(true);
-
-    let { status } = await Location.requestBackgroundPermissionsAsync();
-
-    await AsyncStorage.setItem(storageRecording, JSON.stringify(true));
-    await AsyncStorage.setItem(
-      storageRecordingStart,
-      JSON.stringify(new Date())
-    );
-
-    await Location.startLocationUpdatesAsync(LOCATION_TASK_NAME, {
-      activityType: Location.LocationActivityType.Fitness,
-      accuracy: Location.Accuracy.High,
-      timeInterval: 1000,
-      distanceInterval: 2,
-      showsBackgroundLocationIndicator: true,
-    });
+    try {
+      setRecordingCount((prevCount) => prevCount + 1);
+      setRecording(true);
+  
+      let { status } = await Location.requestBackgroundPermissionsAsync();
+  
+      await AsyncStorage.setItem(storageRecording, JSON.stringify(true));
+      await AsyncStorage.setItem(
+        storageRecordingStart,
+        JSON.stringify(new Date())
+      );
+  
+      await Location.startLocationUpdatesAsync(LOCATION_TASK_NAME, {
+        activityType: Location.LocationActivityType.Fitness,
+        accuracy: Location.Accuracy.High,
+        timeInterval: 1000,
+        distanceInterval: 2,
+        showsBackgroundLocationIndicator: true,
+      });
+    }
+    catch (error) {
+      console.log(error);
+    }
   };
 
   const generateGpx = async () => {
-    const gpxData = new BaseBuilder();
-    const { Point, Metadata, } = BaseBuilder.MODELS;
-    
-    gpxData.setMetadata(new Metadata({ name: 'theClick Activity'}));  
-    const jsonStorageLocations = await AsyncStorage.getItem(storageLocations)
+    try {
+      const gpxData = new BaseBuilder();
+      const { Point, Metadata } = BaseBuilder.MODELS;
+  
+      gpxData.setMetadata(new Metadata({ name: 'theClick Activity' }));
+  
+      const jsonStorageLocations = await AsyncStorage.getItem(storageLocations);
+      const locationData = JSON.parse(jsonStorageLocations) || [];
+  
+      if (locationData.length > 0) {
+        const segmentPoints = locationData.map(p => new Point(p.latitude, p.longitude, { time: new Date(p.timestamp) }));
+        gpxData.setSegmentPoints(segmentPoints);
+      }
+  
+      const littersData = await AsyncStorage.getItem(storageRecordingLitters);
+      const litters = JSON.parse(littersData) || [];
+  
+      if (litters.length > 0) {
+        const wayPoints = litters.map(c => new Point(c.latitude, c.longitude, {
+          time: new Date(c.dateAdded),
+          extensions: { id: c.id },
+        }));
+        gpxData.setWayPoints(wayPoints);
+      }
+  
+      const gpx = buildGPX(gpxData.toObject());
+      return gpx;
+    } catch (error) {
+      console.error('Error generating GPX:', error);
+      return null;
+    }
+};
 
-
-    gpxData.setSegmentPoints(JSON.parse(jsonStorageLocations).map(p => {
-      return new Point(p.latitude, p.longitude, { time: new Date(p.timestamp), });
-    }));
-
-
-    const littersData = await AsyncStorage.getItem(storageRecordingLitters)
-    
-    gpxData.setWayPoints(JSON.parse(littersData).map(c => {
-      return new Point(c.latitude, c.longitude, { time: new Date(c.dateAdded), extensions: { id: c.id } } )
-    }));
-    
-    
-    const gpx = buildGPX(gpxData.toObject());
-    return gpx;
-  } 
 
   const handleRecordingStop = async () => {
-    setRecording(false);
 
     try {
+      setRecording(false);
+
       await Location.stopLocationUpdatesAsync(LOCATION_TASK_NAME);
 
       const plogGpx = await generateGpx();
@@ -343,11 +353,11 @@ const Map = ({ navigation }) => {
       await AsyncStorage.setItem(storageRecordingLitters, JSON.stringify([]));
       setElapsedTime();
       setDistance();
+      setShowPostRecordingModal(true);
     } catch (err) {
       console.log(err);
     }
 
-    setShowPostRecordingModal(true);
   };
 
   const handlePostRecordingModalClose = async (result) => {

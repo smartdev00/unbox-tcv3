@@ -1,2 +1,1 @@
-'My Click' graphs bug fix.
-SSO login bug fix.
+move & clean up
