@@ -135,6 +135,7 @@
   "screens.dashboard.tabs.profile.privacy": "Privacy Policy",
   "screens.dashboard.tabs.profile.about": "About",
   "screens.dashboard.tabs.profile.logout": "Log out",
+  "screens.dashboard.tabs.profile.LogOutModal": "Are you sure you want to logout?",
   "screens.dashboard.tabs.profile.preferences": "Preferences",
   "screens.dashboard.tabs.profile.preferences.title": "Preferences",
   "screens.dashboard.tabs.profile.preferences.language": "Language",

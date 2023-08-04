@@ -1,7 +1,7 @@
 import { Button, Modal, Text, useTheme } from 'native-base'
 import { useNavigation } from '@react-navigation/native'
 import { useContext, useState,  } from "react";
-
+import { useTranslation } from "react-i18next";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -18,6 +18,7 @@ const LogOutModal = ({
   const { colors } = useTheme()
   const [auth, setAuth] = useContext(AuthContext);
   const [user, setUser] = useContext(UserContext);
+  const { t } = useTranslation();
 
   const handleOnClose = () => {
     if (onClose) onClose();
@@ -65,7 +66,7 @@ const LogOutModal = ({
             fontWeight={'bold'}
             color={'primary.600'}
           >
-            Log out?
+            {t("litter:screens.dashboard.tabs.profile.logout")}
           </Text>
         </Modal.Header>
         <Modal.Body pt={11}>
@@ -76,21 +77,21 @@ const LogOutModal = ({
             color={'primary.600'}
             mb={3}
           >
-            Are you sure you want to log out?
+            {t("litter:screens.dashboard.tabs.profile.LogOutModal")}
           </Text>          
           <Button
             onPress={() => handleLogOut()}
             colorScheme={'primary'}
             _text={Object({ fontWeight: 'bold' })}
           >
-            Log out
+            {t("litter:screens.dashboard.tabs.profile.logout")}
           </Button>
           <Button
             bg={'white'}
             onPress={() => handleOnClose()}
             _text={Object({ color: colors.primary["600"], fontWeight: 'bold' })}
           >
-            Cancel
+            {t("litter:screens.scan.buttons.cancel")}
           </Button>
         </Modal.Body>
       </Modal.Content>
