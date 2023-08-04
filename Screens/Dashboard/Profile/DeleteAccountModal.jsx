@@ -2,12 +2,14 @@ import { Button, FormControl, Input, Modal, Text, useTheme } from "native-base";
 import { useNavigation } from "@react-navigation/native";
 import { useContext, useState } from "react";
 import { useMutation, gql } from "@apollo/client";
+import { useTranslation } from "react-i18next";
 
 import { AuthContext, UserContext } from "../../../Context";
 import * as mutations from "../../../graphql/mutations";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const LogOutModal = ({ show, onClose }) => {
+  const { t } = useTranslation();
   const navigation = useNavigation();
   const { colors } = useTheme();
   const [auth, setAuth] = useContext(AuthContext);
@@ -61,7 +63,7 @@ const LogOutModal = ({ show, onClose }) => {
         />
         <Modal.Header bg={"white"} pb={3} px={1}>
           <Text fontSize={18} fontWeight={"bold"} color={"primary.600"}>
-            Delete account?
+            {t("litter:screens.dashboard.tabs.profile.deleteAccount")}
           </Text>
         </Modal.Header>
         <Modal.Body pt={11}>
@@ -72,10 +74,10 @@ const LogOutModal = ({ show, onClose }) => {
             color={"primary.600"}
             mb={3}
           >
-            Type delete below if you are sure you want to delete your account.
+            {t("litter:screens.dashboard.tabs.profile.deleteAccount.typeDelete")}
           </Text>
           <Text fontSize={13} lineHeight={18} fontWeight={"bold"} mb={3}>
-            This action cannot be undone.
+            {t("litter:screens.dashboard.tabs.profile.deleteAccount.undone")}
           </Text>
 
           <FormControl mb={18}>        
@@ -94,14 +96,14 @@ const LogOutModal = ({ show, onClose }) => {
             colorScheme={"primary"}
             _text={Object({ fontWeight: "bold" })}
           >
-            Delete Account
+            {t("litter:screens.dashboard.tabs.profile.deleteAccount")}
           </Button>
           <Button
             bg={"white"}
             onPress={() => handleOnClose()}
             _text={Object({ color: colors.primary["600"], fontWeight: "bold" })}
           >
-            Cancel
+            {t("litter:screens.communities.leaveModal.button.cancel")}
           </Button>
         </Modal.Body>
       </Modal.Content>

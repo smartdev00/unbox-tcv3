@@ -113,6 +113,8 @@
   "screens.dashboard.tabs.profile.consumer": "Consommateur",
   "screens.dashboard.tabs.profile.account": "Compte",
   "screens.dashboard.tabs.profile.deleteAccount": "Supprimer mon compte",
+  "screens.dashboard.tabs.profile.deleteAccount.typeDelete": "Tapez 'delete' ci-dessous si vous êtes sûr de vouloir supprimer votre compte.",
+  "screens.dashboard.tabs.profile.deleteAccount.undone": "Cette action ne peut être annulée",
   "screens.dashboard.tabs.profile.personalDetails": "Détails personnels",
   "screens.dashboard.tabs.profile.Back": "Retour",
   "screens.dashboard.tabs.profile.personalDetails.title": "Profil",
