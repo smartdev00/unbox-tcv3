@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 
 import { useTranslation } from "react-i18next";
 import { useLazyQuery, gql, useMutation } from "@apollo/client";
+import { Platform } from 'react-native'
 
 import { ApplicationContext, BalanceContext, UserContext } from "../../Context";
 
@@ -130,6 +131,7 @@ const HomepageTab = () => {
     const deviceToken = await AsyncStorage.getItem("unbox-litter-the-click-3-appPushId");
     if (!deviceToken) {
       try {
+        Platform.OS !== 'ios' && await messaging().registerDeviceForRemoteMessages();
         const deviceToken = await messaging().getToken();
     
         console.log("Device Token:", deviceToken);

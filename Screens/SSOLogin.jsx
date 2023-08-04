@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
+import { Platform, Alert } from 'react-native'
 
 import { useLazyQuery, gql } from '@apollo/client'
 
@@ -174,7 +175,7 @@ const SSOLoginScreen = ({ navigation, route, appConfig }) => {
         return;
       }
 
-      const spamToken = responseJson.result.replaceAll('"', "");
+      const spamToken = responseJson.result.replaceAll ? responseJson.result.replaceAll('"', "") : responseJson.result;
       checkEmail(email, spamToken, identityProvider, data);
 
     } catch (err) {
@@ -217,6 +218,7 @@ const SSOLoginScreen = ({ navigation, route, appConfig }) => {
         setShowLinkModal(true);
       } else if (responseJson.result.includes("unKnown")) {
         console.log("unKnown");
+        Alert.alert("unKnown")
       } else {
         if (identityProvider === "appleId") {
           loginWithApple(data);
@@ -388,7 +390,7 @@ const SSOLoginScreen = ({ navigation, route, appConfig }) => {
   useEffect(() => {
     GoogleSignin.configure({
       scopes: ['email', 'profile'],
-      webClientId: AppConfig.googleClientID,
+      webClientId: Platform.OS === 'ios' ? AppConfig.googleClientID : AppConfig.googleClientIDAndroid,
       offlineAccess: true,
     });
   }, []);
@@ -436,6 +438,8 @@ const SSOLoginScreen = ({ navigation, route, appConfig }) => {
           </HStack>
         </Pressable>
 
+        {
+          Platform.OS === 'ios' && 
         <Pressable
           bg={"white"}
           borderWidth={1}
@@ -455,6 +459,7 @@ const SSOLoginScreen = ({ navigation, route, appConfig }) => {
             </Text>
           </HStack>
         </Pressable>
+        }
 
         <Box my={10}>
           <HStack alignItems={"center"} w={'100%'}
