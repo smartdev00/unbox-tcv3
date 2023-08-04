@@ -147,8 +147,8 @@ android {
         applicationId "be.fostplus.theclick.development"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 38
-        versionName "3.0.16"
+        versionCode 39
+        versionName "3.0.17"
         buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
 
         if (isNewArchitectureEnabled()) {
