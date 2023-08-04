@@ -1,6 +1,6 @@
 {
   "name": "template",
-  "version": "3.0.18",
+  "version": "3.0.19",
   "main": "index.js",
   "scripts": {
     "start": "expo start --dev-client",
