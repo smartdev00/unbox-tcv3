@@ -570,7 +570,7 @@ const Scan = ({ navigation, route }) => {
     
     const isRecording = await AsyncStorage.getItem(storageRecording);
     
-    if (isRecording) {
+    if (isRecording && data) {
       const littersPloggingData = await AsyncStorage.getItem(storageRecordingLitters);
       const littersPlogging = littersPloggingData ? JSON.parse(littersPloggingData) : [];
       
