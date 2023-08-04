@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from "react-i18next";
 
 import {
   Box,
@@ -8,9 +9,10 @@ import {
 
 
 const AchievementsProgress = () => {
+  const { t } = useTranslation();
   return (
     <Box>
-      <Text>Achievements Progress</Text>
+      <Text>{t("litter:screens.achievements.title.progress")}</Text>
     </Box>
   )
 }

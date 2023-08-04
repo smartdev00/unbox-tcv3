@@ -126,36 +126,36 @@ const Statistics = () => {
           <HStack>
             <ProgressItem
               label={"D"}
-              title={"Today"}
+              title={t("litter:screens.dashboard.statistics.today")}
               value={statistics.today}
             />
             <ProgressItem
               label={"W"}
-              title={"Week"}
+              title={t("litter:screens.dashboard.statistics.week")}
               value={statistics.week}
             />
           </HStack>
           <HStack>
             <ProgressItem
               label={"M"}
-              title={"Month"}
+              title={t("litter:screens.dashboard.statistics.month")}
               value={statistics.month}
             />
             <ProgressItem
               label={"Y"}
-              title={"Year"}
+              title={t("litter:screens.dashboard.statistics.year")}
               value={statistics.year}
             />
           </HStack>
           <HStack>
             <ProgressItem
               label={"D"}
-              title={"Streak"}
+              title={t("litter:screens.dashboard.statistics.streak")}
               value={statistics.streak}
             />
             <ProgressItem
               label={"D"}
-              title={"Daily"}
+              title={t("litter:screens.dashboard.statistics.daily")}
               value={statistics.daily.current}
             />
           </HStack>

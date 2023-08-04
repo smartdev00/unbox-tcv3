@@ -114,6 +114,7 @@
   "screens.dashboard.tabs.profile.account": "Account",
   "screens.dashboard.tabs.profile.deleteAccount": "Delete Account",
   "screens.dashboard.tabs.profile.personalDetails": "Personal Details",
+  "screens.dashboard.tabs.profile.Back": "Back",
   "screens.dashboard.tabs.profile.personalDetails.title": "Profile",
   "screens.dashboard.tabs.profile.personalDetails.type": "Account Type",
   "screens.dashboard.tabs.profile.personalDetails.givenName": "Given Name",
@@ -141,6 +142,13 @@
   "screens.dashboard.tabs.profile.followUs": "Follow us on social media",
   "screens.dashboard.tabs.profile.appVersion": "App Version",
   "screens.dashboard.tabs.profile.lookAt": "Visit",
+  "screens.dashboard.statistics.userTitle": "My Clicks",
+  "screens.dashboard.statistics.today": "Clicks today",
+  "screens.dashboard.statistics.week": "Clicks this week",
+  "screens.dashboard.statistics.month": "Clicks this month",
+  "screens.dashboard.statistics.year": "Clicks this year",
+  "screens.dashboard.statistics.streak": "Day streak",
+  "screens.dashboard.statistics.daily": "Day peak",
   "screens.wallet.headerTitle": "Wallet",
   "screens.wallet.tabBarLabel": "Wallet",
   "screens.wallet.tabs.earned.title": "Earned +",
@@ -256,5 +264,6 @@
   "screens.achievements.button.claimBadge": "Badge Claim",
   "screens.achievements.claimModal.reward": "Reward",
   "screens.achievements.claimModal.button.claim": "Claim",
-  "screens.achievements.claimModal.button.cancel": "Cancel"
+  "screens.achievements.claimModal.button.cancel": "Cancel",
+  "screens.achievements.title.progress": "Achievements Progress"
 }
