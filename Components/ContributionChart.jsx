@@ -35,10 +35,17 @@ export default ({ chartType, chartData, }) => {
     color: (opacity = 1) => hexToRGB(colors.primary["600"], opacity),
   };
 
+  var commitsData = [];
+  chartData.data.forEach((item) => {
+    commitsData.push({
+      date: item.key,
+      count: item.value,
+    });
+  });
 
   return (
     <ContributionGraph
-      values={chartData.data}
+      values={commitsData}
       endDate={endDate}
       numDays={100}
       width={Dimensions.get("window").width - 60}

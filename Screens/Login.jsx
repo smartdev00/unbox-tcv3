@@ -44,46 +44,6 @@ import { BackButton } from "../Components";
 
 const LoginScreen = ({ navigation, route, appConfig }) => {
 
-  const [setAppPushId] = useMutation(gql(mutations.setAppPushId), {
-    fetchPolicy: 'no-cache',
-  })
-
-  const AfterLogin = async () => {
-
-    console.log("AfterLogin");
-    const deviceToken = await AsyncStorage.getItem("unbox-litter-the-click-3-appPushId");
-    if (!deviceToken) {
-      try {
-        await messaging().requestPermission();
-        const deviceToken = await messaging().getToken();
-    
-        console.log("Device Token:", deviceToken);
-    
-        if (deviceToken) {
-          const input = {
-            appPushId: deviceToken,
-          };
-    
-          try {
-            await setAppPushId({
-              variables: {
-                input,
-              },
-            });
-    
-            await AsyncStorage.setItem("unbox-litter-the-click-3-appPushId", deviceToken);
-          } catch (error) {
-            console.error("Error setting app push ID:", error);
-          }
-        }
-    
-      } catch (error) {
-        console.log("Error getting device token:", error);
-      }
-    }
-
-};
-
 
   const LoginException = (message) => {
     console.log(`login exception: ${message}`);
@@ -219,7 +179,7 @@ const LoginScreen = ({ navigation, route, appConfig }) => {
           const ip_data = {
             email: global_email,
             // identity: email,
-            identityProvider: "googleId"
+            identityProvider: global_identityProvider === "AppleN" ? "appleId" : "googleId"
           };
           console.log(ip_data, 'setidentityprovider Request')
 
@@ -320,8 +280,6 @@ const LoginScreen = ({ navigation, route, appConfig }) => {
           return;
         }
       }
-
-      AfterLogin();
 
       const { data, error } = await postLoginQuery();
       if (error) {

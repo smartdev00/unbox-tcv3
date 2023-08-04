@@ -18,7 +18,7 @@ export default ({ chartType, chartData, }) => {
   const [t, ] = useTranslation();
   const { colors, } = useTheme();
 
-  const dailyLabels = [
+  var dailyLabels = [
     t('M'),
     t('T'),
     t('W'),
@@ -28,7 +28,7 @@ export default ({ chartType, chartData, }) => {
     t('S'),       
   ];
 
-  const monthlyLabels = [    
+  var monthlyLabels = [    
     t('1'),
     t('2'),
     t('3'),
@@ -41,7 +41,15 @@ export default ({ chartType, chartData, }) => {
     t('10'),       
     t('11'),       
     t('12'),
-  ]
+  ];
+
+  if (chartType === "daily") {
+    const lastElements = dailyLabels.slice(chartData.current-7);
+    dailyLabels = lastElements.concat(dailyLabels.slice(0, chartData.current-7));
+  } else {
+    const lastElements = monthlyLabels.slice(chartData.current-12);
+    monthlyLabels = lastElements.concat(monthlyLabels.slice(0, chartData.current-12));
+  }
 
   const getLabels = (labels, current) => {    
     return [].concat(labels.slice(current + 1, labels.length)).concat(labels.slice(0, current + 1));
@@ -91,10 +99,6 @@ export default ({ chartType, chartData, }) => {
     }
   };
   
-  // const screenWidth = ;
-
-
-
   return (
     <LineChart
       data={data}
