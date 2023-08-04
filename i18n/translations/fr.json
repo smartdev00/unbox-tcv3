@@ -142,6 +142,13 @@
   "screens.dashboard.tabs.profile.followUs": "Suivez-nous sur les réseaux sociaux",
   "screens.dashboard.tabs.profile.appVersion": "Version de l'application",
   "screens.dashboard.tabs.profile.lookAt": "Regarder",
+  "screens.dashboard.statistics.userTitle": "Mes Clicks",
+  "screens.dashboard.statistics.today": "Clicks aujourd’hui",
+  "screens.dashboard.statistics.week": "Clicks/semaine",
+  "screens.dashboard.statistics.month": "Clicks/mois",
+  "screens.dashboard.statistics.year": "Clicks/année",
+  "screens.dashboard.statistics.streak": "Nombre de jours",
+  "screens.dashboard.statistics.daily": "Record Clicks",
   "screens.wallet.headerTitle": "Mes Clicks",
   "screens.wallet.tabBarLabel": "Mes Clicks",
   "screens.wallet.tabs.earned.title": "Gagn +",
@@ -258,5 +265,5 @@
   "screens.achievements.claimModal.reward": "Récompense",
   "screens.achievements.claimModal.button.claim": "Réclamer",
   "screens.achievements.claimModal.button.cancel": "Annuler",
-  "screens.achievements.title.progress": "Achievements Progress"
+  "screens.achievements.title.progress": "Réalisations Progrès"
 }

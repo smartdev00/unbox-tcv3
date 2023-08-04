@@ -142,6 +142,13 @@
   "screens.dashboard.tabs.profile.followUs": "Volg ons op sociale media",
   "screens.dashboard.tabs.profile.appVersion": "App versie",
   "screens.dashboard.tabs.profile.lookAt": "Bekijk",
+  "screens.dashboard.statistics.userTitle": "Mijn Clicks",
+  "screens.dashboard.statistics.today": "Clicks vandaag",
+  "screens.dashboard.statistics.week": "Clicks deze week",
+  "screens.dashboard.statistics.month": "Clicks per maand",
+  "screens.dashboard.statistics.year": "Clicks dit jaar",
+  "screens.dashboard.statistics.streak": "Streak dag",
+  "screens.dashboard.statistics.daily": "Dag record",
   "screens.wallet.headerTitle": "Mijn Clicks",
   "screens.wallet.tabBarLabel": "Mijn Clicks",
   "screens.wallet.tabs.earned.title": "Verdiend +",
@@ -257,5 +264,5 @@
   "screens.achievements.claimModal.reward": "Beloning",
   "screens.achievements.claimModal.button.claim": "Beloning claimen",
   "screens.achievements.claimModal.button.cancel": "Annuleren",
-  "screens.achievements.title.progress": "Achievements Progress"
+  "screens.achievements.title.progress": "Vooruitgang Prestaties"
 }
