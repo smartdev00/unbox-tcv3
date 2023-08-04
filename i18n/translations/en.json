@@ -113,6 +113,8 @@
   "screens.dashboard.tabs.profile.consumer": "Consumer",
   "screens.dashboard.tabs.profile.account": "Account",
   "screens.dashboard.tabs.profile.deleteAccount": "Delete Account",
+  "screens.dashboard.tabs.profile.deleteAccount.typeDelete": "Type delete below if you are sure you want to delete your account.",
+  "screens.dashboard.tabs.profile.deleteAccount.undone": "This action cannot be undone",
   "screens.dashboard.tabs.profile.personalDetails": "Personal Details",
   "screens.dashboard.tabs.profile.Back": "Back",
   "screens.dashboard.tabs.profile.personalDetails.title": "Profile",
