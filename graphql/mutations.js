@@ -215,3 +215,15 @@ export const partnerSubmit = /* GraphQL */ `
     }
   }
 `;
+
+
+export const setLocale = /* GraphQL */ `
+  mutation setLocale($locale: String!) {
+    userUpdate(input:{
+      locale: $locale
+    }) {
+      username
+      locale
+    }
+  }
+`;
