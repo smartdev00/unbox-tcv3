@@ -76,6 +76,24 @@ const SSOLoginScreen = ({ navigation, route, appConfig }) => {
     try {
       await GoogleSignin.hasPlayServices();
       // const {accessToken, user} = await GoogleSignin.signIn();
+      const result = await GoogleSignin.signIn();
+      const userInfo = result.user;
+      setGlobalEmail(userInfo.email)
+      setGlobalIdentifier("GoogleN");
+
+      const data = {
+        "identity": userInfo.email,
+        "firstName": userInfo.givenName,
+        "lastName": userInfo.familyName,
+        "promocode": "",
+        "ssoIdentifier": "GoogleN",
+        "credential": result.idToken,
+        "code": result.serverAuthCode,
+        "debug": "true"
+      };
+      setGlobalData(data);
+      await generateToken(userInfo.email, "googleId", data);
+      /*
       await GoogleSignin.signIn().then(async result => {
         console.log(result, "Google login result");
         const userInfo = result.user;
@@ -96,9 +114,11 @@ const SSOLoginScreen = ({ navigation, route, appConfig }) => {
         setGlobalData(data);
         generateToken(userInfo.email, "googleId", data);
       });
+      */
     } catch (error) {
       console.log(error, 'Error found');
       setLoggingIn(false);
+      Alert.alert(error?.message || 'Something went wrong!');
     }
   };
 
@@ -181,6 +201,7 @@ const SSOLoginScreen = ({ navigation, route, appConfig }) => {
     } catch (err) {
       console.log(err, "Error found");
       setLoggingIn(false);
+      throw err;
     }
   }
 

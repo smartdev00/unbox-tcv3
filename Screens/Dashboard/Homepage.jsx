@@ -128,20 +128,25 @@ const HomepageTab = () => {
   const AfterLogin = async () => {
 
     console.log("AfterLogin");
-    const deviceToken = await AsyncStorage.getItem("unbox-litter-the-click-3-appPushId");
-    if (!deviceToken) {
+    // const deviceToken = await AsyncStorage.getItem("unbox-litter-the-click-3-appPushId");
+    // if (!deviceToken) {
       try {
         Platform.OS !== 'ios' && await messaging().registerDeviceForRemoteMessages();
         const deviceToken = await messaging().getToken();
     
         console.log("Device Token:", deviceToken);
     
-        if (deviceToken) {
+        if (!deviceToken) {
+          console.error("Error setting app push ID:", error);
+          throw {
+            message: "Error setting app push ID:",
+            error
+          }
+        }
           const input = {
             appPushId: deviceToken,
           };
     
-          try {
             await setAppPushId({
               variables: {
                 input,
@@ -157,15 +162,11 @@ const HomepageTab = () => {
     
             await AsyncStorage.setItem("unbox-litter-the-click-3-appPushId", deviceToken);
             await AsyncStorage.setItem("unbox-litter-the-click-3-user", JSON.stringify(user));
-          } catch (error) {
-            console.error("Error setting app push ID:", error);
-          }
-        }
     
       } catch (error) {
         console.log("Error getting device token:", error);
       }
-    }
+    // }
 
   };
 
