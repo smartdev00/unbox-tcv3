@@ -1,1 +1,1 @@
-TC-466 Locale preference
+TC-477 signup The Click title
