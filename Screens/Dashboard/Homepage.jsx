@@ -128,8 +128,8 @@ const HomepageTab = () => {
   const AfterLogin = async () => {
 
     console.log("AfterLogin");
-    // const deviceToken = await AsyncStorage.getItem("unbox-litter-the-click-3-appPushId");
-    // if (!deviceToken) {
+    const deviceToken = await AsyncStorage.getItem("unbox-litter-the-click-3-appPushId");
+    if (!deviceToken) {
       try {
         Platform.OS !== 'ios' && await messaging().registerDeviceForRemoteMessages();
         const deviceToken = await messaging().getToken();
@@ -166,7 +166,7 @@ const HomepageTab = () => {
       } catch (error) {
         console.log("Error getting device token:", error);
       }
-    // }
+    }
 
   };
 
