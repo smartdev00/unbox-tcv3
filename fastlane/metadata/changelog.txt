@@ -1,2 +1,1 @@
-444 - Translations/Mon profil/Supprimer mon compte
-fix bug: Push Notification android
+TC-466 Locale preference

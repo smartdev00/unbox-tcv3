@@ -248,8 +248,8 @@ const Map = ({ navigation }) => {
   const [recording, setRecording] = useState(false);
   const [recordingCount, setRecordingCount] = useState(0);
   const [gpx, setGpx] = useState();
-  const [elapsedTime, setElapsedTime] = useState(false);
-  const [distance, setDistance] = useState();
+  const [elapsedTime, setElapsedTime] = useState(0);
+  const [distance, setDistance] = useState(0);
 
   const [listRetailersQuery] = useLazyQuery(gql(queries.retailers), {
     fetchPolicy: "no-cache",
@@ -351,8 +351,8 @@ const Map = ({ navigation }) => {
       await AsyncStorage.setItem(storageLocations, JSON.stringify([]));
       await AsyncStorage.setItem(storageRecordingDistance, JSON.stringify(0));
       await AsyncStorage.setItem(storageRecordingLitters, JSON.stringify([]));
-      setElapsedTime();
-      setDistance();
+      setElapsedTime(0);
+      setDistance(0);
       setShowPostRecordingModal(true);
     } catch (err) {
       console.log(err);
