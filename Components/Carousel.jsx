@@ -30,7 +30,7 @@ const CarouselComp = ({ data, renderItem, setIndex, kind='notification' }) => {
           }}
           width={width}
           height={kind === 'notification' ? height : 260}
-          autoPlay={false}
+          autoPlay={true}
           data={data}
           scrollAnimationDuration={kind === 'notification' ? 1500 : 3000}
           onAnimatedValueChange={(value) => {
