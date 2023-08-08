@@ -8,8 +8,23 @@ import LogOutModal from "./LogOutModal";
 import DeleteAccountModal from "./DeleteAccountModal";
 import { FilledFacebookThemed, FilledInstagramThemed, FilledLinkedinThemed } from "../../../Components/ThemedSVGs";
 
+const legalLinks = {
+  en: {
+    terms: "https://www.the-click.be/en/terms-and-conditions",
+    privacy: "https://www.the-click.be/en/privacy-statement",
+  },
+  nl: {
+    terms: "https://www.the-click.be/nl/algemene-voorwaarden",
+    privacy: "https://www.the-click.be/nl/privacyverklaring",
+  },
+  fr: {
+    terms: "https://www.the-click.be/fr/conditions-generales",
+    privacy: "https://www.the-click.be/fr/declaration-de-confidentialite",
+  },
+};
+
 const ProfileOptions = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const { navigate } = useNavigation();
 
@@ -17,13 +32,14 @@ const ProfileOptions = () => {
   const [showDeleteAccountModal, setShowDeleteAccountModal] = useState(false);
 
 
-  const handleLegalLink = async () => {
-    await Linking.openURL("https://uat.the-click.app/terms");
+  const handleLink = async (type) => {
+    const link = legalLinks[i18n.language][type];
+    
+    if (link) {
+      await Linking.openURL(link);
+    }
   };
 
-  const handlePrivacyLink = async () => {
-    await Linking.openURL("https://uat.the-click.app/privacy");
-  };
 
   const socialMediaPlatforms = [
     {
@@ -147,7 +163,7 @@ const ProfileOptions = () => {
               </Text>
             </Box>
           </Pressable>
-          <Pressable onPress={handleLegalLink}>
+          <Pressable onPress={() => handleLink('terms')} >
             <Box
               bgColor="white"
               borderBottomWidth={1}
@@ -160,7 +176,7 @@ const ProfileOptions = () => {
               </Text>
             </Box>
           </Pressable>
-          <Pressable onPress={handlePrivacyLink}>
+          <Pressable onPress={() => handleLink('privacy')}>
             <Box
               bgColor="white"
               borderBottomWidth={1}
