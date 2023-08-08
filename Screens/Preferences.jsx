@@ -35,6 +35,10 @@ const Preferences = () => {
     fetchPolicy: 'no-cache',
   })
 
+  const [setLocale] = useMutation(gql(mutations.setLocale), {
+    fetchPolicy: 'no-cache',
+  })
+
   const handleToggleNotifications = () => {
     setAllowPushNotifications((prev) => !prev);
   };
@@ -44,6 +48,13 @@ const Preferences = () => {
 
       if (selectedLang !== i18n.language) {
         i18n.changeLanguage(selectedLang);
+        
+        await setLocale({
+          variables: {
+            locale: selectedLang,
+          },
+        });
+
       }      
 
       const deviceToken = allowPushNotifications

@@ -1,2 +1,3 @@
+TC-466 Locale preference
 TC-336 terms - TC-337 privay links
 TC-428 preference page translation

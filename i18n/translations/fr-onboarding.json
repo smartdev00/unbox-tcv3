@@ -17,7 +17,7 @@
   "error": "Oops, nous ne reconnaissons pas cette combinaison de mot de passe. Veuillez vous assurer que les orthographes sont corrects > votre nom d'utilisateur est enregistré.",
   "login.email": "Connexion par e-mail",
   "signup.email": "Inscrivez-vous par e-mail",
-  "login.apple": "Connectez-vous avec Apple",
+  "login.apple": "Se connecter avec Apple",
   "signup.apple": "Inscrivez-vous ici avec Apple",
   "button.login": "Login",
   "merchantLeader": "Merchant Leader",
