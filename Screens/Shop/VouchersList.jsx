@@ -117,21 +117,23 @@ const VouchersList = ({
     setCategoryFilter(newCategoryFilter);
     setSelCats(newCategoryFilter);
 
+    let query = {
+      order: "name",
+      limit: LIMIT,
+      filters: [],
+    };
+
     if (newCategoryFilter.length) {
-      console.log(queryVariables, " - queryVariables");
-      let newQueryVariables = {...queryVariables};
-      if (newQueryVariables.filters === undefined) newQueryVariables.filters = [];
-      console.log(newQueryVariables, " - newQueryVariables");
       newCategoryFilter.forEach((categoryItem) => {
-        newQueryVariables.filters.push({
+        query.filters.push({
           field: "categoryCsv",
           operator: "CSV",
           value: categoryItem,
         });
       });
-      setQueryVariables(newQueryVariables);
     }
-    console.log(newCategoryFilter);
+    setQueryVariables(query);
+    console.log(query);
   };
 
   const renderHeader = () => (
@@ -156,9 +158,7 @@ const VouchersList = ({
                 .filter((c) => c.imageUri)
                 .map((category, key) => (
                   <Pressable key={key}
-                    onPress={() => { 
-                      console.log("imageUri => ", AppConfig.rootUri + category.imageUri);
-                      popularCategoryPressed(category.code); }}>
+                    onPress={() => { popularCategoryPressed(category.code) }}>
 
                     <VStack w={20} alignItems={"center"}>
                       <Circle bgColor={categoryFilter.includes(category.code) ? "primary.600" : "#f3f3f3"} size={"69px"}>
