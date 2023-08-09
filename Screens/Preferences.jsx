@@ -51,7 +51,8 @@ const Preferences = () => {
         : "";
 
       updateAppPushId(deviceToken);
-
+      await AsyncStorage.setItem("unbox-litter-the-click-3-allowPushNotifications", JSON.stringify(allowPushNotifications));
+      
       navigation.goBack();
 
     } catch (error) {

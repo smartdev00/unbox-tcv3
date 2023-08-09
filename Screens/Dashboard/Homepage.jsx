@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 
 import { useTranslation } from "react-i18next";
 import { useLazyQuery, gql, useMutation } from "@apollo/client";
-import { Platform } from 'react-native'
+import { Alert, Platform } from 'react-native'
 
 import { ApplicationContext, BalanceContext, UserContext } from "../../Context";
 
@@ -128,8 +128,7 @@ const HomepageTab = () => {
   const AfterLogin = async () => {
 
     console.log("AfterLogin");
-    const deviceToken = await AsyncStorage.getItem("unbox-litter-the-click-3-appPushId");
-    if (!deviceToken) {
+
       try {
         Platform.OS !== 'ios' && await messaging().registerDeviceForRemoteMessages();
         const deviceToken = await messaging().getToken();
@@ -143,6 +142,13 @@ const HomepageTab = () => {
             error
           }
         }
+
+        // check if the user has already allowed or not the push notifications from the app. profile>preferences>push notifications, to keep the user setting persistent during the session.
+        const allowPushNotificationsPreference = await AsyncStorage.getItem("unbox-litter-the-click-3-allowPushNotifications");
+        
+        console.log("allowPushNotifications from preferences", allowPushNotificationsPreference);
+
+        if (!allowPushNotificationsPreference) {
           const input = {
             appPushId: deviceToken,
           };
@@ -159,14 +165,18 @@ const HomepageTab = () => {
                 appPushId: deviceToken,
               }
             })
-    
-            await AsyncStorage.setItem("unbox-litter-the-click-3-appPushId", deviceToken);
-            await AsyncStorage.setItem("unbox-litter-the-click-3-user", JSON.stringify(user));
+
+        }
+
+        //the token will be always updated regardless of the user's choice to allow push notifications or not, so later if the user changes the setting, the token will be already updated.
+        await AsyncStorage.setItem("unbox-litter-the-click-3-appPushId", deviceToken);
+
+        await AsyncStorage.setItem("unbox-litter-the-click-3-user", JSON.stringify(user));
+
     
       } catch (error) {
         console.log("Error getting device token:", error);
       }
-    }
 
   };
 
