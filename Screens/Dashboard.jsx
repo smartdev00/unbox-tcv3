@@ -160,7 +160,7 @@ const Dashboard = () => {
       <Stack.Screen
         name="Preferences"
         component={Preferences}
-        options={Object({ headerShown: true, headerTintColor: colors["primary"]["600"], title: 'Preferences',})}
+        options={Object({ headerShown: true, headerTintColor: colors["primary"]["600"], title: t("litter:screens.dashboard.tabs.profile.preferences"), headerBackTitle: t("litter:screens.dashboard.tabs.profile.Back")})}
       />      
     </Stack.Navigator>
   );
