@@ -253,8 +253,8 @@ const ScanNotRecognisedModal = ({ show, onModalClosed, onSubmit, image }) => {
               <Select.Item label="Plastic Bottle" value="plastic-bottle" />
               <Select.Item label="Drink Carton" value="drink-carton" />
               <Select.Item label="Paper" value="paper" />
-              {/* <Select.Item label="Cigarette" value="cigarette" />
-              <Select.Item label="Chewing Gum" value="chewing-gum" /> */}
+              <Select.Item label="Cigarette" value="cigarette" />
+              <Select.Item label="Chewing Gum" value="chewing-gum" />
               <Select.Item label="Other" value="other" />
             </Select>
 
