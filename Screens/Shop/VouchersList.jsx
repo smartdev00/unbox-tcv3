@@ -29,13 +29,16 @@ const LIMIT = 10;
 
 const VouchersList = ({
   queryVariables,
+  setQueryVariables,
   setCats,
-  setLocs
+  setLocs,
+  setSelCats
 }) => {
   const [vouchers, setVouchers] = useState([]);
   const [refreshing, setRefreshing] = useState(true);
   const [showFilterSheet, setShowFilterSheet] = useState(false);
   const [categories, setCategories] = useState([]);
+  const [categoryFilter, setCategoryFilter] = useState([]);
   const [locations, setLocations] = useState([]);
   const [total, setTotal] = useState(0);
   const [isEndReached, setIsEndReached] = useState(true);
@@ -100,6 +103,39 @@ const VouchersList = ({
     return index.toString();
   };
 
+  const popularCategoryPressed = (selectedCategory) => {
+    let newCategoryFilter = [...categoryFilter];
+
+    if (!newCategoryFilter.includes(selectedCategory)) {
+      newCategoryFilter.push(selectedCategory);
+    } else {
+      const index = newCategoryFilter.indexOf(selectedCategory);
+      if (index > -1) {
+        newCategoryFilter.splice(index, 1);
+      }
+    }
+    setCategoryFilter(newCategoryFilter);
+    setSelCats(newCategoryFilter);
+
+    let query = {
+      order: "name",
+      limit: LIMIT,
+      filters: [],
+    };
+
+    if (newCategoryFilter.length) {
+      newCategoryFilter.forEach((categoryItem) => {
+        query.filters.push({
+          field: "categoryCsv",
+          operator: "CSV",
+          value: categoryItem,
+        });
+      });
+    }
+    setQueryVariables(query);
+    console.log(query);
+  };
+
   const renderHeader = () => (
     <>
       <Box bgColor={"white"} py={3}>
@@ -121,11 +157,13 @@ const VouchersList = ({
               categories
                 .filter((c) => c.imageUri)
                 .map((category, key) => (
-                  <Pressable key={key}>
+                  <Pressable key={key}
+                    onPress={() => { popularCategoryPressed(category.code) }}>
 
                     <VStack w={20} alignItems={"center"}>
-                      <Circle bgColor={"#f3f3f3"} size={"69px"}>
-                        <SvgUri alt={category.name} height={40} width={40} uri={AppConfig.rootUri + category.imageUri} />
+                      <Circle bgColor={categoryFilter.includes(category.code) ? "primary.600" : "#f3f3f3"} size={"69px"}>
+                        <SvgUri alt={category.name} height={40} width={40} 
+                        uri={AppConfig.rootUri + (categoryFilter.includes(category.code) ? category.imageUri.replace(".svg", "-white.svg") : category.imageUri)} />
                       </Circle>
                       <Text
                         textAlign={"center"}

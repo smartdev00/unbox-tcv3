@@ -45,6 +45,7 @@ const FilterSheet = ({
   show,
   onQueryChanged,
   onClose,
+  catFilter,
   categories,
   locations,
 }) => {
@@ -121,7 +122,11 @@ const FilterSheet = ({
     }
 
     setQuery(query);
-  }, [sortBy, filterChanged]);
+  }, [sortBy, filterChanged, categoryFilter]);
+
+  useEffect(() => {
+    setCategoryFilter(catFilter);
+  }, [catFilter]);
 
   const getLocationPermissions = async () => {
     const { status } = await Location.requestForegroundPermissionsAsync();
@@ -339,6 +344,7 @@ const FilterSheet = ({
                           category: category.code,
                         })
                       }
+                      isChecked={categoryFilter.includes(category.code)}
                     />
                   </HStack>
                 ))}
@@ -408,6 +414,7 @@ const VouchersTab = () => {
     // queryVariables,
   });
   const [categories, setCategories] = useState([]);
+  const [categoryFilter, setCategoryFilter] = useState([]);
   const [locations, setLocations] = useState([]);
   const [offset, setOffset] = useState(0);
   const [total, setTotal] = useState(0);
@@ -433,6 +440,7 @@ const VouchersTab = () => {
           setShowFilterSheet(false)
         }}
 
+        catFilter={categoryFilter}
         categories={categories}
         locations={locations}
         onClose={() => setShowFilterSheet(false)}
@@ -442,6 +450,7 @@ const VouchersTab = () => {
           queryVariables={queryVariables}
           setQueryVariables={setQueryVariables}
           setCats={setCategories}
+          setSelCats={setCategoryFilter}
           setLocs={setLocations} />
       </QueryClientProvider>
     </>
