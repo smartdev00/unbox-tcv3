@@ -1,4 +1,3 @@
-TC-477 signup The Click title
-TC-466 Locale preference
-TC-336 terms - TC-337 privay links
-TC-428 preference page translation
+TC-485 Speed up scanning process
+TC-486 Litter Type Selection Translations (raised by Saskia)
+CL11-264 Language switching bug (raised by Saskia)
