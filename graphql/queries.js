@@ -373,7 +373,7 @@ export const communitiesListDetailed = /* GraphQL */ `
         description
         about
         hasPin
-        assetUri(width: 100, fit: "stretch")
+        assetUri
         status
       }
     }
