@@ -31,7 +31,10 @@ const SearchBar = ({ showFilter = true, filterSheetShowing, onShowFilterChanged,
           placeholder={"Search..."}
           onSubmitEditing={() => onSearch(value)}
           InputRightElement={
-            <Pressable onPress={() => setValue("")}>
+            <Pressable onPress={() => {
+              setValue("");
+              onSearch("");
+            }}>
               <Image
                 source={require("../../assets/images/search-reset.png")}
                 alt="search reset"
