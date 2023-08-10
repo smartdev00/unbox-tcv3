@@ -102,12 +102,10 @@ const FilterSheet = ({
     }
 
     if (categoryFilter.length) {
-      categoryFilter.forEach((categoryItem) => {
-        query.filters.push({
-          field: "categoryCsv",
-          operator: "CSV",
-          value: categoryItem,
-        });
+      query.filters.push({
+        field: "categoryCsv",
+        operator: "CSV",
+        value: categoryFilter.map(categoryItem => categoryItem).join(',')
       });
     }
 
