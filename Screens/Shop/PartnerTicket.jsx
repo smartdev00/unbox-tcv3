@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import { Box, Button, FormControl, Image, Input, Modal, Text, useTheme } from "native-base";
 
 import { AppConfig } from "../../config";
-import { Alert, Pressable, } from "react-native";
+import { Alert, Platform, Pressable, } from "react-native";
 import HTML, { HTMLContentModel, defaultHTMLElementModels } from 'react-native-render-html';
 import { LocaleContext } from "../../Context";
 
@@ -250,8 +250,11 @@ const PartnerPage = ({ partner, }) => {
   const {colors} = useTheme()
 
   var htmlContent = partner.contentBody;
-  htmlContent = htmlContent.replaceAll('src="/assets/', 'src="' + AppConfig.rootUri + '/assets/');  
-
+  if(Platform.OS == "ios"){
+    htmlContent = htmlContent.replaceAll('src="/assets/', 'src="' + AppConfig.rootUri + '/assets/');  
+  }else{
+    htmlContent = String(htmlContent).replace(/src="\/assets\/public\/images\// , `src="${AppConfig.rootUri}/assets/public/images/`);
+  }
   const customHTMLElementModels = {
     img: defaultHTMLElementModels.img.extend({
       contentModel: HTMLContentModel.mixed,

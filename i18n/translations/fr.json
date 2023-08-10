@@ -49,7 +49,7 @@
   "screens.register.details": "Veuillez saisir vos informations pour vous inscrire au Click. ",
   "screens.register.fields.givenName": "Prénom",
   "screens.register.fields.familyName": "Nom",
-  "screens.register.fields.email": "Adresse e-mail.",
+  "screens.register.fields.email": "Adresse e-mail",
   "screens.register.terms": "J'ai lu et j'accepte les <0>Conditions d'utilisation</0> et la <1>Politique de confidentialité</1>",
   "screens.register.missingTerms": "Vous devez confirmer que vous avez lu et accepté nos conditions d'utilisation et notre politique de confidentialité pour continuer",
   "screens.register.newsletter": "Je souhaite recevoir des newsletter par e-mail (facultatif)",
