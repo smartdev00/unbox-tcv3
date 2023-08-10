@@ -124,12 +124,10 @@ const VouchersList = ({
     };
 
     if (newCategoryFilter.length) {
-      newCategoryFilter.forEach((categoryItem) => {
-        query.filters.push({
-          field: "categoryCsv",
-          operator: "CSV",
-          value: categoryItem,
-        });
+      query.filters.push({
+        field: "categoryCsv",
+        operator: "CSV",
+        value: newCategoryFilter.map(categoryItem => categoryItem).join(',')
       });
     }
     setQueryVariables(query);
