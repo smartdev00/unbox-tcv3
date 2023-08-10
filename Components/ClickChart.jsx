@@ -18,15 +18,7 @@ export default ({ chartType, chartData, }) => {
   const [t, ] = useTranslation();
   const { colors, } = useTheme();
 
-  var dailyLabels = [
-    t('M'),
-    t('T'),
-    t('W'),
-    t('T'),
-    t('F'),
-    t('S'),
-    t('S'),       
-  ];
+  var dailyLabels = t('litter:screens.dashboard.statistics.dailyLabels', { returnObjects: true, });
 
   var monthlyLabels = [    
     t('1'),

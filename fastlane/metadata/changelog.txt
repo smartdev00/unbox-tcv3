@@ -1,3 +1,5 @@
 TC-485 Speed up scanning process
-TC-486 Litter Type Selection Translations (raised by Saskia)
-CL11-264 Language switching bug (raised by Saskia)
+TC-486 Litter Type Selection Translations
+CL11-264 Language switching bug
+CL11-263 Communities Image quality 
+TC-487 'My Clicks' Graph translations
