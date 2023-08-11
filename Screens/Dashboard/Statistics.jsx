@@ -80,17 +80,17 @@ const Statistics = () => {
         {index === 0 ? (
           <Box alignSelf="center" alignItems="center">
             <ClickChart chartType={'daily'} chartData={item} />
-            <Text m={2} color={'primary.600'} bold>{t('Daily')}</Text>
+            <Text m={2} color={'primary.600'} bold>{t('litter:screens.dashboard.statistics.titleDaily')}</Text>
           </Box>
         ) : index === 1 ? (
           <Box alignSelf="center" alignItems="center">
             <ClickChart chartType={'monthly'} chartData={statistics.monthly} />
-            <Text m={2} color={'primary.600'} bold>{t('Monthly')}</Text>
+            <Text m={2} color={'primary.600'} bold>{t('litter:screens.dashboard.statistics.titleMonthly')}</Text>
           </Box>
         ) : (
           <Box alignSelf="center" alignItems="center">
             <ContributionChart chartType={'contribution'} chartData={statistics.contribution} />
-            <Text m={2} color={'primary.600'} bold>{t('Calendar')}</Text>
+            <Text m={2} color={'primary.600'} bold>{t('litter:screens.dashboard.statistics.titleCalendar')}</Text>
           </Box>
         )}
       </Box>

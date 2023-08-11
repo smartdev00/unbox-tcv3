@@ -44,6 +44,9 @@ export const ScanningStatusTypes = {
   NO_CAMERA: "noCamera",
 };
 
+const storageRecording = "the-click-3-plogging-recording";
+const storageRecordingLitters = "the-click-3-plogging-data";
+
 const ScanningStatusBar = ({ scanningStatus }) => {
   if (!scanningStatus) return null;
 
@@ -248,14 +251,15 @@ const ScanNotRecognisedModal = ({ show, onModalClosed, onSubmit, image }) => {
                 bg: "primary.600",
               })}
             >
-              <Select.Item label="Can" value="can" />
-              <Select.Item label="Glass Bottle" value="glass-bottle" />
-              <Select.Item label="Plastic Bottle" value="plastic-bottle" />
-              <Select.Item label="Drink Carton" value="drink-carton" />
-              <Select.Item label="Paper" value="paper" />
-              <Select.Item label="Cigarette" value="cigarette" />
-              <Select.Item label="Chewing Gum" value="chewing-gum" />
-              <Select.Item label="Other" value="other" />
+              <Select.Item label={t("litter:screens.scan.litter.can")} value="can" />
+              <Select.Item label={t("litter:screens.scan.litter.glassBottle")} value="glass-bottle" />
+              <Select.Item label={t("litter:screens.scan.litter.plasticBottle")} value="plastic-bottle" />
+              <Select.Item label={t("litter:screens.scan.litter.drinkCarton")} value="drink-carton" />
+              <Select.Item label={t("litter:screens.scan.litter.paper")} value="paper" />
+              <Select.Item label={t("litter:screens.scan.litter.cigarette")} value="cigarette" />
+              <Select.Item label={t("litter:screens.scan.litter.gum")} value="chewing-gum" />
+              <Select.Item label={t("litter:screens.scan.litter.plasticOther")} value="plastic-other" />
+              <Select.Item label={t("litter:screens.scan.litter.other")} value="other" />
             </Select>
 
             <Checkbox
@@ -381,14 +385,15 @@ const ManualPhotoModal = ({ show, onModalClosed, onSubmit, image }) => {
                 bg: "primary.600",
               })}
             >
-              <Select.Item label="Can" value="can" />
-              <Select.Item label="Glass Bottle" value="glass-bottle" />
-              <Select.Item label="Plastic Bottle" value="plastic-bottle" />
-              <Select.Item label="Drink Carton" value="drink-carton" />
-              <Select.Item label="Paper" value="paper" />
-              <Select.Item label="Cigarette" value="cigarette" />
-              <Select.Item label="Chewing Gum" value="chewing-gum" />
-              <Select.Item label="Other" value="other" />
+              <Select.Item label={t("litter:screens.scan.litter.can")} value="can" />
+              <Select.Item label={t("litter:screens.scan.litter.glassBottle")} value="glass-bottle" />
+              <Select.Item label={t("litter:screens.scan.litter.plasticBottle")} value="plastic-bottle" />
+              <Select.Item label={t("litter:screens.scan.litter.drinkCarton")} value="drink-carton" />
+              <Select.Item label={t("litter:screens.scan.litter.paper")} value="paper" />
+              <Select.Item label={t("litter:screens.scan.litter.cigarette")} value="cigarette" />
+              <Select.Item label={t("litter:screens.scan.litter.gum")} value="chewing-gum" />
+              <Select.Item label={t("litter:screens.scan.litter.plasticOther")} value="plastic-other" />
+              <Select.Item label={t("litter:screens.scan.litter.other")} value="other" />
             </Select>
 
             <Checkbox
@@ -528,66 +533,63 @@ const Scan = ({ navigation, route }) => {
     setScanningStatus(ScanningStatusTypes.SCANNING);
   };
 
-  const handleSubmitScan = async ({ itemType, closeModal }) => {
-    console.log('itemType', itemType);
-    console.log('packaging', packaging);
+  const checkAndUpdateRecording = async (data) => {
+    try {
+  
+      if (data) {
+        
+        await updateBalance();
 
+        const isRecording = await AsyncStorage.getItem(storageRecording);
+  
+        if (isRecording) {
+          const littersPloggingData = await AsyncStorage.getItem(storageRecordingLitters);
+          const littersPlogging = littersPloggingData ? JSON.parse(littersPloggingData) : [];
+  
+          littersPlogging.push({
+            id: data.litterCreate.id,
+            latitude: data.litterCreate.location.latitude,
+            longitude: data.litterCreate.location.longitude,
+            dateAdded: data.litterCreate.dateAdded,
+          });
+  
+          await AsyncStorage.setItem(storageRecordingLitters, JSON.stringify(littersPlogging));
+        }
+      }
+    }
+    catch (err) {
+      console.log(err);
+    }
+  
+  };
+
+  const handleSubmitScan = async ({ itemType, closeModal }) => {
+    const start = performance.now();
     const { longitude, latitude } = currentLocation.coords;
     const input = {
       barcode: barcodeFound?.data || "",
-      location: {
-        longitude,
-        latitude,
-      },
+      location: { longitude, latitude },
       type: itemType || packaging,
-      image: {
-        data: image.data,
-        name: image.name,
-      },
+      image: { data: image.data, name: image.name },
     };
-
-    console.log(input)
-
-    const { data } = await submitLitterMutation({
-      variables: {
-        input,
-      },
-      onError(err) {
-        console.log(err);
-        // if (err.graphQLErrors[0].exception === "UserExists") {
-        //   console.log('user already exists, deal with it')
-        // }
-      },
-    });
-
-    if (data) {
-      await updateBalance();
+  
+    try {
+      const { data } = await submitLitterMutation({
+        variables: { input },
+        onError(err) {
+          console.log(err);
+        },
+      });
+  
+      checkAndUpdateRecording(data);
+    } catch (err) {
+      console.log(err);
     }
-
-
-    const storageRecording = "the-click-3-plogging-recording";
-    const storageRecordingLitters = "the-click-3-plogging-data";
-    
-    const isRecording = await AsyncStorage.getItem(storageRecording);
-    
-    if (isRecording && data) {
-      const littersPloggingData = await AsyncStorage.getItem(storageRecordingLitters);
-      const littersPlogging = littersPloggingData ? JSON.parse(littersPloggingData) : [];
-      
-        const newData = {
-        id: data.litterCreate.id,
-        latitude: data.litterCreate.location.latitude,
-        longitude: data.litterCreate.location.longitude,
-        dateAdded: data.litterCreate.dateAdded,
-      };
-
-      littersPlogging.push(newData);
-    
-      await AsyncStorage.setItem(storageRecordingLitters, JSON.stringify(littersPlogging));
-    }
-    
 
     closeModal();
+    const end = performance.now();
+    console.log(`Scan took ${end - start} milliseconds`);
+
   };
 
   const getCameraPermissions = async () => {

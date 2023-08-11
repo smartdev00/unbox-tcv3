@@ -38,20 +38,20 @@ const DashboardTabs = ({route }) => {
   const [tabRoutes] = React.useState([
     {
       key: "homepage",
-      title: t("litter:screens.dashboard.tabs.homepage.title"),
+      title: "litter:screens.dashboard.tabs.homepage.title"
     },
     {
       key: "achievements",
-      title: t("litter:screens.dashboard.tabs.achievements.title"),
+      title: "litter:screens.dashboard.tabs.achievements.title"
     },
     {
       key: "communities",
-      title: t("litter:screens.dashboard.tabs.communities.title"),
+      title: "litter:screens.dashboard.tabs.communities.title"
     },
     {
       key: "profile",
-      title: t("litter:screens.dashboard.tabs.myProfile.title"),
-    },
+      title: "litter:screens.dashboard.tabs.myProfile.title"
+    }
   ]);
 
   const getTabRouteIndex = ({ tabKey }) => {    
@@ -80,7 +80,7 @@ const DashboardTabs = ({route }) => {
             fontWeight={"700"}
             numberOfLines={1}
           >
-            {route.title}
+            {t(route.title)}
           </Text>
         );
       }}
