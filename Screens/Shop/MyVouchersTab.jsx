@@ -1,7 +1,7 @@
 import { Box, Button, Circle, HStack, ScrollView, Text, useTheme, } from "native-base";
 import SearchBar from "./SearchBar";
 import VoucherTicket from "./VoucherTicket";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { RefreshControl } from "react-native";
 
 import { useLazyQuery, gql } from "@apollo/client";
@@ -9,7 +9,7 @@ import * as queries from "../../graphql/queries";
 
 import { Merchant } from "../../assets/svg";
 import { useTranslation } from "react-i18next";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
 
 const MyVouchersTab = ({ route, navigation }) => {
   const { colors } = useTheme();
@@ -32,8 +32,6 @@ const MyVouchersTab = ({ route, navigation }) => {
       }
 
       if (data) {
-        // console.log(JSON.stringify(data, null, 2));
-
         let vouchers = [];
         data.myVouchers?.items.forEach((orderItem) => {
           orderItem.orderLines?.items.forEach((orderLineItem) => {
@@ -53,6 +51,12 @@ const MyVouchersTab = ({ route, navigation }) => {
       setRefreshing(false);
     }
   };
+  useFocusEffect(
+    useCallback(() => {
+      loadMyVouchers();
+    }, [])
+  );
+
 
   useEffect(() => {
     loadMyVouchers();
