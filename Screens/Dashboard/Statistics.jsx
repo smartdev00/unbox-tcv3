@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 
 import { useTranslation } from "react-i18next";
+import { useFocusEffect } from "@react-navigation/native";
 
 import { BalanceContext, UserContext } from "../../Context";
 
@@ -67,11 +68,12 @@ const Statistics = () => {
       setStatistics(data.userGet.statistics);
   };
 
-  useEffect(() => {
-    //get user statistics
-
-    loadStatistics();
-  }, []);
+  useFocusEffect(
+    React.useCallback(() => {
+      //get user statistics
+      loadStatistics();
+    }, [])
+  );
 
   const renderItem = ({ item }) => {
     const index = caArray.indexOf(item);
