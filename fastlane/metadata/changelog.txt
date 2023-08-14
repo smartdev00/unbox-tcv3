@@ -1,3 +1,1 @@
-TC-488 'Vouchers' page translations
-* Shop page tab bar style for two line on the tab item.
-TC-512 Change word in 'Move & Clean Up' description
+TC-498 Clicks count issue in 'Click Graph'
