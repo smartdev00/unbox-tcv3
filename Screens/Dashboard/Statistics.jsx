@@ -68,12 +68,6 @@ const Statistics = () => {
       setStatistics(data.userGet.statistics);
   };
 
-  useEffect(() => {
-    //get user statistics
-
-    loadStatistics();
-  }, []);
-
   useFocusEffect(
     React.useCallback(() => {
       //get user statistics
