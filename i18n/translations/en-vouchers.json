@@ -77,5 +77,18 @@
   "form.website.description": "If you would like to change your website, please edit this in your profile page.",
   "form.location.label": "Location",
   "form.location.description": "If you would like to change your location, please edit this in your profile page.",
-  "form.delete": "Delete Voucher"
+  "form.delete": "Delete Voucher",
+  "popularCategories": "Popular categories",
+  "food": "Food",
+  "other": "Other",
+  "nonFood": "Non-food",
+  "leisure": "Leisure",
+  "hotelsRestaurants": "Hotels, restaurants, bars",
+  "sortBy": "Sort by",
+  "closest": "Closest",
+  "newest": "Newest",
+  "filterBy": "Filter by",
+  "price": "Price",
+  "category": "Category",
+  "location": "Location"
 }

@@ -14,6 +14,7 @@ import { SvgUri } from "react-native-svg";
 import { useState } from "react";
 import VoucherTicket from "./VoucherTicket";
 import { RefreshControl } from "react-native";
+import { useTranslation } from "react-i18next";
 import { useLazyQuery, gql } from "@apollo/client";
 import * as queries from "../../graphql/queries";
 import { AppConfig } from "../../config";
@@ -34,6 +35,7 @@ const VouchersList = ({
   setLocs,
   setSelCats
 }) => {
+  const { t } = useTranslation()
   const [vouchers, setVouchers] = useState([]);
   const [refreshing, setRefreshing] = useState(true);
   const [showFilterSheet, setShowFilterSheet] = useState(false);
@@ -138,7 +140,7 @@ const VouchersList = ({
     <>
       <Box bgColor={"white"} py={3}>
         <Text fontWeight={"bold"} >
-          Popular Categories
+          {t('vouchers:popularCategories')}
         </Text>
       </Box>
       <Box>

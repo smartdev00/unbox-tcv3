@@ -77,5 +77,18 @@
   "form.website.description": "Si vous souhaitez modifier votre site web, veuillez le faire dans votre page de profil.",
   "form.location.label": "Localisation",
   "form.location.description": "Si vous souhaitez modifier votre lieu de résidence, veuillez le faire dans votre page de profil.",
-  "form.delete": "Supprimer leoucher"
+  "form.delete": "Supprimer leoucher",
+  "popularCategories": "Catégories populaires",
+  "food": "Nutrition",
+  "other": "Autres",
+  "nonFood": "Non alimentaire",
+  "leisure": "Loisirs",
+  "hotelsRestaurants": "Hôtels, restaurants et bars",
+  "sortBy": "Trier par",
+  "closest": "Le plus proche",
+  "newest": "Nouveautés",
+  "filterBy": "Filtrer par",
+  "price": "Prix",
+  "category": "Catégorie",
+  "location": "Emplacement"
 }
