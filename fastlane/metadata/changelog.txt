@@ -1,1 +1,2 @@
 TC-488 'Vouchers' page translations
+* Shop page tab bar style for two line on the tab item.
