@@ -182,6 +182,12 @@ const VouchersList = ({
       <Text lineHight={21} fontWeight={"bold"} py={3}>
         Offers and vouchers
       </Text>
+
+      {data?.pages[0].items.length === 0 &&
+        <Text lineHight={21} py={3} mx={"auto"}>
+          No Results Found
+        </Text>
+      }
     </>
   )
 

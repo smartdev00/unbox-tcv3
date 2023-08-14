@@ -1,1 +1,1 @@
-TC-498 Clicks count issue in 'Click Graph'
+TC-505 'No Results Found' copy needed when search returns no hits

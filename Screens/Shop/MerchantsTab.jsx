@@ -62,6 +62,11 @@ const MerchantsTab = () => {
         }}
       />
 
+      {retailers.length === 0 &&
+        <Text lineHight={21} py={3} mx={"auto"}>
+          No Results Found
+        </Text>
+      }
       <ScrollView
         px={15}
         showsVerticalScrollIndicator={false}
