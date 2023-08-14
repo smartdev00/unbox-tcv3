@@ -1,1 +1,3 @@
-TC-498 Clicks count issue in 'Click Graph'
+TC-513 Replace 'unboxuniverse.com' with the-click 
+TC-515 Language switching bug (shop tabs)
+TC-508 Voucher size in 'Vouchers' and 'My Vouchers' page to be consistent always
