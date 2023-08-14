@@ -1,5 +1,3 @@
-TC-485 Speed up scanning process
-TC-486 Litter Type Selection Translations
-CL11-264 Language switching bug
-CL11-263 Communities Image quality 
-TC-487 'My Clicks' Graph translations
+TC-488 'Vouchers' page translations
+* Shop page tab bar style for two line on the tab item.
+TC-512 Change word in 'Move & Clean Up' description

@@ -10,8 +10,10 @@ import {
 } from "native-base";
 import { FilterThemed, SearchThemed } from "../../Components/ThemedSVGs";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const SearchBar = ({ showFilter = true, filterSheetShowing, onShowFilterChanged, onSearch, }) => {
+  const { t } = useTranslation();
   const [value, setValue] = useState("");
 
   const { colors, } = useTheme();
@@ -28,7 +30,7 @@ const SearchBar = ({ showFilter = true, filterSheetShowing, onShowFilterChanged,
           flex={1}
           rounded={20}
           h={30}
-          placeholder={"Search..."}
+          placeholder={t("vouchers:home.search")}
           onSubmitEditing={() => onSearch(value)}
           InputRightElement={
             <Pressable onPress={() => {

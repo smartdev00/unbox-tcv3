@@ -240,7 +240,7 @@
   "screens.map.summaryModal.summary.earned": "\{{currency}} pending",
   "screens.map.summaryModal.summary.cleanliness": "Route Cleanliness",
   "screens.map.plogging.title": "Move & Clean Up",
-  "screens.map.plogging.instructions": "Press the Play button and start your route. Walking, running or cycling while cleaning up litter. Win win for you and the planet.",
+  "screens.map.plogging.instructions": "Press the Start button and start your route. Walking, running or cycling while cleaning up litter. Win win for you and the planet.",
   "screens.map.plogging.time": "Time",
   "screens.map.plogging.distance": "Distance",
   "screens.map.plogging.start": "Start",

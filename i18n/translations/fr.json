@@ -240,7 +240,7 @@
   "screens.map.summaryModal.summary.earned": "\{{currency}} en attente",
   "screens.map.summaryModal.summary.cleanliness": "Propreté du trajet",
   "screens.map.plogging.title": "Bougez et nettoyezé",
-  "screens.map.plogging.instructions": "Appuyez sur le bouton 'Play' et commencez votre parcours. Marchez, courez ou pédalez tout en nettoyant les déchets. Tout le monde y gagne, vous et la planète",
+  "screens.map.plogging.instructions": "Appuyez sur le bouton 'Start' et commencez votre parcours. Marchez, courez ou pédalez tout en nettoyant les déchets. Tout le monde y gagne, vous et la planète",
   "screens.map.plogging.time": "Temps",
   "screens.map.plogging.distance": "Distance",
   "screens.map.plogging.start": "Démarrer",

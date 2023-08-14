@@ -77,5 +77,18 @@
   "form.website.description": "Als je de website wilt wijzigen, pas dit dan aan op je profielpagina.",
   "form.location.label": "Locatie",
   "form.location.description": "Als je je locatie wilt wijzigen, pas dit dan aan op je profielpagina.",
-  "form.delete": "Voucher deleten"
+  "form.delete": "Voucher deleten",
+  "popularCategories": "Populaire Categorieën",
+  "food": "Voeding",
+  "other": "Andere",
+  "nonFood": "Non-food",
+  "leisure": "Vrije tijd",
+  "hotelsRestaurants": "Hotels, restaurants en bars",
+  "sortBy": "Sorteren op",
+  "closest": "Dichtstbij",
+  "newest": "Nieuwigheden",
+  "filterBy": "Filter op",
+  "price": "Prijs",
+  "category": "Categorie",
+  "location": "Locatie"
 }

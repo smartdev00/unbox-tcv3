@@ -21,6 +21,7 @@ import { SvgUri } from "react-native-svg";
 import * as Location from "expo-location";
 import SearchBar from "./SearchBar";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import VoucherTicket from "./VoucherTicket";
 import * as ThemedSVGs from "../../Components/ThemedSVGs";
 import { RefreshControl } from "react-native";
@@ -49,6 +50,7 @@ const FilterSheet = ({
   categories,
   locations,
 }) => {
+  const { t } = useTranslation()
   const { colors } = useTheme();
   const [sortBy, setSortBy] = useState("name");
   const [filter, setFilter] = useState();
@@ -194,7 +196,7 @@ const FilterSheet = ({
           <VStack alignItems={"flex-start"} p={3}>
             <Box>
               <Text fontWeight={700} fontSize={"18px"} color={"primary.600"}>
-                Sort by
+                {t('vouchers:sortBy')}
               </Text>
               <Radio.Group
                 value={sortBy}
@@ -202,11 +204,11 @@ const FilterSheet = ({
               >
                 {(hasLocationPermission && location) &&
                   <Radio value={SortbyType.SORT_CLOSEST} my={1}>
-                    Closest
+                    {t('vouchers:closest')}
                   </Radio>
                 }
                 <Radio value={SortbyType.SORT_NEWEST} my={1}>
-                  Newest
+                  {t('vouchers:newest')}
                 </Radio>
                 <Radio value={SortbyType.SORT_AZ} my={1}>
                   A-Z
@@ -219,7 +221,7 @@ const FilterSheet = ({
             <Divider my={2} />
             <Box>
               <Text fontWeight={700} fontSize={"18px"} color={"primary.600"}>
-                Filter by
+                {t('vouchers:filterBy')}
               </Text>
             </Box>
             <Divider my={2} />
@@ -241,7 +243,7 @@ const FilterSheet = ({
                     fontSize={"16px"}
                     color={"primary.400"}
                   >
-                    Price
+                    {t('vouchers:price')}
                   </Text>
                   {showPriceSection ? (
                     <ChevronUpIcon color={"primary.400"} />
@@ -315,7 +317,7 @@ const FilterSheet = ({
                     fontSize={"16px"}
                     color={"primary.400"}
                   >
-                    Category
+                    {t('vouchers:category')}
                   </Text>
                   {showCategorySection ? (
                     <ChevronUpIcon color={"primary.400"} />
@@ -360,7 +362,7 @@ const FilterSheet = ({
                     fontSize={"16px"}
                     color={"primary.400"}
                   >
-                    Location
+                    {t('vouchers:location')}
                   </Text>
                   {showLocationSection ? (
                     <ChevronUpIcon color={"primary.400"} />

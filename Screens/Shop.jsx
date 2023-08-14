@@ -57,6 +57,7 @@ const ShopTabs = ({ route }) => {
   const renderTabBar = (props) => (
     <TabBar
       {...props}
+      tabStyle={{paddingLeft: 4, paddingRight: 4}}
       renderLabel={({ route, focused, color }) => {
         return (
           <Text
