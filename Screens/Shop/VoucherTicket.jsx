@@ -92,10 +92,10 @@ const VoucherTicket = ({ voucher, setVouchers, buyMode = false }) => {
           />
         </Box>
         <Box p={3}>
-          <Text fontSize={14} fontWeight={500}>
+          <Text fontSize={14} fontWeight={500} numberOfLines={1}>
             {voucher.retailer?.name || ""}
           </Text>
-          <Text fontSize={12} fontWeight={500}>
+          <Text fontSize={12} fontWeight={500} numberOfLines={1}>
             {voucher.name}
           </Text>
           {buyMode && (

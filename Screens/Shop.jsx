@@ -24,16 +24,16 @@ const ShopTabs = ({ route }) => {
   const { t } = useTranslation();
 
   const tabRoutes = [
-    { key: "vouchers", title: t("litter:screens.shop.tabs.vouchers.title") },
-    { key: "partners", title: t("litter:screens.shop.tabs.partners.title") },
-    { key: "merchants", title: t("litter:screens.shop.tabs.merchants.title") },
+    { key: "vouchers", title: "litter:screens.shop.tabs.vouchers.title" },
+    { key: "partners", title: "litter:screens.shop.tabs.partners.title" },
+    { key: "merchants", title: "litter:screens.shop.tabs.merchants.title" },
     // {
     //   key: "myFavourites",
-    //   title: t("litter:screens.shop.tabs.myFavourites.title"),
+    //   title: "litter:screens.shop.tabs.myFavourites.title",
     // },
     {
       key: "myVouchers",
-      title: t("litter:screens.shop.tabs.myVouchers.title"),
+      title: "litter:screens.shop.tabs.myVouchers.title",
     },
   ];
 
@@ -65,7 +65,7 @@ const ShopTabs = ({ route }) => {
             fontSize={"12px"}
             fontWeight={"700"}
           >
-            {route.title}
+            {t(route.title)}
           </Text>
         );
       }}
