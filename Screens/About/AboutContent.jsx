@@ -10,7 +10,7 @@ const AboutContent = () => {
     >
       <Litter />
       <Ucoin />
-      <Universe />
+      {/* <Universe /> */}
     </Box>
   );
 };
