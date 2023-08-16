@@ -1,3 +1,3 @@
-TC-513 Replace 'unboxuniverse.com' with the-click 
-TC-515 Language switching bug (shop tabs)
-TC-508 Voucher size in 'Vouchers' and 'My Vouchers' page to be consistent always
+TC-438 Add Expiration date of voucher
+TC-439 Merchant website hyperlinks
+TC-440 Directions to merchant location from within voucher

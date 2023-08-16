@@ -31,7 +31,7 @@ import moment from 'moment';
 import Markers from "../Components/Map/Markers";
 
 import { BalanceContext } from "../Context";
-import { ActionSheetIOS, Linking } from "react-native";
+import { ActionSheetIOS, Alert, Linking } from "react-native";
 
 MapboxGL.setWellKnownTileServer(MapboxGL.TileServers.Mapbox);
 MapboxGL.setAccessToken(AppConfig.mapboxAccessToken);
@@ -313,9 +313,24 @@ const VoucherDetails = ({ route, navigation }) => {
           <ThemedSVGs.DirectionsThemed />
           <Text variant={"body3"}>Get Directions</Text>
         </HStack> */}
-                <HStack space={1} alignItems={"center"}>
+                <HStack space={1} alignItems={"center"} >
                   {/* <ThemedSVGs.WebsiteThemed /> */}
-                  <Text variant={"body3"}>{voucher.retailer?.website}</Text>
+                  <Text variant={"body3"} onPress={()=> {
+                    let url = voucher.retailer?.website;
+                    if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                      url = `http://${url}`;
+                    }
+                
+                    Linking.openURL(url)
+                      .catch(error => {
+                        console.error('Error opening URL:', error);
+                      });
+                  }}
+                  >
+                    {voucher.retailer?.website}
+                  
+                  </Text>
+
                 </HStack>
               </HStack>
             </>
