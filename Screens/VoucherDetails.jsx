@@ -100,6 +100,7 @@ const VoucherDetails = ({ route, navigation }) => {
   const [dateRedeemed, setDateRedeemed] = useState();
   const [qrCode, setQRCode] = useState();
   const [balance, setBalance] = useContext(BalanceContext);
+  const [expiryDate, setExpiryDate] = useState();
 
   const [myVoucherDetailsQuery] = useLazyQuery(gql(queries.myVoucherDetails), {
     fetchPolicy: "no-cache",
@@ -123,6 +124,7 @@ const VoucherDetails = ({ route, navigation }) => {
       setQRImg(data.myVoucher.qrCodeUrl);
       setQRCode(data.myVoucher.code);
       setDateRedeemed(data.myVoucher.dateRedeemed);
+      setExpiryDate(data.myVoucher.dateExpires);
     }
   };
 
@@ -274,6 +276,16 @@ const VoucherDetails = ({ route, navigation }) => {
           <Text variant={"body3"} mb={4}>
             {voucher.description}
           </Text>
+          {!buyMode && (
+            <>
+              <Text variant={"body2"} fontWeight={"bold"}>
+                {t('vouchers:info.date')}
+              </Text>
+              <Text variant={"body3"} mb={4}>
+                {moment(voucher.datePurchased).format('DD/MM/yyyy')}
+              </Text>
+            </>
+          )}
           {/* removed for pilot
         <Text variant={"body2"} fontWeight={"bold"}>
           Expiry Date
