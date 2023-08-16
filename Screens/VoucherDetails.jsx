@@ -31,6 +31,7 @@ import moment from 'moment';
 import Markers from "../Components/Map/Markers";
 
 import { BalanceContext } from "../Context";
+import { ActionSheetIOS, Linking } from "react-native";
 
 MapboxGL.setWellKnownTileServer(MapboxGL.TileServers.Mapbox);
 MapboxGL.setAccessToken(AppConfig.mapboxAccessToken);
@@ -347,6 +348,48 @@ const VoucherDetails = ({ route, navigation }) => {
                 // logoPosition={logoPosition}
                 // attributionPosition={attributionPosition}
                 localizeLabels={true}
+                onPress={() => {
+                  const lat = voucher.retailer.location.latitude;
+                  const lng = voucher.retailer.location.longitude;
+
+                  const latLng = `${lat},${lng}`;
+                  const label = voucher.retailer.name;
+
+                  const scheme = Platform.select({
+                    ios: 'maps:0,0?q=',
+                    android: 'geo:0,0?q='
+                  });
+
+                  Linking.canOpenURL(scheme + latLng)
+                    .then(supported => {
+                      if (!supported) {
+                        console.log(`Can't handle url: ${url}`);
+                      } else {
+                        if (Platform.OS === 'ios') {
+                          ActionSheetIOS.showActionSheetWithOptions(
+                            {
+                              options: ['Apple Maps', 'Google Maps', 'waze', 'Cancel'],
+                              cancelButtonIndex: 3,
+                              title: 'Selection',
+                              message: 'Select Navigation App'
+                            },
+                            buttonIndex => {
+                              if (buttonIndex === 0) {
+                                Linking.openURL(`${scheme}${label}@${latLng}`);
+                              } else if (buttonIndex === 1) {
+                                Linking.openURL(`comgooglemaps://?q=${latLng}`);
+                              } else if (buttonIndex === 2) {
+                                Linking.openURL(`waze://?ll=${latLng}&navigate=yes`);
+                              }
+                            }
+                          );
+                        } else { 
+                          Linking.openURL(`${scheme}${latLng}(${label})`);
+                        }
+                      }
+                    })
+                    .catch(err => console.error('An error occurred', err));
+                }}
               >
                 <MapboxGL.Images
                   images={Object({
