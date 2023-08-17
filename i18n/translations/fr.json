@@ -158,7 +158,7 @@
   "screens.dashboard.statistics.dailyLabels": ["L", "M", "M", "J", "V", "S", "D"],
   "screens.wallet.headerTitle": "Mes Clicks",
   "screens.wallet.tabBarLabel": "Mes Clicks",
-  "screens.wallet.tabs.earned.title": "Gagn +",
+  "screens.wallet.tabs.earned.title": "Gagné +",
   "screens.wallet.tabs.earned.noItems": "Votre solde est actuellement nul. Faites le Click et scannez ou photographiez les déchets sauvages !",
   "screens.wallet.tabs.earned.button": "Scannez les déchets sauvages !",
   "screens.wallet.tabs.earned.error": "Si c'est une erreur, veuillez réessayer plus tard ou nous contacter à l'adresse suivante :",
