@@ -109,7 +109,7 @@ const VoucherTicket = ({ voucher, setVouchers, buyMode = false }) => {
             </Button>
           ) : (
             <Button onPress={handleOpenVoucher} mt={2}>
-              {buyMode ? "More Info" : t('vouchers:home.viewVoucher')}
+              {buyMode ? t('vouchers:home.moreInfo') : t('vouchers:home.viewVoucher')}
             </Button>
           )}
         </Box>
