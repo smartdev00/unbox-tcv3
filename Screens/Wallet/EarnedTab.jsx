@@ -65,13 +65,16 @@ const EarnedTab = () => {
     } finally {
       setRefreshing(false);
     }
-    updateBalance();
-
 
   };
 
+
   useEffect(() => {
-    loadTransactions([]);
+    loadTransactions();
+  }, [balance]);
+
+  useEffect(() => {
+    loadTransactions();
   }, []);
 
   // if (!transactions || !transactions?.length)
