@@ -309,6 +309,9 @@ const HomepageTab = () => {
               variant={"paragraph2"}
               colorScheme={"primary"}
               fontWeight={"bold"}
+              paddingBottom={3}
+              paddingLeft={5}
+              paddingRight={2}
               onPress={() => navigate("Shop", { screen: "ShopTabs", params: { tab: "merchants" } })}
             >
               {t("litter:screens.dashboard.tabs.homepage.seeAllMerchants")}

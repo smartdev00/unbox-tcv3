@@ -64,6 +64,7 @@ const ShopTabs = ({ route }) => {
             color={focused ? "primary.600" : "black"}
             fontSize={"12px"}
             fontWeight={"700"}
+            numberOfLines={1}
           >
             {t(route.title)}
           </Text>
