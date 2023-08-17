@@ -191,7 +191,7 @@ const VoucherDetails = ({ route, navigation }) => {
               flex={1}
               isDisabled={voucher.price > balance}
             >
-              Buy Now
+              {t('vouchers:purchaseVoucher.buyNow')}
             </Button>
           </HStack>
         )}

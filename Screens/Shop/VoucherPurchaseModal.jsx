@@ -6,6 +6,7 @@ import { useLazyQuery, useMutation, gql } from "@apollo/client";
 import * as queries from "../../graphql/queries";
 import * as mutations from "../../graphql/mutations";
 import { BalanceContext } from "../../Context";
+import { t } from "i18next";
 
 const VoucherPurchaseModal = ({
   showPurchaseModal,
@@ -84,7 +85,7 @@ const VoucherPurchaseModal = ({
         />
         <Modal.Header bg={"white"} pb={3} px={1}>
           <Text fontSize={18} fontWeight={"bold"} color={"primary.600"}>
-            Order Confirmation
+            {t("vouchers:purchaseVoucher.title")}
           </Text>
         </Modal.Header>
         <Modal.Body pt={11}>
@@ -94,7 +95,7 @@ const VoucherPurchaseModal = ({
             fontWeight={"bold"}
             color={"primary.600"}
           >
-            Do you wish to purchase?
+            {t("vouchers:purchaseVoucher.description")}
           </Text>
           <Text fontSize={13} lineHeight={18} mb={4}>
             {voucher.name}
@@ -105,14 +106,14 @@ const VoucherPurchaseModal = ({
             _text={Object({ fontWeight: "bold" })}
             isLoading={loader}
           >
-            Confirm
+            {t("vouchers:purchaseVoucher.confirm")}
           </Button>
           <Button
             bg={"white"}
             onPress={() => setShowPurchaseModal(false)}
             _text={Object({ color: colors.primary["600"], fontWeight: "bold" })}
           >
-            Cancel
+            {t("vouchers:purchaseVoucher.cancel")}
           </Button>
         </Modal.Body>
       </Modal.Content>

@@ -91,5 +91,10 @@
   "filterBy": "Filter by",
   "price": "Price",
   "category": "Category",
-  "location": "Location"
+  "location": "Location",
+  "purchaseVoucher.buyNow": "Buy Now",
+  "purchaseVoucher.title": "Order confirmation",
+  "purchaseVoucher.description": "Do you wish to purchase?",
+  "purchaseVoucher.confirm": "Confirm",
+  "purchaseVoucher.cancel": "Cancel"
 }

@@ -91,5 +91,10 @@
   "filterBy": "Filter op",
   "price": "Prijs",
   "category": "Categorie",
-  "location": "Locatie"
+  "location": "Locatie",
+  "purchaseVoucher.buyNow": "Koop nu",
+  "purchaseVoucher.title": "Orderbevestiging",
+  "purchaseVoucher.description": "Wil je graag kopen?",
+  "purchaseVoucher.confirm": "Bevestig",
+  "purchaseVoucher.cancel": "Annuleren"
 }
