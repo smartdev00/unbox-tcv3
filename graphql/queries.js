@@ -163,7 +163,7 @@ export const vouchersListDetailed = /* GraphQL */ `
             latitude
             longitude
           }
-          website: hierarchy5
+          website
         }
         terms
         isFavorite

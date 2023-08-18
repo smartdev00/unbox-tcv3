@@ -22,6 +22,8 @@ const MerchantsTab = () => {
 
   const loadRetailers = async () => {
     try {
+      console.log("loadRetailers");
+      setRefreshing(true);
       const { data, error } = await listRetailersQuery({
         variables: {
           ...queryVariables,
@@ -30,7 +32,6 @@ const MerchantsTab = () => {
           
         },
       });
-      setRefreshing(true);
       if (error) {
         console.log("listRetailersQuery", error);
       }
@@ -76,7 +77,7 @@ const MerchantsTab = () => {
         }
       >
 
-        <VStack mt={6}>
+        <VStack mt={0}>
           {retailers &&
             retailers.map((merchant, key) => (
               <MerchantTicket merchant={merchant} key={key} />
