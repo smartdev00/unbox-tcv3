@@ -31,6 +31,7 @@ import moment from 'moment';
 import Markers from "../Components/Map/Markers";
 
 import { BalanceContext } from "../Context";
+import { ActionSheetIOS, Alert, Linking } from "react-native";
 
 MapboxGL.setWellKnownTileServer(MapboxGL.TileServers.Mapbox);
 MapboxGL.setAccessToken(AppConfig.mapboxAccessToken);
@@ -100,6 +101,7 @@ const VoucherDetails = ({ route, navigation }) => {
   const [dateRedeemed, setDateRedeemed] = useState();
   const [qrCode, setQRCode] = useState();
   const [balance, setBalance] = useContext(BalanceContext);
+  const [expiryDate, setExpiryDate] = useState();
 
   const [myVoucherDetailsQuery] = useLazyQuery(gql(queries.myVoucherDetails), {
     fetchPolicy: "no-cache",
@@ -123,6 +125,7 @@ const VoucherDetails = ({ route, navigation }) => {
       setQRImg(data.myVoucher.qrCodeUrl);
       setQRCode(data.myVoucher.code);
       setDateRedeemed(data.myVoucher.dateRedeemed);
+      setExpiryDate(data.myVoucher.dateExpires);
     }
   };
 
@@ -274,6 +277,16 @@ const VoucherDetails = ({ route, navigation }) => {
           <Text variant={"body3"} mb={4}>
             {voucher.description}
           </Text>
+          {!buyMode && (
+            <>
+              <Text variant={"body2"} fontWeight={"bold"}>
+                {t('vouchers:info.date')}
+              </Text>
+              <Text variant={"body3"} mb={4}>
+                {moment(voucher.datePurchased).format('DD/MM/yyyy')}
+              </Text>
+            </>
+          )}
           {/* removed for pilot
         <Text variant={"body2"} fontWeight={"bold"}>
           Expiry Date
@@ -300,9 +313,24 @@ const VoucherDetails = ({ route, navigation }) => {
           <ThemedSVGs.DirectionsThemed />
           <Text variant={"body3"}>Get Directions</Text>
         </HStack> */}
-                <HStack space={1} alignItems={"center"}>
+                <HStack space={1} alignItems={"center"} >
                   {/* <ThemedSVGs.WebsiteThemed /> */}
-                  <Text variant={"body3"}>{voucher.retailer?.website}</Text>
+                  <Text variant={"body3"} onPress={()=> {
+                    let url = voucher.retailer?.website;
+                    if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                      url = `http://${url}`;
+                    }
+                
+                    Linking.openURL(url)
+                      .catch(error => {
+                        console.error('Error opening URL:', error);
+                      });
+                  }}
+                  >
+                    {voucher.retailer?.website}
+                  
+                  </Text>
+
                 </HStack>
               </HStack>
             </>
@@ -335,6 +363,48 @@ const VoucherDetails = ({ route, navigation }) => {
                 // logoPosition={logoPosition}
                 // attributionPosition={attributionPosition}
                 localizeLabels={true}
+                onPress={() => {
+                  const lat = voucher.retailer.location.latitude;
+                  const lng = voucher.retailer.location.longitude;
+
+                  const latLng = `${lat},${lng}`;
+                  const label = voucher.retailer.name;
+
+                  const scheme = Platform.select({
+                    ios: 'maps:0,0?q=',
+                    android: 'geo:0,0?q='
+                  });
+
+                  Linking.canOpenURL(scheme + latLng)
+                    .then(supported => {
+                      if (!supported) {
+                        console.log(`Can't handle url: ${url}`);
+                      } else {
+                        if (Platform.OS === 'ios') {
+                          ActionSheetIOS.showActionSheetWithOptions(
+                            {
+                              options: ['Apple Maps', 'Google Maps', 'waze', 'Cancel'],
+                              cancelButtonIndex: 3,
+                              title: 'Selection',
+                              message: 'Select Navigation App'
+                            },
+                            buttonIndex => {
+                              if (buttonIndex === 0) {
+                                Linking.openURL(`${scheme}${label}@${latLng}`);
+                              } else if (buttonIndex === 1) {
+                                Linking.openURL(`comgooglemaps://?q=${latLng}`);
+                              } else if (buttonIndex === 2) {
+                                Linking.openURL(`waze://?ll=${latLng}&navigate=yes`);
+                              }
+                            }
+                          );
+                        } else { 
+                          Linking.openURL(`${scheme}${latLng}(${label})`);
+                        }
+                      }
+                    })
+                    .catch(err => console.error('An error occurred', err));
+                }}
               >
                 <MapboxGL.Images
                   images={Object({
