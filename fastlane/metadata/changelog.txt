@@ -1,3 +1,3 @@
-TC-513 Replace 'unboxuniverse.com' with the-click 
-TC-515 Language switching bug (shop tabs)
-TC-508 Voucher size in 'Vouchers' and 'My Vouchers' page to be consistent always
+TC-505 'No Results Found' copy needed when search returns no hits
+TC-506 Speed up end search needed
+TC-507 Some merchants are added twice in the Merchant list
