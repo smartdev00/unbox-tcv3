@@ -63,11 +63,16 @@ const SpentTab = () => {
     } finally {
       setRefreshing(false);
     }
-    updateBalance();
   };
 
+
   useEffect(() => {
-    loadTransactions([]);
+    loadTransactions();
+  }, [balance]);
+
+
+  useEffect(() => {
+    loadTransactions();
   }, []);
 
   return (

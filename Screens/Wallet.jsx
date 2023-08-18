@@ -83,8 +83,8 @@ const WalletTabs = ({ navigation }) => {
 
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
-    { key: "earned", title: t("litter:screens.wallet.tabs.earned.title") },
-    { key: "spent", title: t("litter:screens.wallet.tabs.spent.title") },
+    { key: "earned", title: "litter:screens.wallet.tabs.earned.title" },
+    { key: "spent", title: "litter:screens.wallet.tabs.spent.title" },
   ]);
 
   const renderTabBar = (props) => (
@@ -97,7 +97,7 @@ const WalletTabs = ({ navigation }) => {
             fontSize={"12px"}
             fontWeight={"700"}
           >
-            {route.title}
+            {t(route.title)}
           </Text>
         );
       }}

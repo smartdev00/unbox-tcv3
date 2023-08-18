@@ -1,4 +1,6 @@
-feat/Update-Merchant-Vouchers
-TC-438 Add Expiration date of voucher
-TC-439 Merchant website hyperlinks
-TC-440 Directions to merchant location from within voucher
+fix/TC-547-manual-refresh
+TC-547 Manual refresh of 'Spent' page needed
+TC-549 Improve images on vouchers in Shop>Vouchers
+TC-550 'More info' on Vouchers translations needed
+TC-551 'Order confirmation' modal translations needed
+TC-486 Litter Type Selection Translations

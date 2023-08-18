@@ -28,6 +28,7 @@
   "home.search": "Zoek …",
   "home.novouchers": "Geen vouchers gevonden.",
   "home.viewVoucher": "Bekijk voucher",
+  "home.moreInfo": "Meer info",
   "ticket.edit": "Voucher bewerken",
   "ticket.delete": "Verwijderen",
   "info.type": "Type voucher",
@@ -90,5 +91,10 @@
   "filterBy": "Filter op",
   "price": "Prijs",
   "category": "Categorie",
-  "location": "Locatie"
+  "location": "Locatie",
+  "purchaseVoucher.buyNow": "Koop nu",
+  "purchaseVoucher.title": "Orderbevestiging",
+  "purchaseVoucher.description": "Wil je graag kopen?",
+  "purchaseVoucher.confirm": "Bevestig",
+  "purchaseVoucher.cancel": "Annuleren"
 }
