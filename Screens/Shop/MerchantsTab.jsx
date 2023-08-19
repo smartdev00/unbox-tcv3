@@ -37,6 +37,7 @@ const MerchantsTab = () => {
       }
 
       if (data) {
+        console.log(data.retailersDetailed.items, " -- merchant data");
         setRetailers(data.retailersDetailed.items);
         setTotal(data.retailersDetailed.total);
         setCount(data.retailersDetailed.count);
@@ -77,7 +78,7 @@ const MerchantsTab = () => {
         }
       >
 
-        <VStack mt={0}>
+        <VStack mt={2}>
           {retailers &&
             retailers.map((merchant, key) => (
               <MerchantTicket merchant={merchant} key={key} />
