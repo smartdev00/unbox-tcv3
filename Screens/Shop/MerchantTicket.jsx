@@ -8,7 +8,11 @@ const MerchantTicket = ({ merchant }) => {
   const { navigate } = useNavigation();
 
   const handleOpenMerchant = () => {
-    navigate("MerchantDetails", { merchantId: merchant.id, });
+    navigate("MerchantDetails", {
+      merchantId: merchant.id,
+      openStatus: openStatus,
+      isOpen: isOpen
+    });
     // setShowModal(true)
   };
 
