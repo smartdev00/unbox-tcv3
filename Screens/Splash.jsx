@@ -6,12 +6,18 @@ import UnboxLitterSVG from "../Components/UnboxLitterSVG";
 import { useTranslation } from "react-i18next";
 import * as SplashScreen from "expo-splash-screen";
 import { languages } from '../i18n/config';
+import * as mutations from '../graphql/mutations'
+import { gql, useMutation } from "@apollo/client";
 
 SplashScreen.preventAutoHideAsync();
 
 const Splash = ({onClickGo }) => {
   const { t, i18n } = useTranslation();
   const [selectedLang, setSelectedLang] = useState(i18n.language);
+  
+  const [setLocale] = useMutation(gql(mutations.setLocale), {
+    fetchPolicy: 'no-cache',
+  })
 
   const handleLanguageSelect = async (lang) => {
     i18n.changeLanguage(lang);
@@ -19,6 +25,11 @@ const Splash = ({onClickGo }) => {
   };
 
   const handleStartClick = async () => {
+    await setLocale({
+      variables: {
+        locale: selectedLang,
+      },
+    });
     onClickGo();
   };
 
