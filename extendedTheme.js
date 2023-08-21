@@ -15,9 +15,12 @@ const colors = {
     50: "#FFF0DA",
     300: "#FFC574",
     500: "#ff9600",
+    600: "#2AD100",
   },
   success: "#4DC01D",
-  danger: "#D10000",
+  danger: {
+    600: "#D10000",
+  },
   warning: "#FFD53F",
   information: "#199FFF",
   cleanlinessDirty: '#D10000',
@@ -230,7 +233,7 @@ const extendedTheme = {
         },
         paragraph3: ({ colorScheme }) => {
           return {
-            fontSize: 8,
+            fontSize: 10,
             lineHeight: 13,
             fontWeight: 400,
             color: `${colorScheme}.600`,

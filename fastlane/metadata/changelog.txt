@@ -1,6 +1,4 @@
-fix/TC-547-manual-refresh
-TC-547 Manual refresh of 'Spent' page needed
-TC-549 Improve images on vouchers in Shop>Vouchers
-TC-550 'More info' on Vouchers translations needed
-TC-551 'Order confirmation' modal translations needed
-TC-486 Litter Type Selection Translations
+TC-505 'No Results Found' copy needed when search returns no hits
+TC-506 Speed up end search needed
+TC-507 Some merchants are added twice in the Merchant list
+TC-470 Add opening hours to merchant info
