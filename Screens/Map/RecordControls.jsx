@@ -20,10 +20,13 @@ const ElapsedTimeDisplay = ({ elapsedTime, }) => {
   const zeroPad = (num, places) => String(num).padStart(places, '0')
 
   useEffect(() => {
-    const timestamp = new Date(elapsedTime);
-    setHours(zeroPad(timestamp.getHours(), 2));
-    setMinutes(zeroPad(timestamp.getMinutes(), 2));
-    setSeconds(zeroPad(timestamp.getSeconds(), 2));    
+    const hours = Math.floor(elapsedTime / 3600000);
+    const minutes = Math.floor((elapsedTime % 3600000) / 60000);
+    const seconds = Math.floor((elapsedTime % 60000) / 1000);
+
+    setHours(zeroPad(hours, 2));
+    setMinutes(zeroPad(minutes, 2));
+    setSeconds(zeroPad(seconds, 2));  
   }, [elapsedTime]);
 
   return (

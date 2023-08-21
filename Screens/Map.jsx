@@ -372,7 +372,13 @@ const Map = ({ navigation }) => {
       const recordingStarted = await AsyncStorage.getItem(
         storageRecordingStart
       );
-      setElapsedTime(new Date() - new Date(JSON.parse(recordingStarted)));
+
+      const currentTime = new Date().getTime();
+      const recordingStartTime = new Date(JSON.parse(recordingStarted)).getTime();
+      const elapsedTimeMilliseconds = currentTime - recordingStartTime;
+  
+      setElapsedTime(elapsedTimeMilliseconds);
+
       const recordingDistance = await AsyncStorage.getItem(
         storageRecordingDistance
       );
