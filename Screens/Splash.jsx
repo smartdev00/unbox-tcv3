@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
-import { TouchableOpacity, View } from "react-native";
+import { Alert, TouchableOpacity, View } from "react-native";
 import { Button, Image, Text, VStack, Pressable } from "native-base";
 import { useNavigation } from "@react-navigation/native";
 import UnboxLitterSVG from "../Components/UnboxLitterSVG";
@@ -25,11 +25,11 @@ const Splash = ({onClickGo }) => {
   };
 
   const handleStartClick = async () => {
-    await setLocale({
+    setLocale({
       variables: {
         locale: selectedLang,
       },
-    });
+    })
     onClickGo();
   };
 
