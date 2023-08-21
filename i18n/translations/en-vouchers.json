@@ -28,6 +28,7 @@
   "home.search": "Search...",
   "home.novouchers": "No vouchers found.",
   "home.viewVoucher": "View voucher",
+  "home.moreInfo": "More info",
   "ticket.edit": "Edit Voucher",
   "ticket.delete": "Delete",
   "info.type": "Voucher Type",
@@ -90,5 +91,10 @@
   "filterBy": "Filter by",
   "price": "Price",
   "category": "Category",
-  "location": "Location"
+  "location": "Location",
+  "purchaseVoucher.buyNow": "Buy Now",
+  "purchaseVoucher.title": "Order confirmation",
+  "purchaseVoucher.description": "Do you wish to purchase?",
+  "purchaseVoucher.confirm": "Confirm",
+  "purchaseVoucher.cancel": "Cancel"
 }

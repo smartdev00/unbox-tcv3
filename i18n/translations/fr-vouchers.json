@@ -28,6 +28,7 @@
   "home.search": "Recherche…",
   "home.novouchers": "Pas de vouchers trouvés",
   "home.viewVoucher": "Regardez le bon",
+  "home.moreInfo": "Plus d'info",
   "ticket.edit": "Modifier le voucher",
   "ticket.delete": "Supprimer",
   "info.type": "Type de voucher",
@@ -90,5 +91,10 @@
   "filterBy": "Filtrer par",
   "price": "Prix",
   "category": "Catégorie",
-  "location": "Emplacement"
+  "location": "Emplacement",
+  "purchaseVoucher.buyNow": "Acheter maintenant",
+  "purchaseVoucher.title": "Confirmation de commande",
+  "purchaseVoucher.description": "Veux-tu acheter ?",
+  "purchaseVoucher.confirm": "Confirmer",
+  "purchaseVoucher.cancel": "Annuler"
 }

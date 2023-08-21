@@ -152,7 +152,7 @@ export const vouchersListDetailed = /* GraphQL */ `
     }
     vouchersListDetailed: productItemList(limit: $limit, offset: $offset, filters: $filters, order: $order, search: $search) {
       items {
-        img: assetDetailUrl(height: 100, fit: "contain")
+        img: assetDetailUrl(format: "svg")
         id
         description
         name
@@ -165,7 +165,7 @@ export const vouchersListDetailed = /* GraphQL */ `
             latitude
             longitude
           }
-          website: hierarchy5
+          website
         }
         terms
         isFavorite
