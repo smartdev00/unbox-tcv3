@@ -1,4 +1,1 @@
-TC-505 'No Results Found' copy needed when search returns no hits
-TC-506 Speed up end search needed
-TC-507 Some merchants are added twice in the Merchant list
-TC-470 Add opening hours to merchant info
+TC-441 Add 'About the Click' to Homepage
