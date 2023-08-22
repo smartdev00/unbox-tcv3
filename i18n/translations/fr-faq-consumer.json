@@ -25,8 +25,8 @@
       "answer": "Tu peux utiliser l’appli le Click sur l’ensemble du territoire belge. Tu souhaites l’utiliser en dehors de la Belgique ? Envoie un e-mail à theclick@fostplus.be"
     },
     {
-      "question": "Comment introduire une plainte?",
-      "answer": "Tu peux introduire une plainte via le formulaire de contact, ou envoyer un e-mail à theclick@fostplus.be."
+      "question": "Comment introduire une plainte ?’",
+      "answer": "Tu peux introduire une plainte via le formulaire de contact​ sur le site web de Click ou nous envoyer un e-mail. www.the-click.be theclick@fostplus.be"
     },
     {
       "question": "Quelle est la configuration requise pour utiliser l'appli le Click?",
@@ -56,7 +56,7 @@
     },
     {
       "question": "Y a-t-il une limite au nombre d'articles  à scanner?",
-      "answer": "La limite est fixée à 250 articles par personne et par semaine."
+      "answer": "Combien de clicks puis-je faire ?​ \n Chaque nouvel utilisateur peut faire 50 clicks au cours de la première semaine.​ \n Si vous utilisez correctement les clicks (déchets ou emballages vides en déplacement), vous pouvez obtenir plus de clics chaque semaine, jusqu'à un maximum de 250 clicks par semaine.​ \n Par déchets, nous entendons : boîtes de conserve, bouteilles (en verre et en plastique), cartons de boissons, papier, carton, affiches, mégots de cigarettes, chewing-gums, autres produits en plastique, etc.​ \n Par semaine, nous entendons du lundi au lundi.​ \n Les produits avec un code-barres peuvent être scannés : 15 clicks par utilisateur et par minute.​ \n Les produits sans code-barres peuvent être photographiés : 15 clicks par utilisateur et par tranche de 60 minutes.​ \n Les déchets ou vos emballages photographiés sur la route seront contrôlés et vous recevrez vos CUC dans les 3 jours ouvrables.​"
     },
     {
       "question": "Comment promouvoir activement le Click?",
@@ -111,6 +111,10 @@
     {
       "question": "Comment me désabonner?",
       "answer": "Tu peux supprimer l’application de ton téléphone à tout moment, supprimer ton compte et te désabonner du Click. Il te suffit de nous en faire la demande via ce formulaire de contact et nous ferons le nécessaire dans les 5 jours ouvrables."
+    },
+    {
+      "question": "Pourquoi mon compte est-il suspendu ?",
+      "answer": "En cas d'utilisation illégale de l'application, nous avons le droit de suspendre votre compte. Vous ne pourrez alors plus gagner ou échanger des CUC contre des récompenses.​ \n \n Par utilisation illégale de l'application, nous entendons :​ \n - Vous n'êtes pas autorisé à ouvrir plusieurs comptes sur l'appli Click (Pour utiliser l'appli Click, vous devez vous enregistrer et configurer votre compte en remplissant le formulaire d'enregistrement de compte dans l'application. Vous devez indiquer votre nom et votre adresse e-mail. Vous ne pouvez vous inscrire qu'une seule fois. Vous devez nous fournir des informations véridiques, exactes, complètes et à jour. Vous êtes responsable des informations que vous nous fournissez). \n - Vous n'avez pas le droit de scanner ou de photographier plusieurs fois la même bouteille/emballage (1 seul scan ou photo par produit)​ \n - il n'est pas permis de faire des clicks dans les supermarchés ou sur les produits à votre domicile (par exemple dans le réfrigérateur ou les endroits de stockage). \n \n Note : Si vous allez nettoyer les déchets en dehors de votre domicile et que vous les emportez chez vous pour les scanner, cela est cependant autorisé. \n - Il est interdit de scanner de 'faux' codes-barres (le produit lui-même doit être visible) \n - Il est interdit de scanner un emballage encore fermé ou complet"
     }
   ],
   "Circular Ucoins": [
@@ -222,7 +226,7 @@
     },
     {
       "question":"Autre problème",
-      "answer": "Comment signaler un problème ? Tu peux signaler un problème via le formulaire de contact."
+      "answer": "Comment signaler un problème ? \n Tu peux signaler un problème via le formulaire de contact sur le site. www.the-click.be"
     }
   ],
   "Commerçants": [
