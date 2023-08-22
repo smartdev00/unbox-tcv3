@@ -1,3 +1,2 @@
-TC-560 timer fix
-TC-497 achievments language splash
-TC-237 Consumer - Take Profile Photo
+TC-441 Add 'About the Click' to Homepage
+TC-563 'Type of litter' displays with a '-'
