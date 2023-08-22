@@ -145,6 +145,7 @@
   "screens.dashboard.tabs.profile.followUs": "Follow us on social media",
   "screens.dashboard.tabs.profile.appVersion": "App Version",
   "screens.dashboard.tabs.profile.lookAt": "Visit",
+  "screens.dashboard.tabs.profile.photo-modal.title": "Add Photo",
   "screens.dashboard.statistics.userTitle": "My Clicks",
   "screens.dashboard.statistics.today": "Clicks today",
   "screens.dashboard.statistics.week": "Clicks this week",

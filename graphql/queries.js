@@ -11,6 +11,7 @@ export const postLogin = /* GraphQL */ `
       }
       communities
       appPushId
+      avatarUri
     }
     geofences: geofenceList {
       items {

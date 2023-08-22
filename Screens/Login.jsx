@@ -302,6 +302,7 @@ const LoginScreen = ({ navigation, route, appConfig }) => {
         badges: data.user.badges,
         communities: data.user.communities,
         appPushId: data.user.appPushId,
+        avatar: data.user.avatarUri,
       });
       await AsyncStorage.setItem(
         "unbox-litter-the-click-3-user",

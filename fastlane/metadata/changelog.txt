@@ -1,1 +1,3 @@
-TC-441 Add 'About the Click' to Homepage
+TC-560 timer fix
+TC-497 achievments language splash
+TC-237 Consumer - Take Profile Photo
