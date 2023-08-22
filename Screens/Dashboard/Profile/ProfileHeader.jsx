@@ -105,9 +105,6 @@ const ProfilePhotoModal = ({ show, onModalClose }) => {
   const openCamera = async () => {
     try {
       const result = await ImageCropPicker.openCamera({
-        width: 300,
-        height: 300,
-        cropping: true,
         useFrontCamera: true,
         mediaType: "photo",
   
