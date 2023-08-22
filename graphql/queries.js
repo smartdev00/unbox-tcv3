@@ -11,6 +11,7 @@ export const postLogin = /* GraphQL */ `
       }
       communities
       appPushId
+      avatarUri
     }
     geofences: geofenceList {
       items {
@@ -92,6 +93,7 @@ export const retailersDetailed = /* GraphQL */ `
         department
         visitingAddress
         phone
+        openingHours
         category
         location {
           longitude
@@ -112,6 +114,7 @@ export const retailerGet = /* GraphQL */ `
       company
       visitingAddress
       category
+      openingHours
       department
       phone
       location {
