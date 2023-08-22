@@ -107,7 +107,7 @@
   "screens.dashboard.tabs.homepage.findMerchants": "Vind lokale handelaars door te klikken op de map!",
   "screens.dashboard.tabs.homepage.availableMerchants_one": "Er is een \{{count}} handelaar bij wie je je Ucoins kunt uitgeven.",
   "screens.dashboard.tabs.homepage.availableMerchants_other": "Er zijn \{{count}}  handelaars bij wie je je Ucoins kunt uitgeven.",
-  "screens.dashboard.tabs.homepage.learn": "leer meer over Circular Ucoins!",
+  "screens.dashboard.tabs.homepage.learn": "Meer informatie over de Click-app!",
   "screens.dashboard.tabs.homepage.achievements": "Realisaties",
   "screens.dashboard.tabs.homepage.seeAllAchievements": "Bekijk alles",
   "screens.dashboard.tabs.profile.consumer": "Consument",

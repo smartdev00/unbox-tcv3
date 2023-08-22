@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 
 import { useTranslation } from "react-i18next";
 import { useLazyQuery, gql, useMutation } from "@apollo/client";
-import { Alert, Platform } from 'react-native'
+import { Alert, Platform, TouchableOpacity, Linking } from 'react-native'
 
 import { ApplicationContext, BalanceContext, UserContext } from "../../Context";
 
@@ -22,6 +22,7 @@ import {
   Circle,
   HStack,
   Image,
+  Spacer,
   Pressable,
   ScrollView,
   Spinner,
@@ -333,49 +334,45 @@ const HomepageTab = () => {
         <Statistics />
 
         <Achievements/>
-        
-        {/*
-        <Box borderWidth={1} borderColor={"primary.600"} rounded={12}>
+
+        <TouchableOpacity
+          onPress={() =>
+            Linking.openURL("https://www.the-click.be/en")
+          }
+        >
           <Box
-            position={"relative"}
-            alignItems={"center"}
-            justifyContent={"center"}
-            onClick={() => navigate("/about")}
+            borderWidth={1}
+            borderColor={"primary.600"}
+            rounded={12}
           >
-            <Image
-              source={require("../../assets/images/products.png")}
-              alt="about city"
-              height={101}
-              width={"100%"}
-            />
-            <HStack position={"absolute"} alignItems={"center"} space={2}>
+            <Box
+              position={"relative"}
+              alignItems={"center"}
+              justifyContent={"center"}
+            >
               <Image
-                source={require("../../assets/images/unbox-white-log.png")}
-                alt="ucoins"
-                w="92px"
-                h="17px"
+                source={require("../../assets/images/homepage-about.png")}
+                alt="about city"
+                height={101}
+                width={"100%"}
               />
+            </Box>
+            <HStack justifyContent={"space-between"} p={"10px"}>
+              <Text variant={"paragraph2"}>
+                {t("litter:screens.dashboard.tabs.homepage.learn")}
+              </Text>
               <Text
-                color={"white"}
-                letterSpacing={"xl"}
-                fontSize={"21px"}                
+                variant={"paragraph2"}
+                colorScheme={"primary"}
+                fontWeight={"bold"}
               >
-                LITTER
+                {t("litter:home.details")}
               </Text>
             </HStack>
           </Box>
-          <HStack justifyContent={"space-between"} p={"10px"}>
-            <Text variant={"paragraph2"}>{t("litter:screens.dashboard.tabs.homepage.learn")}</Text>
-            <Text
-              variant={"paragraph2"}
-              colorScheme={"primary"}
-              fontWeight={"bold"}
-              onPress={() => navigate("/about")}
-            >
-              {t("litter:screens.dashboard.tabs.homepage.details")}
-            </Text>
-          </HStack>
-        </Box> */}
+        </TouchableOpacity>
+
+        <Spacer size={12} />
       </Box>
     </ScrollView>
   );

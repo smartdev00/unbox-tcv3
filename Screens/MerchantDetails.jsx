@@ -81,7 +81,7 @@ const MerchantMarkerLayer = ({ merchant }) => {
 
 const MerchantDetails = ({ route, navigation }) => {
   const { colors } = useTheme();
-  const { merchantId } = route.params;
+  const { merchantId, openStatus, isOpen } = route.params;
   const mapRef = useRef();
   const { navigate } = useNavigation();
   const [merchant, setMerchant] = useState();
@@ -159,6 +159,17 @@ const MerchantDetails = ({ route, navigation }) => {
           <Text variant={"body3"} mb={4}>
             {merchant.category}
           </Text>
+          {openStatus && (
+            <>
+              <Text variant={"body2"} fontWeight={"bold"}>
+                Opening Hours
+              </Text>
+
+              <Text variant={"body3"} mb={4} colorScheme={isOpen ? "highlight" : "danger"}>
+                {openStatus}
+              </Text>
+            </>
+          )}
           {merchant.description && (
             <>
               <Text variant={"body2"} fontWeight={"bold"}>
