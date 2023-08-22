@@ -107,7 +107,7 @@
   "screens.dashboard.tabs.homepage.findMerchants": "Trouvez des commerçants locaux en cliquant sur la carte !",
   "screens.dashboard.tabs.homepage.availableMerchants_one": "Il y a \{{count}} commerçant chez lequel vous pouvez dépenser vos Ucoins",
   "screens.dashboard.tabs.homepage.availableMerchants_other": "Il y a des \{{count}}  commerçants chez qui vous pouvez dépenser vos Ucoins",
-  "screens.dashboard.tabs.homepage.learn": "En savoir plus sur les Circular Ucoins !",
+  "screens.dashboard.tabs.homepage.learn": "En savoir plus sur l'app le Click !",
   "screens.dashboard.tabs.homepage.achievements": "Réalisations",
   "screens.dashboard.tabs.homepage.seeAllAchievements": "Tout voir",
   "screens.dashboard.tabs.profile.consumer": "Consommateur",
