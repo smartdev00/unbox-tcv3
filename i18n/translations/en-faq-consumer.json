@@ -22,11 +22,11 @@
     },
     {
       "question": "Is the Click app available for international users?",
-      "answer": "You can use the Click app throughout the territory of Belgium. Would you like to use the Click app outside Belgium? Send an e-mail to theclick@fostplus.be"
+      "answer": "You can use the Click app throughout the territory of Belgium. Would you like to use the Click app outside Belgium? Send an e-mail to theclick@fostplus.be ."
     },
     {
       "question": "How can I submit a complaint?",
-      "answer": "You can submit a complaint via the contact form, or send an e-mail to theclick@fostplus.be."
+      "answer": "You can submit a complaint via the contact form, or send an e-mail to theclick@fostplus.be"
     },
     {
       "question": "What are the system requirements for the Click app?",
@@ -56,7 +56,7 @@
     },
     {
       "question": "Is there a limit to the number or items I can scan?",
-      "answer": "There is a limit of 250 items per person per week."
+      "answer": "How many clicks can I make?​ \n Each new user can make 50 clicks in the first week.​ \n If you use clicks correctly (waste or empty packaging on the move), you can get more clicks every week, up to a maximum of 250 clicks per week.​ \n By waste, we mean: cans, bottles (glass and plastic), drinks cartons, paper, cardboard, posters, cigarette butts, chewing gum, other plastic products, etc.​ \n By week, we mean Monday to Monday.​ \n Products with barcodes can be scanned: 15 clicks per user per minute.​ \n Products without barcodes can be photographed: 15 clicks per user per 60 minutes.​ \n Waste or your packaging photographed on the road will be checked and you will receive your CUCs within 3 working days.​"
     },
     {
       "question": "How can I actively promote the Click?",
@@ -111,6 +111,10 @@
     {
       "question": "How do I unsubscribe?",
       "answer": "You can remove the app from your phone at any time. You can delete your account and unsubscribe from the Click. You can send us a message via this contact form. We will complete the process within five working days."
+    },
+    {
+      "question": "Why is my account suspended?",
+      "answer": "In the event of illegal use of the application, we have the right to suspend your account. You will no longer be able to earn or redeem CUCs for rewards. \n \n By illegal use of the application, we mean :​ \n - You are not allowed to open multiple accounts on the Click app (To use the Click app, you must register and set up your account by completing the account registration form in the app. You must enter your name and e-mail address. You can only register once. You must provide us with true, accurate, complete, and up-to-date information. You are responsible for the information you provide.)​ \n - You may not scan or photograph the same bottle/packaging more than once (only 1 scan or photo per product).​ \n - You are not allowed to make clicks in supermarkets or on products in your home (e.g. in the refrigerator or storage areas).​ \n \n Note: If you are going to clean litter outside your home and take it home to scan, however, this is permitted.​ \n - It is forbidden to scan 'false' barcodes (the product itself must be visible). \n - It is forbidden to scan packaging that is still closed or complete."
     }
   ],
   "Circular Ucoins": [
@@ -222,7 +226,7 @@
     },
     {
       "question":"A different problem",
-      "answer": "How can I report a problem? \n You can report a problem via the contact form."
+      "answer": "How can I report a problem? \n You can report a problem via the contact form on our website. www.the-click.be"
     }
   ],
   "Partners": [
