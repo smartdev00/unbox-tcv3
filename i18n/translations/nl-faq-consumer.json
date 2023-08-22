@@ -26,7 +26,7 @@
     },
     {
       "question": "Hoe kan ik een klacht sturen?",
-      "answer": "Je kunt een klacht sturen via het contactformulier, of een mail sturen naar theclick@fostplus.be."
+      "answer": "Je kan een klacht sturen via het contactformulier op onze website of je kan ons een e-mail sturen www.the-click.be theclick@fostplus.be"
     },
     {
       "question": "Wat zijn de systeemvereisten voor het gebruik van de Click app?",
@@ -56,7 +56,7 @@
     },
     {
       "question": "Is er een limiet aan het aantal items dat ik kan scannen?",
-      "answer": "Er is een limiet van 250 items per persoon per week."
+      "answer": "Hoeveel Clicks kan ik maken?​ \n Elke nieuwe Clicker kan in de 1ste week 50 Clicks maken.​ \n Bij correct Click-gebruik (zwerfvuil of lege verpakkingen on-the-go) kan je na elke week meer Clicks maken tot een maximum van 250 Clicks per week.​ \n Onder zwerfvuil verstaan we: blikjes, flesjes (glas en plastic), drankkartons, papier, karton, drukwerk, peuken, kauwgum, andere plastieke producten, ...​ \n Onder 1 week verstaan we van maandag tot maandag.​ \n Producten met een barcode kan je scannen: 15 Clicks per gebruiker per minuut​ \n Producten zonder barcode kan je fotograferen: 15 Clicks per gebruiker per 60 minuten​ \n Stukken zwerfvuil of je verpakkingen onderweg die gefotografeerd worden, worden nagekeken en je ontvangt binnen de 3 werkdagen jouw CUC’s.​"
     },
     {
       "question": "Hoe kan ik actief de Click promoten?",
@@ -111,6 +111,10 @@
     {
       "question": "Hoe kan ik mij uitschrijven?",
       "answer": "Je kan jouw account verwijderen en je uitschrijven uit de Click. Je kunt ons via dit contactformulier een bericht sturen en binnen de 5 werkdagen doen wij het nodige."
+    },
+    {
+      "question": "Waarom wordt mijn account geschorst?",
+      "answer": "Bij onrechtmatig gebruik van de app, hebben wij het recht om jouw account op “suspended” te zetten. Je kan dan geen CUC’s meer verdienen of inwisselen tegen beloningen. \n \n Onder onrechtmatig gebruik van de app verstaan wij: \n - het is niet toegelaten om meerdere accounts te openen op de Click app (Om de Click App te gebruiken, moet je jezelf registreren en jouw account bij ons instellen door het registratieformulier voor de account in de App in te vullen. Je moet jouw eigen naam en e-mailadres opgeven. Je mag jezelf maar één keer registreren. Je moet ons juiste, nauwkeurige, volledige en recente informatie geven. Je bent verantwoordelijk voor de informatie die jij ons verstrekt.) \n - het is niet toegelaten om dezelfde fles/blik verschillende keren te scannen of fotograferen (slechts 1 scan of foto per product) \n - het is niet toegelaten om Clicks te maken in supermarkten of producten bij jouw thuis (bv. In de ijskast of voorraad ruimtes) \n \n Note: wat wel is toegelaten = als je zwerfvuil gaat opruimen en je neemt alles mee naar jouw thuis om daar de scans van het zwerfvuil te maken. Dat is wel toegelaten. \n - het is niet toegelaten om 'namaak' barcodes te scannen (het product zelf moet ook zichtbaar zijn) \n - het is niet toegelaten om volle, ongeopende verpakkingen te scannen of fotograferen"
     }
   ],
   "Circular Ucoins": [
@@ -207,22 +211,22 @@
       "answer": "Rechts onderaan via de button Overzicht en dan via Vouchers links bovenaan. Op de pagina 'Vouchers' staan jouw vouchers voor maximaal 5 dagen. Daar kun je ze bekijken en downloaden."
     },
     {
-      "question": "Ik heb per ongeluk de verkeerde bon gekocht, wat moat ik nu doen?",
+      "question": "Ik heb per ongeluk de verkeerde bon gekocht, wat moet ik nu doen?",
       "answer": "Wees voorzichtig bij het kopen van vouchers, want ze kunnen niet worden terugbetaald of vervangen."
     },
     {
-      "question": "Lemand anders meldde zich aan met mijn e-mail",
+      "question": "Iemand anders meldde zich aan met mijn e-mail?",
       "answer": "Een welkomstmail zou naar jouw e-mailadres zijn gestuurd met een tijdelijk wachtwoord. Tenzij de andere persoon toegang heeft tot jouw e-mails, kunnen zij niet inloggen. Als je toch extra veilig wilt zijn, kun je jouw wachtwoord opnieuw instellen."
     }
   ],
   "Partner Worden": [
     {
       "question": "Hoe kan ik partner worden?",
-      "answer": "Je kunt informatie vinden op onze websitepagina ‘Partner van de Click.’ Je kunt contact met ons opnemen via dit contactformulier."
+      "answer": "Je kan informatie vinden op onze websitepagina ‘Partner van de Click.’ Je kan ook contact met ons opnemen via het contactformulier op onze website. www.the-click.be​"
     },
     {
       "question":"Een ander probleem",
-      "answer": "Hoe kan ik een probleem melden? Je kunt een probleem melden via het contactformulier."
+      "answer": "Hoe kan ik een probleem melden? Je kunt een probleem melden via het contactformulier op onze website. www.the-click.be"
     }
   ],
   "Handelaars": [

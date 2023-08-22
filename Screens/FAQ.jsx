@@ -11,11 +11,25 @@ import {
 import UnboxLitterSVG from '../Components/UnboxLitterSVG'
 import { CollapseThemed, ExpandThemed } from '../Components/ThemedSVGs'
 import { Trans, useTranslation } from 'react-i18next'
+import { Linking } from 'react-native'
+
+let regex = /([a-zA-Z0-9._+-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi; // The actual regex
+let emailRegex = /(((https?:\/\/)|(www\.))[^\s]+)/g;
 
 const FAQsElement = ({ question, answer }) => {
   const [showAnswer, setShowAnswer] = useState(false)
   const { t } = useTranslation()
 
+  let answerResult = '';
+  let emailMatched = regex.exec(answer);
+  if(emailMatched !== null){
+    answerResult = answer.replace(emailMatched[1],'');
+  }
+  const urlMatches = answer.match(emailRegex);
+  if(urlMatches !== null){
+    answerResult = emailMatched !== null ? answerResult.replace(urlMatches[0],'') : answer.replace(urlMatches[0],'') ;
+  }
+  
   return (
     <Pressable
       onPress={() => setShowAnswer(!showAnswer)}
@@ -36,7 +50,7 @@ const FAQsElement = ({ question, answer }) => {
         <Text variant={'paragraph1'} mt={4}>
           <Trans
             t={t}
-            i18nKey={answer}
+            i18nKey={answerResult == '' ? answer : answerResult}
             components={[
               <Link href={'https://www.unboxuniverse.com'} />,
               <Link
@@ -46,6 +60,8 @@ const FAQsElement = ({ question, answer }) => {
               />,
             ]}
           />
+        { emailMatched !== null ? <Text variant={'paragraph1'} mt={4} color={"primary.600"} onPress={() => Linking.openURL(`mailto:${emailMatched[1]}`)}>{'\n'}{t('litter:screens.dashboard.tabs.profile.faq.email')} : {emailMatched[1]}</Text> : null}
+        { urlMatches !== null ? <Text variant={'paragraph1'} mt={4} color={"primary.600"} onPress={() => Linking.openURL(`https://${urlMatches[0]}`)}>{'\n'}{t('litter:screens.dashboard.tabs.profile.faq.web')} : {urlMatches[0]}</Text> : null}
         </Text>
       )}
     </Pressable>

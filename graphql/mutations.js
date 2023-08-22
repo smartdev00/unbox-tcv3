@@ -227,3 +227,18 @@ export const setLocale = /* GraphQL */ `
     }
   }
 `;
+
+export const updateAvatar = /* GraphQL */ `
+  mutation UpdateAvatar($givenName: String!, $name: String!, $data: String!){
+    userUpdate(input:{
+      firstName: $givenName,
+      avatar: {
+        name: $name,
+        data: $data
+      }
+    }) {
+      firstName
+      avatarUri(width:100, fit:"stretch")
+    }
+  }
+`;

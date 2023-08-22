@@ -33,7 +33,8 @@ import {
 
 import * as Screens from "../Screens";
 import { BalanceContext, UserContext } from "../Context";
-import { TouchableOpacity } from "react-native";
+import { Image, TouchableOpacity } from "react-native";
+import { AppConfig } from "../config";
 
 const HeaderLeft = (props) => {
   const [user] = useContext(UserContext);
@@ -41,7 +42,18 @@ const HeaderLeft = (props) => {
 
   return (
     <Pressable onPress={() => navigate("Dashboard", { screen: "DashboardTabs", params: { tab: "profile" } })}>
-    <Circle
+    {user.avatar ? (
+      <Image
+        source={Object({ uri: AppConfig.rootUri + user.avatar })}
+        style={{
+          width: 32,
+          height: 32,
+          borderRadius: 16,
+          marginLeft: 8,
+        }}
+      />
+    ) : (
+      <Circle
       {...props}
       bgColor="primary.600"
       size={8}
@@ -50,6 +62,7 @@ const HeaderLeft = (props) => {
     >
       {user.initials}
     </Circle>
+    )}
     </Pressable>
   );
 };
