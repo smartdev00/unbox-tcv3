@@ -137,7 +137,11 @@ const ApprovedLitterTransaction = ({ transaction }) => {
 
           <HStack justifyContent={"space-between"}>
             <Text>{t(`litter:screens.transaction.summary.itemType`)}</Text>
-            <Text>{transaction.litter.productType}</Text>
+            <Text>
+              {transaction.litter.productType.split('-')
+                .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(' ')}
+            </Text>
           </HStack>
 
           <HStack justifyContent={"space-between"}>
