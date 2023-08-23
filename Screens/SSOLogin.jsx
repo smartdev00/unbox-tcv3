@@ -350,7 +350,8 @@ const SSOLoginScreen = ({ navigation, route, appConfig }) => {
         email: data.user.email,
         badges: data.user.badges,
         communities: data.user.communities,
-        sso
+        sso,
+        avatar: data.user.avatarUri,
       })
       await AsyncStorage.setItem("unbox-litter-the-click-3-user", JSON.stringify({
         username: data.user.username,
@@ -363,6 +364,7 @@ const SSOLoginScreen = ({ navigation, route, appConfig }) => {
         email: data.user.email,
         badges: data.user.badges,
         communities: data.user.communities,
+        avatar: data.user.avatarUri,
       }));
 
       setBalance({
