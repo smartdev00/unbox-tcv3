@@ -53,7 +53,7 @@
   "screens.register.terms": "J'ai lu et j'accepte les <0>Conditions d'utilisation</0> et la <1>Politique de confidentialité</1>",
   "screens.register.missingTerms": "Vous devez confirmer que vous avez lu et accepté nos conditions d'utilisation et notre politique de confidentialité pour continuer",
   "screens.register.newsletter": "Je souhaite recevoir des newsletter par e-mail (facultatif)",
-  "screens.register.button": "S’inscrire.",
+  "screens.register.button": "S’inscrire",
   "screens.register.error": "Oups ! Vos données sont déjà enregistrées. Veuillez vous connecter ou vous inscrire avec une autre adresse électronique",
   "screens.register.noAccountYet": "Avez-vous déjà un compte ?",
   "screens.register.loginHere": "Se connecter ici.",

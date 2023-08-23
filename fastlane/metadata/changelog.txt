@@ -1,1 +1,2 @@
-Take profile picture
+TC-399 Registration fr
+TC-400 Registration/Wrong redirection
