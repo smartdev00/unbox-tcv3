@@ -111,8 +111,6 @@ const ProfilePhotoModal = ({ show, onModalClose }) => {
   };
   
   const openCamera = async () => {
-    showLibrary();
-    return;
     try {
       const result = await ImageCropPicker.openCamera({
         useFrontCamera: true,
