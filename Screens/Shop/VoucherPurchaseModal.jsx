@@ -62,8 +62,8 @@ const VoucherPurchaseModal = ({
 
         setShowPurchaseModal(false);
         navigate("Success", {
-          description: "Voucher successfully purchased!",
-          primaryButtonText: "Done",
+          description: t("vouchers:purchaseVoucher.successfully.purchased"),
+          primaryButtonText: t("vouchers:success.button"),
           primaryButtonAction: "ShopTabs",
         });
       }

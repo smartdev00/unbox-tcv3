@@ -1,2 +1,3 @@
 TC-441 Add 'About the Click' to Homepage
 TC-563 'Type of litter' displays with a '-'
+TC-552 'Order successful' page translations needed

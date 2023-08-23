@@ -1,5 +1,6 @@
 import { Button, Image, Text, VStack } from 'native-base'
 import { useNavigation } from '@react-navigation/native'
+import { t } from "i18next";
 
 const Success = ({ route }) => {
   const {
@@ -24,7 +25,7 @@ const Success = ({ route }) => {
         textAlign={'center'}
         mt={3}
       >
-        Success
+        {t("vouchers:success.title")}
       </Text>
       <VStack space={46} alignItems={'center'}>
         <Image

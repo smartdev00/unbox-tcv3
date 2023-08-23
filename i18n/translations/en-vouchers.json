@@ -92,6 +92,7 @@
   "price": "Price",
   "category": "Category",
   "location": "Location",
+  "purchaseVoucher.successfully.purchased": "Voucher successfully purchased!",
   "purchaseVoucher.buyNow": "Buy Now",
   "purchaseVoucher.title": "Order confirmation",
   "purchaseVoucher.description": "Do you wish to purchase?",
