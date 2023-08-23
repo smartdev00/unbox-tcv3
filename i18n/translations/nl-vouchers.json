@@ -92,6 +92,7 @@
   "price": "Prijs",
   "category": "Categorie",
   "location": "Locatie",
+  "purchaseVoucher.successfully.purchased": "Voucher succesvol gekocht!",
   "purchaseVoucher.buyNow": "Koop nu",
   "purchaseVoucher.title": "Orderbevestiging",
   "purchaseVoucher.description": "Wil je graag kopen?",
