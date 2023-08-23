@@ -9,6 +9,7 @@ import RNFS from 'react-native-fs';
 import { gql, useMutation } from "@apollo/client";
 import * as mutations from '../../../graphql/mutations';
 import { AppConfig } from "../../../config";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const ProfilePhotoModal = ({ show, onModalClose }) => {
   const { t } = useTranslation();
@@ -47,6 +48,13 @@ const ProfilePhotoModal = ({ show, onModalClose }) => {
 
         console.log(result);
         await setUser({...user, avatar: result.data.userUpdate.avatarUri});
+        await AsyncStorage.setItem(
+          "unbox-litter-the-click-3-user",
+          JSON.stringify({
+            ...user,
+            avatar: result.data.userUpdate.avatarUri,
+          })
+        );
         handleModalClose();
 
         setLoading(false);
@@ -103,6 +111,8 @@ const ProfilePhotoModal = ({ show, onModalClose }) => {
   };
   
   const openCamera = async () => {
+    showLibrary();
+    return;
     try {
       const result = await ImageCropPicker.openCamera({
         useFrontCamera: true,
