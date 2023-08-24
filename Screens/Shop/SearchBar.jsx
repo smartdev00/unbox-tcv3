@@ -80,7 +80,7 @@ const SearchBar = ({ showFilter = true, filterSheetShowing, onShowFilterChanged,
             <HStack alignItems={"center"} h={30} px={3} space={1}>
               <FilterThemed fill={(filterSheetShowing) ? "white" : colors.primary["600"]}/>
               <Text variant={"paragraph1"} color={(filterSheetShowing) ? "white" : colors.primary["600"]} >
-                Filter
+                {t("vouchers:offer.filter")}
               </Text>
             </HStack>
           </Pressable>
