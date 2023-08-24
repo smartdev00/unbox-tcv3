@@ -542,10 +542,10 @@ const Scan = ({ navigation, route }) => {
 
         const isRecording = await AsyncStorage.getItem(storageRecording);
   
-        if (isRecording) {
+        if (JSON.parse(isRecording)) {
           const littersPloggingData = await AsyncStorage.getItem(storageRecordingLitters);
           const littersPlogging = littersPloggingData ? JSON.parse(littersPloggingData) : [];
-  
+          
           littersPlogging.push({
             id: data.litterCreate.id,
             latitude: data.litterCreate.location.latitude,
@@ -554,6 +554,7 @@ const Scan = ({ navigation, route }) => {
           });
   
           await AsyncStorage.setItem(storageRecordingLitters, JSON.stringify(littersPlogging));
+          console.log('within the plog');
         }
       }
     }
