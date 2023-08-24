@@ -97,5 +97,8 @@
   "purchaseVoucher.title": "Order confirmation",
   "purchaseVoucher.description": "Do you wish to purchase?",
   "purchaseVoucher.confirm": "Confirm",
-  "purchaseVoucher.cancel": "Cancel"
+  "purchaseVoucher.cancel": "Cancel",
+  "offer.vouchers": "Offers and vouchers",
+  "offer.filter": "Filter"
+  
 }

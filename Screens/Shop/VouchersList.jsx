@@ -180,7 +180,7 @@ const VouchersList = ({
       </Box>
 
       <Text lineHight={21} fontWeight={"bold"} py={3}>
-        Offers and vouchers
+        {t('vouchers:offer.vouchers')}
       </Text>
 
       {data?.pages[0].items.length === 0 &&

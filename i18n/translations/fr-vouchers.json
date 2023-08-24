@@ -50,7 +50,7 @@
   "required": "Ceci est obligatoire.",
   "form.screen.edit.title": "Modifier le voucher",
   "form.screen.create.title": "Créer un nouveau voucher.",
-  "form.title": "Détails du voucher.",
+  "form.title": "Détails du voucher",
   "form.photo.label": "Photo du voucher",
   "form.photo.button": "Choisissez la photo du voucher",
   "form.type.label": "Type de voucher",
@@ -74,7 +74,7 @@
   "form.terms.label": "Conditions",
   "form.terms.placeholder": "Entrez les conditions ici",
   "form.terms.limit": "Vous pouvez insérer jusqu'à 250 caractères.",
-  "form.website.label": "Site internet",
+  "form.website.label": "Site Web",
   "form.website.description": "Si vous souhaitez modifier votre site web, veuillez le faire dans votre page de profil.",
   "form.location.label": "Localisation",
   "form.location.description": "Si vous souhaitez modifier votre lieu de résidence, veuillez le faire dans votre page de profil.",
@@ -97,5 +97,7 @@
   "purchaseVoucher.title": "Confirmation de commande",
   "purchaseVoucher.description": "Veux-tu acheter ?",
   "purchaseVoucher.confirm": "Confirmer",
-  "purchaseVoucher.cancel": "Annuler"
+  "purchaseVoucher.cancel": "Annuler",
+  "offer.vouchers": "Offres et bons d'achat",
+  "offer.filter": "Filtre"
 }

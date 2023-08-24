@@ -56,7 +56,7 @@
     },
     {
       "question": "Y a-t-il une limite au nombre d'articles  à scanner?",
-      "answer": "Combien de clicks puis-je faire ?​ \n Chaque nouvel utilisateur peut faire 50 clicks au cours de la première semaine.​ \n Si vous utilisez correctement les clicks (déchets ou emballages vides en déplacement), vous pouvez obtenir plus de clics chaque semaine, jusqu'à un maximum de 250 clicks par semaine.​ \n Par déchets, nous entendons : boîtes de conserve, bouteilles (en verre et en plastique), cartons de boissons, papier, carton, affiches, mégots de cigarettes, chewing-gums, autres produits en plastique, etc.​ \n Par semaine, nous entendons du lundi au lundi.​ \n Les produits avec un code-barres peuvent être scannés : 15 clicks par utilisateur et par minute.​ \n Les produits sans code-barres peuvent être photographiés : 15 clicks par utilisateur et par tranche de 60 minutes.​ \n Les déchets ou vos emballages photographiés sur la route seront contrôlés et vous recevrez vos CUC dans les 3 jours ouvrables.​"
+      "answer": "Combien de clicks puis-je faire ?​ \n \n Chaque nouvel utilisateur peut faire 50 clicks au cours de la première semaine.​ \n \n Si vous utilisez correctement les clicks (déchets ou emballages vides en déplacement), vous pouvez obtenir plus de clics chaque semaine, jusqu'à un maximum de 250 clicks par semaine.​ \n \n Par déchets, nous entendons : boîtes de conserve, bouteilles (en verre et en plastique), cartons de boissons, papier, carton, affiches, mégots de cigarettes, chewing-gums, autres produits en plastique, etc.​ \n \n Par semaine, nous entendons du lundi au lundi.​ \n \n Les produits avec un code-barres peuvent être scannés : 15 clicks par utilisateur et par minute.​ \n \n Les produits sans code-barres peuvent être photographiés : 15 clicks par utilisateur et par tranche de 60 minutes.​ \n \n Les déchets ou vos emballages photographiés sur la route seront contrôlés et vous recevrez vos CUC dans les 3 jours ouvrables.​"
     },
     {
       "question": "Comment promouvoir activement le Click?",
@@ -222,7 +222,7 @@
   "Devenir partenaire": [
     {
       "question": "Comment devenir partenaire?",
-      "answer": "Retrouve les informations nécessaires sur la page de notre site web « Partenaire du Click ». Contacte-nous via ce formulaire de contact."
+      "answer": "Retrouve les informations nécessaires sur la page de notre site web « Partenaire du Click ». \n Contactez-nous via le formulaire de contact sur le site. www.the-click.be"
     },
     {
       "question":"Autre problème",

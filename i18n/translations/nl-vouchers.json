@@ -97,5 +97,7 @@
   "purchaseVoucher.title": "Orderbevestiging",
   "purchaseVoucher.description": "Wil je graag kopen?",
   "purchaseVoucher.confirm": "Bevestig",
-  "purchaseVoucher.cancel": "Annuleren"
+  "purchaseVoucher.cancel": "Annuleren",
+  "offer.vouchers": "Aanbiedingen en vouchers",
+  "offer.filter": "Filter"
 }

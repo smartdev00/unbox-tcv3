@@ -60,8 +60,8 @@ const FAQsElement = ({ question, answer }) => {
               />,
             ]}
           />
-        { emailMatched !== null ? <Text variant={'paragraph1'} mt={4} color={"primary.600"} onPress={() => Linking.openURL(`mailto:${emailMatched[1]}`)}>{'\n'}{t('litter:screens.dashboard.tabs.profile.faq.email')} : {emailMatched[1]}</Text> : null}
-        { urlMatches !== null ? <Text variant={'paragraph1'} mt={4} color={"primary.600"} onPress={() => Linking.openURL(`https://${urlMatches[0]}`)}>{'\n'}{t('litter:screens.dashboard.tabs.profile.faq.web')} : {urlMatches[0]}</Text> : null}
+        { emailMatched !== null ? <Text variant={'paragraph1'} mt={4}>{'\n'}{t('litter:screens.dashboard.tabs.profile.faq.email')} : <Text variant={'paragraph1'} mt={4} color={"primary.600"} onPress={() => Linking.openURL(`mailto:${emailMatched[1]}`)}> {emailMatched[1]}</Text> </Text> : null}
+        { urlMatches !== null ? <Text variant={'paragraph1'} mt={4}>{'\n'}{t('litter:screens.dashboard.tabs.profile.faq.web')} : <Text variant={'paragraph1'} mt={4} color={"primary.600"} onPress={() => Linking.openURL(`https://${urlMatches[0]}`)}>{urlMatches[0]}</Text></Text> : null}
         </Text>
       )}
     </Pressable>
