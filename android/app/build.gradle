@@ -147,8 +147,8 @@ android {
         applicationId "be.fostplus.theclick.development"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 69
-        versionName "3.0.47"
+        versionCode 70
+        versionName "3.0.48"
         buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
         vectorDrawables.useSupportLibrary = true
         if (isNewArchitectureEnabled()) {
