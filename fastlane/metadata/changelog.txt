@@ -1,4 +1,2 @@
-TC-441 Add 'About the Click' to Homepage
-TC-563 'Type of litter' displays with a '-'
-TC-552 'Order successful' page translations needed
-TC-555 Change word in 'Move & Clean Up' description (FR version)
+TC-399 Registration fr
+TC-400 Registration/Wrong redirection

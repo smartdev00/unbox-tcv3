@@ -96,8 +96,23 @@ const SuccessView = ({ navigation, email }) => {
   );
 };
 
+const legalLinks = {
+  en: {
+    terms: "https://www.the-click.be/en/terms-and-conditions",
+    privacy: "https://www.the-click.be/en/privacy-statement",
+  },
+  nl: {
+    terms: "https://www.the-click.be/nl/algemene-voorwaarden",
+    privacy: "https://www.the-click.be/nl/privacyverklaring",
+  },
+  fr: {
+    terms: "https://www.the-click.be/fr/conditions-generales",
+    privacy: "https://www.the-click.be/fr/declaration-de-confidentialite",
+  },
+};
+
 const RegisterScreen = ({ navigation }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const [givenName, setGivenName] = useState();
   const [familyName, setFamilyName] = useState();
@@ -119,6 +134,15 @@ const RegisterScreen = ({ navigation }) => {
   useEffect(() => setMissingFamilyName(false), [familyName]);
 
   useEffect(() => setMissingTermsAccepted(false), [termsAccepted]);
+
+  const handleLink = async (type) => {
+    const link = legalLinks[i18n.language][type];
+    
+    if (link) {
+      await Linking.openURL(link);
+    }
+  };
+
 
   useEffect(() => {
     setMissingEmail(false);
@@ -310,16 +334,16 @@ const RegisterScreen = ({ navigation }) => {
                         <Text
                           fontWeight={700}
                           color={"primary.600"}
-                          onPress={() =>
-                            Linking.openURL("https://uat.the-click.app/terms")
+                          onPress={() => handleLink('terms')
+                            // Linking.openURL("https://uat.the-click.app/terms")
                           }
                         />,
                         <Text
                           fontWeight={700}
                           color={"primary.600"}
-                          onPress={() =>
-                            Linking.openURL("https://uat.the-click.app/privacy")
-                          }
+                          onPress={() => handleLink('privacy')
+                            // Linking.openURL("https://uat.the-click.app/privacy")
+                          }Ò
                         />,
                       ]}
                     />
