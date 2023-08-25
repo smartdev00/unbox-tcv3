@@ -319,7 +319,7 @@ const RegisterScreen = ({ navigation }) => {
               )}
 
               <FormControl>
-                <Row mb={2}>
+                <Row mb={2} mr={2}>
                   <Checkbox
                     value={termsAccepted}
                     onChange={() => setTermsAccepted(!termsAccepted)}
@@ -343,7 +343,7 @@ const RegisterScreen = ({ navigation }) => {
                           color={"primary.600"}
                           onPress={() => handleLink('privacy')
                             // Linking.openURL("https://uat.the-click.app/privacy")
-                          }Ò
+                          }
                         />,
                       ]}
                     />

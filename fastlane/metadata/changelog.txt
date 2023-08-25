@@ -1,2 +1,2 @@
-TC-399 Registration fr
-TC-400 Registration/Wrong redirection
+TC-400 NL fix Registration/Wrong redirection
+TC-237 translations Consumer - Take Profile Photo
