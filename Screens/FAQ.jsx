@@ -18,8 +18,9 @@ let emailRegex = /(((https?:\/\/)|(www\.))[^\s]+)/g;
 
 const FAQsElement = ({ question, answer }) => {
   const [showAnswer, setShowAnswer] = useState(false)
-  const { t } = useTranslation()
-
+  const { t } = useTranslation();
+  const googlePlay = "https://play.store.come/store/apps/details?id=be.fostplus.theclick"
+  const appStore = "https://apps.apple.come/us/app/the-click/id1570254730"
   let answerResult = '';
   let emailMatched = regex.exec(answer);
   if(emailMatched !== null){
@@ -62,6 +63,8 @@ const FAQsElement = ({ question, answer }) => {
           />
         { emailMatched !== null ? <Text variant={'paragraph1'} mt={4}>{'\n'}{t('litter:screens.dashboard.tabs.profile.faq.email')} : <Text variant={'paragraph1'} mt={4} color={"primary.600"} onPress={() => Linking.openURL(`mailto:${emailMatched[1]}`)}> {emailMatched[1]}</Text> </Text> : null}
         { urlMatches !== null ? <Text variant={'paragraph1'} mt={4}>{'\n'}{t('litter:screens.dashboard.tabs.profile.faq.web')} : <Text variant={'paragraph1'} mt={4} color={"primary.600"} onPress={() => Linking.openURL(`https://${urlMatches[0]}`)}>{urlMatches[0]}</Text></Text> : null}
+        { answerResult !== '' && answerResult.includes('Google play') ?  <Text variant={'paragraph1'} mt={4}>{'\n'}{t('litter:screens.dashboard.tabs.profile.googlestore')} : <Text variant={'paragraph1'} mt={4} color={"primary.600"} onPress={() => Linking.openURL(googlePlay)}>{t('litter:screens.dashboard.tabs.profile.downloadhere')}</Text></Text> : null}
+        { answerResult !== '' && answerResult.includes('App store') ?  <Text variant={'paragraph1'} mt={4}>{'\n'}{t('litter:screens.dashboard.tabs.profile.appstore')} : <Text variant={'paragraph1'} mt={4} color={"primary.600"} onPress={() => Linking.openURL(appStore)}>{t('litter:screens.dashboard.tabs.profile.downloadhere')}</Text></Text> : null}
         </Text>
       )}
     </Pressable>

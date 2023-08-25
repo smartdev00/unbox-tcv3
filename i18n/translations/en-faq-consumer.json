@@ -22,7 +22,7 @@
     },
     {
       "question": "Is the Click app available for international users?",
-      "answer": "You can use the Click app throughout the territory of Belgium. Would you like to use the Click app outside Belgium? Send an e-mail to theclick@fostplus.be ."
+      "answer": "You can use the Click app throughout the territory of Belgium. Would you like to use the Click app outside of Belgium? Send us an e-mail. theclick@fostplus.be"
     },
     {
       "question": "How can I submit a complaint?",
@@ -64,7 +64,7 @@
     },
     {
       "question": "How do I invite a friend?",
-      "answer": "You can share on social media that you are now part of the Click. Everyone who registers will receive an initial balance of Circular UCoins as a welcome gift. Include links to the App Store and Google Play store so your friends and family can find the app quickly. Thank you. \n https://apps.apple.com/us/app/the-click/id1570254730 \n https://play.google.com/store/apps/details?id=be.fostplus.theclick \n https://apps.apple.com/us/app/the-click/id1570254730 \n https://play.google.com/store/apps/details?id=be.fostplus.theclick."
+      "answer": "You can share on social media that you are now part of the Click. Everyone who registers will receive an initial balance of Circular Ucoins as a welcome gift. Include links to the App store and Google play store so your friends and family can find the app quickly. Thank you. www.the-click.be"
     },
     {
       "question": "Are special events/bonuses available?",
@@ -232,7 +232,7 @@
   "Partners": [
     {
       "question": "How can I take part in the Click?",
-      "answer": "To take part in the Click, go to www.the-click.app/company and register." 
+      "answer": "To take part in the Click, go to the website and register. www.the-click.app/company" 
     }
   ]
 }
