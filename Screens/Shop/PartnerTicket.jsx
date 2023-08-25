@@ -10,7 +10,7 @@ import { LocaleContext } from "../../Context";
 import { gql, useMutation } from "@apollo/client";
 
 import * as mutations from '../../graphql/mutations'
-
+import { t } from "i18next";
 
 const PartnerAPI = ({ partner, }) => {
   const {colors} = useTheme()
@@ -175,7 +175,7 @@ const PartnerAPI = ({ partner, }) => {
             <HTML source={{ html: partner.contentBody }} />
 
             <FormControl mt="3" isInvalid={!isValid}>
-              <FormControl.Label>Number</FormControl.Label>
+              <FormControl.Label>{t("litter:screens.shop.tabs.partners.number")}</FormControl.Label>
               <Input 
                   ref={valueInputRef}
                   value={inputValue}
@@ -185,14 +185,14 @@ const PartnerAPI = ({ partner, }) => {
             
             {!isValid && (
               <FormControl.ErrorMessage>
-                Invalid Card Number
+                {t("litter:screens.shop.tabs.partners.invalid.card")}
                 </FormControl.ErrorMessage>
                 )}
             </FormControl>
 
             { partner.inputPassword && (
             <FormControl mt="3" isInvalid={!validPassword}>
-              <FormControl.Label>Password</FormControl.Label>
+              <FormControl.Label>{t("litter:screens.shop.tabs.partners.password")}</FormControl.Label>
               <Input 
                   ref={passwordInputRef}
                   value={password}
@@ -223,7 +223,7 @@ const PartnerAPI = ({ partner, }) => {
                   />
                 {!validPassword && (
                   <FormControl.ErrorMessage>
-                    Enter your password
+                    {t("litter:screens.shop.tabs.partners.enter.password")}
                   </FormControl.ErrorMessage>
                 )}
             </FormControl>
@@ -234,7 +234,7 @@ const PartnerAPI = ({ partner, }) => {
               onPress={() => { handlePartnerSubmit() }}
               mt={50}
             >
-              Submit
+              {t("litter:screens.scan.buttons.submit")}
             </Button>
             
           </Modal.Body>

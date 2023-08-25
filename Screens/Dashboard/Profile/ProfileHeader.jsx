@@ -17,7 +17,7 @@ const ProfilePhotoModal = ({ show, onModalClose }) => {
   const [user, setUser] = useContext(UserContext);
 
   const [image, setImage] = useState();
-  const [buttonText, setButtonText] = useState("Take a photo");
+  const [buttonText, setButtonText] = useState("litter:screens.dashboard.tabs.profile.photo-modal.takePhoto");
   const [loading, setLoading] = useState(false);
 
   const [updateAvatar] = useMutation(gql(mutations.updateAvatar), {
@@ -27,7 +27,7 @@ const ProfilePhotoModal = ({ show, onModalClose }) => {
   const handleModalClose = () => {
     onModalClose && onModalClose();
     setImage(null);
-    setButtonText("Take a photo");
+    setButtonText("litter:screens.dashboard.tabs.profile.photo-modal.takePhoto");
   };
 
   const handleSave = async() => {
@@ -75,11 +75,11 @@ const ProfilePhotoModal = ({ show, onModalClose }) => {
           height: 300,
           cropping: true,
           cropperCircleOverlay: true,
-          cropperToolbarTitle: "move and scale",
+          cropperToolbarTitle: t("litter:screens.dashboard.tabs.profile.photo-modal.moveAndScale"),
           cropperToolbarWidget: "", 
-          cropperChooseText: "Next",
+          cropperChooseText: t("litter:screens.dashboard.tabs.profile.photo-modal.next"),
           cropperChooseColor: colors.primary['600'],
-          cropperCancelText: "Back",
+          cropperCancelText: t("litter:screens.dashboard.tabs.profile.photo-modal.back"),
           cropperCancelColor: colors.white,
           loadingLabelText: "Processing...",
           hideBottomControls: true,
@@ -89,7 +89,7 @@ const ProfilePhotoModal = ({ show, onModalClose }) => {
 
         console.log('Cropped image:', croppedImage.path);
         setImage(croppedImage);
-        setButtonText("Save");
+        setButtonText("litter:screens.dashboard.tabs.profile.photo-modal.savePhoto");
 
       } catch (error) {
         console.log('Error cropping image:', error);
@@ -111,6 +111,8 @@ const ProfilePhotoModal = ({ show, onModalClose }) => {
   };
   
   const openCamera = async () => {
+    showLibrary();
+    return;
     try {
       const result = await ImageCropPicker.openCamera({
         useFrontCamera: true,
@@ -159,15 +161,12 @@ const ProfilePhotoModal = ({ show, onModalClose }) => {
           <Button
             mt={5}
             mb={1}
-            _text={{
-              textTransform: "uppercase",
-            }}
             borderWidth={1}
             borderColor={colors.primary['600']}
             onPress={!image ? openCamera : handleSave}
             width="80%"
           >
-            {loading ? <Spinner color={"white"} /> : buttonText}
+            {loading ? <Spinner color={"white"} /> : t(buttonText)}
           </Button>
 
           <Button
@@ -176,7 +175,6 @@ const ProfilePhotoModal = ({ show, onModalClose }) => {
             borderWidth={1}
             backgroundColor="transparent"
             _text={{
-              textTransform: "uppercase",
               color: colors.primary['600'],
             }}
             _pressed={{
@@ -185,7 +183,7 @@ const ProfilePhotoModal = ({ show, onModalClose }) => {
             onPress={handleModalClose}
             width={"80%"}
           >
-            Cancel
+            {t("litter:screens.dashboard.tabs.profile.photo-modal.cancel")}
           </Button>
         </Modal.Body>
       </Modal.Content>
