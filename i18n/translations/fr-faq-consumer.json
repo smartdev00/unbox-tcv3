@@ -22,10 +22,10 @@
     },
     {
       "question": "L'appli le Click est-elle disponible pour les utilisateurs internationaux?",
-      "answer": "Tu peux utiliser l’appli le Click sur l’ensemble du territoire belge. Tu souhaites l’utiliser en dehors de la Belgique ? Envoie un e-mail à theclick@fostplus.be"
+      "answer": "Tu peux utiliser l’appli le Click sur l’ensemble de territoire Belge. Tu souhaites l’utiliser en dehors de la Belgique? Envoir un e-mail. theclick@fostplus"
     },
     {
-      "question": "Comment introduire une plainte ?’",
+      "question": "Comment introduire une plainte ?",
       "answer": "Tu peux introduire une plainte via le formulaire de contact​ sur le site web de Click ou nous envoyer un e-mail. www.the-click.be theclick@fostplus.be"
     },
     {
@@ -64,7 +64,7 @@
     },
     {
       "question": "Comment inviter un ami?",
-      "answer": "Tu peux partager ton adhésion au Click sur les réseaux sociaux. Toute inscription donne droit à un montant initial de Circular UCoins comme cadeau de bienvenue. Mentionne les liens vers l’App Store et le Google Play Store afin que tes amis et ta famille trouvent rapidement l’application. Merci.\n https://apps.apple.com/us/app/the-click/id1570254730 \n https://play.google.com/store/apps/details?id=be.fostplus.theclick"
+      "answer": "Tu peux partager ton adhésion au Click sur les réseaux sociaux. Toute inscription donne droit à un montant initial de Circular Ucoins comme cadeau de bienvenue. Mentionne les liens vers l’App Store et le Google Play Store afin que tes amis et ta famille trouvent rapidement l’application. Merci. www.the-click.be"
     },
     {
       "question": "Y a-t-il des événements spéciaux/des bonus disponibles?",
@@ -232,7 +232,7 @@
   "Commerçants": [
     {
       "question": "Commet participer au Click?",
-      "answer": "Pour participer au Click, rends-toi sur www.the-click.app/company et inscris-toi." 
+      "answer": "Pour participer au Click, rends-toi sur le site web et inscrivez-vous. www.the-click.app/company" 
     }
   ]
 }
