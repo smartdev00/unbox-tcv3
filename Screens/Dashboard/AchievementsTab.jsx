@@ -20,6 +20,7 @@ import AchievementsProgress from './Achievements/AchievementsProgress';
 const AchievementsTab = () => {
 
   const [achievements, setAchievements] = useState([]);
+  const [targets, setTargets] = useState({});
   const [refreshing, setRefreshing] = useState(true)
   const [showWonModal, setShowWonModal] = useState(false);
 
@@ -59,6 +60,7 @@ const AchievementsTab = () => {
         })
 
         console.log(combinedBadges);
+        setTargets(data.targetsGet)
         setAchievements(combinedBadges)
       }      
     } finally {
@@ -72,14 +74,15 @@ const AchievementsTab = () => {
   }, []);
 
   return (
-    <ScrollView bgColor="white" showsVerticalScrollIndicator={false} refreshControl={
-      <RefreshControl refreshing={refreshing} onRefresh={loadAchievements} />
-    }>
-      <AchievementsProgress/>
+    <ScrollView bgColor="white" showsVerticalScrollIndicator={false} pl={2}
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={loadAchievements} />
+      }>
+      <AchievementsProgress targets={targets} />
       <Box alignItems={"center"}>
-      <AchievementsList achievements={achievements} onClaimed={loadAchievements}/>
+        <AchievementsList achievements={achievements} onClaimed={loadAchievements} />
       </Box>
-      <AchievementWonModal show={showWonModal} onModalClosed={() => setShowWonModal(false)}/>
+      <AchievementWonModal show={showWonModal} onModalClosed={() => setShowWonModal(false)} />
     </ScrollView>
   );
 };

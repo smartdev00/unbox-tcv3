@@ -409,7 +409,7 @@ export const getCommunity = /* GraphQL */ `
 `;
 
 export const badgesListDetailed = /* GraphQL */ `
-  query ListBadges {
+  query getBadgesAndTargets {
     badgeList {
       items {
         name
@@ -432,6 +432,11 @@ export const badgesListDetailed = /* GraphQL */ `
         won
         claimed
       }
+    }
+    targetsGet {
+      level
+      target
+      progress
     }
   }
 `;
