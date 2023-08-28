@@ -441,6 +441,16 @@ export const badgesListDetailed = /* GraphQL */ `
   }
 `;
 
+export const getUserTargets = /* GraphQL */ `
+  query getUserTargets {
+    targetsGet {
+      level
+      target
+      progress
+    }
+  }
+`;
+
 export const getUserStatistics = /* GraphQL */ `
   query UserStatistics {
     userGet {
