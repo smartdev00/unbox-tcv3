@@ -1,1 +1,1 @@
-TC-330 Consumer - Achievement Progress Bar
+TC-330 Achievement Progress Bar
