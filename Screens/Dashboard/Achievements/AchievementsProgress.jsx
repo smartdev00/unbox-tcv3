@@ -12,6 +12,7 @@ import { Dimensions } from "react-native";
 const AchievementsProgress = ({ targets }) => {
   const { t } = useTranslation();
   const screenWidth = Dimensions.get("window").width;
+  if (targets.progress === undefined) return;
   return (
     <Box my={4} ml={2}>
       {/* <Text>{t("litter:screens.achievements.title.progress")}</Text> */}
@@ -27,7 +28,7 @@ const AchievementsProgress = ({ targets }) => {
         py={'1px'}
         position={'relative'}
       >
-        {targets.progress > 0 &&
+        {targets.progress &&
           (<Box
             width={(screenWidth - 60) * targets.progress / targets.target}
             bgColor={"primary.600"}
@@ -38,7 +39,6 @@ const AchievementsProgress = ({ targets }) => {
             borderWidth={"0.5px"}
             position={'absolute'}
             borderRightColor={"primary.600"}
-            style={{ elevation: 1 }}
             zIndex={3}
           />)}
 
