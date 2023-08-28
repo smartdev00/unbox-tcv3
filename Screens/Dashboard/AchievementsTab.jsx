@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 // import ProfileHeader from "./Profile/ProfileHeader";
 // import ProfileOptions from "./Profile/ProfileOptions";
@@ -9,6 +9,7 @@ import {
 } from 'native-base';
 
 import { RefreshControl } from "react-native";
+import { useFocusEffect } from '@react-navigation/native';
 
 import { useLazyQuery, gql } from "@apollo/client";
 import * as queries from "../../graphql/queries";
@@ -29,6 +30,9 @@ const AchievementsTab = () => {
   }
 
   const [listAchievementsQuery] = useLazyQuery(gql(queries.badgesListDetailed), {
+    fetchPolicy: "no-cache",
+  });
+  const [userTargetsQuery] = useLazyQuery(gql(queries.getUserTargets), {
     fetchPolicy: "no-cache",
   });
 
@@ -60,25 +64,46 @@ const AchievementsTab = () => {
         })
 
         console.log(combinedBadges);
-        setTargets(data.targetsGet)
-        setAchievements(combinedBadges)
+        setAchievements(combinedBadges);
       }      
     } finally {
       setRefreshing(false);
     }
   }
 
+  const loadUserTargets = async () => {
+    try {
+      const { data, error } = await userTargetsQuery();
+      if (error) {
+        console.log("userTargetsQuery", error);
+      }
+
+      if (data) {
+        console.log(JSON.stringify(data, null, 2), "userTargets");
+        setTargets(data.targetsGet);
+      }      
+    } finally {
+    }
+  }
 
   useEffect(() => {
     loadAchievements();
   }, []);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      (async () => {        
+        await loadUserTargets();
+      })();
+    }, [])
+  );
 
   return (
     <ScrollView bgColor="white" showsVerticalScrollIndicator={false} pl={2}
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={loadAchievements} />
       }>
-      <AchievementsProgress targets={targets} />
+      {targets && (<AchievementsProgress targets={targets} />)}
       <Box alignItems={"center"}>
         <AchievementsList achievements={achievements} onClaimed={loadAchievements} />
       </Box>
