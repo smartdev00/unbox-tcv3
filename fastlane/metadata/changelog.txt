@@ -1,1 +1,1 @@
-TC-519 Charity category (language switching bug)
+TC-519 Charity category(language switching bug)
