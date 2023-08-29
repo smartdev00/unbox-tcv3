@@ -1,1 +1,2 @@
 TC-330 Achievement Progress Bar
+CL11-246 Achievement Progress Bar to Homepage

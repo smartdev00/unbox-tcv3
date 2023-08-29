@@ -103,7 +103,11 @@ const AchievementsTab = () => {
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={loadAchievements} />
       }>
-      {targets && (<AchievementsProgress targets={targets} />)}
+      {targets && (
+        <Box py={4} mr={4} ml={2}>
+          <AchievementsProgress targets={targets} />
+        </Box>
+      )}
       <Box alignItems={"center"}>
         <AchievementsList achievements={achievements} onClaimed={loadAchievements} />
       </Box>
