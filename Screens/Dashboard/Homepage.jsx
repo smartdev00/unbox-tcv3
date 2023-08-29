@@ -45,6 +45,7 @@ const HomepageTab = () => {
   const [balance, setBalance] = useContext(BalanceContext);
   const [application, setApplication,] = useContext(ApplicationContext);
   const [user, setUser] = useContext(UserContext);
+  const [targets, setTargets] = useState({});
   const [retailersCount, setRetailersCount] = useState(0);
   const { navigate } = useNavigation();
   const [loaded, setLoaded] = useState(false);
@@ -215,11 +216,31 @@ const HomepageTab = () => {
     return status === "granted";
   };
 
+  const [userTargetsQuery] = useLazyQuery(gql(queries.getUserTargets), {
+    fetchPolicy: "no-cache",
+  });
+
+  const loadUserTargets = async () => {
+    try {
+      const { data, error } = await userTargetsQuery();
+      if (error) {
+        console.log("userTargetsQuery", error);
+      }
+
+      if (data) {
+        console.log(JSON.stringify(data, null, 2), "userTargets");
+        setTargets(data.targetsGet);
+      }      
+    } finally {
+    }
+  }
+
   useFocusEffect(
     React.useCallback(() => {
       (async () => {        
         await getCameraPermissions();
         await getLocationPermissions();
+        await loadUserTargets();
       })();
     }, [])
   );
@@ -333,7 +354,7 @@ const HomepageTab = () => {
 
         <Statistics />
 
-        <Achievements/>
+        <Achievements targets={targets}/>
 
         <TouchableOpacity
           onPress={() =>
