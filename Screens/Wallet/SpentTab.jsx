@@ -6,7 +6,7 @@ import { Box, Circle, Button, Image, ScrollView, Text, useTheme, } from "native-
 
 import { Merchant } from "../../assets/svg";
 
-import { RefreshControl } from "react-native";
+import { Alert, RefreshControl } from "react-native";
 
 import { useNavigation } from "@react-navigation/native";
 
@@ -57,8 +57,22 @@ const SpentTab = () => {
       }
 
       if (data) {
-        console.log(JSON.stringify(data, null, 2));
-        setTransactions(data.transactionList.items);
+        let transactions = [];
+
+        data.transactionList?.items.forEach((transaction) => {
+          transaction.order.orderLines?.items.forEach((orderLine) => {
+            transactions.push({
+              ...transaction,
+              ...orderLine.productItem,
+              orderLineId: orderLine.id,
+              visitingAddress: orderLine.productItem?.retailer?.visitingAddress,
+              qrStatus: orderLine.qrVoucher?.status,
+            });
+          });
+        });
+
+        setTransactions(transactions);
+      
       }
     } finally {
       setRefreshing(false);
@@ -68,12 +82,17 @@ const SpentTab = () => {
 
   useEffect(() => {
     loadTransactions();
+
   }, [balance]);
 
 
   useEffect(() => {
     loadTransactions();
   }, []);
+
+  const [myVouchers, setMyVouchers] = useState([]);
+
+
 
   return (
     <ScrollView
@@ -123,7 +142,7 @@ const SpentTab = () => {
 
       {transactions &&
         transactions.map((transaction, key) => (
-          <TransactionDebitTicket key={key} transaction={transaction} />
+          <TransactionDebitTicket key={key} transaction={transaction} setTransactions={setTransactions} />
         ))}
     </ScrollView>
   );

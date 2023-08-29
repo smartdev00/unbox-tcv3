@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { Box, Divider, HStack, Text, VStack, Pressable } from "native-base";
 
@@ -6,12 +6,13 @@ import format from "date-fns/format";
 
 import { useNavigation } from "@react-navigation/native";
 
-const TransactionDebitTicket = ({ transaction }) => {
+const TransactionDebitTicket = ({ transaction, setTransactions }) => {
 
   const { navigate } = useNavigation();
 
+  
   return (
-    <Pressable onPress={() => navigate("TransactionDetails", { transaction } )}>
+    <Pressable onPress={() => navigate("TransactionDetails", { transaction, setTransactions })}>
       <Box p={4}>
         <VStack space={1}>
           <HStack justifyContent={"space-between"}>

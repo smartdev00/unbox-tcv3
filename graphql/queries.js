@@ -327,13 +327,32 @@ export const consumerDebitTransactionsList = /* GraphQL */ `
         reference
         dateAdded
         order {
+          id
+          dateAdded
           orderLines {
             items {
+              id
+              status
+              qrVoucher(profile: "vb") {
+                status
+              }
               productItem {
+                img: assetDetailUrl(width: 256, height: 256, fit: "inside")
+                id
+                description
                 name
+                price: priceTotalInc
                 retailer {
+                  id
                   company
+                  visitingAddress
+                  location {
+                    latitude
+                    longitude
+                  }
+                  website: hierarchy5
                 }
+                terms
               }
             }
           }
