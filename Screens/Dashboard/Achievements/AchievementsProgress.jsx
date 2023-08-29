@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useTranslation } from "react-i18next";
 
 import {
@@ -10,15 +10,24 @@ import { Dimensions } from "react-native";
 
 
 const AchievementsProgress = ({ targets }) => {
+  const parentRef = useRef(null);
   const { t } = useTranslation();
   const screenWidth = Dimensions.get("window").width;
+
+  const getParentWidth = () => {
+    if (parentRef.current) {
+      const parentWidth = parentRef.current.offsetWidth;
+      console.log(parentWidth, "parentWidth");
+    }
+  };
+  getParentWidth();
+
   if (targets.progress === undefined) return;
   return (
-    <Box my={4} ml={2}>
+    <Box ref={parentRef}>
       {/* <Text>{t("litter:screens.achievements.title.progress")}</Text> */}
       <Box
         height={"12px"}
-        width={screenWidth - 40}
         bgColor={"#D9D9D9"}
         flexDirection={"row"}
         alignItems={"center"}
@@ -26,11 +35,12 @@ const AchievementsProgress = ({ targets }) => {
         borderWidth={"0.5px"}
         borderColor={"secondary.700"}
         py={'1px'}
+        pr={'22px'}
         position={'relative'}
       >
         {targets.progress &&
           (<Box
-            width={(screenWidth - 60) * targets.progress / targets.target}
+            width={`${(targets.progress / targets.target) * 100}%`}
             bgColor={"primary.600"}
             height={'11px'}
             borderTopLeftRadius={'7px'}
@@ -46,7 +56,7 @@ const AchievementsProgress = ({ targets }) => {
           bgColor={"primary.600"}
           size={'26px'}
           position={'absolute'}
-          left={(screenWidth - 60) * (targets.progress / targets.target)}
+          left={`${(targets.progress / targets.target) * 100}%`}
           ml={"-2px"}
           borderWidth={"0.5px"}
           zIndex={2}
