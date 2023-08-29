@@ -1,1 +1,1 @@
-TC-330 Achievement Progress Bar
+TC-519 Charity category (language switching bug)

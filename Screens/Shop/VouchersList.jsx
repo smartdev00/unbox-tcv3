@@ -11,7 +11,7 @@ import {
 import { ActivityIndicator } from 'react-native';
 import { useInfiniteQuery } from 'react-query';
 import { SvgUri } from "react-native-svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import VoucherTicket from "./VoucherTicket";
 import { RefreshControl } from "react-native";
 import { useTranslation } from "react-i18next";
@@ -90,7 +90,7 @@ const VouchersList = ({
     }
   };
 
-  const { isLoading, data, hasNextPage, fetchNextPage, isFetchingNextPage } =
+  const { isLoading, data, hasNextPage, fetchNextPage, isFetchingNextPage, refetch } =
     useInfiniteQuery(['vouchers-items', queryVariables], ({ pageParam = 0 }) => loadVouchers(pageParam, queryVariables), {
       getNextPageParam: lastPage => {
         if (lastPage && (lastPage.total > lastPage.offset + LIMIT)) {
@@ -100,6 +100,13 @@ const VouchersList = ({
         }
       }
     });
+
+  useEffect(() => {
+    setTimeout(() => {
+      refetch();
+    }, 3000);
+
+  }, [t]);
 
   const itemExtractorKey = (item, index) => {
     return index.toString();
